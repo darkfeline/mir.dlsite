@@ -7,6 +7,10 @@ setup(
     version='0.1.0',
     package_dir={'': 'src'},
     packages=find_packages('src'),
+    install_requires=[
+        'beautifulsoup4',
+        'lxml',
+    ],
 
     author='Allen Li',
     author_email='darkfeline@felesatra.moe',
