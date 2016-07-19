@@ -50,9 +50,9 @@ class WorkInfo:
     def from_rjcode(cls, rjcode):
         data = urllib.request.urlopen(rjcode.url).read()
         soup = BeautifulSoup(data.decode(), 'lxml')
-        work_name = soup.find(id="work_name").a.contents[-1]
-        maker_name = soup.find(id="work_maker")
-        maker_name = maker_name.find(**{'class': 'maker_name'}).a.string
+        work_name = soup.find(id="work_name").a.contents[-1].strip()
+        work_maker = soup.find(id="work_maker")
+        maker_name = work_maker.find(**{'class': 'maker_name'}).a.string
         return cls(rjcode, work_name, maker_name)
 
     def __str__(self):
