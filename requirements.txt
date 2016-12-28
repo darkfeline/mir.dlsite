@@ -1,0 +1,4 @@
+# Test dependencies
+pytest==3.0.4
+pytest-catchlog==1.2.2
+pytest-cov==2.4.0
