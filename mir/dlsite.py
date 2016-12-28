@@ -14,20 +14,26 @@
 
 """dlsite library"""
 
+import collections
 import urllib.request
 import re
 
 from bs4 import BeautifulSoup
 
-_DLSITE_URL = 'http://www.dlsite.com/maniax/work/=/product_id/{}.html'
 
+class RJCode(str):
 
-class RJCode:
-
+    __slots__ = ()
     _RJCODE_PATTERN = re.compile(r'(RJ[0-9]+)')
+    _DLSITE_URL = 'http://www.dlsite.com/maniax/work/=/product_id/{}'
 
-    def __init__(self, rjcode):
-        self.rjcode = rjcode
+    def __new__(cls, obj):
+        if not isinstance(obj, str):
+            raise TypeError('RJCode constructor argument must be a string')
+        match = cls._RJCODE_PATTERN.match(obj)
+        if match is None or match.end() < len(obj):
+            raise ValueError('%r is not a valid RJCode' % obj)
+        return super().__new__(cls, obj)
 
     @classmethod
     def from_string(cls, string):
@@ -39,12 +45,9 @@ class RJCode:
         else:
             raise ValueError('No rjcode found.')
 
-    def __str__(self):
-        return self.rjcode
-
     @property
     def url(self):
-        return _DLSITE_URL.format(self.rjcode)
+        return self._DLSITE_URL.format(self)
 
 
 class WorkInfo:
