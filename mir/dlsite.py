@@ -41,6 +41,8 @@ def parse_rjcode(string) -> str:
 
 class WorkInfoFetcher:
 
+    """Fetches DLSite work information."""
+
     _ROOT = 'http://www.dlsite.com/maniax/'
     _WORK_URL = _ROOT + 'work/=/product_id/{}.html'
     _ANNOUNCE_URL = _ROOT + 'announce/=/product_id/{}.html'
@@ -96,6 +98,8 @@ class WorkInfoFetcher:
 
 
 class WorkInfo(namedtuple('WorkInfo', 'rjcode,name,maker,series')):
+
+    """Info about a DLSite work."""
 
     def __new__(cls, rjcode, name, maker, series=''):
         return super().__new__(cls, rjcode, name, maker, series)
