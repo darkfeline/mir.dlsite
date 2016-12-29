@@ -15,8 +15,9 @@
 """dlsite library"""
 
 from collections import namedtuple
-import urllib.request
 import re
+import shelve
+import urllib.request
 
 from bs4 import BeautifulSoup
 
@@ -62,19 +63,21 @@ class WorkInfoFetcher:
 
     def _get_maker(self, soup) -> str:
         """Get the work maker."""
-        return (soup.find(id="work_maker")
-                .find(**{'class': 'maker_name'})
-                .a.string)
+        return str(
+            soup.find(id="work_maker")
+            .find(**{'class': 'maker_name'})
+            .a.string)
 
     _series_pattern = re.compile('^シリーズ名')
 
     def _get_series(self, soup) -> str:
         """Get work series name."""
         try:
-            return (soup.find(id='work_outline')
-                    .find('th', string=self._series_pattern)
-                    .find_next_sibling('td')
-                    .a.string)
+            return str(
+                soup.find(id='work_outline')
+                .find('th', string=self._series_pattern)
+                .find_next_sibling('td')
+                .a.string)
         except AttributeError:
             return ''
 
@@ -97,12 +100,42 @@ class WorkInfoFetcher:
         return self._ANNOUNCE_URL.format(rjcode)
 
 
+class CachedFetcher(WorkInfoFetcher):
+
+    def __init__(self, path):
+        super().__init__()
+        # TODO use fspath
+        self._shelf = shelve.open(str(path))
+
+    def __call__(self, rjcode: str) -> 'WorkInfo':
+        try:
+            return self._shelf[rjcode]
+        except KeyError:
+            work_info = super().__call__(rjcode)
+            self._shelf[rjcode] = work_info
+            return work_info
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        self.close()
+
+    def close(self):
+        self._shelf.close()
+
+
 class WorkInfo(namedtuple('WorkInfo', 'rjcode,name,maker,series')):
 
     """Info about a DLSite work."""
 
     def __new__(cls, rjcode, name, maker, series=''):
-        return super().__new__(cls, rjcode, name, maker, series)
+        return super().__new__(
+            cls,
+            str(rjcode),
+            str(name),
+            str(maker),
+            str(series))
 
     def __str__(self):
         return '{} [{}] {}'.format(self.rjcode, self.maker, self.name)
