@@ -14,57 +14,80 @@
 
 """dlsite library"""
 
-import collections
+from collections import namedtuple
 import urllib.request
 import re
 
 from bs4 import BeautifulSoup
 
+__version__ = '0.1.0'
 
-class RJCode(str):
-
-    __slots__ = ()
-    _RJCODE_PATTERN = re.compile(r'(RJ[0-9]+)')
-    _DLSITE_URL = 'http://www.dlsite.com/maniax/work/=/product_id/{}'
-
-    def __new__(cls, obj):
-        if not isinstance(obj, str):
-            raise TypeError('RJCode constructor argument must be a string')
-        match = cls._RJCODE_PATTERN.match(obj)
-        if match is None or match.end() < len(obj):
-            raise ValueError('%r is not a valid RJCode' % obj)
-        return super().__new__(cls, obj)
-
-    @classmethod
-    def from_string(cls, string):
-        """Get RJ code from a string."""
-        match = cls._RJCODE_PATTERN.search(string)
-        if match:
-            rjcode = cls._RJCODE_PATTERN.search(string).group(1)
-            return cls(rjcode)
-        else:
-            raise ValueError('No rjcode found.')
-
-    @property
-    def url(self):
-        return self._DLSITE_URL.format(self)
+_RJCODE_PATTERN = re.compile(r'RJ[0-9]+')
 
 
-class WorkInfo:
+def parse_rjcodes(string) -> 'Iterable':
+    """Parse all RJ codes from a string."""
+    for match in _RJCODE_PATTERN.finditer(string):
+        yield match.group(0)
 
-    def __init__(self, rjcode, name, maker):
-        self.rjcode = rjcode
-        self.name = name
-        self.maker = maker
 
-    @classmethod
-    def from_rjcode(cls, rjcode):
-        data = urllib.request.urlopen(rjcode.url).read()
-        soup = BeautifulSoup(data.decode(), 'lxml')
-        work_name = soup.find(id="work_name").a.contents[-1].strip()
-        work_maker = soup.find(id="work_maker")
-        maker_name = work_maker.find(**{'class': 'maker_name'}).a.string
-        return cls(rjcode, work_name, maker_name)
+def parse_rjcode(string) -> str:
+    """Parse RJ code from a string."""
+    try:
+        return next(parse_rjcodes(string))
+    except StopIteration:
+        raise ValueError('No rjcode found.')
+
+
+class WorkInfoFetcher:
+
+    _DLSITE_URL = 'http://www.dlsite.com/maniax/work/=/product_id/{}.html'
+
+    def __call__(self, rjcode: str) -> 'WorkInfo':
+        page = self._get_page(rjcode)
+        soup = BeautifulSoup(page, 'lxml')
+        return WorkInfo(
+            rjcode=rjcode,
+            name=self._get_name(soup),
+            maker=self._get_maker(soup),
+            series=self._get_series(soup))
+
+    def _get_name(self, soup) -> str:
+        """Get the work name."""
+        return soup.find(id="work_name").a.contents[-1].strip()
+
+    def _get_maker(self, soup) -> str:
+        """Get the work maker."""
+        return (soup.find(id="work_maker")
+                .find(**{'class': 'maker_name'})
+                .a.string)
+
+    _series_pattern = re.compile('^シリーズ名')
+
+    def _get_series(self, soup) -> str:
+        """Get work series name."""
+        try:
+            return (soup.find(id='work_outline')
+                    .find('th', string=self._series_pattern)
+                    .find_next_sibling('td')
+                    .a.string)
+        except AttributeError:
+            return ''
+
+    def _get_page(self, rjcode: str) -> str:
+        """Get webpage text for a work."""
+        url = self._get_url(rjcode)
+        return urllib.request.urlopen(url).read().decode()
+
+    def _get_url(self, rjcode: str) -> str:
+        """Get DLSite URL corresponding to an RJ code."""
+        return self._DLSITE_URL.format(rjcode)
+
+
+class WorkInfo(namedtuple('WorkInfo', 'rjcode,name,maker,series')):
+
+    def __new__(cls, rjcode, name, maker, series=''):
+        return super().__new__(cls, rjcode, name, maker, series)
 
     def __str__(self):
         return '{} [{}] {}'.format(self.rjcode, self.maker, self.name)
