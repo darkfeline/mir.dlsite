@@ -12,9 +12,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""dlsite library"""
+"""DLsite library"""
 
 from collections import namedtuple
+import pathlib
 import re
 import shelve
 import urllib.request
@@ -42,7 +43,7 @@ def parse_rjcode(string) -> str:
 
 class WorkInfoFetcher:
 
-    """Fetches DLSite work information."""
+    """Fetches DLsite work information."""
 
     _ROOT = 'http://www.dlsite.com/maniax/'
     _WORK_URL = _ROOT + 'work/=/product_id/{}.html'
@@ -92,11 +93,11 @@ class WorkInfoFetcher:
         return request.read().decode()
 
     def _get_work_url(self, rjcode: str) -> str:
-        """Get DLSite work URL corresponding to an RJ code."""
+        """Get DLsite work URL corresponding to an RJ code."""
         return self._WORK_URL.format(rjcode)
 
     def _get_announce_url(self, rjcode: str) -> str:
-        """Get DLSite announce URL corresponding to an RJ code."""
+        """Get DLsite announce URL corresponding to an RJ code."""
         return self._ANNOUNCE_URL.format(rjcode)
 
 
@@ -104,6 +105,8 @@ class CachedFetcher(WorkInfoFetcher):
 
     def __init__(self, path):
         super().__init__()
+        path = pathlib.Path(path)
+        path.parent.mkdir(parents=True, exist_okay=True)
         # TODO use fspath
         self._shelf = shelve.open(str(path))
 
@@ -127,7 +130,7 @@ class CachedFetcher(WorkInfoFetcher):
 
 class WorkInfo(namedtuple('WorkInfo', 'rjcode,name,maker,series')):
 
-    """Info about a DLSite work."""
+    """Info about a DLsite work."""
 
     def __new__(cls, rjcode, name, maker, series=''):
         return super().__new__(

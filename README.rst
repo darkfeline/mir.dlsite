@@ -14,4 +14,4 @@ mir.dlsite README
    :target: http://mir-dlsite.readthedocs.io/en/latest/
    :alt: Latest Documentation
 
-API for DLSite.
+API for DLsite.

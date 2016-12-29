@@ -17,7 +17,7 @@ from setuptools import setup
 setup(
     name='mir.dlsite',
     version='0.1.0',
-    description='API for DLSite',
+    description='API for DLsite',
     long_description='',
     keywords='',
     url='https://github.com/darkfeline/mir.dlsite',
