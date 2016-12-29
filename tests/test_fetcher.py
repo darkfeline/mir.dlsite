@@ -1,0 +1,107 @@
+# Copyright (C) 2016 Allen Li
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import io
+from unittest import mock
+import urllib.error
+
+import pathlib
+
+import pytest
+
+from mir import dlsite
+
+
+def test_get_work_url():
+    fetcher = dlsite.WorkInfoFetcher()
+    assert fetcher._get_work_url('RJ123') == \
+        'http://www.dlsite.com/maniax/work/=/product_id/RJ123.html'
+
+
+def test_get_announce_url():
+    fetcher = dlsite.WorkInfoFetcher()
+    assert fetcher._get_announce_url('RJ123') == \
+        'http://www.dlsite.com/maniax/announce/=/product_id/RJ123.html'
+
+
+@mock.patch('urllib.request.urlopen', autospec=True)
+def test_get_page_work(urlopen):
+    urlopen.return_value = io.BytesIO(b'foo')
+    fetcher = dlsite.WorkInfoFetcher()
+    assert fetcher._get_page('RJ123') == 'foo'
+
+
+@mock.patch('urllib.request.urlopen', autospec=True)
+def test_get_page_announce(urlopen):
+    urlopen.side_effect = _announce_opener(io.BytesIO(b'foo'))
+    fetcher = dlsite.WorkInfoFetcher()
+    assert fetcher._get_page('RJ123') == 'foo'
+
+
+@mock.patch('urllib.request.urlopen', autospec=True)
+def test_get_page_error(urlopen):
+    urlopen.side_effect = _error_opener
+    fetcher = dlsite.WorkInfoFetcher()
+    with pytest.raises(urllib.error.HTTPError):
+        fetcher._get_page('RJ123')
+
+
+def _announce_opener(value):
+    """A stub urlopen."""
+    def opener(url):
+        if 'announce' in url:
+            return value
+        else:
+            raise urllib.error.HTTPError(
+                url=url,
+                code=404,
+                msg='',
+                hdrs=None,
+                fp=None)
+    return opener
+
+
+def _error_opener(url):
+    """A stub urlopen."""
+    raise urllib.error.HTTPError(
+        url=url,
+        code=400,
+        msg='',
+        hdrs=None,
+        fp=None)
+
+
+def test_fetch_work_with_series():
+    fetcher = _FakeFetcher()
+    workinfo = fetcher('RJ189758')
+    assert workinfo.rjcode == 'RJ189758'
+    assert workinfo.maker == 'B-bishop'
+    assert workinfo.name == '意地悪な機械人形に完全支配される音声 地獄級射精禁止オナニーサポート4 ヘルエグゼキューション'
+    assert workinfo.series == '地獄級オナニーサポート'
+
+
+def test_fetch_work_without_series():
+    fetcher = _FakeFetcher()
+    workinfo = fetcher('RJ173248')
+    assert workinfo.rjcode == 'RJ173248'
+    assert workinfo.maker == 'B-bishop'
+    assert workinfo.name == '搾精天使ピュアミルク 背後からバイノーラルでいじめられる音声'
+    assert workinfo.series == ''
+
+
+class _FakeFetcher(dlsite.WorkInfoFetcher):
+
+    def _get_page(self, rjcode):
+        return (pathlib.Path(__file__).parent
+                / 'pages' / ('%s.html' % rjcode)).read_text()

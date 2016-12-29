@@ -12,8 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import pathlib
-
 import pytest
 
 from mir import dlsite
@@ -36,30 +34,5 @@ def test_parse_rjcodes_missing():
     assert list(dlsite.parse_rjcodes('asdf')) == []
 
 
-def test_fetch_work_with_series():
-    fetcher = _FakeFetcher()
-    workinfo = fetcher('RJ189758')
-    assert workinfo.rjcode == 'RJ189758'
-    assert workinfo.maker == 'B-bishop'
-    assert workinfo.name == '意地悪な機械人形に完全支配される音声 地獄級射精禁止オナニーサポート4 ヘルエグゼキューション'
-    assert workinfo.series == '地獄級オナニーサポート'
-
-
 def test_work_info_str():
     assert str(dlsite.WorkInfo('RJ123', 'foo', 'bar')) == 'RJ123 [bar] foo'
-
-
-def test_fetch_work_without_series():
-    fetcher = _FakeFetcher()
-    workinfo = fetcher('RJ173248')
-    assert workinfo.rjcode == 'RJ173248'
-    assert workinfo.maker == 'B-bishop'
-    assert workinfo.name == '搾精天使ピュアミルク 背後からバイノーラルでいじめられる音声'
-    assert workinfo.series == ''
-
-
-class _FakeFetcher(dlsite.WorkInfoFetcher):
-
-    def _get_page(self, rjcode):
-        return (pathlib.Path(__file__).parent
-                / 'pages' / ('%s.html' % rjcode)).read_text()

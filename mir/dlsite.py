@@ -41,7 +41,9 @@ def parse_rjcode(string) -> str:
 
 class WorkInfoFetcher:
 
-    _DLSITE_URL = 'http://www.dlsite.com/maniax/work/=/product_id/{}.html'
+    _ROOT = 'http://www.dlsite.com/maniax/'
+    _WORK_URL = _ROOT + 'work/=/product_id/{}.html'
+    _ANNOUNCE_URL = _ROOT + 'announce/=/product_id/{}.html'
 
     def __call__(self, rjcode: str) -> 'WorkInfo':
         page = self._get_page(rjcode)
@@ -76,12 +78,21 @@ class WorkInfoFetcher:
 
     def _get_page(self, rjcode: str) -> str:
         """Get webpage text for a work."""
-        url = self._get_url(rjcode)
-        return urllib.request.urlopen(url).read().decode()
+        try:
+            request = urllib.request.urlopen(self._get_work_url(rjcode))
+        except urllib.error.HTTPError as e:
+            if e.code != 404:
+                raise
+            request = urllib.request.urlopen(self._get_announce_url(rjcode))
+        return request.read().decode()
 
-    def _get_url(self, rjcode: str) -> str:
-        """Get DLSite URL corresponding to an RJ code."""
-        return self._DLSITE_URL.format(rjcode)
+    def _get_work_url(self, rjcode: str) -> str:
+        """Get DLSite work URL corresponding to an RJ code."""
+        return self._WORK_URL.format(rjcode)
+
+    def _get_announce_url(self, rjcode: str) -> str:
+        """Get DLSite announce URL corresponding to an RJ code."""
+        return self._ANNOUNCE_URL.format(rjcode)
 
 
 class WorkInfo(namedtuple('WorkInfo', 'rjcode,name,maker,series')):
