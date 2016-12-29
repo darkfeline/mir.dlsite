@@ -106,7 +106,7 @@ class CachedFetcher(WorkInfoFetcher):
     def __init__(self, path):
         super().__init__()
         path = pathlib.Path(path)
-        path.parent.mkdir(parents=True, exist_okay=True)
+        path.parent.mkdir(parents=True, exist_ok=True)
         # TODO use fspath
         self._shelf = shelve.open(str(path))
 
