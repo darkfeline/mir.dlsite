@@ -14,6 +14,7 @@
 
 """DLsite library"""
 
+import os
 import pathlib
 import re
 import shelve
@@ -107,8 +108,7 @@ class CachedFetcher(WorkInfoFetcher):
         super().__init__()
         path = pathlib.Path(path)
         path.parent.mkdir(parents=True, exist_ok=True)
-        # TODO use fspath
-        self._shelf = shelve.open(str(path))
+        self._shelf = shelve.open(os.fspath(path))
 
     def __call__(self, rjcode: str) -> 'WorkInfo':
         try:
