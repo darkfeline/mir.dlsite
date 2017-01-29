@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""DLsite library"""
+"""DLsite API"""
 
 import os
 import pathlib
@@ -21,24 +21,6 @@ import shelve
 import urllib.request
 
 from bs4 import BeautifulSoup
-
-__version__ = '0.1.0'
-
-_RJCODE_PATTERN = re.compile(r'RJ[0-9]+')
-
-
-def parse_rjcodes(string) -> 'Iterable':
-    """Parse all RJ codes from a string."""
-    for match in _RJCODE_PATTERN.finditer(string):
-        yield match.group(0)
-
-
-def parse_rjcode(string) -> str:
-    """Parse RJ code from a string."""
-    try:
-        return next(parse_rjcodes(string))
-    except StopIteration:
-        raise ValueError('No rjcode found.')
 
 
 class WorkInfoFetcher:

@@ -30,8 +30,7 @@ setup(
         'Programming Language :: Python :: 3.6',
     ],
 
-    py_modules=['mir.dlsite'],
-    packages=[],
+    packages=['mir.dlsite'],
     install_requires=[
         'beautifulsoup4',
         'lxml',

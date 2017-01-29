@@ -1,4 +1,4 @@
-# Copyright (C) 2016 Allen Li
+# Copyright (C) 2016, 2017 Allen Li
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -20,17 +20,17 @@ import pathlib
 
 import pytest
 
-from mir import dlsite
+from mir.dlsite import api
 
 
 def test_get_work_url():
-    fetcher = dlsite.WorkInfoFetcher()
+    fetcher = api.WorkInfoFetcher()
     assert fetcher._get_work_url('RJ123') == \
         'http://www.dlsite.com/maniax/work/=/product_id/RJ123.html'
 
 
 def test_get_announce_url():
-    fetcher = dlsite.WorkInfoFetcher()
+    fetcher = api.WorkInfoFetcher()
     assert fetcher._get_announce_url('RJ123') == \
         'http://www.dlsite.com/maniax/announce/=/product_id/RJ123.html'
 
@@ -38,21 +38,21 @@ def test_get_announce_url():
 @mock.patch('urllib.request.urlopen', autospec=True)
 def test_get_page_work(urlopen):
     urlopen.return_value = io.BytesIO(b'foo')
-    fetcher = dlsite.WorkInfoFetcher()
+    fetcher = api.WorkInfoFetcher()
     assert fetcher._get_page('RJ123') == 'foo'
 
 
 @mock.patch('urllib.request.urlopen', autospec=True)
 def test_get_page_announce(urlopen):
     urlopen.side_effect = _announce_opener(io.BytesIO(b'foo'))
-    fetcher = dlsite.WorkInfoFetcher()
+    fetcher = api.WorkInfoFetcher()
     assert fetcher._get_page('RJ123') == 'foo'
 
 
 @mock.patch('urllib.request.urlopen', autospec=True)
 def test_get_page_error(urlopen):
     urlopen.side_effect = _error_opener
-    fetcher = dlsite.WorkInfoFetcher()
+    fetcher = api.WorkInfoFetcher()
     with pytest.raises(urllib.error.HTTPError):
         fetcher._get_page('RJ123')
 
@@ -112,12 +112,16 @@ def test_cached_fetcher(tmpdir):
     getter_mock.assert_not_called()
 
 
-class _FakeFetcher(dlsite.WorkInfoFetcher):
+def test_work_info_str():
+    assert str(api.WorkInfo('RJ123', 'foo', 'bar')) == 'RJ123 [bar] foo'
+
+
+class _FakeFetcher(api.WorkInfoFetcher):
 
     def _get_page(self, rjcode):
         return (pathlib.Path(__file__).parent
                 / 'pages' / ('%s.html' % rjcode)).read_text()
 
 
-class _FakeCachedFetcher(_FakeFetcher, dlsite.CachedFetcher):
+class _FakeCachedFetcher(_FakeFetcher, api.CachedFetcher):
     pass
