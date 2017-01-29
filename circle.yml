@@ -1,0 +1,9 @@
+machine:
+  python:
+    version: 3.6.0
+test:
+  override:
+    - tox
+  post:
+    - mv .pytest $CIRCLE_TEST_REPORTS/pytest
+    - bash <(curl -s https://codecov.io/bash)

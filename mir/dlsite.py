@@ -1,4 +1,4 @@
-# Copyright (C) 2016 Allen Li
+# Copyright (C) 2016, 2017 Allen Li
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,7 +14,6 @@
 
 """DLsite library"""
 
-from collections import namedtuple
 import pathlib
 import re
 import shelve
@@ -24,6 +23,7 @@ from bs4 import BeautifulSoup
 
 __version__ = '0.1.0'
 
+_CACHE = pathlib.Path.home() / '.cache' / 'mir.dlsite.db'
 _RJCODE_PATTERN = re.compile(r'RJ[0-9]+')
 
 
@@ -128,17 +128,18 @@ class CachedFetcher(WorkInfoFetcher):
         self._shelf.close()
 
 
-class WorkInfo(namedtuple('WorkInfo', 'rjcode,name,maker,series')):
+class WorkInfo:
 
-    """Info about a DLsite work."""
+    __slots__ = ('rjcode', 'name', 'maker', 'series')
 
-    def __new__(cls, rjcode, name, maker, series=''):
-        return super().__new__(
-            cls,
-            str(rjcode),
-            str(name),
-            str(maker),
-            str(series))
+    def __init__(self, rjcode, name, maker, series=''):
+        self.rjcode = rjcode
+        self.name = name
+        self.maker = maker
+        self.series = series
 
     def __str__(self):
-        return '{} [{}] {}'.format(self.rjcode, self.maker, self.name)
+        return f'{self.rjcode} [{self.maker}] {self.name}'
+
+
+fetcher = CachedFetcher(_CACHE)
