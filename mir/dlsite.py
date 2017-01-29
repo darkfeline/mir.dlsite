@@ -24,7 +24,6 @@ from bs4 import BeautifulSoup
 
 __version__ = '0.1.0'
 
-_CACHE = pathlib.Path.home() / '.cache' / 'mir.dlsite.db'
 _RJCODE_PATTERN = re.compile(r'RJ[0-9]+')
 
 
@@ -140,6 +139,3 @@ class WorkInfo:
 
     def __str__(self):
         return f'{self.rjcode} [{self.maker}] {self.name}'
-
-
-fetcher = CachedFetcher(_CACHE)
