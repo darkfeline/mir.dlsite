@@ -19,15 +19,14 @@ import re
 _RJCODE_PATTERN = re.compile(r'RJ[0-9]+')
 
 
-def parse_rjcodes(string) -> 'Iterable':
-    """Parse all RJ codes from a string."""
-    for match in _RJCODE_PATTERN.finditer(string):
-        yield match.group(0)
-
-
-def parse_rjcode(string) -> str:
+def parse(string) -> str:
     """Parse RJ code from a string."""
-    try:
-        return next(parse_rjcodes(string))
-    except StopIteration:
+    match = _RJCODE_PATTERN.search(string)
+    if match is None:
         raise ValueError('No rjcode found.')
+    return match.group(0)
+
+
+def contains(string) -> bool:
+    """Return True if string contains RJ code."""
+    return bool(_RJCODE_PATTERN.search(string))

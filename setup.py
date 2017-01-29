@@ -35,4 +35,11 @@ setup(
         'beautifulsoup4',
         'lxml',
     ],
+    entry_points={
+        'console_scripts': [
+            'dllist = mir.dlsite.dllist:main',
+            'dlmv = mir.dlsite.dlmv:main',
+            'dlorg = mir.dlsite.dlorg:main',
+        ],
+    },
 )

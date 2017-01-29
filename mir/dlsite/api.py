@@ -121,3 +121,27 @@ class WorkInfo:
 
     def __str__(self):
         return f'{self.rjcode} [{self.maker}] {self.name}'
+
+    @property
+    def as_filename(self):
+        return _escape_filename(str(self))
+
+    @property
+    def as_path(self):
+        path = pathlib.PurePath(_escape_filename(self.maker))
+        if self.series:
+            path /= _escape_filename(self.series)
+        path /= _escape_filename('%s %s' % (self.rjcode, self.name))
+        return path
+
+
+def _escape_filename(filename: str) -> str:
+    return filename.replace('/', '_')
+
+
+_CACHE = pathlib.Path.home() / '.cache' / 'mir.dlsite.db'
+
+
+def get_fetcher():
+    """Get default cached fetcher."""
+    return CachedFetcher(_CACHE)

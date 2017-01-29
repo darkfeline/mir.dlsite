@@ -13,6 +13,7 @@
 # limitations under the License.
 
 import io
+from pathlib import PurePath
 from unittest import mock
 import urllib.error
 
@@ -112,10 +113,6 @@ def test_cached_fetcher(tmpdir):
     getter_mock.assert_not_called()
 
 
-def test_work_info_str():
-    assert str(api.WorkInfo('RJ123', 'foo', 'bar')) == 'RJ123 [bar] foo'
-
-
 class _FakeFetcher(api.WorkInfoFetcher):
 
     def _get_page(self, rjcode):
@@ -125,3 +122,35 @@ class _FakeFetcher(api.WorkInfoFetcher):
 
 class _FakeCachedFetcher(_FakeFetcher, api.CachedFetcher):
     pass
+
+
+def test_work_info_str():
+    assert str(api.WorkInfo('RJ123', 'foo', 'bar')) == 'RJ123 [bar] foo'
+
+
+def test_work_info_str_slash():
+    assert str(api.WorkInfo('RJ123', 'foo/', 'bar')) == 'RJ123 [bar] foo/'
+
+
+def test_work_info_as_filename():
+    assert api.WorkInfo('RJ123', 'foo', 'bar').as_filename == 'RJ123 [bar] foo'
+
+
+def test_work_info_as_filename_slash():
+    assert api.WorkInfo('RJ123', 'foo/', 'bar').as_filename == \
+        'RJ123 [bar] foo_'
+
+
+def test_work_info_as_path():
+    assert api.WorkInfo('RJ123', 'foo', 'bar').as_path == \
+        PurePath('bar/RJ123 foo')
+
+
+def test_work_info_as_path_with_series():
+    assert api.WorkInfo('RJ123', 'foo', 'bar', 'baz').as_path == \
+        PurePath('bar/baz/RJ123 foo')
+
+
+def test_work_info_as_path_slash():
+    assert api.WorkInfo('RJ123', 'foo', 'bar/').as_path == \
+        PurePath('bar_/RJ123 foo')

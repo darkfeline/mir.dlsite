@@ -17,18 +17,18 @@ import pytest
 from mir.dlsite import rj
 
 
-def test_parse_rjcode():
-    assert rj.parse_rjcode('asdf RJ123 asdf') == 'RJ123'
+def test_parse():
+    assert rj.parse('asdf RJ123 asdf') == 'RJ123'
 
 
-def test_parse_rjcode_missing():
+def test_parse_missing():
     with pytest.raises(ValueError):
-        rj.parse_rjcode('asdf')
+        rj.parse('asdf')
 
 
-def test_parse_rjcodes():
-    assert list(rj.parse_rjcodes('RJ1 RJ2 RJ3')) == ['RJ1', 'RJ2', 'RJ3']
+def test_contains():
+    assert rj.contains('asdf RJ123 asdf')
 
 
-def test_parse_rjcodes_missing():
-    assert list(rj.parse_rjcodes('asdf')) == []
+def test_contains_missing():
+    assert not rj.contains('asdf')
