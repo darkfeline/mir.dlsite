@@ -111,8 +111,6 @@ class CachedFetcher(WorkInfoFetcher):
 
 class WorkInfo:
 
-    __slots__ = ('rjcode', 'name', 'maker', 'series')
-
     def __init__(self, rjcode, name, maker, series=''):
         self.rjcode = rjcode
         self.name = name
