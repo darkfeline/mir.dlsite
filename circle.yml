@@ -1,9 +1,13 @@
 machine:
   python:
-    version: 3.6.0
+    version: 3.6.2
+dependencies:
+  post:
+    - pip install pipenv
 test:
   override:
-    - tox
+    - pipenv install --dev
+    - pipenv run python -m pytest --junitxml=.pytest/junit.xml
   post:
     - mv .pytest $CIRCLE_TEST_REPORTS/pytest
     - bash <(curl -s https://codecov.io/bash)

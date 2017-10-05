@@ -32,7 +32,7 @@ setup(
 
     packages=['mir.dlsite'],
     install_requires=[
-        'beautifulsoup4',
-        'lxml',
+        'beautifulsoup4~=4.6',
+        'lxml~=4.0',
     ],
 )

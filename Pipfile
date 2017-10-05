@@ -1,0 +1,13 @@
+[[source]]
+url = "https://pypi.python.org/simple"
+verify_ssl = true
+
+[dev-packages]
+
+pytest = "==3.2.2"
+"pytest-catchlog" = "==1.2.2"
+"pytest-cov" = "==2.5.1"
+
+[packages]
+"beautifulsoup4" = "*"
+lxml = "*"
