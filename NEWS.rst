@@ -3,8 +3,8 @@ mir.dlsite Release Notes
 
 This project uses `semantic versioning <http://semver.org/>`_.
 
-0.3.0 ()
---------
+0.3.0 (2017-10-05)
+------------------
 
 Added
 ^^^^^
