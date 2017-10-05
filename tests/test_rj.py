@@ -26,9 +26,9 @@ def test_parse_missing():
         rj.parse('asdf')
 
 
-def test_contains():
-    assert rj.contains('asdf RJ123 asdf')
+def test_inside():
+    assert rj.inside('asdf RJ123 asdf')
 
 
-def test_contains_missing():
-    assert not rj.contains('asdf')
+def test_inside_missing():
+    assert not rj.inside('asdf')

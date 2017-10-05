@@ -52,7 +52,7 @@ def _find(top_dir: Path) -> 'Iterable[Path]':
     for path in top_dir.iterdir():
         if not path.is_dir():
             continue
-        if rj.contains(path.name):
+        if rj.inside(path.name):
             yield path
 
 
@@ -62,7 +62,7 @@ def _find_all(top_dir: Path) -> 'Iterable[Path]':
     Yield Path instances to work directories, relative to top_dir.
     """
     for path in _walk_dirs(top_dir):
-        if rj.contains(path.name):
+        if rj.inside(path.name):
             yield path
 
 

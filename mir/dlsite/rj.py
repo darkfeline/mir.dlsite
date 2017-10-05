@@ -27,6 +27,6 @@ def parse(string) -> str:
     return match.group(0)
 
 
-def contains(string) -> bool:
-    """Return True if string contains RJ code."""
+def inside(string) -> bool:
+    """Return True if an RJ code is inside string."""
     return bool(_RJCODE_PATTERN.search(string))

@@ -11,6 +11,11 @@ Added
 
 - Added `--all` option to `dlorg` allow for faster shallow runs.
 
+Changed
+^^^^^^^
+
+- Renamed `rj.contains` to `rj.inside`.
+
 0.2.0 (2017-07-30)
 ------------------
 
