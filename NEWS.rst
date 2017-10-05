@@ -3,6 +3,14 @@ mir.dlsite Release Notes
 
 This project uses `semantic versioning <http://semver.org/>`_.
 
+0.3.0 ()
+--------
+
+Added
+^^^^^
+
+- Added `--all` option to `dlorg` allow for faster shallow runs.
+
 0.2.0 (2017-07-30)
 ------------------
 
