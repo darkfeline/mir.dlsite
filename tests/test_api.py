@@ -45,7 +45,7 @@ def test_fetch_work_with_series(fake_urlopen):
     assert work.series == '地獄級オナニーサポート'
 
 
-def test_fetch_work_without_series():
+def test_fetch_work_without_series(fake_urlopen):
     work = api.fetch_work('RJ173248')
     assert work.rjcode == 'RJ173248'
     assert work.maker == 'B-bishop'
@@ -53,12 +53,20 @@ def test_fetch_work_without_series():
     assert work.series is None
 
 
-def test_fetch_work_from_announce():
+def test_fetch_work_from_announce(fake_urlopen):
     work = api.fetch_work('RJ189666')
     assert work.rjcode == 'RJ189666'
     assert work.maker == 'S彼女'
     assert work.name == '強気な妹に連射させられる!? ～即ヌキ淫語16～'
     assert work.series == '即ヌキ淫語'
+
+
+def test_cached_fetcher(tmpdir, fake_urlopen):
+    fetcher = api.CachedFetcher(str(tmpdir.join('cache')), api.fetch_work)
+    work1 = fetcher('RJ189758')
+    fake_urlopen.side_effect = _FakeError
+    work2 = fetcher('RJ189758')
+    assert work1.rjcode == work2.rjcode
 
 
 # def test_cached_fetcher(tmpdir):
@@ -75,6 +83,7 @@ def test_fetch_work_from_announce():
 
 def _get_page(section: str, rjcode: str) -> str:
     """Get test page contents as a fake HTTP body."""
+    logger.debug(f'Getting page {section} {rjcode}')
     path = (pathlib.Path(__file__).parent
             / 'pages' / section / f'{rjcode}.html')
     try:
@@ -89,7 +98,7 @@ def _open_url(url):
     logger.debug(f'Opening {url}')
     match = re.match(r'http://www.dlsite.com/maniax/(work|announce)/=/product_id/(RJ[0-9]+)(.html)?',
                      url)
-    if match is None:
+    if match is None:  # pragma: no cover
         raise _FakeError
     return _get_page(match.group(1), match.group(2))
 

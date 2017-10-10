@@ -46,7 +46,7 @@ def _get_page(rjcode: str) -> str:
     try:
         request = urllib.request.urlopen(_get_work_url(rjcode))
     except urllib.error.HTTPError as e:
-        if e.code != 404:
+        if e.code != 404:  # pragma: no cover
             raise
         request = urllib.request.urlopen(_get_announce_url(rjcode))
     return request.read().decode()
