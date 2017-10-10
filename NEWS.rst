@@ -10,6 +10,7 @@ Changed
 ^^^^^^^
 
 - Renamed `mir.scripts` to `mir.cmd`.
+- API rejiggered.
 
 0.3.0 (2017-10-05)
 ------------------
