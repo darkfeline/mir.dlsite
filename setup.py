@@ -12,11 +12,23 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import re
 from setuptools import setup
+
+
+def find_version(path):
+    with open(path) as f:
+        text = f.read()
+    version_match = re.search(r"^__version__ = ['\"]([^'\"]*)['\"]",
+                              text, re.M)
+    if version_match:
+        return version_match.group(1)
+    raise RuntimeError("Unable to find version string.")
+
 
 setup(
     name='mir.dlsite',
-    version='0.3.0',
+    version=find_version('mir/dlsite/__init__.py'),
     description='API for DLsite',
     long_description='',
     keywords='',
