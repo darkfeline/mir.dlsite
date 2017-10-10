@@ -13,6 +13,7 @@
 # limitations under the License.
 
 import io
+from itertools import zip_longest
 import logging
 from unittest import mock
 import re
@@ -23,6 +24,7 @@ import pathlib
 import pytest
 
 from mir.dlsite import api
+from mir.dlsite.workinfo import Track
 
 logger = logging.getLogger(__name__)
 
@@ -59,12 +61,19 @@ def test_fetch_work_without_series(fake_urlopen):
     assert work.series is None
 
 
-def test_fetch_work_with_trackinfo(fake_urlopen):
+def test_fetch_work_with_tracklist(fake_urlopen):
     work = api.fetch_work('RJ126928')
     assert work.rjcode == 'RJ126928'
     assert work.maker == 'クッキーボイス'
     assert work.name == 'まじこスハロウィン -可愛い彼女は吸血鬼!? 妖しく光る魅了の魔眼の巻-'
-    assert work.tracklist == ''
+    assert work.tracklist == [
+        Track('1. WELCOME\u3000TO\u3000HALLOWEEN',
+              '『ハロウィンの招待状』\u3000約1分\u3000※BGMの有無選択可能'),
+        Track('2. 魅了吸血お漏らし', '『ヒロインの来訪、魅了束縛でのイタズラ』\u3000約18分'),
+        Track('3. フェラチオきば愛情', '『精液を摂取する、吸血鬼』\t約16分'),
+        Track('4. あなたもう゛ぁんぷ', '『童貞卒業、牙で噛み合い』\t約15分'),
+        Track('5. 突発ラジオ', '『ラブラブ朝のグッドモーニング放送局』\t約6分'),
+    ]
 
 
 def test_fetch_work_from_announce(fake_urlopen):

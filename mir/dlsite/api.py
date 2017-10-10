@@ -39,10 +39,16 @@ def fetch_work(rjcode: str) -> workinfo.Work:
     work.description = _get_description(soup)
     try:
         series = _get_series(soup)
-    except ValueError:
+    except _NoInfoError:
         pass
     else:
         work.series = series
+    try:
+        tracklist = _get_tracklist(soup)
+    except _NoInfoError:
+        pass
+    else:
+        work.tracklist = tracklist
     return work
 
 
@@ -97,7 +103,7 @@ def _get_series(soup) -> str:
             .find_next_sibling('td')
             .a.string)
     except AttributeError:
-        raise ValueError('no series')
+        raise _NoInfoError('no series')
 
 
 def _get_description(soup) -> str:
@@ -110,7 +116,7 @@ def _get_description(soup) -> str:
     return text.strip() + '\n'
 
 
-def _replace_br(elements):
+def _replace_br(elements) -> 'Iterable[str]':
     """Replace br tags with newline strings."""
     for element in elements:
         if not isinstance(element, bs4.element.Tag):
@@ -121,6 +127,24 @@ def _replace_br(elements):
             continue
         logger.debug('Encountered unhandled tag %r', element)
         yield element.string
+
+
+def _get_tracklist(soup) -> 'List[Track]':
+    return list(_generate_tracklist(soup))
+
+
+def _generate_tracklist(soup) -> 'Iterable[Track]':
+    div = soup.find('div', id='work_parts')
+    if div is None:
+        raise _NoInfoError('no tracklist')
+    ol = div.find('ol', {'class': 'work_tracklist_list'})
+    if ol is None:
+        raise _NoInfoError('no tracklist')
+    li_list = ol.find_all('li')
+    for li in li_list:
+        name = ' '.join(li.find('p', {'class': 'track_name'}).strings)
+        text = li.find('p', {'class': 'track_text'}).string
+        yield workinfo.Track(name, text)
 
 
 class CachedFetcher:
@@ -149,6 +173,10 @@ class CachedFetcher:
 
     def close(self):
         self._shelf.close()
+
+
+class _NoInfoError(ValueError):
+    """No info found."""
 
 
 _CACHE = Path.home() / '.cache' / 'mir.dlsite.db'

@@ -67,5 +67,23 @@ def work_path(work) -> PurePath:
     return path
 
 
+class Track:
+    """DLSite track info data class."""
+
+    def __init__(self, name, text):
+        self.name = name
+        self.text = text
+
+    def __repr__(self):
+        cls = type(self).__qualname__
+        return (f'{cls}({self.name!r}, {self.text!r})')
+
+    def __eq__(self, other):
+        if isinstance(other, type(self)):
+            return (self.name == other.name
+                    and self.text == other.text)
+        return NotImplemented
+
+
 def _escape_filename(filename: str) -> str:
     return filename.replace('/', '_')

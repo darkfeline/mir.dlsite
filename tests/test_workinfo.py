@@ -77,3 +77,26 @@ def test_work_path_with_series():
 def test_work_path_slash():
     obj = workinfo.Work('RJ123', 'foo', 'bar/')
     assert workinfo.work_path(obj) == PurePath('bar_/RJ123 foo')
+
+
+def test_track_repr():
+    track = workinfo.Track('lydie', 'suelle')
+    got = repr(track)
+    assert got == "Track('lydie', 'suelle')"
+
+
+def test_track_eq():
+    track1 = workinfo.Track('lydie', 'suelle')
+    track2 = workinfo.Track('lydie', 'suelle')
+    assert track1 == track2
+
+
+def test_track_not_eq():
+    track1 = workinfo.Track('lydie', 'suelle')
+    track2 = workinfo.Track('sophie', 'prachta')
+    assert track1 != track2
+
+
+def test_track_eq_wrong_type():
+    track = workinfo.Track('lydie', 'suelle')
+    assert track != 'asdf'
