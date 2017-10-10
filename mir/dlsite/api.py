@@ -105,12 +105,12 @@ class CachedFetcher:
     def __call__(self, rjcode: str) -> 'WorkInfo':
         try:
             return self._shelf[rjcode]
+        except TypeError:
+            raise ValueError('called unopened CachedFetcher')
         except KeyError:
             work_info = self._fetcher(rjcode)
             self._shelf[rjcode] = work_info
             return work_info
-        except TypeError:
-            raise ValueError('called unopened CachedFetcher')
 
     def __enter__(self):
         self._shelf = shelve.open(self._path)

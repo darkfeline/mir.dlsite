@@ -61,24 +61,19 @@ def test_fetch_work_from_announce(fake_urlopen):
     assert work.series == '即ヌキ淫語'
 
 
+def test_cached_fetcher_used_without_context(tmpdir, fake_urlopen):
+    fetcher = api.CachedFetcher(str(tmpdir.join('cache')), api.fetch_work)
+    with pytest.raises(ValueError):
+        fetcher('RJ189758')
+
+
 def test_cached_fetcher(tmpdir, fake_urlopen):
     fetcher = api.CachedFetcher(str(tmpdir.join('cache')), api.fetch_work)
-    work1 = fetcher('RJ189758')
-    fake_urlopen.side_effect = _FakeError
-    work2 = fetcher('RJ189758')
+    with fetcher:
+        work1 = fetcher('RJ189758')
+        fake_urlopen.side_effect = _FakeError
+        work2 = fetcher('RJ189758')
     assert work1.rjcode == work2.rjcode
-
-
-# def test_cached_fetcher(tmpdir):
-#     with _FakeCachedFetcher(tmpdir / 'cache') as fetcher:
-#         work = fetcher('RJ173248')
-#     assert work.rjcode == 'RJ173248'
-
-#     with mock.patch.object(_FakeCachedFetcher, '_get_page') as getter_mock, \
-#          _FakeCachedFetcher(tmpdir / 'cache') as fetcher:
-#         work = fetcher('RJ173248')
-#     assert work.rjcode == 'RJ173248'
-#     getter_mock.assert_not_called()
 
 
 def _get_page(section: str, rjcode: str) -> str:
