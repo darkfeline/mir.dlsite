@@ -43,6 +43,12 @@ def test_fetch_work_with_series(fake_urlopen):
     assert work.maker == 'B-bishop'
     assert work.name == '意地悪な機械人形に完全支配される音声 地獄級射精禁止オナニーサポート4 ヘルエグゼキューション'
     assert work.series == '地獄級オナニーサポート'
+    assert work.description.startswith('''皆様、こんにちは。サークルB-bishopのpawnlank7と申します。
+今作は、地獄級に激しいオナニーサポート作品第4弾です。
+''')
+    assert work.description.endswith('''本作品の販売
+B-bishop http://pawnlank7.blog.fc2.com
+''')
 
 
 def test_fetch_work_without_series(fake_urlopen):
@@ -51,6 +57,14 @@ def test_fetch_work_without_series(fake_urlopen):
     assert work.maker == 'B-bishop'
     assert work.name == '搾精天使ピュアミルク 背後からバイノーラルでいじめられる音声'
     assert work.series is None
+
+
+def test_fetch_work_with_trackinfo(fake_urlopen):
+    work = api.fetch_work('RJ126928')
+    assert work.rjcode == 'RJ126928'
+    assert work.maker == 'クッキーボイス'
+    assert work.name == 'まじこスハロウィン -可愛い彼女は吸血鬼!? 妖しく光る魅了の魔眼の巻-'
+    assert work.tracklist == ''
 
 
 def test_fetch_work_from_announce(fake_urlopen):

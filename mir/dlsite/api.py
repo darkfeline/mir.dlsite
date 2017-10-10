@@ -14,14 +14,18 @@
 
 """DLsite API"""
 
+import logging
 from pathlib import Path
 import re
 import shelve
 import urllib.request
 
+import bs4
 from bs4 import BeautifulSoup
 
 from mir.dlsite import workinfo
+
+logger = logging.getLogger(__name__)
 
 
 def fetch_work(rjcode: str) -> workinfo.Work:
@@ -32,6 +36,7 @@ def fetch_work(rjcode: str) -> workinfo.Work:
         rjcode=rjcode,
         name=_get_name(soup),
         maker=_get_maker(soup))
+    work.description = _get_description(soup)
     try:
         series = _get_series(soup)
     except ValueError:
@@ -93,6 +98,29 @@ def _get_series(soup) -> str:
             .a.string)
     except AttributeError:
         raise ValueError('no series')
+
+
+def _get_description(soup) -> str:
+    """Get work series name."""
+    contents = (
+        soup.find(id='main_inner')
+        .find('div', itemprop='description')
+        .contents)
+    text = ''.join(_replace_br(contents))
+    return text.strip() + '\n'
+
+
+def _replace_br(elements):
+    """Replace br tags with newline strings."""
+    for element in elements:
+        if not isinstance(element, bs4.element.Tag):
+            yield element
+            continue
+        if element.name == 'br':
+            # DLSite includes redundant <br/>
+            continue
+        logger.debug('Encountered unhandled tag %r', element)
+        yield element.string
 
 
 class CachedFetcher:
