@@ -13,8 +13,9 @@
 # limitations under the License.
 
 import io
-from pathlib import PurePath
+import logging
 from unittest import mock
+import re
 import urllib.error
 
 import pathlib
@@ -23,134 +24,84 @@ import pytest
 
 from mir.dlsite import api
 
+logger = logging.getLogger(__name__)
+
 
 def test_get_work_url():
-    fetcher = api.WorkInfoFetcher()
-    assert fetcher._get_work_url('RJ123') == \
-        'http://www.dlsite.com/maniax/work/=/product_id/RJ123.html'
+    got = api._get_work_url('RJ123')
+    assert got == 'http://www.dlsite.com/maniax/work/=/product_id/RJ123.html'
 
 
 def test_get_announce_url():
-    fetcher = api.WorkInfoFetcher()
-    assert fetcher._get_announce_url('RJ123') == \
-        'http://www.dlsite.com/maniax/announce/=/product_id/RJ123.html'
+    got = api._get_announce_url('RJ123')
+    assert got == 'http://www.dlsite.com/maniax/announce/=/product_id/RJ123.html'
 
 
-@mock.patch('urllib.request.urlopen', autospec=True)
-def test_get_page_work(urlopen):
-    urlopen.return_value = io.BytesIO(b'foo')
-    fetcher = api.WorkInfoFetcher()
-    assert fetcher._get_page('RJ123') == 'foo'
-
-
-@mock.patch('urllib.request.urlopen', autospec=True)
-def test_get_page_announce(urlopen):
-    urlopen.side_effect = _announce_opener(io.BytesIO(b'foo'))
-    fetcher = api.WorkInfoFetcher()
-    assert fetcher._get_page('RJ123') == 'foo'
-
-
-@mock.patch('urllib.request.urlopen', autospec=True)
-def test_get_page_error(urlopen):
-    urlopen.side_effect = _error_opener
-    fetcher = api.WorkInfoFetcher()
-    with pytest.raises(urllib.error.HTTPError):
-        fetcher._get_page('RJ123')
-
-
-def _announce_opener(value):
-    """A stub urlopen."""
-    def opener(url):
-        if 'announce' in url:
-            return value
-        else:
-            raise urllib.error.HTTPError(
-                url=url,
-                code=404,
-                msg='',
-                hdrs=None,
-                fp=None)
-    return opener
-
-
-def _error_opener(url):
-    """A stub urlopen."""
-    raise urllib.error.HTTPError(
-        url=url,
-        code=400,
-        msg='',
-        hdrs=None,
-        fp=None)
-
-
-def test_fetch_work_with_series():
-    fetcher = _FakeFetcher()
-    work_info = fetcher('RJ189758')
-    assert work_info.rjcode == 'RJ189758'
-    assert work_info.maker == 'B-bishop'
-    assert work_info.name == '意地悪な機械人形に完全支配される音声 地獄級射精禁止オナニーサポート4 ヘルエグゼキューション'
-    assert work_info.series == '地獄級オナニーサポート'
+def test_fetch_work_with_series(fake_urlopen):
+    work = api.fetch_work('RJ189758')
+    assert work.rjcode == 'RJ189758'
+    assert work.maker == 'B-bishop'
+    assert work.name == '意地悪な機械人形に完全支配される音声 地獄級射精禁止オナニーサポート4 ヘルエグゼキューション'
+    assert work.series == '地獄級オナニーサポート'
 
 
 def test_fetch_work_without_series():
-    fetcher = _FakeFetcher()
-    work_info = fetcher('RJ173248')
-    assert work_info.rjcode == 'RJ173248'
-    assert work_info.maker == 'B-bishop'
-    assert work_info.name == '搾精天使ピュアミルク 背後からバイノーラルでいじめられる音声'
-    assert work_info.series == ''
+    work = api.fetch_work('RJ173248')
+    assert work.rjcode == 'RJ173248'
+    assert work.maker == 'B-bishop'
+    assert work.name == '搾精天使ピュアミルク 背後からバイノーラルでいじめられる音声'
+    assert work.series is None
 
 
-def test_cached_fetcher(tmpdir):
-    with _FakeCachedFetcher(tmpdir / 'cache') as fetcher:
-        work_info = fetcher('RJ173248')
-    assert work_info.rjcode == 'RJ173248'
-
-    with mock.patch.object(_FakeCachedFetcher, '_get_page') as getter_mock, \
-         _FakeCachedFetcher(tmpdir / 'cache') as fetcher:
-        work_info = fetcher('RJ173248')
-    assert work_info.rjcode == 'RJ173248'
-    getter_mock.assert_not_called()
+def test_fetch_work_from_announce():
+    work = api.fetch_work('RJ189666')
+    assert work.rjcode == 'RJ189666'
+    assert work.maker == 'S彼女'
+    assert work.name == '強気な妹に連射させられる!? ～即ヌキ淫語16～'
+    assert work.series == '即ヌキ淫語'
 
 
-class _FakeFetcher(api.WorkInfoFetcher):
+# def test_cached_fetcher(tmpdir):
+#     with _FakeCachedFetcher(tmpdir / 'cache') as fetcher:
+#         work = fetcher('RJ173248')
+#     assert work.rjcode == 'RJ173248'
 
-    def _get_page(self, rjcode):
-        return (pathlib.Path(__file__).parent
-                / 'pages' / ('%s.html' % rjcode)).read_text()
-
-
-class _FakeCachedFetcher(_FakeFetcher, api.CachedFetcher):
-    pass
-
-
-def test_work_info_str():
-    assert str(api.WorkInfo('RJ123', 'foo', 'bar')) == 'RJ123 [bar] foo'
+#     with mock.patch.object(_FakeCachedFetcher, '_get_page') as getter_mock, \
+#          _FakeCachedFetcher(tmpdir / 'cache') as fetcher:
+#         work = fetcher('RJ173248')
+#     assert work.rjcode == 'RJ173248'
+#     getter_mock.assert_not_called()
 
 
-def test_work_info_str_slash():
-    assert str(api.WorkInfo('RJ123', 'foo/', 'bar')) == 'RJ123 [bar] foo/'
+def _get_page(section: str, rjcode: str) -> str:
+    """Get test page contents as a fake HTTP body."""
+    path = (pathlib.Path(__file__).parent
+            / 'pages' / section / f'{rjcode}.html')
+    try:
+        text = path.read_text()
+    except FileNotFoundError:
+        raise _FakeError
+    return io.BytesIO(text.encode())
 
 
-def test_work_info_as_filename():
-    assert api.WorkInfo('RJ123', 'foo', 'bar').as_filename == 'RJ123 [bar] foo'
+def _open_url(url):
+    """Fake DLSite URL open."""
+    logger.debug(f'Opening {url}')
+    match = re.match(r'http://www.dlsite.com/maniax/(work|announce)/=/product_id/(RJ[0-9]+)(.html)?',
+                     url)
+    if match is None:
+        raise _FakeError
+    return _get_page(match.group(1), match.group(2))
 
 
-def test_work_info_as_filename_slash():
-    assert api.WorkInfo('RJ123', 'foo/', 'bar').as_filename == \
-        'RJ123 [bar] foo_'
+@pytest.fixture
+def fake_urlopen():
+    with mock.patch('urllib.request.urlopen') as urlopen:
+        urlopen.side_effect = _open_url
+        yield urlopen
 
 
-def test_work_info_as_path():
-    assert api.WorkInfo('RJ123', 'foo', 'bar').as_path == \
-        PurePath('bar/RJ123 foo')
+class _FakeError(urllib.error.HTTPError):
 
-
-def test_work_info_as_path_with_series():
-    assert api.WorkInfo('RJ123', 'foo', 'bar', 'baz').as_path == \
-        PurePath('bar/baz/RJ123 foo')
-
-
-def test_work_info_as_path_slash():
-    assert api.WorkInfo('RJ123', 'foo', 'bar/').as_path == \
-        PurePath('bar_/RJ123 foo')
+    def __init__(self):
+        self.code = 404

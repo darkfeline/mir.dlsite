@@ -21,7 +21,7 @@ from pathlib import Path
 from typing import NamedTuple
 
 from mir.dlsite import api
-from mir.dlsite import rj
+from mir.dlsite import workinfo
 
 logger = logging.getLogger(__name__)
 
@@ -52,7 +52,7 @@ def _find(top_dir: Path) -> 'Iterable[Path]':
     for path in top_dir.iterdir():
         if not path.is_dir():
             continue
-        if rj.inside(path.name):
+        if workinfo.contains_rjcode(path.name):
             yield path
 
 
@@ -62,7 +62,7 @@ def _find_all(top_dir: Path) -> 'Iterable[Path]':
     Yield Path instances to work directories, relative to top_dir.
     """
     for path in _walk_dirs(top_dir):
-        if rj.inside(path.name):
+        if workinfo.contains_rjcode(path.name):
             yield path
 
 
@@ -81,7 +81,7 @@ def _calculate_path_renames(works: 'Iterable[Path]') -> 'Iterable[_PathRename]':
     """
     with api.get_fetcher() as fetcher:
         for path in works:
-            rjcode = rj.parse(path.name)
+            rjcode = workinfo.parse_rjcode(path.name)
             work_info = fetcher(rjcode)
             yield _PathRename(path, work_info.as_path)
 

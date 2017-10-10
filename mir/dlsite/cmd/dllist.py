@@ -18,7 +18,7 @@ import argparse
 import sys
 
 from mir.dlsite import api
-from mir.dlsite import rj
+from mir.dlsite import workinfo
 
 
 def main():
@@ -34,7 +34,7 @@ def main():
 
     for line in sys.stdin:
         try:
-            rjcode = rj.parse(line)
+            rjcode = workinfo.parse_rjcode(line)
         except ValueError:
             continue
         printer(rjcode)
@@ -46,8 +46,8 @@ def _simple_printer(rjcode: str):
 
 def _info_printer(rjcode: str):
     with api.get_fetcher() as fetcher:
-        workinfo = fetcher(rjcode)
-        print(str(workinfo))
+        work = fetcher(rjcode)
+        print(str(work))
 
 
 if __name__ == '__main__':

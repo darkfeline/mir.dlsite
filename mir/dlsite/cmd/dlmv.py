@@ -18,24 +18,24 @@ import argparse
 import os
 
 from mir.dlsite import api
-from mir.dlsite import rj
+from mir.dlsite import workinfo
 
 
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('file')
     parser.add_argument('rjcode', nargs='?', default=None,
-                        type=rj.parse)
+                        type=workinfo.parse_rjcode)
     args = parser.parse_args()
 
     if args.rjcode is None:
-        rjcode = rj.parse(args.file)
+        rjcode = workinfo.parse_rjcode(args.file)
     else:
         rjcode = args.rjcode
 
     with api.get_fetcher() as fetcher:
-        work_info = fetcher(rjcode)
-    os.rename(args.file, work_info.as_filename)
+        work = fetcher(rjcode)
+    os.rename(args.file, workinfo.work_filename(work))
 
 
 if __name__ == '__main__':
