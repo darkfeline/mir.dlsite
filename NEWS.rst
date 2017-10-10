@@ -3,6 +3,14 @@ mir.dlsite Release Notes
 
 This project uses `semantic versioning <http://semver.org/>`_.
 
+0.4.0
+-----
+
+Changed
+^^^^^^^
+
+- Renamed `mir.scripts` to `mir.cmd`.
+
 0.3.0 (2017-10-05)
 ------------------
 
