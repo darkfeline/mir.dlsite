@@ -42,6 +42,8 @@ def main():
     works = finder(args.top_dir)
     renames = _calculate_path_renames(works)
     fixer(args.top_dir, renames)
+    if not args.dry_run:
+        _remove_empty_dirs(args.top_dir)
 
 
 def _find(top_dir: Path) -> 'Iterable[Path]':
@@ -101,7 +103,6 @@ def _fix(top_dir: Path, renames: 'Iterable[_PathRename]'):
             continue
         logger.debug('Renaming %s to %s', rename.old, rename.new)
         rename.execute(top_dir)
-    _remove_empty_dirs(top_dir)
 
 
 def _remove_empty_dirs(top_dir: Path):
