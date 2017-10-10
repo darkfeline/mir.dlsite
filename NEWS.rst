@@ -6,6 +6,12 @@ This project uses `semantic versioning <http://semver.org/>`_.
 0.4.0
 -----
 
+Added
+^^^^^
+
+- Added tracklist support.
+- Added description support.
+
 Changed
 ^^^^^^^
 
