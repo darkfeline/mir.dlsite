@@ -15,6 +15,7 @@
 """Rename a file by dlsite code."""
 
 import argparse
+import logging
 import os
 
 from mir.dlsite import api
@@ -27,6 +28,7 @@ def main():
     parser.add_argument('rjcode', nargs='?', default=None,
                         type=workinfo.parse_rjcode)
     args = parser.parse_args()
+    logging.basicConfig(level='DEBUG')
 
     if args.rjcode is None:
         rjcode = workinfo.parse_rjcode(args.file)

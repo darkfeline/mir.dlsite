@@ -74,6 +74,7 @@ def test_fetch_work_with_tracklist(fake_urlopen):
         Track('4. あなたもう゛ぁんぷ', '『童貞卒業、牙で噛み合い』\t約15分'),
         Track('5. 突発ラジオ', '『ラブラブ朝のグッドモーニング放送局』\t約6分'),
     ]
+    assert type(work.tracklist[0].text) is str
 
 
 def test_fetch_work_from_announce(fake_urlopen):

@@ -144,7 +144,7 @@ def _generate_tracklist(soup) -> 'Iterable[Track]':
     li_list = ol.find_all('li')
     for li in li_list:
         name = ' '.join(li.find('p', {'class': 'track_name'}).strings)
-        text = li.find('p', {'class': 'track_text'}).string
+        text = str(li.find('p', {'class': 'track_text'}).string)
         yield workinfo.Track(name, text)
 
 
@@ -161,9 +161,9 @@ class CachedFetcher:
         except TypeError:
             raise ValueError('called unopened CachedFetcher')
         except KeyError:
-            work_info = self._fetcher(rjcode)
-            self._shelf[rjcode] = work_info
-            return work_info
+            work = self._fetcher(rjcode)
+            self._shelf[rjcode] = work
+            return work
 
     def __enter__(self):
         self._shelf = shelve.open(os.fspath(self._path))
