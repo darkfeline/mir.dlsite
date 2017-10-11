@@ -20,6 +20,7 @@ import pytest
 from mir.dlsite import org
 from mir.dlsite.org import PathRename
 from mir.dlsite import workinfo
+from mir.dlsite.workinfo import Track
 
 
 def test_find_works(tmpdir):
@@ -75,10 +76,60 @@ def test_apply_renames():
     ]
 
 
+def test_add_dlsite_files(tmpdir, fat_stub_fetcher):
+    tmpdir.ensure('RJ123', dir=True)
+    p = Path(str(tmpdir), 'RJ123')
+    org.add_dlsite_files(fat_stub_fetcher, p)
+    assert (p / 'dlsite-description.txt').exists()
+    assert (p / 'dlsite-description.txt').read_text() == '''\
+Some text
+
+Other text
+'''
+    assert (p / 'dlsite-tracklist.txt').exists()
+    assert (p / 'dlsite-tracklist.txt').read_text() == '''\
+1. foo bar
+2. spam eggs
+'''
+
+
+def test_add_dlsite_files_does_not_overwrite(tmpdir, fat_stub_fetcher):
+    tmpdir.ensure('RJ123/dlsite-description.txt').write('asdf')
+    p = Path(str(tmpdir), 'RJ123')
+    org.add_dlsite_files(fat_stub_fetcher, p)
+    assert (p / 'dlsite-description.txt').read_text() == 'asdf'
+
+
+def test_add_dlsite_files_missing_workinfo(tmpdir, stub_fetcher):
+    tmpdir.ensure('RJ123', dir=True)
+    p = Path(str(tmpdir), 'RJ123')
+    org.add_dlsite_files(stub_fetcher, p)
+    assert not (p / 'dlsite-description.txt').exists()
+    assert not (p / 'dlsite-tracklist.txt').exists()
+
+
 @pytest.fixture
 def stub_fetcher():
     def fetch(rjcode):
         work = workinfo.Work(rjcode, 'name', 'group')
         work.series = 'series'
+        return work
+    return fetch
+
+
+@pytest.fixture
+def fat_stub_fetcher():
+    def fetch(rjcode):
+        work = workinfo.Work(rjcode, 'name', 'group')
+        work.series = 'series'
+        work.description = '''\
+Some text
+
+Other text
+'''
+        work.tracklist = [
+            Track('1. foo', 'bar'),
+            Track('2. spam', 'eggs'),
+        ]
         return work
     return fetch

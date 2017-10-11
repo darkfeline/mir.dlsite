@@ -36,6 +36,13 @@ def contains_rjcode(string) -> bool:
 class Work:
     """DLSite work info data class."""
 
+    rjcode: str
+    name: str
+    maker: str
+    series: 'Optional[str]'
+    description: 'Optional[str]'
+    tracklist: 'Optional[List[Track]]'
+
     def __init__(self, rjcode, name, maker):
         self.rjcode = rjcode
         self.name = name
@@ -69,6 +76,9 @@ def work_path(work) -> PurePath:
 
 class Track:
     """DLSite track info data class."""
+
+    name: str
+    text: str
 
     def __init__(self, name, text):
         self.name = name
