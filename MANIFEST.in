@@ -1,0 +1,3 @@
+include Makefile
+graft tests
+recursive-exclude tests *.pyc
