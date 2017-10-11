@@ -9,6 +9,7 @@ __pycache__/
 /dist/
 /doc/
 /*.egg-info/
+/.cache/
 
 # Test artifacts
 /.coverage
