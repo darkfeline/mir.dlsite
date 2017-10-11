@@ -33,17 +33,21 @@ def main():
     parser.add_argument('-a', '--all', action='store_true')
     args = parser.parse_args()
 
-    works = org.find_works(args.top_dir)
+    paths = list(org.find_works(args.top_dir))
     if not args.all:
-        works = (p for p in works if len(p.parts) == 1)
+        paths = [p for p in paths if len(p.parts) == 1]
 
-    renames = org.calculate_path_renames(works)
+    renames = list(org.calculate_path_renames(paths))
     if args.dry_run:
+        for r in renames:
+            logger.info('Would rename %s to %s', r.old, r.new)
         ...
     else:
         for r in renames:
             r.execute(args.top_dir)
         org.remove_empty_dirs(args.top_dir)
+        paths = org.apply_renames(paths, renames)
+        ...
 
 
 if __name__ == '__main__':

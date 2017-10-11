@@ -71,8 +71,18 @@ class PathRename(NamedTuple):
 
 
 def apply_renames(paths: 'Iterable[Path]',
-                  renames: 'Iterable[PathRename]') -> 'Iterable[Path]':
+                  renames: 'Iterable[PathRename]') -> 'List[Path]':
     """Apply PathRenames to Paths."""
     renames_map = {r.old: r.new for r in renames}
-    for p in paths:
-        yield renames_map.get(p, p)
+    return [renames_map.get(p, p) for p in paths]
+
+
+_DESC_FILE = 'dlsite-description.txt'
+_TRACK_FILE = 'dlsite-tracklist.txt'
+
+
+def add_dlsite_files(fetcher, path: Path):
+    """Add dlsite information files to a work."""
+    rjcode = workinfo.parse_rjcode(path.name)
+    work = fetcher(rjcode)
+    ...

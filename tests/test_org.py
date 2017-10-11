@@ -68,7 +68,7 @@ def test_apply_renames():
         PathRename(Path('foo/bar'), Path('lydie/suelle')),
         PathRename(Path('fujiwara/takeda'), Path('hotaru/yuma')),
     ]
-    got = list(org.apply_renames(paths, renames))
+    got = org.apply_renames(paths, renames)
     assert got == [
         Path('lydie/suelle'),
         Path('sophie/prachta'),
