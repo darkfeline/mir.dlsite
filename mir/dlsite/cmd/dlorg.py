@@ -16,12 +16,9 @@
 
 import argparse
 import logging
-import os
 from pathlib import Path
-from typing import NamedTuple
 
-from mir.dlsite import api
-from mir.dlsite import workinfo
+from mir.dlsite import org
 
 logger = logging.getLogger(__name__)
 
@@ -36,100 +33,17 @@ def main():
     parser.add_argument('-a', '--all', action='store_true')
     args = parser.parse_args()
 
-    finder = _find_all if args.all else _find
-    fixer = _dryrun_fix if args.dry_run else _fix
+    works = org.find_works(args.top_dir)
+    if not args.all:
+        works = (p for p in works if len(p.parts) == 1)
 
-    works = finder(args.top_dir)
-    renames = _calculate_path_renames(works)
-    fixer(args.top_dir, renames)
-    if not args.dry_run:
-        _remove_empty_dirs(args.top_dir)
-
-
-def _find(top_dir: Path) -> 'Iterable[Path]':
-    """Find DLsite work paths.
-
-    Yield Path instances to work directories, relative to top_dir.
-    """
-    for path in top_dir.iterdir():
-        if not path.is_dir():
-            continue
-        if workinfo.contains_rjcode(path.name):
-            yield path
-
-
-def _find_all(top_dir: Path) -> 'Iterable[Path]':
-    """Find DLsite work paths recursively.
-
-    Yield Path instances to work directories, relative to top_dir.
-    """
-    for path in _walk_dirs(top_dir):
-        if workinfo.contains_rjcode(path.name):
-            yield path
-
-
-def _walk_dirs(top_dir: Path) -> 'Iterable[Path]':
-    """Yield relative paths to all subdirs, recursively."""
-    for dirpath, dirnames, _filenames in os.walk(top_dir):
-        dirpath = Path(dirpath)
-        for dirname in dirnames:
-            yield (dirpath / dirname).relative_to(top_dir)
-
-
-def _calculate_path_renames(works: 'Iterable[Path]') -> 'Iterable[_PathRename]':
-    """Find work renames.
-
-    Yield _PathRename instances.
-    """
-    with api.get_fetcher() as fetcher:
-        for path in works:
-            rjcode = workinfo.parse_rjcode(path.name)
-            work_info = fetcher(rjcode)
-            yield _PathRename(path, work_info.as_path)
-
-
-def _dryrun_fix(top_dir: Path, renames: 'Iterable[_PathRename]'):
-    for rename in renames:
-        if rename.is_noop():
-            logger.debug('%s already correct', rename.old)
-            continue
-        logger.debug('Renaming %s to %s', rename.old, rename.new)
-
-
-def _fix(top_dir: Path, renames: 'Iterable[_PathRename]'):
-    for rename in renames:
-        if rename.is_noop():
-            logger.debug('%s already correct', rename.old)
-            continue
-        logger.debug('Renaming %s to %s', rename.old, rename.new)
-        rename.execute(top_dir)
-
-
-def _remove_empty_dirs(top_dir: Path):
-    for dirpath, dirnames, filenames in os.walk(top_dir, topdown=False):
-        if not (dirnames or filenames):
-            os.rmdir(dirpath)
-
-
-class _PathRename(NamedTuple):
-    old: Path
-    new: Path
-
-    def __rtruediv__(self, other):
-        if isinstance(other, Path):
-            return _PathRename(
-                old=other / self.old,
-                new=other / self.new,
-            )
-
-    def is_noop(self):
-        return self.old == self.new
-
-    def execute(self, top_dir: Path):
-        old = top_dir / self.old
-        new = top_dir / self.new
-        new.parent.mkdir(parents=True, exist_ok=True)
-        old.rename(new)
+    renames = org.calculate_path_renames(works)
+    if args.dry_run:
+        ...
+    else:
+        for r in renames:
+            r.execute(args.top_dir)
+        org.remove_empty_dirs(args.top_dir)
 
 
 if __name__ == '__main__':

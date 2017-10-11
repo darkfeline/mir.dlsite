@@ -19,7 +19,6 @@ import os
 from pathlib import Path
 from typing import NamedTuple
 
-from mir.dlsite import api
 from mir.dlsite import workinfo
 
 logger = logging.getLogger(__name__)
