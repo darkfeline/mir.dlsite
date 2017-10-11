@@ -18,6 +18,7 @@ import argparse
 import logging
 from pathlib import Path
 
+from mir.dlsite import api
 from mir.dlsite import org
 
 logger = logging.getLogger(__name__)
@@ -37,17 +38,19 @@ def main():
     if not args.all:
         paths = [p for p in paths if len(p.parts) == 1]
 
-    renames = list(org.calculate_path_renames(paths))
+    with api.get_fetcher() as fetcher:
+        renames = list(org.calculate_path_renames(fetcher, paths))
     if args.dry_run:
         for r in renames:
             logger.info('Would rename %s to %s', r.old, r.new)
-        ...
     else:
         for r in renames:
             r.execute(args.top_dir)
         org.remove_empty_dirs(args.top_dir)
         paths = org.apply_renames(paths, renames)
-        ...
+        with api.get_fetcher() as fetcher:
+            for p in paths:
+                org.add_dlsite_files(fetcher, p)
 
 
 if __name__ == '__main__':
