@@ -36,12 +36,12 @@ def find_works(top_dir: 'PathLike') -> 'Iterable[Path]':
             dirnames.remove(n)
 
 
-def calculate_path_renames(fetcher, works: 'Iterable[Path]') -> 'Iterable[PathRename]':
+def calculate_path_renames(fetcher, paths: 'Iterable[Path]') -> 'Iterable[PathRename]':
     """Find rename operations to organize works.
 
     Yield PathRename instances.
     """
-    for path in works:
+    for path in paths:
         rjcode = workinfo.parse_rjcode(path.name)
         work = fetcher(rjcode)
         wanted_path = workinfo.work_path(work)
@@ -68,3 +68,11 @@ class PathRename(NamedTuple):
         new.parent.mkdir(parents=True, exist_ok=True)
         logger.debug('Renaming %s to %s', old, new)
         old.rename(new)
+
+
+def apply_renames(paths: 'Iterable[Path]',
+                  renames: 'Iterable[PathRename]') -> 'Iterable[Path]':
+    """Apply PathRenames to Paths."""
+    renames_map = {r.old: r.new for r in renames}
+    for p in paths:
+        yield renames_map.get(p, p)

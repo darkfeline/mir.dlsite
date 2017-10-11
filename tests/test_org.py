@@ -18,6 +18,7 @@ from pathlib import Path
 import pytest
 
 from mir.dlsite import org
+from mir.dlsite.org import PathRename
 from mir.dlsite import workinfo
 
 
@@ -36,7 +37,7 @@ def test_calculate_path_renames(stub_fetcher):
     ]
     got = list(org.calculate_path_renames(stub_fetcher, works))
     assert got == [
-        org.PathRename(Path('foo/RJ123'), Path('group/series/RJ123 name')),
+        PathRename(Path('foo/RJ123'), Path('group/series/RJ123 name')),
     ]
 
 
@@ -56,6 +57,22 @@ def test_PathRename_execute(tmpdir):
                        Path('baz'))
     r.execute(Path(str(tmpdir)))
     assert os.path.exists(os.path.join(str(tmpdir), 'baz/sophie'))
+
+
+def test_apply_renames():
+    paths = [
+        Path('foo/bar'),
+        Path('sophie/prachta'),
+    ]
+    renames = [
+        PathRename(Path('foo/bar'), Path('lydie/suelle')),
+        PathRename(Path('fujiwara/takeda'), Path('hotaru/yuma')),
+    ]
+    got = list(org.apply_renames(paths, renames))
+    assert got == [
+        Path('lydie/suelle'),
+        Path('sophie/prachta'),
+    ]
 
 
 @pytest.fixture
