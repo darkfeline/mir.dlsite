@@ -15,6 +15,7 @@
 """DLsite API"""
 
 import logging
+import os
 from pathlib import Path
 import re
 import shelve
@@ -165,7 +166,7 @@ class CachedFetcher:
             return work_info
 
     def __enter__(self):
-        self._shelf = shelve.open(self._path)
+        self._shelf = shelve.open(os.fspath(self._path))
         return self
 
     def __exit__(self, exc_type, exc_val, exc_tb):
