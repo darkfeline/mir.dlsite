@@ -17,6 +17,7 @@
 import argparse
 import logging
 from pathlib import Path
+import sys
 
 from mir.dlsite import api
 from mir.dlsite import org
@@ -24,15 +25,16 @@ from mir.dlsite import org
 logger = logging.getLogger(__name__)
 
 
-def main():
+def main(argv):
     logging.basicConfig(level='DEBUG')
 
-    parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser(prog=argv[0],
+                                     description=__doc__)
     parser.add_argument('top_dir', nargs='?', default=Path.cwd(),
                         type=Path)
     parser.add_argument('-n', '--dry-run', action='store_true')
     parser.add_argument('-a', '--all', action='store_true')
-    args = parser.parse_args()
+    args = parser.parse_args(argv[1:])
 
     paths = list(org.find_works(args.top_dir))
     if not args.all:
@@ -51,7 +53,8 @@ def main():
         with api.get_fetcher() as fetcher:
             for p in paths:
                 org.add_dlsite_files(fetcher, p)
+    return 0
 
 
 if __name__ == '__main__':
-    main()
+    sys.exit(main(sys.argv))
