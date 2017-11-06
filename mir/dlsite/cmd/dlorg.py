@@ -29,8 +29,7 @@ def main(argv):
     logging.basicConfig(level='DEBUG')
     args = _parse_args(argv)
     paths = _find_works(args.top_dir, recursive=args.all)
-    with api.get_fetcher() as fetcher:
-        renames = list(org.calculate_path_renames(fetcher, paths))
+    renames = _calculate_renames(paths)
     if args.dry_run:
         for r in renames:
             logger.info('Would rename %s to %s', r.old, r.new)
@@ -63,6 +62,11 @@ def _find_works(top_dir, recursive):
     if not recursive:
         paths = [p for p in paths if len(p.parts) == 1]
     return paths
+
+
+def _calculate_renames(paths):
+    with api.get_fetcher() as fetcher:
+        return list(org.calculate_path_renames(fetcher, paths))
 
 
 if __name__ == '__main__':
