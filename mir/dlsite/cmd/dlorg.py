@@ -37,9 +37,9 @@ def main(argv):
     for r in renames:
         r.execute(args.top_dir)
     org.remove_empty_dirs(args.top_dir)
+    paths = org.apply_renames(paths, renames)
     if not args.add_descriptions:
         return 0
-    paths = org.apply_renames(paths, renames)
     with api.get_fetcher() as fetcher:
         for p in paths:
             org.add_dlsite_files(fetcher, p)
