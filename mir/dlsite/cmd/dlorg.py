@@ -45,14 +45,14 @@ def main(argv):
     if args.dry_run:
         for r in renames:
             logger.info('Would rename %s to %s', r.old, r.new)
-    else:
-        for r in renames:
-            r.execute(args.top_dir)
-        org.remove_empty_dirs(args.top_dir)
-        paths = org.apply_renames(paths, renames)
-        with api.get_fetcher() as fetcher:
-            for p in paths:
-                org.add_dlsite_files(fetcher, p)
+        return 0
+    for r in renames:
+        r.execute(args.top_dir)
+    org.remove_empty_dirs(args.top_dir)
+    paths = org.apply_renames(paths, renames)
+    with api.get_fetcher() as fetcher:
+        for p in paths:
+            org.add_dlsite_files(fetcher, p)
     return 0
 
 
