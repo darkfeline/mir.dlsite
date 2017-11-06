@@ -27,14 +27,7 @@ logger = logging.getLogger(__name__)
 
 def main(argv):
     logging.basicConfig(level='DEBUG')
-
-    parser = argparse.ArgumentParser(prog=argv[0],
-                                     description=__doc__)
-    parser.add_argument('top_dir', nargs='?', default=Path.cwd(),
-                        type=Path)
-    parser.add_argument('-n', '--dry-run', action='store_true')
-    parser.add_argument('-a', '--all', action='store_true')
-    args = parser.parse_args(argv[1:])
+    args = _parse_args(argv)
 
     paths = list(org.find_works(args.top_dir))
     if not args.all:
@@ -54,6 +47,16 @@ def main(argv):
         for p in paths:
             org.add_dlsite_files(fetcher, p)
     return 0
+
+
+def _parse_args(argv):
+    parser = argparse.ArgumentParser(prog=argv[0],
+                                     description=__doc__)
+    parser.add_argument('top_dir', nargs='?', default=Path.cwd(),
+                        type=Path)
+    parser.add_argument('-n', '--dry-run', action='store_true')
+    parser.add_argument('-a', '--all', action='store_true')
+    return parser.parse_args(argv[1:])
 
 
 if __name__ == '__main__':
