@@ -42,6 +42,8 @@ def main(argv):
     for r in renames:
         r.execute(args.top_dir)
     org.remove_empty_dirs(args.top_dir)
+    if not args.add_descriptions:
+        return 0
     paths = org.apply_renames(paths, renames)
     with api.get_fetcher() as fetcher:
         for p in paths:
@@ -56,6 +58,7 @@ def _parse_args(argv):
                         type=Path)
     parser.add_argument('-n', '--dry-run', action='store_true')
     parser.add_argument('-a', '--all', action='store_true')
+    parser.add_argument('-d', '--add-descriptions', action='store_true')
     return parser.parse_args(argv[1:])
 
 
