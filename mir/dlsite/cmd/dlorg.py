@@ -33,17 +33,13 @@ def main(argv):
     if args.dry_run:
         for r in renames:
             logger.info('Would rename %s to %s', r.old, r.new)
-        return 0
+        return
     for r in renames:
         r.execute(args.top_dir)
     org.remove_empty_dirs(args.top_dir)
     paths = org.apply_renames(paths, renames)
-    if not args.add_descriptions:
-        return 0
-    with api.get_fetcher() as fetcher:
-        for p in paths:
-            org.add_dlsite_files(fetcher, p)
-    return 0
+    if args.add_descriptions:
+        _add_dlsite_files(paths)
 
 
 def _parse_args(argv):
@@ -67,6 +63,12 @@ def _find_works(top_dir, recursive):
 def _calculate_renames(paths):
     with api.get_fetcher() as fetcher:
         return list(org.calculate_path_renames(fetcher, paths))
+
+
+def _add_dlsite_files(paths):
+    with api.get_fetcher() as fetcher:
+        for p in paths:
+            org.add_dlsite_files(fetcher, p)
 
 
 if __name__ == '__main__':
