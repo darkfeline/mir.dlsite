@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from pathlib import PurePath
+from pathlib import Path
 
 import pytest
 
@@ -65,18 +65,18 @@ def test_work_filename_slash():
 
 def test_work_path():
     obj = workinfo.Work('RJ123', 'foo', 'bar')
-    assert workinfo.work_path(obj) == PurePath('bar/RJ123 foo')
+    assert workinfo.work_path(obj) == Path('bar/RJ123 foo')
 
 
 def test_work_path_with_series():
     obj = workinfo.Work('RJ123', 'foo', 'bar')
     obj.series = 'baz'
-    assert workinfo.work_path(obj) == PurePath('bar/baz/RJ123 foo')
+    assert workinfo.work_path(obj) == Path('bar/baz/RJ123 foo')
 
 
 def test_work_path_slash():
     obj = workinfo.Work('RJ123', 'foo', 'bar/')
-    assert workinfo.work_path(obj) == PurePath('bar_/RJ123 foo')
+    assert workinfo.work_path(obj) == Path('bar_/RJ123 foo')
 
 
 def test_track_repr():

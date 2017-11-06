@@ -14,7 +14,7 @@
 
 """DLSite work info library"""
 
-from pathlib import PurePath
+from pathlib import Path
 import re
 
 _RJCODE_PATTERN = re.compile(r'RJ[0-9]+')
@@ -65,9 +65,9 @@ def work_filename(work) -> str:
     return _escape_filename(f'{work.rjcode} [{work.maker}] {work.name}')
 
 
-def work_path(work) -> PurePath:
+def work_path(work) -> Path:
     """Return the path to be used for a work."""
-    path = PurePath(_escape_filename(work.maker))
+    path = Path(_escape_filename(work.maker))
     if work.series:
         path /= _escape_filename(work.series)
     path /= _escape_filename(f'{work.rjcode} {work.name}')
