@@ -37,9 +37,9 @@ def main(argv):
     for r in renames:
         r.execute(args.top_dir)
     org.remove_empty_dirs(args.top_dir)
-    paths = org.apply_renames(paths, renames)
+    new_paths = org.apply_renames(paths, renames)
     if args.add_descriptions:
-        _add_dlsite_files(paths)
+        _add_dlsite_files(new_paths)
 
 
 def _parse_args(argv):
