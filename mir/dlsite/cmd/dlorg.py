@@ -28,11 +28,7 @@ logger = logging.getLogger(__name__)
 def main(argv):
     logging.basicConfig(level='DEBUG')
     args = _parse_args(argv)
-
-    paths = list(org.find_works(args.top_dir))
-    if not args.all:
-        paths = [p for p in paths if len(p.parts) == 1]
-
+    paths = _find_works(args.top_dir, recursive=args.all)
     with api.get_fetcher() as fetcher:
         renames = list(org.calculate_path_renames(fetcher, paths))
     if args.dry_run:
@@ -60,6 +56,13 @@ def _parse_args(argv):
     parser.add_argument('-a', '--all', action='store_true')
     parser.add_argument('-d', '--add-descriptions', action='store_true')
     return parser.parse_args(argv[1:])
+
+
+def _find_works(top_dir, recursive):
+    paths = list(org.find_works(top_dir))
+    if not recursive:
+        paths = [p for p in paths if len(p.parts) == 1]
+    return paths
 
 
 if __name__ == '__main__':
