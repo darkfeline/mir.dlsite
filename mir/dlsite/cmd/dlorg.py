@@ -16,6 +16,7 @@
 
 import argparse
 import logging
+import logging.config
 from pathlib import Path
 import sys
 
@@ -26,8 +27,8 @@ logger = logging.getLogger(__name__)
 
 
 def main(argv):
-    logging.basicConfig(level='DEBUG')
     args = _parse_args(argv)
+    _configure_logging()
     paths = _find_works(args.top_dir, recursive=args.all)
     renames = _calculate_renames(paths)
     if args.dry_run:
@@ -36,9 +37,11 @@ def main(argv):
         return
     for r in renames:
         r.execute(args.top_dir)
-    org.remove_empty_dirs(args.top_dir)
-    new_paths = org.apply_renames(paths, renames)
+        logger.info('Removing empty dirs')
+        org.remove_empty_dirs(args.top_dir)
     if args.add_descriptions:
+        logger.info('Adding description files')
+        new_paths = org.apply_renames(paths, renames)
         _add_dlsite_files(new_paths)
 
 
@@ -51,6 +54,28 @@ def _parse_args(argv):
     parser.add_argument('-a', '--all', action='store_true')
     parser.add_argument('-d', '--add-descriptions', action='store_true')
     return parser.parse_args(argv[1:])
+
+
+def _configure_logging():
+    logging.config.dictConfig({
+        'version': 1,
+        'root': {
+            'level': 'DEBUG',
+            'handlers': 'default',
+        },
+        'handlers': {
+            'default': {
+                'class': 'logging.StreamHandler',
+                'formatter': 'default',
+            },
+        },
+        'formatters': {
+            'default': {
+                'format': 'dlorg: %(asctime)s:%(levelname)s:%(name)s:%(message)s',
+            },
+        },
+        'disable_existing_loggers': False,
+    })
 
 
 def _find_works(top_dir, recursive):
