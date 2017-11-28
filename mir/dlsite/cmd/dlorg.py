@@ -37,8 +37,8 @@ def main(argv):
         return
     for r in renames:
         r.execute(args.top_dir)
-        logger.info('Removing empty dirs')
-        org.remove_empty_dirs(args.top_dir)
+    logger.info('Removing empty dirs')
+    org.remove_empty_dirs(args.top_dir)
     if args.add_descriptions:
         logger.info('Adding description files')
         new_paths = org.apply_renames(paths, renames)
