@@ -61,7 +61,7 @@ def _configure_logging():
         'version': 1,
         'root': {
             'level': 'DEBUG',
-            'handlers': 'default',
+            'handlers': ['default'],
         },
         'handlers': {
             'default': {
