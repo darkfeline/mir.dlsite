@@ -155,7 +155,7 @@ class CachedFetcher:
         self._path = path
         self._shelf = None
 
-    def __call__(self, rjcode: str) -> 'WorkInfo':
+    def __call__(self, rjcode: str) -> workinfo.Work:
         try:
             return self._shelf[rjcode]
         except TypeError:
