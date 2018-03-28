@@ -13,7 +13,6 @@
 # limitations under the License.
 
 import io
-from itertools import zip_longest
 import logging
 from unittest import mock
 import re
