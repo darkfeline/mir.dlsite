@@ -105,7 +105,7 @@ def _get_page(section: str, rjcode: str) -> str:
     path = (pathlib.Path(__file__).parent
             / 'pages' / section / f'{rjcode}.html')
     try:
-        text = path.read_text()
+        text = path.read_text(encoding='utf-8')
     except FileNotFoundError:
         raise _FakeError
     return io.BytesIO(text.encode())
