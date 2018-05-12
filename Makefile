@@ -1,4 +1,4 @@
-PYTHON := pipenv run python
+PYTHON := python
 export PYTHONPATH := $(CURDIR)
 
 .PHONY: all
@@ -18,26 +18,17 @@ wheel:
 
 .PHONY: html
 html: \
- $(shell find mir -name __init__.py -printf "%h.html\n" | sed 's:/:.:g; s:^:doc/:') \
- $(shell find mir -name '*.py' ! -name __init__.py | sed 's:/:.:g; s/\.py/\.html/; s:^:doc/:')
+ $(shell find mir -name __init__.py -printf "%h.html\n" | sed 's:/:.:g; s:^:pydoc/:') \
+ $(shell find mir -name '*.py' ! -name __init__.py | sed 's:/:.:g; s/\.py/\.html/; s:^:pydoc/:')
 
-doc/%.html: $(wildcard mir/**/*.py)
-	mkdir -p doc
-	cd doc && $(PYTHON) -m pydoc -w $(@F:%.html=%)
+pydoc/%.html: $(wildcard mir/**/*.py)
+	mkdir -p pydoc
+	cd pydoc && $(PYTHON) -m pydoc -w $(@F:%.html=%)
 
 .PHONY: TAGS
 TAGS:
 	ctags -e -R mir
 
-.PHONY: distclean
-distclean:
-	rm -rf build dist doc *.egg-info
-	rm -f .coverage
-
 .PHONY: upload
 upload: sdist wheel
 	$(PYTHON) -m twine upload --skip-existing dist/*
-
-.PHONY: pipenv
-pipenv:
-	pipenv install --dev

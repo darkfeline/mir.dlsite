@@ -1,0 +1,15 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/python:3.6.4
+    steps:
+      - checkout
+      # https://github.com/pypa/pipenv/issues/1648
+      - run: pip install --user git+https://github.com/pypa/pipenv.git#egg=pipenv
+      - run: python -m pipenv install --dev
+      - run: python -m pipenv run python -m pytest --junitxml=.pytest/junit.xml
+      - store_test_results:
+          path: .pytest
+      - run: pip install --user codecov
+      - run: python -m codecov
