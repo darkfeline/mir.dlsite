@@ -36,14 +36,6 @@ def test_contains_rjcode_missing():
     assert not workinfo.contains_rjcode('asdf')
 
 
-def test_work_str():
-    assert str(workinfo.Work('RJ123', 'foo', 'bar')) == 'RJ123 [bar] foo'
-
-
-def test_work_str_slash():
-    assert str(workinfo.Work('RJ123', 'foo/', 'bar')) == 'RJ123 [bar] foo/'
-
-
 def test_work_repr():
     work = workinfo.Work('RJ123', 'foo', 'bar')
     got = repr(work)
@@ -77,12 +69,6 @@ def test_work_path_with_series():
 def test_work_path_slash():
     obj = workinfo.Work('RJ123', 'foo', 'bar/')
     assert workinfo.work_path(obj) == Path('bar_/RJ123 foo')
-
-
-def test_track_repr():
-    track = workinfo.Track('lydie', 'suelle')
-    got = repr(track)
-    assert got == "Track('lydie', 'suelle')"
 
 
 def test_track_eq():

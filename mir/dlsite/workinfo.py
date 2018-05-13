@@ -14,8 +14,10 @@
 
 """DLSite work info library"""
 
+from dataclasses import dataclass
 from pathlib import Path
 import re
+
 
 _RJCODE_PATTERN = re.compile(r'RJ[0-9]+')
 
@@ -33,31 +35,17 @@ def contains_rjcode(string) -> bool:
     return bool(_RJCODE_PATTERN.search(string))
 
 
+@dataclass
 class Work:
+
     """DLSite work info data class."""
 
     rjcode: str
     name: str
     maker: str
-    series: 'Optional[str]'
-    description: 'Optional[str]'
-    tracklist: 'Optional[List[Track]]'
-
-    def __init__(self, rjcode, name, maker):
-        self.rjcode = rjcode
-        self.name = name
-        self.maker = maker
-        self.series = None
-        self.description = None
-        self.tracklist = None
-
-    def __repr__(self):
-        cls = type(self).__qualname__
-        return (f'<{cls} with rjcode={self.rjcode!r}, name={self.name!r},'
-                f' maker={self.maker!r}, series={self.series!r}>')
-
-    def __str__(self):
-        return f'{self.rjcode} [{self.maker}] {self.name}'
+    series: 'Optional[str]' = None
+    description: 'Optional[str]' = None
+    tracklist: 'Optional[List[Track]]' = None
 
 
 def work_filename(work) -> str:
@@ -74,25 +62,13 @@ def work_path(work) -> Path:
     return path
 
 
+@dataclass
 class Track:
+
     """DLSite track info data class."""
 
     name: str
     text: str
-
-    def __init__(self, name, text):
-        self.name = name
-        self.text = text
-
-    def __repr__(self):
-        cls = type(self).__qualname__
-        return (f'{cls}({self.name!r}, {self.text!r})')
-
-    def __eq__(self, other):
-        if isinstance(other, type(self)):
-            return (self.name == other.name
-                    and self.text == other.text)
-        return NotImplemented
 
 
 def _escape_filename(filename: str) -> str:
