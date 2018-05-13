@@ -42,6 +42,14 @@ def test_calculate_path_renames(stub_fetcher):
     ]
 
 
+def test_do_path_renames(tmpdir):
+    tmpdir.ensure('foo/bar/baz/sophie')
+    r = org.PathRename(Path('foo/bar/baz'),
+                       Path('baz'))
+    org.do_path_renames(Path(str(tmpdir)), [r])
+    assert os.path.exists(os.path.join(str(tmpdir), 'baz/sophie'))
+
+
 def test_remove_empty_dirs(tmpdir):
     tmpdir.ensure('foo/bar/baz/sophie', dir=True)
     tmpdir.ensure('foo/spam')
@@ -50,14 +58,6 @@ def test_remove_empty_dirs(tmpdir):
 
     assert os.listdir(str(tmpdir)) == ['foo']
     assert os.listdir(str(tmpdir.join('foo'))) == ['spam']
-
-
-def test_PathRename_execute(tmpdir):
-    tmpdir.ensure('foo/bar/baz/sophie')
-    r = org.PathRename(Path('foo/bar/baz'),
-                       Path('baz'))
-    r.execute(Path(str(tmpdir)))
-    assert os.path.exists(os.path.join(str(tmpdir), 'baz/sophie'))
 
 
 def test_apply_renames():

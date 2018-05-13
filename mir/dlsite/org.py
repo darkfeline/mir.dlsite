@@ -51,6 +51,15 @@ def calculate_path_renames(fetcher, paths: 'Iterable[Path]') -> 'Iterable[PathRe
             logger.info('%s already correct', path)
 
 
+def do_path_renames(top_dir: 'Path', renames: 'Iterable[PathRename]'):
+    for old, new in renames:
+        old = top_dir / old
+        new = top_dir / new
+        new.parent.mkdir(parents=True, exist_ok=True)
+        logger.debug('Renaming %s to %s', old, new)
+        old.rename(new)
+
+
 def remove_empty_dirs(top_dir: 'PathLike'):
     for dirpath, dirnames, filenames in os.walk(top_dir, topdown=False):
         if not os.listdir(dirpath):
@@ -61,13 +70,6 @@ class PathRename(NamedTuple):
     """PathRename represents a rename operation."""
     old: Path
     new: Path
-
-    def execute(self, top_dir: Path):
-        old = top_dir / self.old
-        new = top_dir / self.new
-        new.parent.mkdir(parents=True, exist_ok=True)
-        logger.debug('Renaming %s to %s', old, new)
-        old.rename(new)
 
 
 def apply_renames(paths: 'Iterable[Path]',

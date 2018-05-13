@@ -35,8 +35,7 @@ def main(argv):
         for r in renames:
             logger.info('Would rename %s to %s', r.old, r.new)
         return
-    for r in renames:
-        r.execute(args.top_dir)
+    org.do_path_renames(args.top_dir, renames)
     logger.info('Removing empty dirs')
     org.remove_empty_dirs(args.top_dir)
     if args.add_descriptions:
