@@ -150,6 +150,14 @@ def _generate_tracklist(soup) -> 'Iterable[Track]':
 
 class CachedFetcher:
 
+    """DLSite work fetcher that uses a cache.
+
+    CachedFetcher does not implement fetching and needs to be passed a
+    fetching function like fetch_work().
+
+    CachedFetcher uses Python's shelve module for caching.
+    """
+
     def __init__(self, path: 'PathLike', fetcher):
         self._fetcher = fetcher
         self._path = path
@@ -184,7 +192,7 @@ _CACHE = Path.home() / '.cache' / 'mir.dlsite.db'
 
 
 def get_fetcher():
-    """Get default cached fetcher."""
+    """Create a default CachedFetcher instance."""
     path = Path(_CACHE)
     path.parent.mkdir(parents=True, exist_ok=True)
     return CachedFetcher(_CACHE, fetch_work)
