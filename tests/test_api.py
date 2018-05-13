@@ -99,6 +99,11 @@ def test_cached_fetcher(tmpdir, fake_urlopen):
     assert work1.rjcode == work2.rjcode
 
 
+def test_get_fetcher():
+    f = api.get_fetcher()
+    assert isinstance(f, api.CachedFetcher)
+
+
 def _get_page(section: str, rjcode: str) -> str:
     """Get test page contents as a fake HTTP body."""
     logger.debug(f'Getting page {section} {rjcode}')
