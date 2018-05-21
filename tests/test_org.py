@@ -31,6 +31,12 @@ def test_find_works(tmpdir):
     ]
 
 
+def test_calculate_path_rename(stub_fetcher):
+    work = Path('foo/RJ123')
+    got = org.calculate_path_rename(stub_fetcher, work)
+    assert got == Path('group/series/RJ123 name')
+
+
 def test_calculate_path_renames(stub_fetcher):
     works = [
         Path('foo/RJ123'),

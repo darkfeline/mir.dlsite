@@ -42,13 +42,18 @@ def calculate_path_renames(fetcher, paths: 'Iterable[Path]') -> 'Iterable[PathRe
     Yield PathRename instances.
     """
     for path in paths:
-        rjcode = workinfo.parse_rjcode(path.name)
-        work = fetcher(rjcode)
-        wanted_path = workinfo.work_path(work)
+        wanted_path = calculate_path_rename(fetcher, path)
         if path != wanted_path:
             yield PathRename(path, wanted_path)
         else:
             logger.info('%s already correct', path)
+
+
+def calculate_path_rename(fetcher, path: 'Path') -> 'Path':
+    """Find rename operation to organize work."""
+    rjcode = workinfo.parse_rjcode(path.name)
+    work = fetcher(rjcode)
+    return workinfo.work_path(work)
 
 
 def do_path_renames(top_dir: 'Path', renames: 'Iterable[PathRename]'):
