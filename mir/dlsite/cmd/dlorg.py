@@ -17,11 +17,12 @@
 import argparse
 import logging
 import logging.config
+import os
 from pathlib import Path
 import sys
 
 from mir.dlsite import api
-from mir.dlsite import org
+from mir.dlsite import workinfo
 
 logger = logging.getLogger(__name__)
 
@@ -30,18 +31,14 @@ def main(argv):
     args = _parse_args(argv)
     _configure_logging()
     paths = _find_works(args.top_dir, recursive=args.all)
-    renames = _calculate_renames(paths)
-    if args.dry_run:
-        for r in renames:
-            logger.info('Would rename %s to %s', r.old, r.new)
-        return
-    org.do_path_renames(args.top_dir, renames)
-    logger.info('Removing empty dirs')
-    org.remove_empty_dirs(args.top_dir)
-    if args.add_descriptions:
-        logger.info('Adding description files')
-        new_paths = org.apply_renames(paths, renames)
-        _add_dlsite_files(new_paths)
+    if not args.all:
+        paths = _filter_shallow_paths(paths)
+    with api.get_fetcher() as fetcher:
+        for path in paths:
+            _do_one(args, fetcher, path)
+    if not args.dry_run:
+        logger.info('Removing empty dirs')
+        _remove_empty_dirs(args.top_dir)
 
 
 def _parse_args(argv):
@@ -77,22 +74,77 @@ def _configure_logging():
     })
 
 
-def _find_works(top_dir, recursive):
-    paths = list(org.find_works(top_dir))
-    if not recursive:
-        paths = [p for p in paths if len(p.parts) == 1]
-    return paths
+def _filter_shallow_paths(paths: 'Iterable[Path]'):
+    """Filter keeping shallow paths."""
+    for p in paths:
+        if len(p.parts) == 1:
+            yield p
 
 
-def _calculate_renames(paths):
-    with api.get_fetcher() as fetcher:
-        return list(org.calculate_path_renames(fetcher, paths))
+def _find_works(top_dir: 'PathLike') -> 'Iterable[Path]':
+    """Find DLsite works.
+
+    Yield Path instances to work directories, relative to top_dir.
+    """
+    for dirpath, dirnames, _filenames in os.walk(top_dir):
+        work_dirnames = [n for n in dirnames if workinfo.contains_rjcode(n)]
+        yield from (Path(dirpath, n).relative_to(top_dir) for n in work_dirnames)
+        for n in work_dirnames:
+            dirnames.remove(n)
 
 
-def _add_dlsite_files(paths):
-    with api.get_fetcher() as fetcher:
-        for p in paths:
-            org.add_dlsite_files(fetcher, p)
+def _remove_empty_dirs(top_dir: 'PathLike'):
+    for dirpath, dirnames, filenames in os.walk(top_dir, topdown=False):
+        if not os.listdir(dirpath):
+            os.rmdir(dirpath)
+
+
+def _do_one(args, fetcher, path):
+    new_path = _calculate_new_path(fetcher, path)
+    if args.dry_run:
+        if path != new_path:
+            logger.info('Would rename %s to %s', path, new_path)
+        return
+    if path != new_path:
+        _rename(args.top_dir, path, new_path)
+        path = new_path
+    if args.add_descriptions:
+        logger.info('Adding description files for %s', path)
+        _add_dlsite_files(fetcher, path)
+
+
+def _calculate_new_path(fetcher, path: 'Path') -> 'Path':
+    """Find rename operation to organize work."""
+    rjcode = workinfo.parse_rjcode(path.name)
+    work = fetcher(rjcode)
+    return workinfo.work_path(work)
+
+
+def _rename(top_dir: 'Path', old: 'Path', new: 'Path'):
+    old = top_dir / old
+    new = top_dir / new
+    new.parent.mkdir(parents=True, exist_ok=True)
+    logger.debug('Renaming %s to %s', old, new)
+    old.rename(new)
+
+
+_DESC_FILE = 'dlsite-description.txt'
+_TRACK_FILE = 'dlsite-tracklist.txt'
+
+
+def _add_dlsite_files(fetcher, path: 'Path'):
+    """Add dlsite information files to a work."""
+    rjcode = workinfo.parse_rjcode(path.name)
+    work = fetcher(rjcode)
+    desc_file = path / _DESC_FILE
+    if not desc_file.exists() and work.description is not None:
+        logger.info('Adding %s', desc_file)
+        desc_file.write_text(work.description)
+    track_file = path / _TRACK_FILE
+    if not track_file.exists() and work.tracklist is not None:
+        logger.info('Adding %s', track_file)
+        tl = ''.join(f'{t.name} {t.text}\n' for t in work.tracklist)
+        track_file.write_text(tl)
 
 
 if __name__ == '__main__':

@@ -17,75 +17,45 @@ from pathlib import Path
 
 import pytest
 
-from mir.dlsite import org
-from mir.dlsite.org import PathRename
+from mir.dlsite.cmd import dlorg
 from mir.dlsite import workinfo
 from mir.dlsite.workinfo import Track
 
 
-def test_find_works(tmpdir):
+def test__find_works(tmpdir):
     tmpdir.ensure('foo/RJ123/RJ456', dir=True)
-    got = list(org.find_works(str(tmpdir)))
+    got = list(dlorg._find_works(str(tmpdir)))
     assert got == [
         Path('foo/RJ123'),
     ]
 
 
-def test_calculate_path_rename(stub_fetcher):
+def test__calculate_new_path(stub_fetcher):
     work = Path('foo/RJ123')
-    got = org.calculate_path_rename(stub_fetcher, work)
+    got = dlorg._calculate_new_path(stub_fetcher, work)
     assert got == Path('group/series/RJ123 name')
 
 
-def test_calculate_path_renames(stub_fetcher):
-    works = [
-        Path('foo/RJ123'),
-        Path('group/series/RJ456 name'),
-    ]
-    got = list(org.calculate_path_renames(stub_fetcher, works))
-    assert got == [
-        PathRename(Path('foo/RJ123'), Path('group/series/RJ123 name')),
-    ]
-
-
-def test_do_path_renames(tmpdir):
+def test_do__rename(tmpdir):
     tmpdir.ensure('foo/bar/baz/sophie')
-    r = org.PathRename(Path('foo/bar/baz'),
-                       Path('baz'))
-    org.do_path_renames(Path(str(tmpdir)), [r])
+    dlorg._rename(Path(str(tmpdir)), Path('foo/bar/baz'), Path('baz'))
     assert os.path.exists(os.path.join(str(tmpdir), 'baz/sophie'))
 
 
-def test_remove_empty_dirs(tmpdir):
+def test__remove_empty_dirs(tmpdir):
     tmpdir.ensure('foo/bar/baz/sophie', dir=True)
     tmpdir.ensure('foo/spam')
 
-    org.remove_empty_dirs(str(tmpdir))
+    dlorg._remove_empty_dirs(str(tmpdir))
 
     assert os.listdir(str(tmpdir)) == ['foo']
     assert os.listdir(str(tmpdir.join('foo'))) == ['spam']
 
 
-def test_apply_renames():
-    paths = [
-        Path('foo/bar'),
-        Path('sophie/prachta'),
-    ]
-    renames = [
-        PathRename(Path('foo/bar'), Path('lydie/suelle')),
-        PathRename(Path('fujiwara/takeda'), Path('hotaru/yuma')),
-    ]
-    got = org.apply_renames(paths, renames)
-    assert got == [
-        Path('lydie/suelle'),
-        Path('sophie/prachta'),
-    ]
-
-
-def test_add_dlsite_files(tmpdir, fat_stub_fetcher):
+def test__add_dlsite_files(tmpdir, fat_stub_fetcher):
     tmpdir.ensure('RJ123', dir=True)
     p = Path(str(tmpdir), 'RJ123')
-    org.add_dlsite_files(fat_stub_fetcher, p)
+    dlorg._add_dlsite_files(fat_stub_fetcher, p)
     assert (p / 'dlsite-description.txt').exists()
     assert (p / 'dlsite-description.txt').read_text() == '''\
 Some text
@@ -99,17 +69,17 @@ Other text
 '''
 
 
-def test_add_dlsite_files_does_not_overwrite(tmpdir, fat_stub_fetcher):
+def test__add_dlsite_files_does_not_overwrite(tmpdir, fat_stub_fetcher):
     tmpdir.ensure('RJ123/dlsite-description.txt').write('asdf')
     p = Path(str(tmpdir), 'RJ123')
-    org.add_dlsite_files(fat_stub_fetcher, p)
+    dlorg._add_dlsite_files(fat_stub_fetcher, p)
     assert (p / 'dlsite-description.txt').read_text() == 'asdf'
 
 
-def test_add_dlsite_files_missing_workinfo(tmpdir, stub_fetcher):
+def test__add_dlsite_files_missing_workinfo(tmpdir, stub_fetcher):
     tmpdir.ensure('RJ123', dir=True)
     p = Path(str(tmpdir), 'RJ123')
-    org.add_dlsite_files(stub_fetcher, p)
+    dlorg._add_dlsite_files(stub_fetcher, p)
     assert not (p / 'dlsite-description.txt').exists()
     assert not (p / 'dlsite-tracklist.txt').exists()
 
