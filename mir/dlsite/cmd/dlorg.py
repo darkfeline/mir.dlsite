@@ -115,8 +115,7 @@ def _do_one(args, fetcher, path):
 
 def _calculate_new_path(fetcher, path: 'Path') -> 'Path':
     """Find rename operation to organize work."""
-    rjcode = workinfo.parse_rjcode(path.name)
-    work = fetcher(rjcode)
+    work = _get_path_work(fetcher, path)
     return workinfo.work_path(work)
 
 
@@ -134,8 +133,7 @@ _TRACK_FILE = 'dlsite-tracklist.txt'
 
 def _add_dlsite_files(fetcher, path: 'Path'):
     """Add dlsite information files to a work."""
-    rjcode = workinfo.parse_rjcode(path.name)
-    work = fetcher(rjcode)
+    work = _get_path_work(fetcher, path)
     _add_desc_file(work, path)
     _add_track_file(work, path)
 
@@ -153,6 +151,11 @@ def _add_track_file(work, path: 'Path'):
         logger.info('Adding %s', track_file)
         tl = ''.join(f'{t.name} {t.text}\n' for t in work.tracklist)
         track_file.write_text(tl)
+
+
+def _get_path_work(fetcher, path: 'Path') -> 'workinfo.Work':
+    rjcode = workinfo.parse_rjcode(path.name)
+    return fetcher(rjcode)
 
 
 if __name__ == '__main__':
