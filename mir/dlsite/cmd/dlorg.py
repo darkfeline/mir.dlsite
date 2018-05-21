@@ -136,10 +136,18 @@ def _add_dlsite_files(fetcher, path: 'Path'):
     """Add dlsite information files to a work."""
     rjcode = workinfo.parse_rjcode(path.name)
     work = fetcher(rjcode)
+    _add_desc_file(work, path)
+    _add_track_file(work, path)
+
+
+def _add_desc_file(work, path: 'Path'):
     desc_file = path / _DESC_FILE
     if not desc_file.exists() and work.description is not None:
         logger.info('Adding %s', desc_file)
         desc_file.write_text(work.description)
+
+
+def _add_track_file(work, path: 'Path'):
     track_file = path / _TRACK_FILE
     if not track_file.exists() and work.tracklist is not None:
         logger.info('Adding %s', track_file)
