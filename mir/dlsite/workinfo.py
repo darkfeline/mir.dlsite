@@ -37,9 +37,7 @@ def contains_rjcode(string) -> bool:
 
 @dataclass
 class Work:
-
     """DLSite work info data class."""
-
     rjcode: str
     name: str
     maker: str
@@ -64,9 +62,7 @@ def work_path(work) -> Path:
 
 @dataclass
 class Track:
-
     """DLSite track info data class."""
-
     name: str
     text: str
 
