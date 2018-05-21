@@ -12,12 +12,23 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import subprocess
-import sys
+import io
+from unittest import mock
+
+from mir.dlsite.cmd import dllist
 
 
-def test_dllist():
-    proc = subprocess.run([sys.executable, '-m', 'mir.dlsite.cmd.dllist', '--no-info'],
-                          input=b'foo RJ12345 bar\nbad\n',
-                          stdout=subprocess.PIPE)
-    assert proc.stdout == b'RJ12345\n'
+def test_dllist_no_info(capsys):
+    with mock.patch('sys.argv', ['dllist', '--no-info']), \
+         mock.patch('sys.stdin', io.StringIO('foo RJ12345 bar\nbad\n')):
+        dllist.main()
+    out, err = capsys.readouterr()
+    assert out == 'RJ12345\n'
+
+
+def test_dllist(capsys, patch_fetcher):
+    with mock.patch('sys.argv', ['dllist']), \
+         mock.patch('sys.stdin', io.StringIO('foo RJ12345 bar\nbad\n')):
+        dllist.main()
+    out, err = capsys.readouterr()
+    assert out == 'RJ12345 [group] name\n'

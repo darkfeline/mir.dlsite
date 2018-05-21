@@ -47,7 +47,7 @@ def _simple_printer(rjcode: str):
 def _info_printer(rjcode: str):
     with api.get_fetcher() as fetcher:
         work = fetcher(rjcode)
-        print(str(work))
+        print(workinfo.work_filename(work))
 
 
 if __name__ == '__main__':

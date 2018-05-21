@@ -15,11 +15,7 @@
 import os
 from pathlib import Path
 
-import pytest
-
 from mir.dlsite.cmd import dlorg
-from mir.dlsite import workinfo
-from mir.dlsite.workinfo import Track
 
 
 def test__find_works(tmpdir):
@@ -82,30 +78,3 @@ def test__add_dlsite_files_missing_workinfo(tmpdir, stub_fetcher):
     dlorg._add_dlsite_files(stub_fetcher, p)
     assert not (p / 'dlsite-description.txt').exists()
     assert not (p / 'dlsite-tracklist.txt').exists()
-
-
-@pytest.fixture
-def stub_fetcher():
-    def fetch(rjcode):
-        work = workinfo.Work(rjcode, 'name', 'group')
-        work.series = 'series'
-        return work
-    return fetch
-
-
-@pytest.fixture
-def fat_stub_fetcher():
-    def fetch(rjcode):
-        work = workinfo.Work(rjcode, 'name', 'group')
-        work.series = 'series'
-        work.description = '''\
-Some text
-
-Other text
-'''
-        work.tracklist = [
-            Track('1. foo', 'bar'),
-            Track('2. spam', 'eggs'),
-        ]
-        return work
-    return fetch
