@@ -3,6 +3,21 @@ mir.dlsite Release Notes
 
 This project uses `semantic versioning <http://semver.org/>`_.
 
+0.5.0 (2018-05-22)
+------------------
+
+Changed
+^^^^^^^
+
+- `dlorg` now handles each work sequentially rather than in batch.
+  This primarily affects what happens if a duplicate work is
+  encountered and `-d` is used.
+
+Removed
+^^^^^^^
+
+- `org` module removed (it wasn't really a good public API anyway).
+
 0.4.0 (2017-11-05)
 ------------------
 
