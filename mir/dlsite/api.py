@@ -12,6 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Modifications copyright (C) 2018 fluzi
+
 """DLsite API"""
 
 import logging
@@ -38,6 +40,8 @@ def fetch_work(rjcode: str) -> workinfo.Work:
         name=_get_name(soup),
         maker=_get_maker(soup))
     work.description = _get_description(soup)
+    work.age_rating = _get_age_rating(soup)
+    work.genre = _get_genre(soup)
     try:
         series = _get_series(soup)
     except _NoInfoError:
@@ -92,7 +96,7 @@ def _get_maker(soup) -> str:
         .a.string)
 
 
-_SERIES_PATTERN = re.compile('^シリーズ名')
+_SERIES_PATTERN = re.compile('^Series|^シリーズ名')
 
 
 def _get_series(soup) -> str:
@@ -105,6 +109,34 @@ def _get_series(soup) -> str:
             .a.string)
     except AttributeError:
         raise _NoInfoError('no series')
+
+
+_AGE_RATING_PATTERN = re.compile('^Age Ratings|^年齢指定')
+
+
+def _is_age_rating(tag) -> bool:
+    """BeautifulSoup match function for age rating."""
+    return tag.get('class') == ['work_genre'] \
+    and _AGE_RATING_PATTERN.search(tag.parent.parent.th.string)
+
+
+def _get_age_rating(soup) -> str:
+    """Get work age rating."""
+    return soup.find(_is_age_rating).string
+
+
+_GENRE_PATTERN = re.compile('^Genre|^ジャンル')
+
+
+def _is_genre(tag) -> bool:
+    """BeautifulSoup match function for genre."""
+    return tag.get('class') == ['main_genre'] \
+    and _GENRE_PATTERN.search(tag.parent.parent.th.string)
+
+
+def _get_genre(soup) -> list:
+    """Get work genre."""
+    return [a.string for a in soup.find(_is_genre).find_all('a')]
 
 
 def _get_description(soup) -> str:
