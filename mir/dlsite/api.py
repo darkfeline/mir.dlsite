@@ -1,4 +1,4 @@
-# Copyright (C) 2016, 2017 Allen Li
+# Copyright (C) 2016, 2017, 2018 Allen Li
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -11,8 +11,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
-# Modifications copyright (C) 2018 fluzi
 
 """DLsite API"""
 
@@ -116,8 +114,8 @@ _AGE_RATING_PATTERN = re.compile('^Age Ratings|^年齢指定')
 
 def _is_age_rating(tag) -> bool:
     """BeautifulSoup match function for age rating."""
-    return tag.get('class') == ['work_genre'] \
-    and _AGE_RATING_PATTERN.search(tag.parent.parent.th.string)
+    return (tag.get('class') == ['work_genre']
+        and _AGE_RATING_PATTERN.search(tag.parent.parent.th.string))
 
 
 def _get_age_rating(soup) -> str:
@@ -130,8 +128,8 @@ _GENRE_PATTERN = re.compile('^Genre|^ジャンル')
 
 def _is_genre(tag) -> bool:
     """BeautifulSoup match function for genre."""
-    return tag.get('class') == ['main_genre'] \
-    and _GENRE_PATTERN.search(tag.parent.parent.th.string)
+    return (tag.get('class') == ['main_genre']
+        and _GENRE_PATTERN.search(tag.parent.parent.th.string))
 
 
 def _get_genre(soup) -> list:
