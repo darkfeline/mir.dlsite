@@ -64,7 +64,7 @@ def _get_page(rjcode: str) -> str:
     return request.read().decode()
 
 
-_ROOT = 'http://www.dlsite.com/maniax/'
+_ROOT = 'https://www.dlsite.com/maniax/'
 _WORK_URL = _ROOT + 'work/=/product_id/{}.html'
 _ANNOUNCE_URL = _ROOT + 'announce/=/product_id/{}.html'
 
