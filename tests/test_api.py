@@ -30,12 +30,12 @@ logger = logging.getLogger(__name__)
 
 def test_get_work_url():
     got = api._get_work_url('RJ123')
-    assert got == 'http://www.dlsite.com/maniax/work/=/product_id/RJ123.html'
+    assert got == 'https://www.dlsite.com/maniax/work/=/product_id/RJ123.html'
 
 
 def test_get_announce_url():
     got = api._get_announce_url('RJ123')
-    assert got == 'http://www.dlsite.com/maniax/announce/=/product_id/RJ123.html'
+    assert got == 'https://www.dlsite.com/maniax/announce/=/product_id/RJ123.html'
 
 
 def test_fetch_work_with_series(fake_urlopen):
@@ -119,7 +119,7 @@ def _get_page(section: str, rjcode: str) -> str:
 def _open_url(url):
     """Fake DLSite URL open."""
     logger.debug(f'Opening {url}')
-    match = re.match(r'http://www.dlsite.com/maniax/(work|announce)/=/product_id/(RJ[0-9]+)(.html)?',
+    match = re.match(r'https://www.dlsite.com/maniax/(work|announce)/=/product_id/(RJ[0-9]+)(.html)?',
                      url)
     if match is None:  # pragma: no cover
         raise _FakeError
