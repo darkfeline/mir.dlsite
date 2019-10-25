@@ -3,6 +3,14 @@ mir.dlsite Release Notes
 
 This project uses `semantic versioning <http://semver.org/>`_.
 
+0.6.0 (2019-10-25)
+------------------
+
+Changed
+^^^^^^^
+
+- Use HTTPS instead of HTTP for accessing DLSite.
+
 0.5.0 (2018-05-22)
 ------------------
 
