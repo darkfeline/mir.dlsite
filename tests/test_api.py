@@ -60,28 +60,21 @@ def test_fetch_work_without_series(fake_urlopen):
     assert work.series is None
 
 
+# DLSite no longer has a formal tracklist section,
+# so this test doesn't really test tracklist parsing.
 def test_fetch_work_with_tracklist(fake_urlopen):
     work = api.fetch_work('RJ126928')
     assert work.rjcode == 'RJ126928'
     assert work.maker == 'クッキーボイス'
     assert work.name == 'まじこスハロウィン -可愛い彼女は吸血鬼!? 妖しく光る魅了の魔眼の巻-'
-    assert work.tracklist == [
-        Track('1. WELCOME\u3000TO\u3000HALLOWEEN',
-              '『ハロウィンの招待状』\u3000約1分\u3000※BGMの有無選択可能'),
-        Track('2. 魅了吸血お漏らし', '『ヒロインの来訪、魅了束縛でのイタズラ』\u3000約18分'),
-        Track('3. フェラチオきば愛情', '『精液を摂取する、吸血鬼』\t約16分'),
-        Track('4. あなたもう゛ぁんぷ', '『童貞卒業、牙で噛み合い』\t約15分'),
-        Track('5. 突発ラジオ', '『ラブラブ朝のグッドモーニング放送局』\t約6分'),
-    ]
-    assert type(work.tracklist[0].text) is str
 
 
 def test_fetch_work_from_announce(fake_urlopen):
-    work = api.fetch_work('RJ189666')
-    assert work.rjcode == 'RJ189666'
-    assert work.maker == 'S彼女'
-    assert work.name == '強気な妹に連射させられる!? ～即ヌキ淫語16～'
-    assert work.series == '即ヌキ淫語'
+    work = api.fetch_work('RJ275695')
+    assert work.rjcode == 'RJ275695'
+    assert work.maker == 'Chastity Fancier(性的禁欲愛好家)'
+    assert work.name == '貞操帯所有者のための強制ED化調教'
+    assert work.series == 'キョウカ様による調教♪'
 
 
 def test_cached_fetcher_used_without_context(tmpdir, fake_urlopen):

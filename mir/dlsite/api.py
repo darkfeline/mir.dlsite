@@ -108,11 +108,11 @@ def _get_series(soup) -> str:
 
 
 def _get_description(soup) -> str:
-    """Get work series name."""
+    """Get work description."""
     contents = (
         soup.find(id='main_inner')
         .find('div', itemprop='description')
-        .contents)
+        .strings)
     text = ''.join(_replace_br(contents))
     return text.strip() + '\n'
 
