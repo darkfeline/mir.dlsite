@@ -3,6 +3,14 @@ mir.dlsite Release Notes
 
 This project uses `semantic versioning <http://semver.org/>`_.
 
+0.7.0 (2020-10-15)
+------------------
+
+Fixed
+^^^^^
+
+- Fixed parsing new DLSite page format.
+
 0.6.0 (2019-10-25)
 ------------------
 
