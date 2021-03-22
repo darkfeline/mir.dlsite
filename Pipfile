@@ -5,7 +5,7 @@ verify_ssl = true
 [packages]
 "beautifulsoup4" = "~=4.6"
 dataclasses = "==0.5"
-lxml = "~=4.0"
+lxml = "~=4.6"
 
 [dev-packages]
 pytest = "~=3.2"
