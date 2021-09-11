@@ -52,6 +52,22 @@ B-bishop http://pawnlank7.blog.fc2.com
 ''')
 
 
+def test_fetch_work_with_genre(fake_urlopen):
+    work = api.fetch_work('RJ126928')
+    assert work.rjcode == 'RJ126928'
+    assert work.maker == 'クッキーボイス'
+    assert work.name == 'まじこスハロウィン -可愛い彼女は吸血鬼!? 妖しく光る魅了の魔眼の巻-'
+    assert work.genres == ['ラブラブ/あまあま', 'オカルト', '男性受け', '少女', '人外娘/モンスター娘']
+
+
+def test_fetch_work_without_genre(fake_urlopen):
+    work = api.fetch_work('RJ304732')
+    assert work.rjcode == 'RJ304732'
+    assert work.maker == 'OriverMusic'
+    assert work.name == '東方錫の風～とうほうすずのかぜ～'
+    assert work.genres == []
+
+
 def test_fetch_work_without_series(fake_urlopen):
     work = api.fetch_work('RJ173248')
     assert work.rjcode == 'RJ173248'

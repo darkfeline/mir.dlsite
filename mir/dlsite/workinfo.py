@@ -14,7 +14,7 @@
 
 """DLSite work info library"""
 
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from pathlib import Path
 import re
 
@@ -44,6 +44,7 @@ class Work:
     series: 'Optional[str]' = None
     description: 'Optional[str]' = None
     tracklist: 'Optional[List[Track]]' = None
+    genres: 'List[str]' = field(default_factory=list)
 
 
 def work_filename(work) -> str:

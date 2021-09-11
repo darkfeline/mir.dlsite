@@ -50,6 +50,10 @@ def fetch_work(rjcode: str) -> workinfo.Work:
         pass
     else:
         work.tracklist = tracklist
+    try:
+        work.genres = _get_genres(soup)
+    except _NoInfoError:
+        pass
     return work
 
 
@@ -146,6 +150,21 @@ def _generate_tracklist(soup) -> 'Iterable[Track]':
         name = ' '.join(li.find('p', {'class': 'track_name'}).strings)
         text = str(li.find('p', {'class': 'track_text'}).string)
         yield workinfo.Track(name, text)
+
+
+def _get_genres(soup) -> 'List[str]':
+    return list(_generate_genres(soup))
+
+
+def _generate_genres(soup) -> 'Iterable[str]':
+    div = soup.find('div', {'class': 'main_genre'})
+    if div is None:
+        raise _NoInfoError('no genre')
+    a_list = div.find_all('a')
+    if a_list is None:
+        raise _NoInfoError('no genre')
+    for a in a_list:
+        yield a.text
 
 
 class CachedFetcher:

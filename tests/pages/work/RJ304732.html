@@ -1,0 +1,2653 @@
+<!DOCTYPE html>
+<html lang="ja-jp">
+
+<head>
+  <meta charset="utf-8"><script type="text/javascript">(window.NREUM||(NREUM={})).init={privacy:{cookies_enabled:true},distributed_tracing:{enabled:true}};(window.NREUM||(NREUM={})).loader_config={agentID:"950599793",accountID:"2597550",trustKey:"2462166",xpid:"VgMOVlNWCBAJUFlbAgIEUFY=",licenseKey:"NRJS-26fb73475871c01d5bd",applicationID:"948953362"};window.NREUM||(NREUM={}),__nr_require=function(t,e,n){function r(n){if(!e[n]){var o=e[n]={exports:{}};t[n][0].call(o.exports,function(e){var o=t[n][1][e];return r(o||e)},o,o.exports)}return e[n].exports}if("function"==typeof __nr_require)return __nr_require;for(var o=0;o<n.length;o++)r(n[o]);return r}({1:[function(t,e,n){function r(t){try{s.console&&console.log(t)}catch(e){}}var o,i=t("ee"),a=t(29),s={};try{o=localStorage.getItem("__nr_flags").split(","),console&&"function"==typeof console.log&&(s.console=!0,o.indexOf("dev")!==-1&&(s.dev=!0),o.indexOf("nr_dev")!==-1&&(s.nrDev=!0))}catch(c){}s.nrDev&&i.on("internal-error",function(t){r(t.stack)}),s.dev&&i.on("fn-err",function(t,e,n){r(n.stack)}),s.dev&&(r("NR AGENT IN DEVELOPMENT MODE"),r("flags: "+a(s,function(t,e){return t}).join(", ")))},{}],2:[function(t,e,n){function r(t,e,n,r,s){try{l?l-=1:o(s||new UncaughtException(t,e,n),!0)}catch(f){try{i("ierr",[f,c.now(),!0])}catch(d){}}return"function"==typeof u&&u.apply(this,a(arguments))}function UncaughtException(t,e,n){this.message=t||"Uncaught error with no additional information",this.sourceURL=e,this.line=n}function o(t,e){var n=e?null:c.now();i("err",[t,n])}var i=t("handle"),a=t(30),s=t("ee"),c=t("loader"),f=t("gos"),u=window.onerror,d=!1,p="nr@seenError";if(!c.disabled){var l=0;c.features.err=!0,t(1),window.onerror=r;try{throw new Error}catch(h){"stack"in h&&(t(13),t(12),"addEventListener"in window&&t(6),c.xhrWrappable&&t(14),d=!0)}s.on("fn-start",function(t,e,n){d&&(l+=1)}),s.on("fn-err",function(t,e,n){d&&!n[p]&&(f(n,p,function(){return!0}),this.thrown=!0,o(n))}),s.on("fn-end",function(){d&&!this.thrown&&l>0&&(l-=1)}),s.on("internal-error",function(t){i("ierr",[t,c.now(),!0])})}},{}],3:[function(t,e,n){var r=t("loader");r.disabled||(r.features.ins=!0)},{}],4:[function(t,e,n){function r(){L++,C=g.hash,this[u]=y.now()}function o(){L--,g.hash!==C&&i(0,!0);var t=y.now();this[h]=~~this[h]+t-this[u],this[d]=t}function i(t,e){E.emit("newURL",[""+g,e])}function a(t,e){t.on(e,function(){this[e]=y.now()})}var s="-start",c="-end",f="-body",u="fn"+s,d="fn"+c,p="cb"+s,l="cb"+c,h="jsTime",m="fetch",v="addEventListener",w=window,g=w.location,y=t("loader");if(w[v]&&y.xhrWrappable&&!y.disabled){var x=t(10),b=t(11),E=t(8),R=t(6),O=t(13),S=t(7),N=t(14),M=t(9),P=t("ee"),T=P.get("tracer");t(16),y.features.spa=!0;var C,L=0;P.on(u,r),b.on(p,r),M.on(p,r),P.on(d,o),b.on(l,o),M.on(l,o),P.buffer([u,d,"xhr-done","xhr-resolved"]),R.buffer([u]),O.buffer(["setTimeout"+c,"clearTimeout"+s,u]),N.buffer([u,"new-xhr","send-xhr"+s]),S.buffer([m+s,m+"-done",m+f+s,m+f+c]),E.buffer(["newURL"]),x.buffer([u]),b.buffer(["propagate",p,l,"executor-err","resolve"+s]),T.buffer([u,"no-"+u]),M.buffer(["new-jsonp","cb-start","jsonp-error","jsonp-end"]),a(N,"send-xhr"+s),a(P,"xhr-resolved"),a(P,"xhr-done"),a(S,m+s),a(S,m+"-done"),a(M,"new-jsonp"),a(M,"jsonp-end"),a(M,"cb-start"),E.on("pushState-end",i),E.on("replaceState-end",i),w[v]("hashchange",i,!0),w[v]("load",i,!0),w[v]("popstate",function(){i(0,L>1)},!0)}},{}],5:[function(t,e,n){function r(t){}if(window.performance&&window.performance.timing&&window.performance.getEntriesByType){var o=t("ee"),i=t("handle"),a=t(13),s=t(12),c="learResourceTimings",f="addEventListener",u="resourcetimingbufferfull",d="bstResource",p="resource",l="-start",h="-end",m="fn"+l,v="fn"+h,w="bstTimer",g="pushState",y=t("loader");if(!y.disabled){y.features.stn=!0,t(8),"addEventListener"in window&&t(6);var x=NREUM.o.EV;o.on(m,function(t,e){var n=t[0];n instanceof x&&(this.bstStart=y.now())}),o.on(v,function(t,e){var n=t[0];n instanceof x&&i("bst",[n,e,this.bstStart,y.now()])}),a.on(m,function(t,e,n){this.bstStart=y.now(),this.bstType=n}),a.on(v,function(t,e){i(w,[e,this.bstStart,y.now(),this.bstType])}),s.on(m,function(){this.bstStart=y.now()}),s.on(v,function(t,e){i(w,[e,this.bstStart,y.now(),"requestAnimationFrame"])}),o.on(g+l,function(t){this.time=y.now(),this.startPath=location.pathname+location.hash}),o.on(g+h,function(t){i("bstHist",[location.pathname+location.hash,this.startPath,this.time])}),f in window.performance&&(window.performance["c"+c]?window.performance[f](u,function(t){i(d,[window.performance.getEntriesByType(p)]),window.performance["c"+c]()},!1):window.performance[f]("webkit"+u,function(t){i(d,[window.performance.getEntriesByType(p)]),window.performance["webkitC"+c]()},!1)),document[f]("scroll",r,{passive:!0}),document[f]("keypress",r,!1),document[f]("click",r,!1)}}},{}],6:[function(t,e,n){function r(t){for(var e=t;e&&!e.hasOwnProperty(u);)e=Object.getPrototypeOf(e);e&&o(e)}function o(t){s.inPlace(t,[u,d],"-",i)}function i(t,e){return t[1]}var a=t("ee").get("events"),s=t("wrap-function")(a,!0),c=t("gos"),f=XMLHttpRequest,u="addEventListener",d="removeEventListener";e.exports=a,"getPrototypeOf"in Object?(r(document),r(window),r(f.prototype)):f.prototype.hasOwnProperty(u)&&(o(window),o(f.prototype)),a.on(u+"-start",function(t,e){var n=t[1],r=c(n,"nr@wrapped",function(){function t(){if("function"==typeof n.handleEvent)return n.handleEvent.apply(n,arguments)}var e={object:t,"function":n}[typeof n];return e?s(e,"fn-",null,e.name||"anonymous"):n});this.wrapped=t[1]=r}),a.on(d+"-start",function(t){t[1]=this.wrapped||t[1]})},{}],7:[function(t,e,n){function r(t,e,n){var r=t[e];"function"==typeof r&&(t[e]=function(){var t=i(arguments),e={};o.emit(n+"before-start",[t],e);var a;e[m]&&e[m].dt&&(a=e[m].dt);var s=r.apply(this,t);return o.emit(n+"start",[t,a],s),s.then(function(t){return o.emit(n+"end",[null,t],s),t},function(t){throw o.emit(n+"end",[t],s),t})})}var o=t("ee").get("fetch"),i=t(30),a=t(29);e.exports=o;var s=window,c="fetch-",f=c+"body-",u=["arrayBuffer","blob","json","text","formData"],d=s.Request,p=s.Response,l=s.fetch,h="prototype",m="nr@context";d&&p&&l&&(a(u,function(t,e){r(d[h],e,f),r(p[h],e,f)}),r(s,"fetch",c),o.on(c+"end",function(t,e){var n=this;if(e){var r=e.headers.get("content-length");null!==r&&(n.rxSize=r),o.emit(c+"done",[null,e],n)}else o.emit(c+"done",[t],n)}))},{}],8:[function(t,e,n){var r=t("ee").get("history"),o=t("wrap-function")(r);e.exports=r;var i=window.history&&window.history.constructor&&window.history.constructor.prototype,a=window.history;i&&i.pushState&&i.replaceState&&(a=i),o.inPlace(a,["pushState","replaceState"],"-")},{}],9:[function(t,e,n){function r(t){function e(){c.emit("jsonp-end",[],p),t.removeEventListener("load",e,!1),t.removeEventListener("error",n,!1)}function n(){c.emit("jsonp-error",[],p),c.emit("jsonp-end",[],p),t.removeEventListener("load",e,!1),t.removeEventListener("error",n,!1)}var r=t&&"string"==typeof t.nodeName&&"script"===t.nodeName.toLowerCase();if(r){var o="function"==typeof t.addEventListener;if(o){var a=i(t.src);if(a){var u=s(a),d="function"==typeof u.parent[u.key];if(d){var p={};f.inPlace(u.parent,[u.key],"cb-",p),t.addEventListener("load",e,!1),t.addEventListener("error",n,!1),c.emit("new-jsonp",[t.src],p)}}}}}function o(){return"addEventListener"in window}function i(t){var e=t.match(u);return e?e[1]:null}function a(t,e){var n=t.match(p),r=n[1],o=n[3];return o?a(o,e[r]):e[r]}function s(t){var e=t.match(d);return e&&e.length>=3?{key:e[2],parent:a(e[1],window)}:{key:t,parent:window}}var c=t("ee").get("jsonp"),f=t("wrap-function")(c);if(e.exports=c,o()){var u=/[?&](?:callback|cb)=([^&#]+)/,d=/(.*)\.([^.]+)/,p=/^(\w+)(\.|$)(.*)$/,l=["appendChild","insertBefore","replaceChild"];Node&&Node.prototype&&Node.prototype.appendChild?f.inPlace(Node.prototype,l,"dom-"):(f.inPlace(HTMLElement.prototype,l,"dom-"),f.inPlace(HTMLHeadElement.prototype,l,"dom-"),f.inPlace(HTMLBodyElement.prototype,l,"dom-")),c.on("dom-start",function(t){r(t[0])})}},{}],10:[function(t,e,n){var r=t("ee").get("mutation"),o=t("wrap-function")(r),i=NREUM.o.MO;e.exports=r,i&&(window.MutationObserver=function(t){return this instanceof i?new i(o(t,"fn-")):i.apply(this,arguments)},MutationObserver.prototype=i.prototype)},{}],11:[function(t,e,n){function r(t){var e=i.context(),n=s(t,"executor-",e,null,!1),r=new f(n);return i.context(r).getCtx=function(){return e},r}var o=t("wrap-function"),i=t("ee").get("promise"),a=t("ee").getOrSetContext,s=o(i),c=t(29),f=NREUM.o.PR;e.exports=i,f&&(window.Promise=r,["all","race"].forEach(function(t){var e=f[t];f[t]=function(n){function r(t){return function(){i.emit("propagate",[null,!o],a,!1,!1),o=o||!t}}var o=!1;c(n,function(e,n){Promise.resolve(n).then(r("all"===t),r(!1))});var a=e.apply(f,arguments),s=f.resolve(a);return s}}),["resolve","reject"].forEach(function(t){var e=f[t];f[t]=function(t){var n=e.apply(f,arguments);return t!==n&&i.emit("propagate",[t,!0],n,!1,!1),n}}),f.prototype["catch"]=function(t){return this.then(null,t)},f.prototype=Object.create(f.prototype,{constructor:{value:r}}),c(Object.getOwnPropertyNames(f),function(t,e){try{r[e]=f[e]}catch(n){}}),o.wrapInPlace(f.prototype,"then",function(t){return function(){var e=this,n=o.argsToArray.apply(this,arguments),r=a(e);r.promise=e,n[0]=s(n[0],"cb-",r,null,!1),n[1]=s(n[1],"cb-",r,null,!1);var c=t.apply(this,n);return r.nextPromise=c,i.emit("propagate",[e,!0],c,!1,!1),c}}),i.on("executor-start",function(t){t[0]=s(t[0],"resolve-",this,null,!1),t[1]=s(t[1],"resolve-",this,null,!1)}),i.on("executor-err",function(t,e,n){t[1](n)}),i.on("cb-end",function(t,e,n){i.emit("propagate",[n,!0],this.nextPromise,!1,!1)}),i.on("propagate",function(t,e,n){this.getCtx&&!e||(this.getCtx=function(){if(t instanceof Promise)var e=i.context(t);return e&&e.getCtx?e.getCtx():this})}),r.toString=function(){return""+f})},{}],12:[function(t,e,n){var r=t("ee").get("raf"),o=t("wrap-function")(r),i="equestAnimationFrame";e.exports=r,o.inPlace(window,["r"+i,"mozR"+i,"webkitR"+i,"msR"+i],"raf-"),r.on("raf-start",function(t){t[0]=o(t[0],"fn-")})},{}],13:[function(t,e,n){function r(t,e,n){t[0]=a(t[0],"fn-",null,n)}function o(t,e,n){this.method=n,this.timerDuration=isNaN(t[1])?0:+t[1],t[0]=a(t[0],"fn-",this,n)}var i=t("ee").get("timer"),a=t("wrap-function")(i),s="setTimeout",c="setInterval",f="clearTimeout",u="-start",d="-";e.exports=i,a.inPlace(window,[s,"setImmediate"],s+d),a.inPlace(window,[c],c+d),a.inPlace(window,[f,"clearImmediate"],f+d),i.on(c+u,r),i.on(s+u,o)},{}],14:[function(t,e,n){function r(t,e){d.inPlace(e,["onreadystatechange"],"fn-",s)}function o(){var t=this,e=u.context(t);t.readyState>3&&!e.resolved&&(e.resolved=!0,u.emit("xhr-resolved",[],t)),d.inPlace(t,g,"fn-",s)}function i(t){y.push(t),h&&(b?b.then(a):v?v(a):(E=-E,R.data=E))}function a(){for(var t=0;t<y.length;t++)r([],y[t]);y.length&&(y=[])}function s(t,e){return e}function c(t,e){for(var n in t)e[n]=t[n];return e}t(6);var f=t("ee"),u=f.get("xhr"),d=t("wrap-function")(u),p=NREUM.o,l=p.XHR,h=p.MO,m=p.PR,v=p.SI,w="readystatechange",g=["onload","onerror","onabort","onloadstart","onloadend","onprogress","ontimeout"],y=[];e.exports=u;var x=window.XMLHttpRequest=function(t){var e=new l(t);try{u.emit("new-xhr",[e],e),e.addEventListener(w,o,!1)}catch(n){try{u.emit("internal-error",[n])}catch(r){}}return e};if(c(l,x),x.prototype=l.prototype,d.inPlace(x.prototype,["open","send"],"-xhr-",s),u.on("send-xhr-start",function(t,e){r(t,e),i(e)}),u.on("open-xhr-start",r),h){var b=m&&m.resolve();if(!v&&!m){var E=1,R=document.createTextNode(E);new h(a).observe(R,{characterData:!0})}}else f.on("fn-end",function(t){t[0]&&t[0].type===w||a()})},{}],15:[function(t,e,n){function r(t){if(!s(t))return null;var e=window.NREUM;if(!e.loader_config)return null;var n=(e.loader_config.accountID||"").toString()||null,r=(e.loader_config.agentID||"").toString()||null,f=(e.loader_config.trustKey||"").toString()||null;if(!n||!r)return null;var h=l.generateSpanId(),m=l.generateTraceId(),v=Date.now(),w={spanId:h,traceId:m,timestamp:v};return(t.sameOrigin||c(t)&&p())&&(w.traceContextParentHeader=o(h,m),w.traceContextStateHeader=i(h,v,n,r,f)),(t.sameOrigin&&!u()||!t.sameOrigin&&c(t)&&d())&&(w.newrelicHeader=a(h,m,v,n,r,f)),w}function o(t,e){return"00-"+e+"-"+t+"-01"}function i(t,e,n,r,o){var i=0,a="",s=1,c="",f="";return o+"@nr="+i+"-"+s+"-"+n+"-"+r+"-"+t+"-"+a+"-"+c+"-"+f+"-"+e}function a(t,e,n,r,o,i){var a="btoa"in window&&"function"==typeof window.btoa;if(!a)return null;var s={v:[0,1],d:{ty:"Browser",ac:r,ap:o,id:t,tr:e,ti:n}};return i&&r!==i&&(s.d.tk=i),btoa(JSON.stringify(s))}function s(t){return f()&&c(t)}function c(t){var e=!1,n={};if("init"in NREUM&&"distributed_tracing"in NREUM.init&&(n=NREUM.init.distributed_tracing),t.sameOrigin)e=!0;else if(n.allowed_origins instanceof Array)for(var r=0;r<n.allowed_origins.length;r++){var o=h(n.allowed_origins[r]);if(t.hostname===o.hostname&&t.protocol===o.protocol&&t.port===o.port){e=!0;break}}return e}function f(){return"init"in NREUM&&"distributed_tracing"in NREUM.init&&!!NREUM.init.distributed_tracing.enabled}function u(){return"init"in NREUM&&"distributed_tracing"in NREUM.init&&!!NREUM.init.distributed_tracing.exclude_newrelic_header}function d(){return"init"in NREUM&&"distributed_tracing"in NREUM.init&&NREUM.init.distributed_tracing.cors_use_newrelic_header!==!1}function p(){return"init"in NREUM&&"distributed_tracing"in NREUM.init&&!!NREUM.init.distributed_tracing.cors_use_tracecontext_headers}var l=t(26),h=t(17);e.exports={generateTracePayload:r,shouldGenerateTrace:s}},{}],16:[function(t,e,n){function r(t){var e=this.params,n=this.metrics;if(!this.ended){this.ended=!0;for(var r=0;r<p;r++)t.removeEventListener(d[r],this.listener,!1);e.aborted||(n.duration=a.now()-this.startTime,this.loadCaptureCalled||4!==t.readyState?null==e.status&&(e.status=0):i(this,t),n.cbTime=this.cbTime,u.emit("xhr-done",[t],t),s("xhr",[e,n,this.startTime]))}}function o(t,e){var n=c(e),r=t.params;r.host=n.hostname+":"+n.port,r.pathname=n.pathname,t.parsedOrigin=n,t.sameOrigin=n.sameOrigin}function i(t,e){t.params.status=e.status;var n=v(e,t.lastSize);if(n&&(t.metrics.rxSize=n),t.sameOrigin){var r=e.getResponseHeader("X-NewRelic-App-Data");r&&(t.params.cat=r.split(", ").pop())}t.loadCaptureCalled=!0}var a=t("loader");if(a.xhrWrappable&&!a.disabled){var s=t("handle"),c=t(17),f=t(15).generateTracePayload,u=t("ee"),d=["load","error","abort","timeout"],p=d.length,l=t("id"),h=t(22),m=t(21),v=t(18),w=NREUM.o.REQ,g=window.XMLHttpRequest;a.features.xhr=!0,t(14),t(7),u.on("new-xhr",function(t){var e=this;e.totalCbs=0,e.called=0,e.cbTime=0,e.end=r,e.ended=!1,e.xhrGuids={},e.lastSize=null,e.loadCaptureCalled=!1,e.params=this.params||{},e.metrics=this.metrics||{},t.addEventListener("load",function(n){i(e,t)},!1),h&&(h>34||h<10)||window.opera||t.addEventListener("progress",function(t){e.lastSize=t.loaded},!1)}),u.on("open-xhr-start",function(t){this.params={method:t[0]},o(this,t[1]),this.metrics={}}),u.on("open-xhr-end",function(t,e){"loader_config"in NREUM&&"xpid"in NREUM.loader_config&&this.sameOrigin&&e.setRequestHeader("X-NewRelic-ID",NREUM.loader_config.xpid);var n=f(this.parsedOrigin);if(n){var r=!1;n.newrelicHeader&&(e.setRequestHeader("newrelic",n.newrelicHeader),r=!0),n.traceContextParentHeader&&(e.setRequestHeader("traceparent",n.traceContextParentHeader),n.traceContextStateHeader&&e.setRequestHeader("tracestate",n.traceContextStateHeader),r=!0),r&&(this.dt=n)}}),u.on("send-xhr-start",function(t,e){var n=this.metrics,r=t[0],o=this;if(n&&r){var i=m(r);i&&(n.txSize=i)}this.startTime=a.now(),this.listener=function(t){try{"abort"!==t.type||o.loadCaptureCalled||(o.params.aborted=!0),("load"!==t.type||o.called===o.totalCbs&&(o.onloadCalled||"function"!=typeof e.onload))&&o.end(e)}catch(n){try{u.emit("internal-error",[n])}catch(r){}}};for(var s=0;s<p;s++)e.addEventListener(d[s],this.listener,!1)}),u.on("xhr-cb-time",function(t,e,n){this.cbTime+=t,e?this.onloadCalled=!0:this.called+=1,this.called!==this.totalCbs||!this.onloadCalled&&"function"==typeof n.onload||this.end(n)}),u.on("xhr-load-added",function(t,e){var n=""+l(t)+!!e;this.xhrGuids&&!this.xhrGuids[n]&&(this.xhrGuids[n]=!0,this.totalCbs+=1)}),u.on("xhr-load-removed",function(t,e){var n=""+l(t)+!!e;this.xhrGuids&&this.xhrGuids[n]&&(delete this.xhrGuids[n],this.totalCbs-=1)}),u.on("addEventListener-end",function(t,e){e instanceof g&&"load"===t[0]&&u.emit("xhr-load-added",[t[1],t[2]],e)}),u.on("removeEventListener-end",function(t,e){e instanceof g&&"load"===t[0]&&u.emit("xhr-load-removed",[t[1],t[2]],e)}),u.on("fn-start",function(t,e,n){e instanceof g&&("onload"===n&&(this.onload=!0),("load"===(t[0]&&t[0].type)||this.onload)&&(this.xhrCbStart=a.now()))}),u.on("fn-end",function(t,e){this.xhrCbStart&&u.emit("xhr-cb-time",[a.now()-this.xhrCbStart,this.onload,e],e)}),u.on("fetch-before-start",function(t){function e(t,e){var n=!1;return e.newrelicHeader&&(t.set("newrelic",e.newrelicHeader),n=!0),e.traceContextParentHeader&&(t.set("traceparent",e.traceContextParentHeader),e.traceContextStateHeader&&t.set("tracestate",e.traceContextStateHeader),n=!0),n}var n,r=t[1]||{};"string"==typeof t[0]?n=t[0]:t[0]&&t[0].url?n=t[0].url:window.URL&&t[0]&&t[0]instanceof URL&&(n=t[0].href),n&&(this.parsedOrigin=c(n),this.sameOrigin=this.parsedOrigin.sameOrigin);var o=f(this.parsedOrigin);if(o&&(o.newrelicHeader||o.traceContextParentHeader))if("string"==typeof t[0]||window.URL&&t[0]&&t[0]instanceof URL){var i={};for(var a in r)i[a]=r[a];i.headers=new Headers(r.headers||{}),e(i.headers,o)&&(this.dt=o),t.length>1?t[1]=i:t.push(i)}else t[0]&&t[0].headers&&e(t[0].headers,o)&&(this.dt=o)}),u.on("fetch-start",function(t,e){this.params={},this.metrics={},this.startTime=a.now(),t.length>=1&&(this.target=t[0]),t.length>=2&&(this.opts=t[1]);var n,r=this.opts||{},i=this.target;"string"==typeof i?n=i:"object"==typeof i&&i instanceof w?n=i.url:window.URL&&"object"==typeof i&&i instanceof URL&&(n=i.href),o(this,n);var s=(""+(i&&i instanceof w&&i.method||r.method||"GET")).toUpperCase();this.params.method=s,this.txSize=m(r.body)||0}),u.on("fetch-done",function(t,e){this.params||(this.params={}),this.params.status=e?e.status:0;var n;"string"==typeof this.rxSize&&this.rxSize.length>0&&(n=+this.rxSize);var r={txSize:this.txSize,rxSize:n,duration:a.now()-this.startTime};s("xhr",[this.params,r,this.startTime])})}},{}],17:[function(t,e,n){var r={};e.exports=function(t){if(t in r)return r[t];var e=document.createElement("a"),n=window.location,o={};e.href=t,o.port=e.port;var i=e.href.split("://");!o.port&&i[1]&&(o.port=i[1].split("/")[0].split("@").pop().split(":")[1]),o.port&&"0"!==o.port||(o.port="https"===i[0]?"443":"80"),o.hostname=e.hostname||n.hostname,o.pathname=e.pathname,o.protocol=i[0],"/"!==o.pathname.charAt(0)&&(o.pathname="/"+o.pathname);var a=!e.protocol||":"===e.protocol||e.protocol===n.protocol,s=e.hostname===document.domain&&e.port===n.port;return o.sameOrigin=a&&(!e.hostname||s),"/"===o.pathname&&(r[t]=o),o}},{}],18:[function(t,e,n){function r(t,e){var n=t.responseType;return"json"===n&&null!==e?e:"arraybuffer"===n||"blob"===n||"json"===n?o(t.response):"text"===n||""===n||void 0===n?o(t.responseText):void 0}var o=t(21);e.exports=r},{}],19:[function(t,e,n){function r(){}function o(t,e,n){return function(){return i(t,[f.now()].concat(s(arguments)),e?null:this,n),e?void 0:this}}var i=t("handle"),a=t(29),s=t(30),c=t("ee").get("tracer"),f=t("loader"),u=NREUM;"undefined"==typeof window.newrelic&&(newrelic=u);var d=["setPageViewName","setCustomAttribute","setErrorHandler","finished","addToTrace","inlineHit","addRelease"],p="api-",l=p+"ixn-";a(d,function(t,e){u[e]=o(p+e,!0,"api")}),u.addPageAction=o(p+"addPageAction",!0),u.setCurrentRouteName=o(p+"routeName",!0),e.exports=newrelic,u.interaction=function(){return(new r).get()};var h=r.prototype={createTracer:function(t,e){var n={},r=this,o="function"==typeof e;return i(l+"tracer",[f.now(),t,n],r),function(){if(c.emit((o?"":"no-")+"fn-start",[f.now(),r,o],n),o)try{return e.apply(this,arguments)}catch(t){throw c.emit("fn-err",[arguments,this,t],n),t}finally{c.emit("fn-end",[f.now()],n)}}}};a("actionText,setName,setAttribute,save,ignore,onEnd,getContext,end,get".split(","),function(t,e){h[e]=o(l+e)}),newrelic.noticeError=function(t,e){"string"==typeof t&&(t=new Error(t)),i("err",[t,f.now(),!1,e])}},{}],20:[function(t,e,n){function r(t){if(NREUM.init){for(var e=NREUM.init,n=t.split("."),r=0;r<n.length-1;r++)if(e=e[n[r]],"object"!=typeof e)return;return e=e[n[n.length-1]]}}e.exports={getConfiguration:r}},{}],21:[function(t,e,n){e.exports=function(t){if("string"==typeof t&&t.length)return t.length;if("object"==typeof t){if("undefined"!=typeof ArrayBuffer&&t instanceof ArrayBuffer&&t.byteLength)return t.byteLength;if("undefined"!=typeof Blob&&t instanceof Blob&&t.size)return t.size;if(!("undefined"!=typeof FormData&&t instanceof FormData))try{return JSON.stringify(t).length}catch(e){return}}}},{}],22:[function(t,e,n){var r=0,o=navigator.userAgent.match(/Firefox[\/\s](\d+\.\d+)/);o&&(r=+o[1]),e.exports=r},{}],23:[function(t,e,n){function r(){return s.exists&&performance.now?Math.round(performance.now()):(i=Math.max((new Date).getTime(),i))-a}function o(){return i}var i=(new Date).getTime(),a=i,s=t(31);e.exports=r,e.exports.offset=a,e.exports.getLastTimestamp=o},{}],24:[function(t,e,n){function r(t){return!(!t||!t.protocol||"file:"===t.protocol)}e.exports=r},{}],25:[function(t,e,n){function r(t,e){var n=t.getEntries();n.forEach(function(t){"first-paint"===t.name?d("timing",["fp",Math.floor(t.startTime)]):"first-contentful-paint"===t.name&&d("timing",["fcp",Math.floor(t.startTime)])})}function o(t,e){var n=t.getEntries();n.length>0&&d("lcp",[n[n.length-1]])}function i(t){t.getEntries().forEach(function(t){t.hadRecentInput||d("cls",[t])})}function a(t){if(t instanceof h&&!v){var e=Math.round(t.timeStamp),n={type:t.type};e<=p.now()?n.fid=p.now()-e:e>p.offset&&e<=Date.now()?(e-=p.offset,n.fid=p.now()-e):e=p.now(),v=!0,d("timing",["fi",e,n])}}function s(t){"hidden"===t&&d("pageHide",[p.now()])}if(!("init"in NREUM&&"page_view_timing"in NREUM.init&&"enabled"in NREUM.init.page_view_timing&&NREUM.init.page_view_timing.enabled===!1)){var c,f,u,d=t("handle"),p=t("loader"),l=t(28),h=NREUM.o.EV;if("PerformanceObserver"in window&&"function"==typeof window.PerformanceObserver){c=new PerformanceObserver(r);try{c.observe({entryTypes:["paint"]})}catch(m){}f=new PerformanceObserver(o);try{f.observe({entryTypes:["largest-contentful-paint"]})}catch(m){}u=new PerformanceObserver(i);try{u.observe({type:"layout-shift",buffered:!0})}catch(m){}}if("addEventListener"in document){var v=!1,w=["click","keydown","mousedown","pointerdown","touchstart"];w.forEach(function(t){document.addEventListener(t,a,!1)})}l(s)}},{}],26:[function(t,e,n){function r(){function t(){return e?15&e[n++]:16*Math.random()|0}var e=null,n=0,r=window.crypto||window.msCrypto;r&&r.getRandomValues&&(e=r.getRandomValues(new Uint8Array(31)));for(var o,i="xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx",a="",s=0;s<i.length;s++)o=i[s],"x"===o?a+=t().toString(16):"y"===o?(o=3&t()|8,a+=o.toString(16)):a+=o;return a}function o(){return a(16)}function i(){return a(32)}function a(t){function e(){return n?15&n[r++]:16*Math.random()|0}var n=null,r=0,o=window.crypto||window.msCrypto;o&&o.getRandomValues&&Uint8Array&&(n=o.getRandomValues(new Uint8Array(31)));for(var i=[],a=0;a<t;a++)i.push(e().toString(16));return i.join("")}e.exports={generateUuid:r,generateSpanId:o,generateTraceId:i}},{}],27:[function(t,e,n){function r(t,e){if(!o)return!1;if(t!==o)return!1;if(!e)return!0;if(!i)return!1;for(var n=i.split("."),r=e.split("."),a=0;a<r.length;a++)if(r[a]!==n[a])return!1;return!0}var o=null,i=null,a=/Version\/(\S+)\s+Safari/;if(navigator.userAgent){var s=navigator.userAgent,c=s.match(a);c&&s.indexOf("Chrome")===-1&&s.indexOf("Chromium")===-1&&(o="Safari",i=c[1])}e.exports={agent:o,version:i,match:r}},{}],28:[function(t,e,n){function r(t){function e(){t(a&&document[a]?document[a]:document[o]?"hidden":"visible")}"addEventListener"in document&&i&&document.addEventListener(i,e,!1)}e.exports=r;var o,i,a;"undefined"!=typeof document.hidden?(o="hidden",i="visibilitychange",a="visibilityState"):"undefined"!=typeof document.msHidden?(o="msHidden",i="msvisibilitychange"):"undefined"!=typeof document.webkitHidden&&(o="webkitHidden",i="webkitvisibilitychange",a="webkitVisibilityState")},{}],29:[function(t,e,n){function r(t,e){var n=[],r="",i=0;for(r in t)o.call(t,r)&&(n[i]=e(r,t[r]),i+=1);return n}var o=Object.prototype.hasOwnProperty;e.exports=r},{}],30:[function(t,e,n){function r(t,e,n){e||(e=0),"undefined"==typeof n&&(n=t?t.length:0);for(var r=-1,o=n-e||0,i=Array(o<0?0:o);++r<o;)i[r]=t[e+r];return i}e.exports=r},{}],31:[function(t,e,n){e.exports={exists:"undefined"!=typeof window.performance&&window.performance.timing&&"undefined"!=typeof window.performance.timing.navigationStart}},{}],ee:[function(t,e,n){function r(){}function o(t){function e(t){return t&&t instanceof r?t:t?f(t,c,a):a()}function n(n,r,o,i,a){if(a!==!1&&(a=!0),!l.aborted||i){t&&a&&t(n,r,o);for(var s=e(o),c=m(n),f=c.length,u=0;u<f;u++)c[u].apply(s,r);var p=d[y[n]];return p&&p.push([x,n,r,s]),s}}function i(t,e){g[t]=m(t).concat(e)}function h(t,e){var n=g[t];if(n)for(var r=0;r<n.length;r++)n[r]===e&&n.splice(r,1)}function m(t){return g[t]||[]}function v(t){return p[t]=p[t]||o(n)}function w(t,e){l.aborted||u(t,function(t,n){e=e||"feature",y[n]=e,e in d||(d[e]=[])})}var g={},y={},x={on:i,addEventListener:i,removeEventListener:h,emit:n,get:v,listeners:m,context:e,buffer:w,abort:s,aborted:!1};return x}function i(t){return f(t,c,a)}function a(){return new r}function s(){(d.api||d.feature)&&(l.aborted=!0,d=l.backlog={})}var c="nr@context",f=t("gos"),u=t(29),d={},p={},l=e.exports=o();e.exports.getOrSetContext=i,l.backlog=d},{}],gos:[function(t,e,n){function r(t,e,n){if(o.call(t,e))return t[e];var r=n();if(Object.defineProperty&&Object.keys)try{return Object.defineProperty(t,e,{value:r,writable:!0,enumerable:!1}),r}catch(i){}return t[e]=r,r}var o=Object.prototype.hasOwnProperty;e.exports=r},{}],handle:[function(t,e,n){function r(t,e,n,r){o.buffer([t],r),o.emit(t,e,n)}var o=t("ee").get("handle");e.exports=r,r.ee=o},{}],id:[function(t,e,n){function r(t){var e=typeof t;return!t||"object"!==e&&"function"!==e?-1:t===window?0:a(t,i,function(){return o++})}var o=1,i="nr@id",a=t("gos");e.exports=r},{}],loader:[function(t,e,n){function r(){if(!S++){var t=O.info=NREUM.info,e=m.getElementsByTagName("script")[0];if(setTimeout(f.abort,3e4),!(t&&t.licenseKey&&t.applicationID&&e))return f.abort();c(E,function(e,n){t[e]||(t[e]=n)});var n=a();s("mark",["onload",n+O.offset],null,"api"),s("timing",["load",n]);var r=m.createElement("script");0===t.agent.indexOf("http://")||0===t.agent.indexOf("https://")?r.src=t.agent:r.src=l+"://"+t.agent,e.parentNode.insertBefore(r,e)}}function o(){"complete"===m.readyState&&i()}function i(){s("mark",["domContent",a()+O.offset],null,"api")}var a=t(23),s=t("handle"),c=t(29),f=t("ee"),u=t(27),d=t(24),p=t(20),l=p.getConfiguration("ssl")===!1?"http":"https",h=window,m=h.document,v="addEventListener",w="attachEvent",g=h.XMLHttpRequest,y=g&&g.prototype,x=!d(h.location);NREUM.o={ST:setTimeout,SI:h.setImmediate,CT:clearTimeout,XHR:g,REQ:h.Request,EV:h.Event,PR:h.Promise,MO:h.MutationObserver};var b=""+location,E={beacon:"bam.nr-data.net",errorBeacon:"bam.nr-data.net",agent:"js-agent.newrelic.com/nr-spa-1210.min.js"},R=g&&y&&y[v]&&!/CriOS/.test(navigator.userAgent),O=e.exports={offset:a.getLastTimestamp(),now:a,origin:b,features:{},xhrWrappable:R,userAgent:u,disabled:x};if(!x){t(19),t(25),m[v]?(m[v]("DOMContentLoaded",i,!1),h[v]("load",r,!1)):(m[w]("onreadystatechange",o),h[w]("onload",r)),s("mark",["firstbyte",a.getLastTimestamp()],null,"api");var S=0}},{}],"wrap-function":[function(t,e,n){function r(t,e){function n(e,n,r,c,f){function nrWrapper(){var i,a,u,p;try{a=this,i=d(arguments),u="function"==typeof r?r(i,a):r||{}}catch(l){o([l,"",[i,a,c],u],t)}s(n+"start",[i,a,c],u,f);try{return p=e.apply(a,i)}catch(h){throw s(n+"err",[i,a,h],u,f),h}finally{s(n+"end",[i,a,p],u,f)}}return a(e)?e:(n||(n=""),nrWrapper[p]=e,i(e,nrWrapper,t),nrWrapper)}function r(t,e,r,o,i){r||(r="");var s,c,f,u="-"===r.charAt(0);for(f=0;f<e.length;f++)c=e[f],s=t[c],a(s)||(t[c]=n(s,u?c+r:r,o,c,i))}function s(n,r,i,a){if(!h||e){var s=h;h=!0;try{t.emit(n,r,i,e,a)}catch(c){o([c,n,r,i],t)}h=s}}return t||(t=u),n.inPlace=r,n.flag=p,n}function o(t,e){e||(e=u);try{e.emit("internal-error",t)}catch(n){}}function i(t,e,n){if(Object.defineProperty&&Object.keys)try{var r=Object.keys(t);return r.forEach(function(n){Object.defineProperty(e,n,{get:function(){return t[n]},set:function(e){return t[n]=e,e}})}),e}catch(i){o([i],n)}for(var a in t)l.call(t,a)&&(e[a]=t[a]);return e}function a(t){return!(t&&t instanceof Function&&t.apply&&!t[p])}function s(t,e){var n=e(t);return n[p]=t,i(t,n,u),n}function c(t,e,n){var r=t[e];t[e]=s(r,n)}function f(){for(var t=arguments.length,e=new Array(t),n=0;n<t;++n)e[n]=arguments[n];return e}var u=t("ee"),d=t(30),p="nr@original",l=Object.prototype.hasOwnProperty,h=!1;e.exports=r,e.exports.wrapFunction=s,e.exports.wrapInPlace=c,e.exports.argsToArray=f},{}]},{},["loader",2,16,5,3,4]);</script>
+<meta name="viewport" content="width=1024">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<meta name="google-site-verification" content="S2Jzwn_Dm4hGoyTfPnxEUSKnbHSuT73N6SZbTanWbEM">
+<link rel="apple-touch-icon" href="/modpub/images/web/common/apple_touch_icon_57x57.png">
+<link rel="apple-touch-icon" sizes="72x72" href="/modpub/images/web/common/apple_touch_icon_72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="/modpub/images/web/common/apple_touch_icon_76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="/modpub/images/web/common/apple_touch_icon_114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="/modpub/images/web/common/apple_touch_icon_120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="/modpub/images/web/common/apple_touch_icon_144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="/modpub/images/web/common/apple_touch_icon_152x152.png">
+<meta name="msapplication-config" content="/browserconfig.xml">
+<link rel="shortcut icon" href="/images/web/common/favicon.ico">
+
+<script src="https://cdn-apac.onetrust.com/scripttemplates/otSDKStub.js"  type="text/javascript" charset="UTF-8" data-domain-script="b3436a95-43c8-4563-b55a-f5f020bd3cc8"></script>
+
+<script type="text/javascript">
+  function OptanonWrapper() { }
+</script>
+
+
+  
+      
+  
+  
+  <link rel="canonical" href="https://www.dlsite.com/home/work/=/product_id/RJ304732.html">
+
+  <link rel="alternate" media="only screen and (max-width: 640px)" href="https://www.dlsite.com/home-touch/work/=/product_id/RJ304732.html" class="alternate_smartphone" />
+
+  <link rel="alternate" hreflang="ja" href="https://www.dlsite.com/maniax/work/=/product_id/RJ304732.html">
+<link rel="alternate" hreflang="zh-TW" href="https://www.dlsite.com/maniax/work/=/product_id/RJ304732.html/?locale=zh_TW">
+<link rel="alternate" hreflang="zh-CN" href="https://www.dlsite.com/maniax/work/=/product_id/RJ304732.html/?locale=zh_CN">
+<link rel="alternate" hreflang="ko" href="https://www.dlsite.com/maniax/work/=/product_id/RJ304732.html/?locale=ko_KR">
+<link rel="alternate" hreflang="en" href="https://www.dlsite.com/maniax/work/=/product_id/RJ304732.html/?locale=en_US">
+
+
+
+<meta name="description" content="弾幕系シューティングゲーム、東方Projectのアレンジ集。ケルトの笛、ピアノ、オーケストラ、シンフォニックメタル、そして歌。 さまざまな楽の音で紡がれる、ひとと妖怪、神々の奇譚。 美しくも壮大な幻想郷の世界。「DLsite 同人 - R18」は同人誌・同人ゲーム・同人ボイス・ASMRのダウンロードショップ。お気に入りの作品をすぐダウンロードできてすぐ楽しめる！毎日更新しているのであなたが探している作品にきっと出会えます。国内最大級の二次元総合ダウンロードショップ「DLsite」！">
+<title>【90%OFF】東方錫の風～とうほうすずのかぜ～ [OriverMusic] | DLsite 同人 - R18</title>
+
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@DLsiteManiax">
+<meta name="twitter:image:src" content="https://img.dlsite.jp/modpub/images2/work/doujin/RJ305000/RJ304732_img_main.jpg">
+
+<meta property="og:title" content="東方錫の風～とうほうすずのかぜ～ [OriverMusic] | DLsite">
+<meta property="og:type" content="website">
+<meta property="og:description" content="弾幕系シューティングゲーム、東方Projectのアレンジ集。ケルトの笛、ピアノ、オーケストラ、シンフォニックメタル、そして歌。 さまざまな楽の音で紡がれる、ひとと妖怪、神々の奇譚。 美しくも壮大な幻想郷の世界。「DLsite 同人 - R18」は同人誌・同人ゲーム・同人ボイス・ASMRのダウンロードショップ。お気に入りの作品をすぐダウンロードできてすぐ楽しめる！毎日更新しているのであなたが探している作品にきっと出会えます。国内最大級の二次元総合ダウンロードショップ「DLsite」！">
+<meta property="og:url" content="https://www.dlsite.com/home/work/=/product_id/RJ304732.html">
+<meta property="og:image" content="https://img.dlsite.jp/modpub/images2/work/doujin/RJ305000/RJ304732_img_main.jpg">
+<meta property="og:site_name" content="DLsite">
+<meta property="fb:app_id" content="226115600829997">
+<meta property="mixi:device-smartphone" content="https://www.dlsite.com/maniax-touch/work/=/product_id/RJ304732.html">
+
+
+    <script>
+if ( ! /uniqid=/.test(document.cookie)) {
+  document.cookie = 'uniqid=' + Math.random().toString(36) + '; domain=.dlsite.com; path=/; max-age=63072000'
+}
+
+if (/uniqid=\./.test(document.cookie)) {
+  document.cookie = 'uniqid=' + Math.random().toString(36) + '; domain=.dlsite.com; path=/; max-age=63072000'
+}
+</script>
+
+  <link rel="stylesheet" href="/css/reset.css?1631081391" type="text/css" id="reset" />
+<link rel="stylesheet" href="/css/default.css?1631081390" type="text/css" id="default" />
+<link rel="stylesheet" href="/css/layout_2col_work.css?1631081391" type="text/css" id="layout_2col_work" />
+<link rel="stylesheet" href="/css/common.css?1631081387" type="text/css" id="common" />
+<link rel="stylesheet" href="/css/switch.css?1631081392" type="text/css" id="switch" />
+<link rel="stylesheet" href="/css/suggest.css?1631081392" type="text/css" id="suggest" />
+<link rel="stylesheet" href="/css/header_campaign_banner.css?1631081391" type="text/css" id="header_campaign_banner" />
+<link rel="stylesheet" href="/modpub/universal/css/universal.css?" type="text/css" id="universal" />
+<link rel="stylesheet" href="/css/work_template.css?1631081392" type="text/css" id="work_template" />
+<link rel="stylesheet" href="/css/work_slider.css?1631081392" type="text/css" id="work_slider" />
+<link rel="stylesheet" href="/css/couponget.css?1631081390" type="text/css" id="couponget" />
+
+  <script type="text/javascript" src="/js/libs/libraries-pack.js?1631164960"></script>
+<script type="text/javascript" src="/js/dlsite_util.js?1627347590"></script>
+<script type="text/javascript" src="/js/slide_menu.js?1553754105"></script>
+<script type="text/javascript" src="/js/dlsite_suggest.js?1617866986"></script>
+<script type="text/javascript" src="/js/dlsite_trigger.js?1553754105"></script>
+<script type="text/javascript" src="/js/jquery.slideproduct.js?1610442922"></script>
+<script type="text/javascript" src="/js/dlsite_img_filter.js?1553754105"></script>
+<script type="text/javascript" src="/js/dlsite/work/work_logger.js?1617856051"></script>
+<script type="text/javascript" src="/js/libs/clipboard.min.js?1562550059"></script>
+<script type="text/javascript" src="/js/swiper4.0.7/js/swiper.min.js?1553754105"></script>
+
+  
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(), event:'gtm.js'}); var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl+ '&gtm_auth=Z_ubU9a2b3yGEFSh9Hdtkg&gtm_preview=env-12&gtm_cookies_win=x';f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-NTSRG2');</script>
+<!-- End Google Tag Manager -->
+
+
+
+  
+
+
+</head>
+
+<body class="style_maniax t_male">
+  <iframe id="op"
+  src="https://login.dlsite.com/assets/login/check_session.html?_=20171107123100"
+  crossorigin="anonymous"
+  style="height:0;width:0;display:none;"
+></iframe>
+<iframe
+  id="rp"
+  src="/js/check_session.html?site=maniax&client_id=dlsite.user&origin=https%3A%2F%2Flogin.dlsite.com&cookie=session_state&_=20171107123100"
+  style="height:0;width:0;display:none;"
+></iframe>
+
+  <meta http-equiv="PICS-Label" content='(PICS-1.1"http://www.iajapan.org/rating/" r(lv 4) )'> 
+
+<script>
+(function(){
+$.extend({
+  useAdultcheck: false,
+  importAdultcheck: function(){
+    if ($.useAdultcheck) return;
+    $.useAdultcheck = true;
+    var s = document.createElement('script');
+    s.src = '/js/adultcheck.js?1611798352';
+    s.defer = true;
+    document.querySelector('head').appendChild(s);
+  }
+});
+if ((dlsite.isAdult() && dlsite.getId() !== 'circle' && !(dlsite.isFemale() && dlsite.isBooks())) || dlsite.forceAdultCheck) {
+  $.importAdultcheck();
+}
+})();
+</script>
+
+
+  <!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NTSRG2&gtm_auth=Z_ubU9a2b3yGEFSh9Hdtkg&gtm_preview=env-12&gtm_cookies_win=x" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+
+
+    <div data-vue-component="header-banner" data-vue-async="true" data-section_name="campaign_header_banner">
+    <div v-if="loading" class="hd_cp_banner type_1bn">
+    <ul class="cp_bn_list">
+            <li class="cp_bn_item" style="background-color: #ff4fa2;">
+        <a href="https://www.dlsite.com/maniax/campaign/sale202107" >
+          <div class="cp_bn_inner">
+            <div class="cp_bn_reminder " style="background-color: ; color: ;">
+              <div class="cp_bn_reminder_content"><i class="cp_bn_reminder_period type_date">9/13</i><i class="cp_bn_reminder_period type_time">13:59</i>まで</div>
+            </div>
+            <div class="cp_bn"><img src="/modpub/images/campaign/doujin_sale_2107/bn_hd_cp_ja_jp.png" alt="2021年DLsite同人サマーセール"></div>
+                        <div class="cp_bn_work" style="background-color: ;"><div class="cp_bn_work_inner">対象作品<i class="cp_bn_work_count">100,000</i>作品以上！</div></div>
+                      </div>
+        </a>
+      </li>
+          </ul>
+  </div>
+    
+  <div v-else-if="is_show_frame" :class="style" class="hd_cp_banner" v-cloak>
+    <ul class="cp_bn_list">
+      <li v-for="campaign in campaigns" class="cp_bn_item" :data-ab-test="campaign.abTest" :style="{'background-color': campaign.mainColor}">
+        <a :href="campaign.url" :target="campaign.option.includes('target_blank') ? 'blank' : null">
+          <div class="cp_bn_inner">
+            <div class="cp_bn_reminder" v-if="campaign.isShowLimit" :class="{blank: !campaign.isShowLimit}" :style="{'background-color': campaign.periodBgColor, 'color': campaign.periodTextColor}">
+              <div class="cp_bn_reminder_content" v-html="campaign.period"></div>
+            </div>
+            <div class="cp_bn"><img :src="campaign.img" :alt="campaign.alt"></div>
+            <div
+              class="cp_bn_work"
+              v-if="campaign.outline"
+              v-html="campaign.outline"
+              :style="{'background-color': campaign.periodBgColor}"
+            >
+            </div>
+          </div>
+        </a>
+      </li>
+    </ul>
+  </div>
+  
+</div>
+
+  <div data-vue-component="coupon-modal" v-cloak></div>
+
+<div data-vue-component="header-locale-suggest-dialog" data-vue-async="true"></div>
+
+<div data-vue-component="ie-alert" v-cloak></div>
+  <!-- container -->
+    <div itemscope itemtype="http://schema.org/Product" id="container" site="maniax">
+    
+      <div id="top_header">
+        
+      </div>
+
+      <!-- header -->
+      <div id="header">
+        <header class="l-header" data-vue-component="header" data-search-category="">
+  <div class="headerCore">
+    <div class="headerCore_top">
+      <div class="headerCore_top_item">
+        <p class="header_description">
+                                    同人誌・同人ゲーム・同人ボイス・ASMRならDLsite                              </p>
+      </div>
+      <div class="headerCore_top_item">
+                <ul v-if="isMemberLogin" v-cloak class="login_information">
+          <li class="login_information_item type_point">
+            <a href="https://www.dlsite.com/maniax/mypage/point" class="coupon_text">
+            ポイント<span class="number" v-text="point_str">-</span>pt
+            </a>
+          </li>
+          <li class="login_information_item type_coupon" :class="{ 'is-active': noticeCoupons.length, 'singular-number': coupons.length === 1 }">
+            <a href="https://www.dlsite.com/maniax/mypage/coupon/list" class="coupon_text">クーポン<span class="number" v-text="coupons.length">-</span>枚</a>
+          </li>
+        </ul>
+                <header_locale class="header_dropdown_nav type_language">
+          <div class="header_dropdown_nav_Link">Language</div>
+        </header_locale>
+                        <header_service class="header_dropdown_nav type_service">
+          <div class="header_dropdown_nav_Link">関連サービス</div>
+        </header_service>
+              </div>
+    </div>
+
+    <div class="headerCore-sub">
+            <a href="https://www.dlsite.com/maniax/" class="logo">
+                <img src="/images/web/common/logo/pc/logo-dlsite-r18.png" alt="DLsite R18" width="132" height="25">
+              </a>
+            <!-- 検索 -->
+              <div class="globalSearch" :class="{active: isFocus}">
+          <form class="globalSearch-form" action="https://www.dlsite.com/maniax/fs" method="post">
+            <input name="_qf__fulltext_search" type="hidden" value="">
+            <input name="_layout" type="hidden" value="fs">
+            <input name="_site" type="hidden" value="maniax">
+            <input name="_form_id" type="hidden" value="FulltextSearchProductForm">
+            <input name="_view" type="hidden" value="input">
+            <input name="from" type="hidden" value="fs.header" id="header_search_from">
+
+                                        <input type="hidden" name="site_category" :value="selected" v-if="!/drama$/.test(selected)">
+                            <input type="hidden" name="work_category" :value="'drama'" v-if="/drama$/.test(selected)">
+                            <input type="hidden" name="work_category" :value="'all'" v-if="site.gender === 'female' && !selected">
+                            <input type="hidden" name="is_tl"  :value="1" v-if="/^girls/.test(selected)">
+              <input type="hidden" name="is_bl"  :value="1" v-if="/^bl/.test(selected)">
+              <input type="hidden" name="is_gay" :value="1" v-if="/^bl/.test(selected)">
+            
+            <div class="globalSearchSelect">
+              <div class="globalSearchSelect-lable">
+                <span v-text="searchCategories[selected]">すべて</span>
+              </div>
+              <select v-model="selected" class="globalSearchSelect-list is-active">
+                <option value="">すべて</option>
+                                <option value="maniax">同人</option>
+                <option value="books">成年コミック</option>
+                <option value="pro">美少女ゲーム</option>
+                              </select>
+            </div>
+            <div class="globalSearchForm">
+              <input
+                name="keyword"
+                type="search"
+                id="search_text"
+                ref="keyword"
+                maxlength="255"
+                autocomplete="off"
+                aria-autocomplete="list"
+                                placeholder="キーワードから探す（作品名、サークル名など）"                @focus="isFocus = true"
+                @blur="isFocus = false"
+              >
+            </div>
+            <button id="search_button" class="globalSearchBtn" type="submit" @click="saveSelected()"><i>検索</i></button>
+          </form>
+        </div>
+        <div class="detailedSearch">
+          <a href="https://www.dlsite.com/maniax/fs">詳細検索</a>
+        </div>
+            <!-- /検索 -->
+      <!-- アイコンメニュー -->
+      <ul class="globalNav">
+        <li v-if="!isMemberLogin && !isCircleLogin" class="globalNav-item type-register" v-cloak>
+          <a href="https://www.dlsite.com/maniax/regist/user"><i>新規登録</i></a>
+        </li>
+        <li v-if="!isMemberLogin && !isCircleLogin" class="globalNav-item type-login" v-cloak>
+          <a href="https://www.dlsite.com/maniax/login/=/skip_register/1" referrerpolicy="no-referrer-when-downgrade"><i>ログイン</i></a>
+        </li>
+        <li v-if="isMemberLogin" class="globalNav-item type-favorite">
+          <a  :href="hasUnboughtFavorites ? 'https://www.dlsite.com/maniax/mypage/wishlist' : 'https://www.dlsite.com/maniax/mypage/wishlist'"><i>お気に入り</i></a><template v-if="hasUnboughtFavorites" v-cloak><a href="https://www.dlsite.com/maniax/mypage/wishlist/=/discount/1" class="notificationBadge" >割引作品あり</a></template>
+        </li>
+        <li class="globalNav-item type-cart"><a href="https://www.dlsite.com/maniax/cart"><i>カート</i></a><span v-if="cartActives.length" v-cloak class="cartBadge" v-text="Math.min(cartActives.length, 100)"></span></li>
+        <li v-if="isMemberLogin" class="globalNav-item type-play">
+          <a rel="noopener" href="https://play.dlsite.com/" target="_blank" v-cloak><i>購入済作品</i></a>
+        </li>
+        <!-- メンバーアカウント登録の場合　-->
+        <li v-if="isMemberLogin" class="globalNav-item type-circle">
+          <a v-cloak><i>アカウント</i></a>
+          <div class="dropdown_list type_account" v-cloak>
+            <div class="dropdown_list_inner">
+              <ul class="globalNav">
+                <li class="globalNav-item type-review">
+                  <a href="https://www.dlsite.com/maniax/mypage/short-review">
+                    <i>評価・レビュー</i>
+                  </a>
+                </li>
+                <li class="globalNav-item type-coupon">
+                  <a href="https://www.dlsite.com/maniax/mypage/coupon/list">
+                    <i>クーポン管理</i>
+                  </a>
+                </li>
+                <li class="globalNav-item type-userbuy">
+                  <a href="https://www.dlsite.com/maniax/mypage/userbuy">
+                    <i>購入履歴</i>
+                  </a>
+                </li>
+              </ul>
+              <ul class="menu_list">
+                <li class="menu_list_item type-mypage">
+                  <a href="https://www.dlsite.com/maniax/mypage" class="link">
+                    <i>マイページ</i>
+                    <span v-if="mypageNotices > 0" class="count" v-cloak>{{ noticesBadge(mypageNotices) }}</span>
+                  </a>
+                  <div v-if="mypageNotices > 0" class="notice">
+                                        重要なお知らせが<span>{{ mypageNotices }}件</span>あります。                  </div>
+                </li>
+                <li v-if="isCircleLogin" class="menu_list_item type-circle" v-cloak>
+                  <a href="https://www.dlsite.com/circle/" class="link">
+                    <i>サークル管理</i>
+                    <span v-if="circleNotices > 0" class="count" v-cloak>{{ noticesBadge(circleNotices) }}</span>
+                  </a>
+                  <div v-if="circleNotices > 0" class="notice">
+                                        重要なお知らせが<span>{{ circleNotices }}件</span>あります。                  </div>
+                </li>
+                <li class="menu_list_item">
+                  <a href="https://login.dlsite.com/user/self?lang=ja&redirect_uri=https%3A%2F%2Fwww.dlsite.com%2Fmaniax%2F" class="link" target="_blank">
+                    <i>アカウント管理</i>
+                  </a>
+                </li>
+              </ul>
+              <div class="login_account">
+                <div class="login_account_item">
+                  <p v-if="login_id" v-cloak class="account_name">
+                                                            <span>{{ login_id.substr(0, 30) }}{{ login_id.length > 30 ? '...' : '' }}</span>
+                    さん                  </p>
+                </div>
+                <div class="login_account_item">
+                  <a href="https://www.dlsite.com/maniax/logout" class="logout">ログアウト</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <span v-if="(mypageNotices + circleNotices) > 0 " class="accountBadge" v-text="noticesBadge(mypageNotices + circleNotices)" v-cloak></span>
+        </li>
+        <!-- サークルアカウントのみ登録の場合　-->
+        <li v-if="isCircleLogin && !isMemberLogin" class="globalNav-item type-circle">
+          <a v-cloak><i>アカウント</i></a>
+          <div class="dropdown_list type_account" v-cloak>
+            <div class="dropdown_list_inner">
+              <ul class="menu_list">
+                <li v-if="isCircleLogin" class="menu_list_item type-circle" v-cloak>
+                  <a href="https://www.dlsite.com/circle/" class="link">
+                    <i>サークル管理</i>
+                    <span v-if="circleNotices > 0" class="count" v-cloak>{{ noticesBadge(circleNotices) }}</span>
+                  </a>
+                  <div v-if="circleNotices > 0" class="notice">
+                                        重要なお知らせが<span>{{ circleNotices }}件</span>あります。                  </div>
+                </li>
+                <li class="menu_list_item">
+                  <a href="https://login.dlsite.com/user/self?lang=ja&redirect_uri=https%3A%2F%2Fwww.dlsite.com%2Fmaniax%2F" class="link" target="_blank">
+                    <i>アカウント管理</i>
+                  </a>
+                </li>
+              </ul>
+              <div class="login_account">
+                <div class="login_account_item">
+                  <p v-if="login_id" v-cloak class="account_name">
+                                                            <span>{{ login_id.substr(0, 30) }}{{ login_id.length > 30 ? '...' : '' }}</span>
+                    さん                  </p>
+                </div>
+                <div class="login_account_item">
+                  <a href="https://www.dlsite.com/maniax/logout" class="logout">ログアウト</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <span v-if="(circleNotices) > 0 " class="accountBadge" v-text="noticesBadge(circleNotices)" v-cloak></span>
+        </li>
+        <li class="globalNav-item type-guide">
+          <a href="#"><i>ガイド</i></a>
+          <div class="dropdown_list type_guide">
+            <div class="dropdown_list_inner">
+              <ul class="menu_list">
+                <li class="menu_list_item"><a rel="noopener" href="https://www.dlsite.com/maniax/faq/=/type/user" target="_blank" class="link">ヘルプ</a></li>
+                <li class="menu_list_item"><a href="https://www.dlsite.com/maniax/welcome" class="link">初めての方へ</a></li>
+                                <li class="menu_list_item"><a href="https://www.dlsite.com/maniax/circle/invite" class="link">サークル登録について</a></li>
+                                <li class="menu_list_item"><a href="https://www.dlsite.com/maniax/guide/payment" class="link">お支払方法について</a></li>
+                <li class="menu_list_item"><a href="https://www.dlsite.com/maniax/mypage/aboutpoint" class="link">ポイントについて</a></li>
+              </ul>
+            </div>
+          </div>
+        </li>
+      </ul>
+      <!-- /ガイドメニュー -->
+    </div>
+
+        <div class="headerCore-main">
+        <div class="headerCore-mainInner " :class="{ couponShow: isAccountLogin }">
+                <ul class="floorTab type-adult">
+          <li class="floorTab-item type-doujin is-active"><a href="https://www.dlsite.com/maniax/">同人</a>       </li>
+          <li class="floorTab-item type-ebook "><a href="https://www.dlsite.com/books/">成年コミック</a></li>
+          <li class="floorTab-item type-com   "><a href="https://www.dlsite.com/pro/">美少女ゲーム</a>  </li>
+          <li class="floorTab-item type-nijiyome"><a href="https://www.nijiyome.jp?en=dlsite&em=tab&et=maniax">にじGAME</a></li>
+        </ul>
+        
+                <div class="floorNavLink">
+                              <div class="floorNavLink-item type-general"><a href="https://www.dlsite.com/home/">全年齢向けへ</a></div>
+                    <div class="floorNavLink-item type-female"><a href="https://www.dlsite.com/girls/">女性向けへ</a></div>
+        </div>
+              </div>
+
+            <div class="floorSubNav">
+        <div class="floorSubNav-item">
+          <ul class="headerNav">
+
+      
+                  <li class="headerNav-item"><a href="https://www.dlsite.com/maniax/" class="top">TOP</a></li>
+                        <li class="headerNav-item">
+              <a href="https://www.dlsite.com/maniax/works/type/=/work_type_category/game" class="game" :class="{'is-active': currentWorkTypeCategoryEquals('game')}">ゲーム</a>
+            </li>
+            <li class="headerNav-item">
+              <a href="https://www.dlsite.com/maniax/works/type/=/work_type_category/movie" class="video" :class="{'is-active': currentWorkTypeCategoryEquals('movie')}">動画</a>
+            </li>
+            <li class="headerNav-item">
+              <a href="https://www.dlsite.com/maniax/works/type/=/work_type_category/audio" class="voice" :class="{'is-active': currentWorkTypeCategoryEquals('audio')}">ボイス・ASMR</a>
+            </li>
+            <li class="headerNav-item">
+              <a href="https://www.dlsite.com/maniax/works/type/=/work_type_category/comic" class="manga" :class="{'is-active': currentWorkTypeCategoryEquals('comic')}">マンガ</a>
+            </li>
+            <li class="headerNav-item">
+              <a href="https://www.dlsite.com/maniax/works/type/=/work_type_category/illust" class="illust" :class="{'is-active': currentWorkTypeCategoryEquals('illust')}">CG・イラスト</a>
+            </li>
+            <li class="headerNav-item">
+              <a href="https://www.dlsite.com/maniax/ranking?date=30d" class="ranking">ランキング</a>
+            </li>
+            <li class="headerNav-item"><a href="https://www.dlsite.com/maniax/announce/list/day" class="announce">発売予告作品</a></li>
+            <li class="headerNav-item"><a href="https://www.dlsite.com/maniax/new" class="calendar">発売カレンダー</a></li>
+
+            
+                            </ul>
+        </div>
+      </div>
+      
+    </div>
+      </div>
+</header>
+
+
+
+
+        <script type="text/javascript">
+var loginchecked = $.cookie('loginchecked');
+
+if (loginchecked & 1) {
+  // ユーザがログイン中の表示
+  $("li#nav_login a").attr("title", "ログアウト").attr("href", "https://www.dlsite.com/maniax/logout/=/type/member");
+  $("li#nav_login").attr("id", "nav_logout");
+} else {
+  // ユーザがログアウト中の表示
+//  $("li#nav_logout a").attr("title", "ログイン").attr("href", "https://www.dlsite.com/maniax/login/=/type/member");
+//  $("li#nav_logout").attr("id", "nav_login");
+}
+</script>
+
+        
+      </div>
+      <!-- /header -->
+
+            <!-- top_wrapper -->
+      <div id="top_wrapper" class="clearfix" data-section_name="top_wrapper">
+        <ul class="topicpath" itemscope="" itemtype="https://schema.org/BreadcrumbList">
+  <li class="topicpath_item" itemprop="itemListElement" itemscope="" itemtype="https://schema.org/ListItem">
+    <a itemtype="https://schema.org/Thing" itemprop="item" href="https://www.dlsite.com/maniax/">
+    <span itemprop="name">
+              同人
+          </span>
+    </a>
+    <meta itemprop="position" content="1">
+      </li>
+                          <li class="topicpath_item" itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">
+        <a itemtype="http://schema.org/Thing" itemprop="item" href="https://www.dlsite.com/maniax/circle/list">
+    <span itemprop="name">
+                                      サークル一覧          </span>
+        </a>
+        <meta itemprop="position" content="2">
+              </li>
+                  <li class="topicpath_item" itemprop="itemListElement" itemscope="" itemtype="https://schema.org/ListItem">
+        <a itemtype="https://schema.org/Thing" itemprop="item"
+           href="https://www.dlsite.com/maniax/circle/profile/=/maker_id/RG53722.html">
+          <span itemprop="name">OriverMusic</span>
+        </a>
+        <meta itemprop="position" content="3">
+              </li>
+                                          <li class="topicpath_item" itemprop="itemListElement" itemscope="" itemtype="https://schema.org/ListItem">
+            <a itemtype="https://schema.org/Thing" itemprop="item"
+               href="https://www.dlsite.com/maniax/fsr/=/keyword_work_name/%22%E6%9D%B1%E6%96%B9%E9%8C%AB%E3%81%AE%E9%A2%A8%22+SRI0000027121/order/release_d/from/work.series">
+              <span itemprop="name">「東方錫の風」シリーズ</span>
+            </a>
+            <meta itemprop="position" content="4">
+                      </li>
+                    <li class="topicpath_item" itemprop="itemListElement" itemscope="" itemtype="https://schema.org/ListItem">
+        <a itemtype="https://schema.org/Thing" itemprop="item" href="https://www.dlsite.com/maniax/work/=/product_id/RJ304732.html">
+          <span itemprop="name">東方錫の風～とうほうすずのかぜ～</span>
+        </a>
+        <meta itemprop="position" content="5">
+              </li>
+                            
+      </ul>
+<div class="base_title_br clearfix">
+
+<div class="icon_wrap">
+
+
+
+
+
+
+
+
+</div>
+<h1 itemprop="name" id="work_name">
+<a href="https://www.dlsite.com/maniax/work/=/product_id/RJ304732.html" itemprop="url">東方錫の風～とうほうすずのかぜ～</a>
+</h1>
+
+<template data-vue-component="dlchannel-topic" data-product-id="RJ304732" data-product-name="東方錫の風～とうほうすずのかぜ～" data-maker-name="OriverMusic"></template>
+
+
+  
+    
+  
+        
+                
+  
+<template data-vue-component="share-button" data-twitter-share-url="https://twitter.com/intent/tweet?url=https%3A%2F%2Fdlsite.jp%2Fmawot%2FRJ304732%2F%3Futm_content%3DRJ304732%26locale%3Dja_JP%0A&text=%E6%9D%B1%E6%96%B9%E9%8C%AB%E3%81%AE%E9%A2%A8%EF%BD%9E%E3%81%A8%E3%81%86%E3%81%BB%E3%81%86%E3%81%99%E3%81%9A%E3%81%AE%E3%81%8B%E3%81%9C%EF%BD%9E%2FOriverMusic%2090%25OFF%209%2F13%2013%E6%99%8259%E5%88%86%E3%81%BE%E3%81%A7&hashtags=DLsite&lang=ja
+" data-share-url="https://www.dlsite.com/maniax/work/=/product_id/RJ304732.html" data-share-title="東方錫の風～とうほうすずのかぜ～" data-share-maker-name="OriverMusic"></template>
+
+</div>
+      </div>
+      <!-- /top_wrapper -->
+      
+      <!-- wrapper -->
+      <div id="wrapper">
+
+        <template data-vue-component="share-group"></template>
+
+        
+        <!-- main -->
+        <div id="main" data-section_name="main">
+          <!-- main_inner -->
+          <div id="main_inner">
+            
+
+
+<!-- work_header -->
+<div id="work_header" data-section_name="work_header">
+<!-- work_left -->
+<div id="work_left">
+
+<div data-vue-component="product-slider" data-product-id="RJ304732">
+
+<div class="product-slider">
+  <!-- Sample image data -->
+  <div ref="product_slider_data" class="product-slider-data">
+    <div data-src="//img.dlsite.jp/modpub/images2/work/doujin/RJ305000/RJ304732_img_main.jpg" data-width="424" data-height="420" data-thumb="//img.dlsite.jp/resize/images2/work/doujin/RJ305000/RJ304732_img_main_240x240.jpg"></div>
+    <div data-src="//img.dlsite.jp/modpub/images2/work/doujin/RJ305000/RJ304732_img_smp1.jpg" data-width="2000" data-height="1016" data-thumb="//img.dlsite.jp/resize/images2/work/doujin/RJ305000/RJ304732_img_smp1_100x100.jpg"></div>
+    <div data-src="//img.dlsite.jp/modpub/images2/work/doujin/RJ305000/RJ304732_img_smp2.jpg" data-width="2000" data-height="1016" data-thumb="//img.dlsite.jp/resize/images2/work/doujin/RJ305000/RJ304732_img_smp2_100x100.jpg"></div>
+    <div data-src="//img.dlsite.jp/modpub/images2/work/doujin/RJ305000/RJ304732_img_smp3.jpg" data-width="1654" data-height="1654" data-thumb="//img.dlsite.jp/resize/images2/work/doujin/RJ305000/RJ304732_img_smp3_100x100.jpg"></div>
+    <div data-src="//img.dlsite.jp/modpub/images2/work/doujin/RJ305000/RJ304732_img_smp4.jpg" data-width="1000" data-height="1000" data-thumb="//img.dlsite.jp/resize/images2/work/doujin/RJ305000/RJ304732_img_smp4_100x100.jpg"></div>
+  </div>
+
+
+  <!-- Sample viewer -->
+  <div class="work_slider male">
+    <div class="work_slider_container">
+      <div class="slider_body">
+        <div ref="swiper" class="slider_body_inner">
+          <ul class="slider_items trans" ref="body_items" @click="showPopup">
+
+            <li v-if="items.length === 0" class="slider_item active"><img itemprop="image" src="//img.dlsite.jp/modpub/images2/work/doujin/RJ305000/RJ304732_img_main.jpg" width="auto" height="420" alt="東方錫の風～とうほうすずのかぜ～ [OriverMusic]"></li>
+
+          <template v-for="(item, index) in items">
+
+            <li v-if="index === 0" class="slider_item active"><img itemprop="image" :src="item.src" alt="東方錫の風～とうほうすずのかぜ～ [OriverMusic]"></li>
+            <li v-else             class="slider_item" ><img class="swiper-lazy" :data-src="item.src" alt="東方錫の風～とうほうすずのかぜ～ [OriverMusic]"></li>
+
+          </template>
+          </ul>
+        </div>
+        <div v-cloak v-if="items.length > 1" class="slider_prev" @click="slideTo('prev')"></div>
+        <div v-cloak v-if="items.length > 1" class="slider_next" @click="slideTo('next')"></div>
+      </div>
+
+      <div v-cloak v-if="items.length > 1" ref="ctrl" @wheel="slideScroll" class="slider_controller">
+        <div class="controller_body">
+          <ul ref="ctrl_items" class="controller_items">
+          <template v-for="(item, index) in items">
+            <li class="controller_item" :class="{active:(index === swiper.realIndex)}" @click="slideTo(index)">
+              <div class="thumb_box">
+                
+                <img v-lazy="item.thumb.src" :width="item.thumb.width" :height="item.thumb.height" alt="東方錫の風～とうほうすずのかぜ～ [OriverMusic]">
+                
+              </div>
+            </li>
+          </template>
+          </ul>
+        </div>
+        <div class="controller_prev" @click="slideTo('prev')"></div>
+        <div class="controller_next" @click="slideTo('next')"></div>
+      </div>
+    </div>
+  </div>
+  <div v-cloak class="work_slider_comp" v-if="items.length > 1">
+
+
+
+    <!-- 枚数 -->
+    <span v-t="{ path: 'product.slider.totalImages', args: [items.length] }"></span>
+  </div>
+
+  <!-- Popup viewer -->
+  <div v-if="popupVisible" class="slider_popup_overlay" @click="hidePopup">
+    <div class="slider_popup" @click.stop>
+      <span class="slider_popup_close" @click="hidePopup"></span>
+      <div class="slider_popup_rightpane">
+        <div class="slider_popup_sidebar">
+        <template v-for="(item, index) in items">
+          <div rel="noopener" target="_blank" :class="{active:(index === swiper.realIndex)}" @click="slideTo(index, false)">
+
+            <img v-lazy="item.thumb.src" alt="東方錫の風～とうほうすずのかぜ～ [OriverMusic]">
+
+          </div>
+        </template>
+        </div>
+        <div class="slider_popup_arrows">
+          <div class="slider_popup_button">
+            <div class="slider_popup_prev" @click="slideTo('prev', false)"></div>
+            <div class="slider_popup_next" @click="slideTo('next', false)"></div>
+          </div>
+          <div class="slider_popup_count">{{ swiper.realIndex + 1 }} / {{ items.length }}</div>
+        </div>
+      </div>
+      <div class="slider_popup_leftpane">
+        <div ref="mainbox" class="slider_popup_mainbox" @wheel.prevent="slideScroll">
+          <div class="slider_zoom_container" ref="zoom_container" @mousemove.prevent="setPopupPosition" @click="setPopupImage(true)">
+
+            <img :src="items[swiper.realIndex].src" ref="zoom_container_image" alt="東方錫の風～とうほうすずのかぜ～ [OriverMusic]">
+
+          </div>
+        </div>
+        <div class="slider_popup_tool">
+          <input id="target1" class="checkbox" name="target" type="checkbox" value="1" v-model="alwaysActualSize" @change="toggleActualSize" @click="toggleActualSize">
+          <label for="target1" class="checkbox-label" v-t="'product.slider.alwaysActual'"></label>
+          <span class="slider_popup_description" v-t="'product.slider.tools'"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</div>
+
+
+</div>
+<!-- /work_left -->
+
+<!-- work_right -->
+<div id="work_right">
+<div
+  class="work_right_info"
+  data-vue-component="product-price"
+  data-product-id="RJ304732"
+  data-is-check="false"
+  data-is-comingsoon="false"
+  v-if="(product.dl_count !== undefined && product.dl_count > 0) || (!isFemale() && product.wishlist_count !== undefined && product.wishlist_count > 0) || product.rate_count > 0 || product.review_count"
+  v-cloak
+>
+  <product-rank product-id="RJ304732"></product-rank>
+
+  <div v-if="(product.dl_count !== undefined && product.dl_count > 0) || product.rate_count > 0" v-cloak class="work_right_info_item">
+    <dl class="work_right_info_title value">
+            <!-- 販売 / DL数 [home, maniax, girls, bl] ここから -->
+      <template v-if="product.dl_count !== undefined && product.dl_count > 0" v-cloak>
+        <dt v-if="isFemale()" v-t="'product.evaluate.download_label'"></dt>
+        <dt v-else v-t="'product.evaluate.purchase_label'"></dt>
+        <dd class="point">{{ product.dl_count|number_format }}</dd>
+      </template>
+      <!-- 販売 / DL数 [home, maniax, girls, bl] ここまで -->
+      
+      <!-- 評価 ここから -->
+      <template v-if="product.rate_count > 0" v-cloak>
+        <dt v-t="'product.evaluate.rating_label'"></dt>
+        <dd class="star_box" @mouseenter="showRateDetail" @mouseleave="hideRateDetail">
+          <span class="point average_count">{{ product.rate_average_2dp }}</span>
+          <div class="star_wrap">
+            
+            <span class="rate" :class="'rate' + product.rate_average_star"></span>
+
+            <div class="rating_popup" :class="{ open: is_open_rate }" v-if="is_display_rate">
+              <div class="rating_popup_inner">
+                <div class="rating_content">
+                  <dl class="rating_content_inner">
+                    <dt class="rating_itemTitle" v-t="'product.rating.average'"></dt>
+                    <dd><p class="rating_score">{{ product.rate_average_2dp }}</p></dd>
+                  </dl>
+                  <dl class="rating_content_inner">
+                    <dt class="rating_itemTitle" v-t="'product.rating.ratings'"></dt>
+                    <dd><p class="">{{ product.rate_count|number_format }}</p></dd>
+                  </dl>
+                </div>
+
+                <div class="rating_content">
+                  <dl class="rating_content_inner">
+                    <dt class="rating_itemTitle" v-t="'product.rating.rating'"></dt>
+                    <dd>
+                      <dl class="rating_map">
+                        <dt class="rating_map_label">
+                          <p v-t="'product.rating.star_5'"></p>
+                        </dt>
+                        <dd class="rating_map_body">
+                          <div class="rating_meter">
+                            <div class="rating_bar" :style="{ width: is_open_rate ? Math.floor(product.rate_count_detail[4].ratio * 0.8) + 'px' : 0 }"></div>
+                          </div>
+                          ({{ product.rate_count_detail ? product.rate_count_detail[4].count : 0|number_format }})
+                        </dd>
+                        <dt class="rating_map_label">
+                          <p v-t="'product.rating.star_4'"></p>
+                        </dt>
+                        <dd class="rating_map_body">
+                          <div class="rating_meter">
+                            <div class="rating_bar" :style="{ width: is_open_rate ? Math.floor(product.rate_count_detail[3].ratio * 0.8) + 'px' : 0 }"></div>
+                          </div>
+                          ({{ product.rate_count_detail ? product.rate_count_detail[3].count : 0|number_format }})
+                        </dd>
+                        <dt class="rating_map_label">
+                          <p v-t="'product.rating.star_3'"></p>
+                        </dt>
+                        <dd class="rating_map_body">
+                          <div class="rating_meter">
+                            <div class="rating_bar" :style="{ width: is_open_rate ? Math.floor(product.rate_count_detail[2].ratio * 0.8) + 'px' : 0 }"></div>
+                          </div>
+                          ({{ product.rate_count_detail ? product.rate_count_detail[2].count : 0|number_format }})
+                        </dd>
+                        <dt class="rating_map_label">
+                          <p v-t="'product.rating.star_2'"></p>
+                        </dt>
+                        <dd class="rating_map_body">
+                          <div class="rating_meter">
+                            <div class="rating_bar" :style="{ width: is_open_rate ? Math.floor(product.rate_count_detail[1].ratio * 0.8) + 'px' : 0 }"></div>
+                          </div>
+                          ({{ product.rate_count_detail ? product.rate_count_detail[1].count : 0|number_format }})
+                        </dd>
+                        <dt class="rating_map_label">
+                          <p v-t="'product.rating.star_1'"></p>
+                        </dt>
+                        <dd class="rating_map_body">
+                          <div class="rating_meter">
+                            <div class="rating_bar" :style="{ width: is_open_rate ? Math.floor(product.rate_count_detail[0].ratio * 0.8) + 'px' : 0 }"></div>
+                          </div>
+                          ({{ product.rate_count_detail ? product.rate_count_detail[0].count : 0|number_format }})
+                        </dd>
+                      </dl>
+                    </dd>
+                  </dl>
+                </div>
+              </div>
+            </div>
+            
+          </div>
+          <span class="count">({{ product.rate_count|number_format }})</span></p>
+        </dd>
+      </template>
+      <!-- 評価 ここまで -->
+    </dl>
+  </div>
+
+  <div v-if="(!isFemale() && product.wishlist_count !== undefined && product.wishlist_count > 0) || product.review_count" v-cloak class="work_right_info_item">
+    <dl class="work_right_info_title">
+            <!-- お気に入り数 / DL数 [home, maniax, girls, bl] ここから -->
+      <template v-if="!isFemale() && product.wishlist_count !== undefined && product.wishlist_count > 0" v-cloak>
+        <dt v-t="'product.evaluate.favorite_works_label'"></dt>
+        <dd class="position_fix">{{ product.wishlist_count|number_format }}</dd>
+
+      </template>
+      <!-- お気に入り数 ここまで -->
+      
+      <!-- レビュー ここから -->
+      <template v-if="product.review_count" v-cloak>
+        <dt v-t="'product.evaluate.review_number_label'"></dt>
+        <dd class="position_fix"><span>{{ product.review_count|number_format }}</span><span class="count"></span>&nbsp;(<a href="#review_link" v-html="$t('product.evaluate.to_rating_label')"></a>)</span></dd>
+      </template>
+      <!-- レビュー ここまで -->
+    </dl>
+  </div>
+  <!--
+  <div v-if=" ! product.is_reservable && product.review_count <= 0" v-cloak class="work_right_info_item">
+    <dl class="work_right_info_title">
+      <dt v-t="'product.evaluate.no_review_message'"></dt>
+      <dd><span class="count"></span><a href="https://www.dlsite.com/maniax/review/write/work/=/product_id/RJ304732.html" v-t="'product.evaluate.to_review_message'"></a></dd>
+    </dl>
+  </div>
+  -->
+</div>
+<div id="work_right_inner">
+
+
+<div id="work_right_name">
+  <table id="work_maker">
+        <tr>
+      <th>サークル名</th>
+      <td>
+        <span itemprop="brand" class="maker_name">
+          <a href="https://www.dlsite.com/maniax/circle/profile/=/maker_id/RG53722.html">OriverMusic</a>
+        </span>
+        <span class="add_follow" data-vue-component="follow-button" data-follow-key="RG53722" data-follow-name="OriverMusic" v-cloak>
+        </span>
+      </td>
+    </tr>
+      </table>
+    <span data-vue-component="cien-creator-link" data-vue-async="true" data-maker-id="RG53722"></span>
+</div>
+
+
+<table cellspacing="0" id="work_outline">
+  <tr>
+    <th>販売日</th>
+    <td><a href="https://www.dlsite.com/maniax/new/=/year/2020/mon/10/day/21/cyear/2020/cmon/10">2020年10月21日</a></td>  </tr>
+        <tr>
+      <th>シリーズ名</th>
+      <td>
+        <a href="https://www.dlsite.com/maniax/fsr/=/keyword_work_name/%22%E6%9D%B1%E6%96%B9%E9%8C%AB%E3%81%AE%E9%A2%A8%22+SRI0000027121/order/title_d/from/work.titles">東方錫の風</a>
+      </td>
+    </tr>
+    
+                        
+<tr>
+  <th>音楽</th>
+    <td>
+          <a
+                  href="https://www.dlsite.com/maniax/fsr/=/keyword_creater/%22Oriver%22"
+              >Oriver</a> /           <a
+                  href="https://www.dlsite.com/maniax/fsr/=/keyword_creater/%22seira%22"
+              >seira</a> /           <a
+                  href="https://www.dlsite.com/maniax/fsr/=/keyword_creater/%22%E3%81%93%E3%81%BE%22"
+              >こま</a>        </td>
+</tr>
+
+  
+        <tr>
+      <th>年齢指定</th>
+      <td>
+        <div class="work_genre">
+                      <span class="icon_GEN">全年齢</span>
+                  </div>
+      </td>
+    </tr>
+    <tr>
+    <th>作品形式</th>
+    <td>
+      <div class="work_genre" id="category_type">
+        <a href="https://www.dlsite.com/maniax/works/type/=/work_type/MUS/from/icon.work"><span class="icon_MUS" title="音楽">音楽</span></a>
+              </div>
+    </td>
+  </tr>
+      <tr>
+      <th>ファイル形式</th>
+      <td>
+        <div class="work_genre">
+          <a href="https://www.dlsite.com/maniax/fsr/=/work_category%5B0%5D/doujin/file_type/WAV/from/icon.work"><span class="icon_WAV" title="WAV">WAV</span></a>
+                      <div class="additional_info"> / MP3同梱</div>
+                  </div>
+      </td>
+    </tr>
+                                    
+  
+  
+       <tr>
+    <th>ファイル容量</th>
+    <td>
+      <div class="main_genre">
+                              450.22MB
+                        </div>
+    </td>
+  </tr>
+  
+    </table>
+
+
+
+<ul class="work_feature">
+
+
+
+
+
+
+
+
+
+</ul>
+
+
+<script>
+  jQuery(function ($) {
+    var dl_format = '0';
+    var is_dlsiteplay_work = '1';
+
+    if (/Mac/.test(navigator.userAgent) && (dl_format == 10 || dl_format == 9)) {
+      if (is_dlsiteplay_work) {
+        $('._no_mac_viewer').remove();
+      } else {
+        $('._no_mac_protect').remove();
+      }
+    }
+  });
+</script>
+
+
+<div data-vue-component="product-sales-end" data-product-id="RJ304732" v-cloak></div>
+
+</div>
+
+
+
+
+
+<div class="trial_download mb30">
+</div>
+
+<ul class="work_edition">
+  
+  </ul>
+
+</div>
+<!-- /work_right-->
+</div>
+<!-- /work_header -->
+
+
+
+<div id="intro-title" class="title_01 clearfix"><h2>作品内容</h2></div>
+
+              <div itemprop="description" class="work_parts_container">
+                                  
+<div class="work_parts type_text">
+
+              <h3 class="work_parts_heading">東方錫の風～とうほうすずのかぜ～</h3>
+    
+    
+          <div class="work_parts_area">
+        <p>弾幕系シューティングゲーム、東方Projectのアレンジ集。<br />
+<br />
+ケルトの笛、ピアノ、オーケストラ、シンフォニックメタル、そして歌。<br />
+さまざまな楽の音で紡がれる、ひとと妖怪、神々の奇譚。<br />
+美しくも壮大な幻想郷の世界。<br />
+<br />
+1.緋想天<br />
+2.もう歌しか聞こえない<br />
+3.恋色マスタースパーク<br />
+4.おてんば恋娘<br />
+5.千年幻想郷 ～ History of the Moon<br />
+6.砕月<br />
+7.御伽の国の鬼が島 ～ Missing Power<br />
+8.Moon Drop ～ 亡き王女の為のセプテット<br />
+　原題:亡き王女の為のセプテット<br />
+9.竹取飛翔 ～ Lunatic Princess<br />
+<br />
+ご奉仕価格です。WAVEと高音質MP3同梱。<br />
+試聴用クロスフェードPV<br />
+<a rel="noopener nofollow" href="https://youtu.be/O7WW-rHhiUI" target="_blank">https://youtu.be/O7WW-rHhiUI</a></p>
+      </div>
+
+    
+</div>
+                    
+      </div>
+
+    
+<!-- spec -->
+<!-- /spec -->
+
+
+
+<script>
+jQuery(function($){
+    $('._to_out').click(function(){
+        ga('send', 'event', 'maniax', $(this).data('action'), $(this).data('label'), {'nonInteraction': 1});
+    });
+});
+</script>
+
+
+
+            <!-- same_series -->
+<div class="work_series">
+  <div class="title_01">
+    <h2><span class="title">同一シリーズ作品</span></h2>
+    <template data-vue-component="product-bulk-cart" data-product-id="RJ304732" data-series-id="SRI0000027121" v-cloak></template>
+  </div>
+    <div class="recommend_list "
+    data-href="https://www.dlsite.com/maniax/load/recommend/detail/v2/=/type/same_series/workno/RJ304745%2C"
+    data-type="same_series"></div>
+  <div class="work_series_other_box">
+    <p class="work_series_other">
+      <span class="series"><a
+          href="https://www.dlsite.com/maniax/fsr/=/keyword/%E6%9D%B1%E6%96%B9%E9%8C%AB%E3%81%AE%E9%A2%A8+SRI0000027121/order/release_d/from/work.series">作品をもっと見る</a></span>
+    </p>
+  </div>
+</div>
+<!-- /same_series -->
+
+<!-- maker_works -->
+<div class="work_series">
+  <div class="title_01 clearfix">
+    <h2>
+      <span class="title">
+                サークル作品一覧              </span>
+    </h2>
+        <p class="move"><span><a
+          href="https://www.dlsite.com/maniax/fsr/=/keyword_maker_name/OriverMusic+RG53722/ana_flg/all/from/work.same_maker">作品をもっと見る</a></span>
+    </p>
+      </div>
+      <div class="sub_title"><span class="ml10">販売作品</span></div>
+    <div class="recommend_list "
+    data-href="https://www.dlsite.com/maniax/load/recommend/detail/v2/=/type/maker_works/workno/RJ313619%2CRJ304745%2CRJ242694%2C"
+    data-type="maker_works"></div>
+  </div>
+<!-- maker_works -->
+
+<!-- label_works -->
+<!-- /label_works -->
+
+<!-- relation -->
+<!-- /relation -->
+
+<!-- same_voice -->
+<!-- /same_voice -->
+
+            <!-- recommend -->
+<div class="title_01 clearfix" data-download-threshold="5"><h2>この作品を買った人はこんな作品も買っています</h2></div>
+<div
+  class="recommend_list "
+  data-section-name="work_recommend_history"
+  data-href="https://www.dlsite.com/maniax/load/recommend/v2/=/type/viewsales2/reject/RG53722/product_id/RJ304732.html"
+  data-type="viewsales2"
+></div>
+
+<!-- /recommend -->
+
+<div class="title_01 clearfix"><h2>最近チェックした作品</h2></div>
+<div
+  class="recommend_list "
+  data-section-name="work_recommend_history"
+  data-href="https://www.dlsite.com/maniax/load/recommend/v2/=/type/history/product_id/RJ304732.html"
+  data-type="history"
+></div>
+
+
+<script>
+$(function() {
+  // サムネイルポップアップ
+  $(document).bind('ajaxSuccess', function() {
+        var $target_blocks = $('.work_main_list_ncol');
+        $target_blocks.each(function () {
+            if ($(this).thumbImgPopup !== undefined) {
+                $(this).thumbImgPopup();
+                $(this).setBlockViewSetting('mheight_01','__sp_detail','end');
+            };
+        });
+    }
+  );
+
+  $.getJSON('https://www.dlsite.com/maniax/load/member/uninterest').then(
+    function (res) {
+      var rejects = [].concat(res['reason_1'], res['reason_2'])
+
+      $('.recommend_list').each(function(i, element){
+        var href = element.dataset.href
+        var type = element.dataset.type
+        href && $.get(href).then(function(res){
+          // html適応
+          $(element).html(res)
+
+          // イベント設定
+          $(element).find('li.swiper-slide').each(function(i, li){
+            var $li = $(li)
+
+            // 不要な作品
+            if (~rejects.indexOf($li.data('prod'))) {
+              return $li.remove()
+            }
+
+            // miniメニュー開閉
+            $li.find('.mini_menu').bind('click', function (e) {
+              $li.find('.mini_menu_dropdown').toggleClass('open');
+            })
+
+            // 非表示設定
+            $li.find('.mini_menu_dropdown_inner').bind('click', function() {
+              $li.find('.recommend_work_item').addClass('hidden');
+              $.get('https://www.dlsite.com/maniax/cart/ajax/=/mode/nothanks/product_id/' + $li.data('prod'));
+            })
+
+            // Vueの拡大ポップアップロジックを利用するためVueのinit処理を行い、コンポーネントをマウントする
+            $(window).triggerHandler('initialize.vue');
+
+            // レコメンド結果通知
+            $li.delegate('a', 'click', function (e) {
+              var $self = $(e.currentTarget);
+
+              //GAイベント送信
+              try {
+                window.ga('send', 'event', dlsite.getName(), 'recommend_' + $li.data('category'), $self[0].pathname);
+              } catch (ex) {
+                //
+              }
+
+              var param = {
+                prod: $li.data('prod'),
+                merch: 'dlsite',
+                spec: $li.data('spec'),
+                cref: $li.data('cref'),
+                cookie: $.cookie('uniqid')
+              };
+
+              if (!param['prod'] || !param['spec'] || !param['cref']) {
+                return true;
+              }
+
+              var url = 'https://dlsite.silveregg.net/pycre5/click?' + $.param(param);
+
+              // クリックイベントを送出
+              if (!navigator.sendBeacon || !navigator.sendBeacon(url)) {
+                $.ajax(url, {
+                  async: false,
+                  timeout: 2000,
+                });
+              }
+
+              return true;
+            });
+          });
+
+          // Swiper
+          new Swiper(element.firstChild, {
+            navigation: {
+              nextEl: '.swiper-button-next.type-' + type,
+              prevEl: '.swiper-button-prev.type-' + type,
+              disabledClass: 'disable',
+            },
+            slidesPerColumn: type === 'viewsales2' ? 2 : 1,
+            slidesPerView: Math.floor($(element).find('.swiper-container').width() / 200),
+            slidesPerGroup: Math.floor($(element).find('.swiper-container').width() / 200),
+            spaceBetween: 10,
+            breakpoints: {
+              1194: {
+                slidesPerView: 3,
+                slidesPerGroup: 3,
+              },
+              1364: {
+                slidesPerView: 4,
+                slidesPerGroup: 4,
+              },
+              1534: {
+                slidesPerView: 5,
+                slidesPerGroup: 5,
+              },
+              1704: {
+                slidesPerView: 6,
+                slidesPerGroup: 6,
+              },
+              1874: {
+                slidesPerView: 7,
+                slidesPerGroup: 7,
+              },
+              max: {
+                slidesPerView: 8,
+                slidesPerGroup: 8,
+              }
+            },
+          })
+        });
+      })
+    }
+  )
+})
+</script>
+
+            <!-- review -->
+<div class="title_01 clearfix" id="review_link"><h2>ユーザーレビュー</h2></div>
+
+
+<div class="work_article" id="work_review" data-section_name="work_review">
+
+    <table class="reviewer_most_genre" cellspacing="0">
+    <tbody>
+      <tr>
+        <th>
+          <p>レビュアーに多く選ばれたジャンル :</p>
+        </th>
+        <td>
+                    <span><a href="https://www.dlsite.com/maniax/fsr/=/genre/056/from/work.review_genre">癒し（7）</a></span>
+                    <span><a href="https://www.dlsite.com/maniax/fsr/=/genre/055/from/work.review_genre">感動（6）</a></span>
+                    <span><a href="https://www.dlsite.com/maniax/fsr/=/genre/512/from/work.review_genre">東方Project（3）</a></span>
+                  </td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <div class="review_head">
+      <p class="float_l review_count">レビュー数 : <span class="review_work_count">29件</span></p>
+              <template data-vue-component="product-review-order" data-layout="pc" data-product_id="RJ304732"></template>
+        </div>
+
+  <!-- work_review_list -->
+  <table id="work_review_list" cellspacing="0">
+        <tbody itemprop="review" itemscope itemtype="https://schema.org/Review">
+      <tr>
+        <td class="review_title">
+                    <div class="review_title_l">
+            <div class="title"><span itemprop="name">
+                            <a href="https://www.dlsite.com/home/work/reviewlist/=/reviewer/REV0012178/product_id/RJ304732.html">コスパおかしい。(誉め言葉)</a>
+                          </span></div>
+            <p>
+              <meta itemprop="datePublished" content="2021-05-08">2021年05月08日&nbsp;&nbsp;<span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="name"><a href="https://www.dlsite.com/maniax/reviewlist/=/reviewer/REV0012178">Tikuwabu</a></span> さん</span>
+                              <span class="popularity_reviewer bronze">人気レビュアー：Best200</span>
+                                          <span class="purchased">購入済み</span>
+                          </p>
+          </div>
+                    <div class="review_title_r">
+            <span class="reviewer_recommend">レビュアーオススメ！</span>
+          </div>
+                  </td>
+      </tr>
+      <tr>
+        <td class="review_main _review_main">
+                    <div class="reviewer_genre">
+            <p>レビュアーが選んだジャンル :</p>
+            <ul class="reviewer_select_genre">
+                            <li><a href="https://www.dlsite.com/maniax/fsr/=/genre/055/from/review.genre">感動</a></li>
+                            <li><a href="https://www.dlsite.com/maniax/fsr/=/genre/056/from/review.genre">癒し</a></li>
+                          </ul>
+          </div>
+          
+                    <div class="_SW1">
+            <p class="review_caution">
+              <strong>※ネタバレ※</strong>
+              このレビューには作品の内容に関する記述が含まれています。              <span class="review_open"><a href="#" onclick="return false;">レビューを表示する</a></span>
+            </p>
+          </div>
+          
+          <div class="_SW2"  style="display: none;" >
+            <p class="reviewer_descrip" itemprop="reviewBody">本作は東方アレンジ物のアルバム、全9曲38分で構成された音楽作品です。<br />
+人気の高い楽曲をケルトの笛(ティン・ホイッスル)を中心にしてアレンジ。<br />
+その内容は至極充実していて、これはちょっとコスパ計算がおかしくないですかね……?<br />
+<br />
+音質、アレンジの質も高く、何よりアルバムを通してのたたずまいが非常に美しい。<br />
+荘厳なプロローグを紡ぐ「緋想天」のオーケストレーションは、後半にティンホイッスルのソロを置いてアルバムの主題を明確に示しています。<br />
+また、アルバム前半ではクラシカルなアレンジで整えられ、後半に入ってアレンジの妙で唸らされる。<br />
+そして最後の「竹取飛翔」の落ち着いたピアノアレンジが下げとなって、きちんと締められる形ですね。<br />
+<br />
+そこですかさず「緋想天」が立ち上がり(※DLsite play で聞くと、mp3版→WAV版と必ず連続再生される構造です)、ヘビロテへと聞き手を導いていく。<br />
+<br />
+全体的な雰囲気は和の色調が色濃く、ノスタルジックなしっとりさがあります。<br />
+例えば「おてんば恋娘」はハープ+ティンホイッスルデュオでスローテンポに演奏されて、メロディの魅力が強調されて引き出されている。<br />
+尖ったアレンジが目立つ後半でも「砕月」や「Moon Drop」、「竹取飛翔」としっとりアレンジが多めです。<br />
+<br />
+一方で、「千年幻想郷」のように度肝を抜かれるアレンジも含まれている。<br />
+初聴の際は本当に驚きましたが、長調アレンジで久石譲さんの「Summer」を彷彿とさせる爽やかなアレンジが施されている。<br />
+原曲の魅力とは違った側面にスポットを当てていますね。<br />
+「砕月」でもASMR要素を投入し、虫の音とケルトの笛の共演が描かれています。<br />
+<br />
+質の高いアレンジの中に仕掛けもあって、笛に焦点を当てた点も合わせて非常に特徴的なアルバムに仕上がっています。<br />
+総じて良質なアルバムであり、コスパがおかしすぎて頭がバグります。<br />
+<br />
+やや秋感強めですが、オールシーズン超お勧めです!</p>
+            <p class="review_ref">
+              <input value="役に立った" type="button" class="_btn_good_review btn_default" data-review_id="648952" data-product_id="RJ304732">
+              <span class="useful">2人 が役に立ったと答えています</span>              <span class="review_report">[&nbsp;<a href="https://www.dlsite.com/maniax/contact/review/=/reviewer_id/REV0012178/product_id/RJ304732.html">報告する</a>&nbsp;]</span>
+            </p>
+            <p class="mini_message _review_message" style="display: none;">&nbsp;</p>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+        <tbody itemprop="review" itemscope itemtype="https://schema.org/Review">
+      <tr>
+        <td class="review_title">
+                    <div class="review_title_l">
+            <div class="title"><span itemprop="name">
+                            <a href="https://www.dlsite.com/home/work/reviewlist/=/reviewer/REV0061780/product_id/RJ304732.html">東方は、いいぞ</a>
+                          </span></div>
+            <p>
+              <meta itemprop="datePublished" content="2021-01-06">2021年01月06日&nbsp;&nbsp;<span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="name"><a href="https://www.dlsite.com/maniax/reviewlist/=/reviewer/REV0061780">ちんぽこしこたろう</a></span> さん</span>
+                              <span class="popularity_reviewer bronze">人気レビュアー：Best200</span>
+                                          <span class="purchased">購入済み</span>
+                          </p>
+          </div>
+                    <div class="review_title_r">
+            <span class="reviewer_recommend">レビュアーオススメ！</span>
+          </div>
+                  </td>
+      </tr>
+      <tr>
+        <td class="review_main _review_main">
+          
+                    <div class="_SW1">
+            <p class="review_caution">
+              <strong>※ネタバレ※</strong>
+              このレビューには作品の内容に関する記述が含まれています。              <span class="review_open"><a href="#" onclick="return false;">レビューを表示する</a></span>
+            </p>
+          </div>
+          
+          <div class="_SW2"  style="display: none;" >
+            <p class="reviewer_descrip" itemprop="reviewBody">セール中でしたので購入させていただきました。東方と言えばシューティングアクションゲームが有名ですが、これはむしろ和風の穏やかさと鮮烈さを併せ持ったオリジナルサウンドトラックです。誰もが知っているような有名な楽曲も豊かなアレンジを加えられて、テンション上がりっぱなしになること間違いなしです。<br />
+<br />
+大変素晴らしい仕上がりとなっております。かなりおすすめです。</p>
+            <p class="review_ref">
+              <input value="役に立った" type="button" class="_btn_good_review btn_default" data-review_id="580754" data-product_id="RJ304732">
+              <span class="useful">2人 が役に立ったと答えています</span>              <span class="review_report">[&nbsp;<a href="https://www.dlsite.com/maniax/contact/review/=/reviewer_id/REV0061780/product_id/RJ304732.html">報告する</a>&nbsp;]</span>
+            </p>
+            <p class="mini_message _review_message" style="display: none;">&nbsp;</p>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+        <tbody itemprop="review" itemscope itemtype="https://schema.org/Review">
+      <tr>
+        <td class="review_title">
+                    <div class="review_title_l">
+            <div class="title"><span itemprop="name">
+                            <a href="https://www.dlsite.com/home/work/reviewlist/=/reviewer/REV0056621/product_id/RJ304732.html">すごい</a>
+                          </span></div>
+            <p>
+              <meta itemprop="datePublished" content="2020-12-25">2020年12月25日&nbsp;&nbsp;<span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="name"><a href="https://www.dlsite.com/maniax/reviewlist/=/reviewer/REV0056621">フェチス党</a></span> さん</span>
+                                          <span class="purchased">購入済み</span>
+                          </p>
+          </div>
+                    <div class="review_title_r">
+            <span class="reviewer_recommend">レビュアーオススメ！</span>
+          </div>
+                  </td>
+      </tr>
+      <tr>
+        <td class="review_main _review_main">
+          
+                    <div class="_SW1">
+            <p class="review_caution">
+              <strong>※ネタバレ※</strong>
+              このレビューには作品の内容に関する記述が含まれています。              <span class="review_open"><a href="#" onclick="return false;">レビューを表示する</a></span>
+            </p>
+          </div>
+          
+          <div class="_SW2"  style="display: none;" >
+            <p class="reviewer_descrip" itemprop="reviewBody">軽い気持ちでもって購入したものですがとんでもない衝撃を受けました。まさかたったの十一円でこれほどの高いクオリティーの音楽を何曲も聴けるとは思いもしませんでした。どの曲も独特の世界観が表現されていてさまざまなジャンルの曲をさまざまなアプローチでもって演奏されていた点に感動しました。素晴らしかったです。ボーカル付の曲は特に。</p>
+            <p class="review_ref">
+              <input value="役に立った" type="button" class="_btn_good_review btn_default" data-review_id="574879" data-product_id="RJ304732">
+              <span class="useful">2人 が役に立ったと答えています</span>              <span class="review_report">[&nbsp;<a href="https://www.dlsite.com/maniax/contact/review/=/reviewer_id/REV0056621/product_id/RJ304732.html">報告する</a>&nbsp;]</span>
+            </p>
+            <p class="mini_message _review_message" style="display: none;">&nbsp;</p>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+        <tbody itemprop="review" itemscope itemtype="https://schema.org/Review">
+      <tr>
+        <td class="review_title">
+                    <div class="review_title_l">
+            <div class="title"><span itemprop="name">
+                            <a href="https://www.dlsite.com/home/work/reviewlist/=/reviewer/REV0037757/product_id/RJ304732.html">コスパが良すぎるアレンジBGM集</a>
+                          </span></div>
+            <p>
+              <meta itemprop="datePublished" content="2021-08-16">2021年08月16日&nbsp;&nbsp;<span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="name"><a href="https://www.dlsite.com/maniax/reviewlist/=/reviewer/REV0037757">チャギー</a></span> さん</span>
+                                          <span class="purchased">購入済み</span>
+                          </p>
+          </div>
+                    <div class="review_title_r">
+            <span class="reviewer_recommend">レビュアーオススメ！</span>
+          </div>
+                  </td>
+      </tr>
+      <tr>
+        <td class="review_main _review_main">
+                    <div class="reviewer_genre">
+            <p>レビュアーが選んだジャンル :</p>
+            <ul class="reviewer_select_genre">
+                            <li><a href="https://www.dlsite.com/maniax/fsr/=/genre/055/from/review.genre">感動</a></li>
+                            <li><a href="https://www.dlsite.com/maniax/fsr/=/genre/056/from/review.genre">癒し</a></li>
+                          </ul>
+          </div>
+          
+          
+          <div class="_SW2" >
+            <p class="reviewer_descrip" itemprop="reviewBody">作業用BGMを探しているときに本作を見つけ、<br />
+価格の安さと東方Projectを扱っていることに惹かれて<br />
+購入しました。<br />
+<br />
+聴いてみてあまりのクオリティの高さに驚きました。<br />
+原作のBGMをアレンジしたモノと侮ることなかれ……<br />
+ピアノや笛の音など色々な楽器の音がどの楽曲の雰囲気にも見事に<br />
+マッチしているので曲の良さがより引き出されているのです。<br />
+<br />
+特に、トラック8の「Moon drop」が好きすぎる……<br />
+この曲はボーカル有りの楽曲なのですが、その歌声が最高なのです。<br />
+和風で切なげなイントロが低めな歌声とうまく合わさって曲全体の<br />
+儚さが増しているのでそのような曲が好きな自分にかなり刺さりました。<br />
+何度リピート再生したか分からないぐらい、ドハマりしました 笑<br />
+<br />
+9曲入ってワンコインというとんでもコスパなので<br />
+ぜひ聴いてみてください!!</p>
+            <p class="review_ref">
+              <input value="役に立った" type="button" class="_btn_good_review btn_default" data-review_id="693331" data-product_id="RJ304732">
+              <span class="useful">1人 が役に立ったと答えています</span>              <span class="review_report">[&nbsp;<a href="https://www.dlsite.com/maniax/contact/review/=/reviewer_id/REV0037757/product_id/RJ304732.html">報告する</a>&nbsp;]</span>
+            </p>
+            <p class="mini_message _review_message" style="display: none;">&nbsp;</p>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+        <tbody itemprop="review" itemscope itemtype="https://schema.org/Review">
+      <tr>
+        <td class="review_title">
+                    <div class="review_title_l">
+            <div class="title"><span itemprop="name">
+                            <a href="https://www.dlsite.com/home/work/reviewlist/=/reviewer/REV0044049/product_id/RJ304732.html">原曲が好きなら</a>
+                          </span></div>
+            <p>
+              <meta itemprop="datePublished" content="2021-02-23">2021年02月23日&nbsp;&nbsp;<span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="name"><a href="https://www.dlsite.com/maniax/reviewlist/=/reviewer/REV0044049">ハム＠武士道</a></span> さん</span>
+                              <span class="popularity_reviewer bronze">人気レビュアー：Best600</span>
+                                          <span class="purchased">購入済み</span>
+                          </p>
+          </div>
+                  </td>
+      </tr>
+      <tr>
+        <td class="review_main _review_main">
+          
+          
+          <div class="_SW2" >
+            <p class="reviewer_descrip" itemprop="reviewBody">原曲が良いのだからアレンジも良いものだろう。まあそのくらいの期待値で購入してみました。ワンコインだし。<br />
+実際に聴いてみたら原曲が良いからとかそういうのを抜きにしてこれは良いものだと感じました。原曲の良さを残しつつ、見事なアレンジを加えられているのがとても良いですね。音楽に詳しくないのでなんといっていいのかわかりませんが、とても聴いていて心地よかったです。買って損なし。</p>
+            <p class="review_ref">
+              <input value="役に立った" type="button" class="_btn_good_review btn_default" data-review_id="604377" data-product_id="RJ304732">
+              <span class="useful">1人 が役に立ったと答えています</span>              <span class="review_report">[&nbsp;<a href="https://www.dlsite.com/maniax/contact/review/=/reviewer_id/REV0044049/product_id/RJ304732.html">報告する</a>&nbsp;]</span>
+            </p>
+            <p class="mini_message _review_message" style="display: none;">&nbsp;</p>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+        <tbody itemprop="review" itemscope itemtype="https://schema.org/Review">
+      <tr>
+        <td class="review_title">
+                    <div class="review_title_l">
+            <div class="title"><span itemprop="name">
+                            <a href="https://www.dlsite.com/home/work/reviewlist/=/reviewer/REV0047817/product_id/RJ304732.html">コスパお化け</a>
+                          </span></div>
+            <p>
+              <meta itemprop="datePublished" content="2021-01-07">2021年01月07日&nbsp;&nbsp;<span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="name"><a href="https://www.dlsite.com/maniax/reviewlist/=/reviewer/REV0047817">sleep orbit</a></span> さん</span>
+                                          <span class="purchased">購入済み</span>
+                          </p>
+          </div>
+                  </td>
+      </tr>
+      <tr>
+        <td class="review_main _review_main">
+          
+          
+          <div class="_SW2" >
+            <p class="reviewer_descrip" itemprop="reviewBody">正直言うとあまり期待せずに購入しました。<br />
+せっかくポイントが余ったし買ってみるかー程度の気持ちです。作業のお供になればなと軽い気持ちで再生、流れてくる1曲目『緋想天』<br />
+「クオリティ高過ぎだろ…」<br />
+思わず作業が止まってしまいました。黄昏作品だと原曲のアレンジが流れますが、全曲あのレベルですね。この作品の曲の方がむしろフェイバリットかも。東方好きなら買って損しないです。文句なしのオススメ!</p>
+            <p class="review_ref">
+              <input value="役に立った" type="button" class="_btn_good_review btn_default" data-review_id="582004" data-product_id="RJ304732">
+              <span class="useful">1人 が役に立ったと答えています</span>              <span class="review_report">[&nbsp;<a href="https://www.dlsite.com/maniax/contact/review/=/reviewer_id/REV0047817/product_id/RJ304732.html">報告する</a>&nbsp;]</span>
+            </p>
+            <p class="mini_message _review_message" style="display: none;">&nbsp;</p>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+      </table>
+
+  <table class="review_write">
+    <tr>
+            <td>
+        <div class="review_more">
+          <p><a href="https://www.dlsite.com/maniax/work/reviewlist/=/product_id/RJ304732.html">すべてのレビューを見る （29件）</a></p>
+        </div>
+      </td>
+            <td><div class="review_btn"><a href="https://www.dlsite.com/maniax/review/write/work/=/product_id/RJ304732.html" class="btn_post size_xxl fs15"><i>レビューを投稿する</i></a></div></td>
+    </tr>
+  </table>
+</div>
+<!-- /work_review_list -->
+
+<script type="text/javascript">
+//<!CDATA[
+
+jQuery(function($){
+    "use strict";
+    var wait = false;
+    $('._btn_good_review').bind('click', function(){
+        if(wait){
+            return false;
+        }
+        wait = true;
+        var $self = $(this);
+        $.post('https://www.dlsite.com/maniax/mypage/review/ajax', {act: 'good_review', review_id: $self.data('review_id'), product_id: $self.data('product_id')}, function(data){
+            wait = false;
+            $self.parents('td').find('._review_message').text(data.text).show();
+        }, 'json');
+        return false;
+    });
+});
+
+//]]>
+</script>
+
+
+            <div class="title_01 clearfix">
+  <h2>関連まとめ記事</h2>
+</div>
+  <table class="matome_write">
+    <tbody>
+    <tr>
+      <td>
+        <p class="base_text">
+          この作品のまとめ記事を投稿しよう！                     書き方や詳細については <a rel="noopener" href="https://ch.dlsite.com/matome/185" target="_blank">まとめの作り方</a> をご覧ください。        </p>
+      </td>
+      <td>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+  <div class="dlchannel">
+    <div class="matome_container">
+      <div id="matome-swiper" class="swiper-container">
+        <ul class="matome_box swiper-wrapper" style="display:none;">
+                      <li class="matome_box_inner swiper-slide">
+              <div class="matome_content">
+                <div class="matome_img_main">
+                  <a rel="noopener" href="https://ch.dlsite.com/matome/120013?dls=&k_matome_maniax_pc" target="_blank">
+                    <img data-src="https://media.dlsite.com/proxy/de97c70078c60f57c4e8ef9a87d8168c9d3f17d2/68747470733a2f2f696d672e646c736974652e6a702f6d6f647075622f696d61676573322f776f726b2f626f6f6b732f424a3231323030302f424a3231313530345f696d675f6d61696e2e6a7067" alt="「通常価格:110円」で【サクッと楽しめる】オススメ作品をご紹介！【クリエイターズねくすと】"
+                         title="「通常価格:110円」で【サクッと楽しめる】オススメ作品をご紹介！【クリエイターズねくすと】" class="swiper-lazy"></a>
+                    <div class="swiper-lazy-preloader"></div>
+                </div>
+                <p class="matome_content_title">
+                  <a href="https://ch.dlsite.com/matome/120013?dls=&k_matome_maniax_pc"
+                     rel="noopener" target="_blank">「通常価格:110円」で【サクッと楽しめる】オススメ作品をご紹介！【クリエイターズねくすと】</a>
+                </p>
+              </div>
+            </li>
+                      <li class="matome_box_inner swiper-slide">
+              <div class="matome_content">
+                <div class="matome_img_main">
+                  <a rel="noopener" href="https://ch.dlsite.com/matome/101027?dls=&k_matome_maniax_pc" target="_blank">
+                    <img data-src="https://media.dlsite.com/proxy/1a4d71c3ee1724dc4081741c3ee30221ef4c0c25/68747470733a2f2f696d672e646c736974652e6a702f6d6f647075622f696d61676573322f776f726b2f646f756a696e2f524a3139383030302f524a3139373235315f696d675f6d61696e2e6a7067" alt="【ゲーム系サントラ】作業用BGMとして購入したオススメ音楽作品！【趣味工房にんじんわいん】"
+                         title="【ゲーム系サントラ】作業用BGMとして購入したオススメ音楽作品！【趣味工房にんじんわいん】" class="swiper-lazy"></a>
+                    <div class="swiper-lazy-preloader"></div>
+                </div>
+                <p class="matome_content_title">
+                  <a href="https://ch.dlsite.com/matome/101027?dls=&k_matome_maniax_pc"
+                     rel="noopener" target="_blank">【ゲーム系サントラ】作業用BGMとして購入したオススメ音楽作品！【趣味工房にんじんわいん】</a>
+                </p>
+              </div>
+            </li>
+                  </ul>
+      </div>
+      <div class="carousel_arrow_left swiper-button-prev"></div>
+      <div class="carousel_arrow_right swiper-button-next"></div>
+    </div>
+    <ul class="matome_more">
+              <li><p class="matome_text"><a href="https://ch.dlsite.com/antenna/562635/contents?mode=matome"
+                                      rel="noopener" target="_blank">すべてのまとめ記事を見る（6件）</a></p></li>
+            <li class="matome_btn"><a href="https://ch.dlsite.com/matome/create" rel="noopener" target="_blank"
+                                class="btn_post size_xxl fs15"><i>まとめ記事を作成する</i></a></li>
+    </ul>
+  </div>
+
+  <script>
+      $(function () {
+          // Swiper4系
+          var swiper = new Swiper('#matome-swiper', {
+              slidesPerView: 6,
+              slidesPerGroup: 6,
+              spaceBetween: 20,
+              watchSlidesVisibility: true,
+              navigation: {
+                  nextEl: '.swiper-button-next',
+                  prevEl: '.swiper-button-prev',
+              },
+              preloadImages: false,
+              lazy: true,
+              breakpoints: {
+                  1900: {
+                      slidesPerView: 5,
+                      slidesPerGroup: 5,
+                  },
+                  1620: {
+                      slidesPerView: 4,
+                      slidesPerGroup: 4,
+                  },
+                  1390: {
+                      slidesPerView: 3,
+                      slidesPerGroup: 3,
+                  },
+                  1150: {
+                      slidesPerGroup: 2,
+                      slidesPerView: 2,
+                  }
+              }
+          });
+
+          $('.matome_box').show();
+
+            //要素表示時読み込み
+        var scrollIn = function(event) {
+            var target_rect = document.getElementById('matome-swiper').getBoundingClientRect();
+            if (0 < target_rect.top && target_rect.bottom <= window.innerHeight) {
+                swiper.lazy.load();
+                window.removeEventListener('scroll', scrollIn, false);
+            }
+        };
+        window.addEventListener('scroll', scrollIn, false);
+
+       $('.matome_box').show();
+      });
+  </script>
+
+
+            <div class="title_01 clearfix">
+  <h2>開催中の企画・キャンペーン</h2>
+</div>
+  <div class="content_scroller" data-section-name="eisys-campaign" id="campaign_bcs">
+    <div class="relation_content_container">
+      <div id="content-swiper" class="swiper-container">
+        <ul class="relation_content_list swiper-wrapper" style="display:none;">
+                      <li class="relation_content_list_item swiper-slide">
+              <div class="content_item">
+                <div class="content_item_img">
+                  <a rel="noopener" href="https://ch.dlsite.com/matome/143879?from=event_matome_2109_comipo-free0910" target="_blank">
+                    <img data-src="//media.dlsite.com/bcs/dlsite/1630335600/bn_88eea1b175214d2a323d27fc1343627876cef8cd.jpg?w=200&h=150&s=30" alt="【オリジナルレーベル『comipo comics』】2021年9月の新作情報！" class="swiper-lazy"></a>
+                    <div class="swiper-lazy-preloader"></div>
+                </div>
+                <p class="content_item_title">
+                  <a rel="noopener" href="https://ch.dlsite.com/matome/143879?from=event_matome_2109_comipo-free0910" target="_blank">【オリジナルレーベル『comipo comics』】2021年9月の新作情報！</a>
+                </p>
+              </div>
+            </li>
+                      <li class="relation_content_list_item swiper-slide">
+              <div class="content_item">
+                <div class="content_item_img">
+                  <a rel="noopener" href="https://ch.dlsite.com/matome/143906?from=event_matome_2109_180s-asmr" target="_blank">
+                    <img data-src="//media.dlsite.com/bcs/dlsite/1632927600/bn_6cd29c97712989677006aaed8e798b020755ff64.jpg?w=200&h=150&s=30" alt="【ASMRxアニメーション】180秒で君の耳を幸せにできるか ASMR音声作品が発売開始！" class="swiper-lazy"></a>
+                    <div class="swiper-lazy-preloader"></div>
+                </div>
+                <p class="content_item_title">
+                  <a rel="noopener" href="https://ch.dlsite.com/matome/143906?from=event_matome_2109_180s-asmr" target="_blank">【ASMRxアニメーション】180秒で君の耳を幸せにできるか ASMR音声作品が発売開始！</a>
+                </p>
+              </div>
+            </li>
+                      <li class="relation_content_list_item swiper-slide">
+              <div class="content_item">
+                <div class="content_item_img">
+                  <a rel="noopener" href="https://ch.dlsite.com/matome/143862?from=event_matome_2109_summersale2021-rt" target="_blank">
+                    <img data-src="//media.dlsite.com/bcs/dlsite/1632927600/bn_9a0318d5efe6cbde45458acdc72a987ff746bf7f.jpg?w=200&h=150&s=30" alt="【9/13 13:59まで】＼RTでポイントUP／フォロー&amp;amp;RTキャンペーン実施中" class="swiper-lazy"></a>
+                    <div class="swiper-lazy-preloader"></div>
+                </div>
+                <p class="content_item_title">
+                  <a rel="noopener" href="https://ch.dlsite.com/matome/143862?from=event_matome_2109_summersale2021-rt" target="_blank">【9/13 13:59まで】＼RTでポイントUP／フォロー&amp;amp;RTキャンペーン実施中</a>
+                </p>
+              </div>
+            </li>
+                      <li class="relation_content_list_item swiper-slide">
+              <div class="content_item">
+                <div class="content_item_img">
+                  <a rel="noopener" href="https://ch.dlsite.com/matome/140499?from=event_matome_2109_populargenres0903" target="_blank">
+                    <img data-src="//media.dlsite.com/bcs/dlsite/1632927600/bn_cb2b7bda81a7dbed772d8b72818c681c63ffc151.jpg?w=200&h=150&s=30" alt="【八尺様】いまDLsiteで気になる作品ジャンルについてご紹介！" class="swiper-lazy"></a>
+                    <div class="swiper-lazy-preloader"></div>
+                </div>
+                <p class="content_item_title">
+                  <a rel="noopener" href="https://ch.dlsite.com/matome/140499?from=event_matome_2109_populargenres0903" target="_blank">【八尺様】いまDLsiteで気になる作品ジャンルについてご紹介！</a>
+                </p>
+              </div>
+            </li>
+                      <li class="relation_content_list_item swiper-slide">
+              <div class="content_item">
+                <div class="content_item_img">
+                  <a rel="noopener" href="https://ch.dlsite.com/matome/142390?from=event_matome_2109_8month-matome" target="_blank">
+                    <img data-src="//media.dlsite.com/bcs/dlsite/1632927600/bn_d123e057b0a2b67025055b27b61a52fa271d24d7.jpg?w=200&h=150&s=30" alt="【2021年8月】DLチャンネル運営が勝手に選ぶ、先月面白かったまとめ記事" class="swiper-lazy"></a>
+                    <div class="swiper-lazy-preloader"></div>
+                </div>
+                <p class="content_item_title">
+                  <a rel="noopener" href="https://ch.dlsite.com/matome/142390?from=event_matome_2109_8month-matome" target="_blank">【2021年8月】DLチャンネル運営が勝手に選ぶ、先月面白かったまとめ記事</a>
+                </p>
+              </div>
+            </li>
+                      <li class="relation_content_list_item swiper-slide">
+              <div class="content_item">
+                <div class="content_item_img">
+                  <a rel="noopener" href="https://ch.dlsite.com/matome/142417?from=event_matome_2109_talk-occult" target="_blank">
+                    <img data-src="//media.dlsite.com/bcs/dlsite/1632927600/bn_933a0b616c99ba654d79ab569ff50c7f18e5bdd3.jpg?w=200&h=150&s=30" alt="【トークキャンペーン】オススメのホラー・オカルト作品を語って1000ポイントをGETしよう！" class="swiper-lazy"></a>
+                    <div class="swiper-lazy-preloader"></div>
+                </div>
+                <p class="content_item_title">
+                  <a rel="noopener" href="https://ch.dlsite.com/matome/142417?from=event_matome_2109_talk-occult" target="_blank">【トークキャンペーン】オススメのホラー・オカルト作品を語って1000ポイントをGETしよう！</a>
+                </p>
+              </div>
+            </li>
+                      <li class="relation_content_list_item swiper-slide">
+              <div class="content_item">
+                <div class="content_item_img">
+                  <a rel="noopener" href="https://ch.dlsite.com/matome/141654?from=event_matome_2109_hadukitubasa_review39" target="_blank">
+                    <img data-src="//media.dlsite.com/bcs/dlsite/1632927600/bn_6440162787f5f5eea249aa93829a06dc805f5c61.jpg?w=200&h=150&s=30" alt="【葉月つばさの同人レビューVol.39】三十路童貞が新卒女子に喰われた話" class="swiper-lazy"></a>
+                    <div class="swiper-lazy-preloader"></div>
+                </div>
+                <p class="content_item_title">
+                  <a rel="noopener" href="https://ch.dlsite.com/matome/141654?from=event_matome_2109_hadukitubasa_review39" target="_blank">【葉月つばさの同人レビューVol.39】三十路童貞が新卒女子に喰われた話</a>
+                </p>
+              </div>
+            </li>
+                      <li class="relation_content_list_item swiper-slide">
+              <div class="content_item">
+                <div class="content_item_img">
+                  <a rel="noopener" href="https://ch.dlsite.com/matome/141853?from=event_matome_2108_illegalupload" target="_blank">
+                    <img data-src="//media.dlsite.com/bcs/dlsite/1630335600/bn_39d96fe20548b1bec220ca5bfd36c0d986383ab8.jpg?w=200&h=150&s=30" alt="違法アップロードへの対策活動に関するご報告" class="swiper-lazy"></a>
+                    <div class="swiper-lazy-preloader"></div>
+                </div>
+                <p class="content_item_title">
+                  <a rel="noopener" href="https://ch.dlsite.com/matome/141853?from=event_matome_2108_illegalupload" target="_blank">違法アップロードへの対策活動に関するご報告</a>
+                </p>
+              </div>
+            </li>
+                      <li class="relation_content_list_item swiper-slide">
+              <div class="content_item">
+                <div class="content_item_img">
+                  <a rel="noopener" href="https://ch.dlsite.com/matome/139136?from=event_matome_2108_free0817" target="_blank">
+                    <img data-src="//media.dlsite.com/bcs/dlsite/1630335600/bn_c4758f5666be81bdc11e479e899c87176225673a.jpg?w=200&h=150&s=30" alt="【9/14まで】&amp;ldquo;期間限定&amp;rdquo; 無料作品！ 一ヵ月間だけ0円！【同人】" class="swiper-lazy"></a>
+                    <div class="swiper-lazy-preloader"></div>
+                </div>
+                <p class="content_item_title">
+                  <a rel="noopener" href="https://ch.dlsite.com/matome/139136?from=event_matome_2108_free0817" target="_blank">【9/14まで】&amp;ldquo;期間限定&amp;rdquo; 無料作品！ 一ヵ月間だけ0円！【同人】</a>
+                </p>
+              </div>
+            </li>
+                      <li class="relation_content_list_item swiper-slide">
+              <div class="content_item">
+                <div class="content_item_img">
+                  <a rel="noopener" href="https://ch.dlsite.com/matome/136873?from=event_matome_2108_voice-comic0806" target="_blank">
+                    <img data-src="//media.dlsite.com/bcs/dlsite/1630335600/bn_39006238679b00e974e90cf35cb4ac7d1a15c7dd.jpeg?w=200&h=150&s=30" alt="【2021年8月発売】もう試した？漫画・CG集をボイス付きで楽しむ！ボイスコミック新作まとめ" class="swiper-lazy"></a>
+                    <div class="swiper-lazy-preloader"></div>
+                </div>
+                <p class="content_item_title">
+                  <a rel="noopener" href="https://ch.dlsite.com/matome/136873?from=event_matome_2108_voice-comic0806" target="_blank">【2021年8月発売】もう試した？漫画・CG集をボイス付きで楽しむ！ボイスコミック新作まとめ</a>
+                </p>
+              </div>
+            </li>
+                      <li class="relation_content_list_item swiper-slide">
+              <div class="content_item">
+                <div class="content_item_img">
+                  <a rel="noopener" href="https://ch.dlsite.com/matome/135733?from=event_matome_2107_home-support" target="_blank">
+                    <img data-src="//media.dlsite.com/bcs/dlsite/1627657200/bn_50a37f438668dedb130b79b786b8029433c45cf6.jpg?w=200&h=150&s=30" alt="【クリエイター向け】卸価格一律90%！ 創作活動応援キャンペーン！【販売手数料10%】" class="swiper-lazy"></a>
+                    <div class="swiper-lazy-preloader"></div>
+                </div>
+                <p class="content_item_title">
+                  <a rel="noopener" href="https://ch.dlsite.com/matome/135733?from=event_matome_2107_home-support" target="_blank">【クリエイター向け】卸価格一律90%！ 創作活動応援キャンペーン！【販売手数料10%】</a>
+                </p>
+              </div>
+            </li>
+                      <li class="relation_content_list_item swiper-slide">
+              <div class="content_item">
+                <div class="content_item_img">
+                  <a rel="noopener" href="https://ch.dlsite.com/matome/130260?from=event_matome_2106_dead-of-dead" target="_blank">
+                    <img data-src="//media.dlsite.com/bcs/dlsite/1624978800/bn_c7cabdd867507641a78a8f445a48f4679d75c979.jpg?w=200&h=150&s=30" alt="【CV:椎名へきる】「食人音・咀嚼音」が楽しめるASMR「Dead of Dead」新田鈴編" class="swiper-lazy"></a>
+                    <div class="swiper-lazy-preloader"></div>
+                </div>
+                <p class="content_item_title">
+                  <a rel="noopener" href="https://ch.dlsite.com/matome/130260?from=event_matome_2106_dead-of-dead" target="_blank">【CV:椎名へきる】「食人音・咀嚼音」が楽しめるASMR「Dead of Dead」新田鈴編</a>
+                </p>
+              </div>
+            </li>
+                      <li class="relation_content_list_item swiper-slide">
+              <div class="content_item">
+                <div class="content_item_img">
+                  <a rel="noopener" href="https://ch.dlsite.com/matome/131640?from=event_matome_2107_yukiusagi-asmr" target="_blank">
+                    <img data-src="//media.dlsite.com/bcs/dlsite/1627657200/bn_72c95d91a08fb875c9de2056024c949af900b1fe.jpg?w=200&h=150&s=30" alt="【大人気コミックを音声化！】夢の中の秘め事をASMRで体験しよう【ゆきうさぎ。/幻想エクスタシー】" class="swiper-lazy"></a>
+                    <div class="swiper-lazy-preloader"></div>
+                </div>
+                <p class="content_item_title">
+                  <a rel="noopener" href="https://ch.dlsite.com/matome/131640?from=event_matome_2107_yukiusagi-asmr" target="_blank">【大人気コミックを音声化！】夢の中の秘め事をASMRで体験しよう【ゆきうさぎ。/幻想エクスタシー】</a>
+                </p>
+              </div>
+            </li>
+                      <li class="relation_content_list_item swiper-slide">
+              <div class="content_item">
+                <div class="content_item_img">
+                  <a rel="noopener" href="https://ch.dlsite.com/matome/129602?from=event_matome_2106_ranking" target="_blank">
+                    <img data-src="//media.dlsite.com/bcs/dlsite/1624978800/bn_08290def7d73d821eedcd842a73eeb1513253f14.jpg?w=200&h=150&s=30" alt="【男性成人向け】DLsite2021年上半期ランキング！" class="swiper-lazy"></a>
+                    <div class="swiper-lazy-preloader"></div>
+                </div>
+                <p class="content_item_title">
+                  <a rel="noopener" href="https://ch.dlsite.com/matome/129602?from=event_matome_2106_ranking" target="_blank">【男性成人向け】DLsite2021年上半期ランキング！</a>
+                </p>
+              </div>
+            </li>
+                      <li class="relation_content_list_item swiper-slide">
+              <div class="content_item">
+                <div class="content_item_img">
+                  <a rel="noopener" href="https://ch.dlsite.com/matome/128692?from=event_matome_2106_freelyavailable05" target="_blank">
+                    <img data-src="//media.dlsite.com/bcs/dlsite/1624978800/bn_e83ce1e9e7c185dd3a3510aa722bbf642e9ff9ef.jpg?w=200&h=150&s=30" alt="【無料音声】相良茉優さん主演ASMR「【京ことば】美容師さんごっこ」配信開始" class="swiper-lazy"></a>
+                    <div class="swiper-lazy-preloader"></div>
+                </div>
+                <p class="content_item_title">
+                  <a rel="noopener" href="https://ch.dlsite.com/matome/128692?from=event_matome_2106_freelyavailable05" target="_blank">【無料音声】相良茉優さん主演ASMR「【京ことば】美容師さんごっこ」配信開始</a>
+                </p>
+              </div>
+            </li>
+                      <li class="relation_content_list_item swiper-slide">
+              <div class="content_item">
+                <div class="content_item_img">
+                  <a rel="noopener" href="https://ch.dlsite.com/matome/127111?from=event_matome_2106_girls-comic" target="_blank">
+                    <img data-src="//media.dlsite.com/bcs/dlsite/1624978800/bn_c83de307ef9f20c3f9bb3e1a2de0ae90b20fb886.jpg?w=200&h=150&s=30" alt="【TL】男性でも楽しめる 注目の女性向けコミック【作品まとめ】" class="swiper-lazy"></a>
+                    <div class="swiper-lazy-preloader"></div>
+                </div>
+                <p class="content_item_title">
+                  <a rel="noopener" href="https://ch.dlsite.com/matome/127111?from=event_matome_2106_girls-comic" target="_blank">【TL】男性でも楽しめる 注目の女性向けコミック【作品まとめ】</a>
+                </p>
+              </div>
+            </li>
+                      <li class="relation_content_list_item swiper-slide">
+              <div class="content_item">
+                <div class="content_item_img">
+                  <a rel="noopener" href="https://ch.dlsite.com/matome/123144?from=event_matome_2105_maikafantasia" target="_blank">
+                    <img data-src="//media.dlsite.com/bcs/dlsite/1622386800/bn_226d07395d8c6db3f789797e63f834d79e206b01.jpg?w=200&h=150&s=30" alt="【にじGAME】今度は音ゲー！ 新作タイトル「舞歌ファンタジア」が2021年夏に配信予定！" class="swiper-lazy"></a>
+                    <div class="swiper-lazy-preloader"></div>
+                </div>
+                <p class="content_item_title">
+                  <a rel="noopener" href="https://ch.dlsite.com/matome/123144?from=event_matome_2105_maikafantasia" target="_blank">【にじGAME】今度は音ゲー！ 新作タイトル「舞歌ファンタジア」が2021年夏に配信予定！</a>
+                </p>
+              </div>
+            </li>
+                      <li class="relation_content_list_item swiper-slide">
+              <div class="content_item">
+                <div class="content_item_img">
+                  <a rel="noopener" href="https://ch.dlsite.com/matome/49195?from=event_matome_1911_advertisingbanner" target="_blank">
+                    <img data-src="//media.dlsite.com/bcs/dlsite/1575039600/bn_1caa693d26f78343827d74bcbc1a4c0a6b666cef.jpg?w=200&h=150&s=30" alt="【注目の話題作】広告掲載中の作品一覧はこちらです【バナー広告掲載中のエロ同人】" class="swiper-lazy"></a>
+                    <div class="swiper-lazy-preloader"></div>
+                </div>
+                <p class="content_item_title">
+                  <a rel="noopener" href="https://ch.dlsite.com/matome/49195?from=event_matome_1911_advertisingbanner" target="_blank">【注目の話題作】広告掲載中の作品一覧はこちらです【バナー広告掲載中のエロ同人】</a>
+                </p>
+              </div>
+            </li>
+                  </ul>
+      </div>
+      <div class="carousel_arrow_left content-swiper-button-prev"></div>
+      <div class="carousel_arrow_right content-swiper-button-next"></div>
+    </div>
+  </div>
+
+
+<script>
+$(function () {
+
+  //作品並びシャッフル
+  function shuffleContent(container) {
+    var content = container.find('> li');
+    var total = content.size();
+    content.each(function() {
+        content.eq(Math.floor(Math.random()*total)).prependTo(container);
+    });
+    return true;
+  }
+  shuffleContent($('.relation_content_list'));
+
+  // Swiper4系
+  var swiper = new Swiper('#content-swiper', {
+      slidesPerView: 6,
+      slidesPerGroup: 6,
+      spaceBetween: 20,
+      watchSlidesVisibility: true,
+      navigation: {
+          nextEl: '.content-swiper-button-next',
+          prevEl: '.content-swiper-button-prev',
+      },
+      preloadImages: false,
+      lazy: true,
+      breakpoints: {
+          1900: {
+              slidesPerView: 5,
+              slidesPerGroup: 5,
+          },
+          1620: {
+              slidesPerView: 4,
+              slidesPerGroup: 4,
+          },
+          1390: {
+              slidesPerView: 3,
+              slidesPerGroup: 3,
+          },
+          1150: {
+              slidesPerGroup: 2,
+              slidesPerView: 2,
+          }
+      }
+  });
+
+  //要素表示時読み込み
+  var scrollIn = function(event) {
+      var target_rect = document.getElementById('campaign_bcs').getBoundingClientRect();
+      if (0 < target_rect.top && target_rect.bottom <= window.innerHeight) {
+          swiper.lazy.load();
+          window.removeEventListener('scroll', scrollIn, false);
+      }
+  };
+  window.addEventListener('scroll', scrollIn, false);
+
+  // ファーストビューに含まれそうならすぐ表示
+  if (!document.querySelector('#work_name')) {
+    scrollIn();
+  }
+
+  $('.relation_content_list').show();
+});
+</script>
+
+
+            
+            
+            
+            
+          </div>
+          <!-- /main_inner -->
+        </div>
+        <!-- /main -->
+
+        <template data-vue-component="restriction-of-countries"></template>
+        <template data-vue-component="notice"></template>
+
+      </div>
+      <!-- /wrapper -->
+
+      <!-- right -->
+      <div id="right" data-section_name="right">
+        
+        
+        
+        <div id="work_buy_box_wrapper" data-vue-component="product-price" data-product-id="RJ304732" data-is-check="" data-is-comingsoon="0" data-section_name="right_work_price">
+  <div v-if="product.price !== undefined && (product.on_sale || product.is_rental || is_bought || rentaled)" v-cloak class="work_buy_main">
+    
+    <div id="work_price">
+      <div v-if="product.on_sale" class="work_buy_type" :class="class_buy_type_sell" @click.stop="buy_type = 'sell'">
+        
+
+        <div v-if="product.is_discount || product.is_pointup || product.is_limit_work || rentaled" class="campaign_info">
+          <p v-if="product.is_limit_work" class="type_quantity"><span v-t="'product.title_works.limit_sales'"></span></p>
+          <!-- タイムセール -->
+          <p v-if="product.is_timesale" class="type_sale">
+            <span>{{$t('product.title_works.limit_sales')}} {{ product.discount_rate == 100 ? $t('product.price.discount_free') : product.discount_rate + '%OFF' }}</span>
+          </p>
+          <!-- 割引・無料販売 -->
+          <template v-else-if="product.is_discount">
+            <p v-if="product.discount_to && !dlsite.isComipo()" class="type_sale transition">
+              <a rel="noopener" :href="product.discount_to">
+                <span>{{ product.discount_rate == 100 ? $t('product.price.discount_free') : product.discount_rate + '%OFF' }}<span v-if="product.discount_end_date" class="period">{{ $t('product.price.til', [product.discount_end_date]) }}</span><span class="fs11" v-t="'product.price.sale_link'"></span></span>
+              </a>
+            </p>
+            <p v-else class="type_sale">
+              <span>{{ product.discount_rate == 100 ? $t('product.price.discount_free') : product.discount_rate + '%OFF' }}<span class="period" v-if="product.discount_end_date">{{ $t('product.price.til', [product.discount_end_date]) }}</span></span>
+            </p>
+          </template>
+          <!-- ポイント還元 -->
+          <p v-if="product.is_pointup && (product.product_point || product.default_point)" class="type_point">
+            <span>{{ $t('product.price.point_return', [product.product_point_rate]) }}<span v-if="product.pointup_end_date" class="period">{{ $t('product.price.til', [product.pointup_end_date]) }}</span></span>
+          </p>
+        </div>
+
+        <div class="work_buy_container">
+          
+                    
+          <div class="work_buy_body" itemprop="offers" itemscope="" itemtype="http://schema.org/Offer">
+            <meta itemprop="price" :content="real_price">
+            <meta itemprop="priceCurrency" content="JPY">
+            <div v-if="product.is_discount" class="work_buy_label" v-t="'product.price.special_price'"><!-- セール特価 --></div>
+            <div v-else class="work_buy_label" v-t="'product.price.price'"><!-- 価格 --></div>
+            <div class="work_buy_content">
+              <strong v-if="product.is_discount" class="price">{{ real_price | number_format }}<i v-html="yen_symbol_label"></i></strong>
+              <span v-else class="price">{{ product.price_str }}<i v-html="yen_symbol_label"></i></span>
+              <!-- 通貨換算額 -->
+              <tempalate v-if="locale_price">
+                <span class="separator">/</span>
+                <strong  class="price" v-html="locale_price"></strong>
+              </template>
+            </div>
+          </div>
+
+          <div v-if="product.is_discount" class="work_buy_body">
+            <div class="work_buy_label" v-t="'product.price.normal_price'"><!-- 通常価格 --></div>
+            <div class="work_buy_content">
+                <span class="strike">{{ product.official_price_str || product.price_str }}<i v-html="yen_symbol_label"></i></span>
+                <!-- 通貨換算額 -->
+                <template v-if="locale_official_price">
+                  <span class="separator">/</span>
+                  <span class="strike" v-html="locale_official_price"></span>
+                </template>
+            </div>
+          </div>
+
+          <div v-if="dlsite.getLocale() != 'ja-jp'" class="work_buy_body">
+            <p>[&nbsp;<a :href="estimation_link" v-t="'product.price.estimation'"></a>&nbsp;]</p>
+          </div>
+
+          <div v-if="real_point" class="work_buy_body">
+            <div class="work_buy_label" v-t="'product.price.point'"><!-- ポイント --></div>
+            <div class="work_buy_content">
+              <strong class="work_point point_up">{{ real_point | number_format }}<i v-if="real_point">pt ({{ $t('product.price.point_return', [real_point_rate]) }})</i><i v-else>pt</i></strong>
+            </div>
+          </div>
+          
+          <div v-if="bestCouponDiscount" v-cloak class="coupon_available">
+            <span class="coupon_available_head">会員登録でクーポンを複数プレゼント！</span>
+            <div class="coupon_available_inner">
+              <dl class="coupon_detail">
+                <dt class="ex">一番お得なクーポン利用価格</dt>
+                <dd class="total type_jpy">
+                  {{ (product.price - bestCouponDiscount).toLocaleString() }}<span>円</span>
+                  
+                </dd>
+                <dd class="total" v-html="$options.filters.exchanger_discount_format(product.locale_price, bestCouponRate, dlsite.getLocale())"></dd>
+              </dl>
+            </div>
+          </div>
+          
+          <div v-else-if="bestUserCoupon" v-cloak class="coupon_available">
+            <div class="coupon_available_inner">
+              <dl class="coupon_detail">
+                <dt class="ex">一番お得なクーポン利用価格</dt>
+                <dd class="total type_jpy">
+                  {{ (product.price - bestUserCouponDiscount).toLocaleString() }}<span>円</span>
+                  
+                </dd>
+                <dd class="total" v-html="$options.filters.exchanger_discount_format(product.locale_price, bestUserCouponRate, dlsite.getLocale())"></dd>
+              </dl>
+            </div>
+            <span class="attended">対象クーポン</span>
+            <p class="coupon_name" v-text="bestUserCoupon.coupon_name"></p>
+            <div class="coupon_detail">
+              <a href="https://www.dlsite.com/maniax/mypage/coupon/list">利用条件の確認はこちら</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="work_buy_btn">
+      <!-- ダウンロード -->
+      <template v-if=" ! product.is_sale && is_comingsoon && !is_check">
+        <div class="pre_work_message">
+          <span class="title">販売開始予定</span>
+          <span class="date">10月21日 0時</span>
+          <span class="note">※状況により販売延期される<br>場合もあります</span>
+        </div>
+      </template>
+      <template v-else-if=" ! product.is_sale && product.on_sale && ! is_check">
+        <p class="work_sales_end">販売終了しました</p>
+      </template>
+      <template v-else>
+        <template v-if="is_bought">
+          
+                    
+          <p class="work_stream"><a rel="noopener" href="https://play.dlsite.com/?workno=RJ304732" class="btn_st" :class="{ disabled: ! product.dlsiteplay_work || product.dl_format == 16 }" title="ブラウザ視聴" target="_blank">ブラウザ視聴</a></p>
+          <p v-if="product.dl_format !== 20 && product.dl_format !== 21" class="work_cart">
+            <a :href="product.down_url" class="btn_dl" :class="{ disabled: product.dl_format == 17 }">ダウンロード</a>
+          </p>
+          
+                    
+        </template>
+        <template v-else-if="is_already">
+          <p class="work_already">既に持っています</p>
+        </template>
+
+        <template v-if="rentaled">
+          <p class="work_cart"><a href="https://www.dlsite.com/maniax/download/rental/=/product_id/RJ304732.html" class="btn_dl">ダウンロード</a></p>
+        </template>
+
+        <transition name="popup" mode="out-in">
+        <p v-if="product.is_rental && ! rentaled && ((product.work_rentals || []).length + ( ! is_bought && product.on_sale ? 1 : 0) > 1) && carted" class="message_cart_in" :key="carted.rental_id"><span>{{ carted.name }}</span>追加済み</p>
+        </transition>
+
+        <template v-if="is_check">
+          <p class="work_cart">
+            <a class="btn_cart" v-t="'cart.add_cart'"><!-- カートに入れる --></a>
+          </p>
+        </template>
+        <template v-else-if="buy_type == 'rental' || ! is_bought && ! rentaled && ! product.on_sale">
+          <p v-if="carted && carted.rental_id == rental.id" class="work_cart">
+            <a :href="makeUrl('/cart', { rental_id: rental_id, product_id: product.product_id })" class="btn_cart_in" v-t="'cart.in_cart'"><!-- カートに入っています--></a>
+          </p>
+          <p v-else class="work_cart">
+            <a @click.prevent="addCart({ product_id:product.product_id, rental_id: rental.id }); showCartPopup()" :href="makeUrl('/cart', { rental_id: rental_id, product_id: product.product_id })" class="btn_cart" v-t="'cart.add_cart'"><!-- カートに入れる --></a>
+          </p>
+        </template>
+        <template v-else-if=" ! is_bought && product.on_sale">
+          <p v-if="product.is_sold_out" class="work_cart">
+            <a href="#" class="btn_cart disabled" v-t="'product.item.sold_out'"></a>
+          </p>
+          <p v-else-if="carted && ! carted.rental_id" class="work_cart">
+            
+                          <a :href="makeUrl('/cart', { product_id: product.product_id })" class="btn_cart_in" v-t="'cart.in_cart'"><!-- カートに入っています --></a>
+                      
+          </p>
+          <template v-else>
+          
+                          
+              <p class="work_cart" v-if="!isAccountLogin">
+                <a href="https://www.dlsite.com/maniax/pay/member/=/relayout/cart/buynow/1/product_id/RJ304732.html" class="btn_buy">会員登録して購入</a>
+              </p>
+              <p class="work_cart">
+                <a @click.prevent="addCart({ product_id:product.product_id }); showCartPopup()" :href="makeUrl('/cart', { product_id: product.product_id })" class="btn_cart" v-t="'cart.add_cart'"><!-- カートに入れる --></a>
+              </p>
+              <p class="work_cart" v-if="isAccountLogin">
+                <a href="https://www.dlsite.com/maniax/pay/member/=/relayout/cart/buynow/1/product_id/RJ304732.html" class="btn_buy">すぐに購入</a>
+              </p>
+              
+                      
+          </template>
+        </template>
+
+        <!-- お気に入り -->
+        <p v-if="is_check" class="work_favorite"><a class="btn_favorite" v-t="favorite.add_fav"><!-- お気に入りに追加 --></a></p>
+        <p v-else-if="product.is_sold_out" class="work_favorite"><a href="#" class="btn_favorite disabled" v-t="'favorite.add_fav'"><!-- お気に入りに追加 --></a></p>
+        <p v-else-if="! user.customer_id && ! is_favorite" class="work_favorite"><a :href="link.favorite" class="btn_favorite" :class="{ btn_favorite_in: is_favorite }">{{ is_favorite ? $t('favorite.in_fav') : $t('favorite.add_fav') }}</a></p>
+        <p v-else-if="user.customer_id && ! is_favorite" class="work_favorite"><a @click.prevent="addFavorite({ product_id:product.product_id })" href="https://www.dlsite.com/maniax/mypage/wishlist/=/product_id/RJ304732.html" class="btn_favorite" :class="{ btn_favorite_in: is_favorite }">{{ is_favorite ? $t('favorite.in_fav') : $t('favorite.add_fav') }}</a></p>
+        <p v-else class="work_favorite"><a href="https://www.dlsite.com/maniax/mypage/wishlist/=/product_id/RJ304732.html" class="btn_favorite" :class="{ btn_favorite_in: is_favorite }">{{ is_favorite ? $t('favorite.in_fav') : $t('favorite.add_fav') }}</a></p>
+
+        <!-- 購入済み作品の場合、作品評価ページへのリンクを表示する -->
+        <template v-if="is_bought" v-cloak>
+          <div v-if="is_myrated" class="work_rating" v-cloak><a href="https://www.dlsite.com/maniax/mypage/short-review" class="btn_rating_in">作品評価済み</a></div>
+          <div v-else class="work_rating" v-cloak><a href="https://www.dlsite.com/maniax/mypage/short-review" class="btn_rating">作品を評価する</a></div>
+        </template>
+
+        
+        <!-- 多言語の場合、ポイント購入へのリンクを表示する -->
+                
+
+        <!-- カートボタン押下時にレコメンドのモーダル表示 -->
+        <div v-show="this.$store.state.is_carted" class="add_cart_overlay" @click.stop.prevent="function(){ closeRecommend(); $(document.body).removeClass('scrolling_stop'); }">
+          <div class="add_cart_modal" @click.stop>
+            <span class="add_cart_close" @click.stop.prevent="function(){ closeRecommend(); $(document.body).removeClass('scrolling_stop'); }"></span>
+            <div class="add_cart_btn_inner">
+              <p class="add_cart_note">作品をカートに追加しました</p>
+              <a v-if="user.customer_id" :href="makeUrl('/cart', { product_id: product.product_id })" v-t="'cart.go_buy'" class="add_cart_btn"><!-- 購入手続きへ --></a>
+              <a v-else :href="makeUrl('/cart', { product_id: product.product_id })" v-t="'cart.go_cart'" class="add_cart_btn"><!-- カートを見る --></a>
+            </div>
+            <cart_recommend v-bind:on_display="this.$store.state.is_carted" :product_id="product_id"></cart_recommend>
+          </div>
+        </div>
+        <!-- /カートボタン押下時にレコメンドのモーダル表示 -->
+      </template>
+
+    </div>
+    
+  </div>
+  <div v-else-if="product.price === undefined" class="work_buy_main">
+    <!-- IE8 or noscript -->
+    <div id="work_price">
+      <div class="work_buy_type">
+        <div class="work_buy_container">
+          <div class="work_buy_body">
+            <div class="work_buy_label">価格</div>
+            <div class="work_buy_content"><span class="price">11<i>円</i></span></div>
+          </div>
+                    <div class="work_buy_body">
+            <div class="work_buy_label">ポイント</div>
+            <div class="work_buy_content">
+              <strong class="work_point">
+                1<i>pt (10%還元)</i>
+              </strong>
+            </div>
+          </div>
+                  </div>
+      </div>
+    </div>
+    <div id="work_buy_btn">
+              <p class="work_cart _work_cart" id="_work_cart_RJ304732"><a href="https://www.dlsite.com/maniax/cart/=/product_id/RJ304732.html" class="btn_cart _btn_cart" id="_btn_cart_RJ304732">カートに入れる</a></p>
+        <p class="work_favorite _work_favorite" id="_work_favorite_RJ304732"><a href="https://www.dlsite.com/maniax/mypage/wishlist/=/product_id/RJ304732.html" class="btn_favorite _btn_favorite" id="_btn_favorite_RJ304732">お気に入りに追加</a></p>
+          </div>
+  </div>
+
+    <div v-if="product.is_sale && ! is_bought && ! product.is_sold_out && (product.on_sale || product.is_rental)" v-cloak class="floating_cart_box" :class="class_floating_cart_box">
+    <div class="cart_box_header" @click.prevent="toggleDisplayFloat">{{$t('cart.buy_this')}}<div class="hide" v-t="'cart.hide'"></div></div>
+    <div class="cart_box_body">
+      <div class="cart_box_body_inner">
+        <div class="work_info_wrap">
+          <div class="work_thumb">
+            <img src="//img.dlsite.jp/resize/images2/work/doujin/RJ305000/RJ304732_img_main_240x240.jpg" alt="東方錫の風～とうほうすずのかぜ～ [OriverMusic]" class="target_type">
+          </div>
+          
+          <div class="work_buy_body_wrap">
+            <div class="work_buy_body">
+              <div class="work_buy_label" v-t="'product.price.price'"><!-- 価格 --></div>
+              <div class="work_buy_content">
+                <strong class="price">{{ real_price | number_format }}<i v-t="'product.price.yen'"></i></strong>
+              </div>
+            </div>
+            <div v-if="product.product_point || product.default_point" class="work_buy_body">
+              <div class="work_buy_label" v-t="'product.price.point'"><!-- ポイント --></div>
+              <div class="work_buy_content">
+                <strong class="work_point">{{ (product.product_point || product.default_point) | number_format }}<i>pt</i></strong>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="btn_wrap">
+          <div class="btn_wrap_inner">
+          <template v-if="buy_type == 'rental' || ! is_bought && ! rentaled && ! product.on_sale">
+            <p v-if="carted && carted.rental_id == rental.id" class="work_cart">
+              <a :href="'https://www.dlsite.com/maniax/cart/=/rental_id/_rental_/product_id/RJ304732.html'.replace('_rental_', rental_id)" class="btn_cart_in" v-t="'product.item.into_cart_result'"></a>
+            </p>
+            <p v-else class="work_cart">
+              <a @click.prevent="addCart({ product_id:product.product_id, rental_id: rental.id }); showCartPopup()" :href="'https://www.dlsite.com/maniax/cart/=/rental_id/_rental_/product_id/RJ304732.html'.replace('_rental_', rental_id)" class="btn_cart" data-link-name="float" v-t="'product.item.into_cart'"></a>
+            </p>
+          </template>
+
+          <template v-else-if=" ! is_bought && product.on_sale">
+          
+            <p v-if="carted && ! carted.rental_id" class="work_cart">
+              <a href="https://www.dlsite.com/maniax/cart/=/product_id/RJ304732.html" class="btn_cart_in" v-t="'cart.in_cart_s'"><!-- カートに追加済み --></a>
+            </p>
+            <template v-else>
+              <p class="work_cart" v-if="!isAccountLogin">
+                <a href="https://www.dlsite.com/maniax/pay/member/=/relayout/cart/buynow/1/product_id/RJ304732.html" class="btn_buy">会員登録して購入</a>
+              </p>
+              <p class="work_cart">
+                <a @click.prevent="addCart({ product_id:product.product_id }); showCartPopup()" href="https://www.dlsite.com/maniax/cart/=/product_id/RJ304732.html" class="btn_cart" data-link-name="float" v-t="'cart.add_cart_s'"><!-- カートに追加 --></a>
+              </p>
+              <p class="work_cart" v-if="isAccountLogin">
+                <a href="https://www.dlsite.com/maniax/pay/member/=/relayout/cart/buynow/1/product_id/RJ304732.html" class="btn_buy">すぐに購入</a>
+              </p>
+            </template>
+          
+          </template>
+
+          <p v-if="user.customer_id && ! is_favorite" class="work_favorite">
+            <a @click.prevent="addFavorite({ product_id:product.product_id })" href="https://www.dlsite.com/maniax/mypage/wishlist/=/product_id/RJ304732.html" class="btn_favorite" v-t="'favorite.add_fav'"><!-- お気に入りに追加 --></a>
+          </p>
+          <p v-else class="work_favorite">
+            <a href="https://www.dlsite.com/maniax/mypage/wishlist/=/product_id/RJ304732.html" :class="{ btn_favorite_in: is_favorite, btn_favorite: !is_favorite }" data-link-name="float">{{ is_favorite ? $t('favorite.in_fav') : $t('favorite.add_fav') }}</a>
+          </p>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+  
+    <coupon-obtain
+    link-coupons="https://www.dlsite.com/maniax/coupon/=/ajax/1/product_id/RJ304732.html"
+    link-obtain="https://www.dlsite.com/maniax/get/coupon/=/ajax/1/code/"
+  >
+  </coupon-obtain>
+
+    
+  <div class="work_privilege_guide" v-if="gift && gift.title || coupons.length || bonuses.length" v-cloak>
+    <p class="separate_title"><span>購入特典</span></p>
+    
+    <div class="work_privilege_guide_inner">
+      <ul>
+        <li v-if="gift && gift.title">
+          <p class="label bonus_code">{{ gift.title }}</p>
+          <p v-if="gift.distribute_end_str" class="distribution_period">
+          
+                        {{ gift.distribute_end_str }}まで配布中          
+          </p>
+          <p class="body" v-html="gift.description"></p>
+        </li>
+        <li v-for="coupon in coupons">
+          <p class="label coupon" :class="{ type_work: coupon.issue.product_id, type_maker: coupon.issue.maker_id, type_price: ! coupon.issue.product_id && ! coupon.issue.maker_id }">{{ coupon.coupon_name }}</p>
+          <p v-if="coupon.end_date_str" class="distribution_period" :class="{ type_work: coupon.issue.product_id, type_maker: coupon.issue.maker_id, type_price: ! coupon.issue.product_id && ! coupon.issue.maker_id }">{{ coupon.end_date_str }}まで配布中</p>
+          <p class="body" v-html="coupon.info"></p>
+          <p v-if="coupon.user_limit_date" class="period"><span>有効期限：</span>{{ coupon.user_limit_date }}</p>
+          <p v-else-if="coupon.limit_days_day" class="period">
+          
+                        <span>有効期限：</span>取得から{{ coupon.limit_days_day }}日後          
+          </p>
+        </li>
+        <li v-for="bonus in bonuses">
+          <p class="label limited_benefit">{{ bonus.title }}</p>
+          <p v-if="bonus.end_date_str" class="distribution_period type_work">
+          
+                        {{ bonus.end_date_str }}まで配布中          
+          </p>
+          <p class="body" v-html="bonus.description"></p>
+        </li>
+      </ul>
+    </div>
+    
+    <p v-if="product.is_rental" class="guide_message">レンタルでは購入特典は<br>付与されません。</p>
+  </div>
+
+  <div id="work_device_guide">
+    <p class="separate_title"><span>閲覧可能な環境</span></p>
+    <div class="work_device_table_wrap">
+  <table class="work_device_table">
+    <thead>
+      <tr>
+        <th class="dev"></th>
+        <th class="dl"><span>ダウンロード</span></th>
+        <th class="st"><span>ブラウザ</span></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="label icon_pc">PC</td>
+        <td v-if="user.os == 'Mac'" v-cloak><span class="dev_play"></span></td>
+        <td v-else><span class="dev_play"></span></td>
+        <td><span class="dev_play"></span></td>
+      </tr>
+      <tr>
+        <td class="label icon_sp">スマホ</td>
+        <td>
+                        <span class="dev_play_no"></span>
+                    </td>
+        <td><span class="dev_play"></span></td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+    
+    
+  <div class="os_popup" :class="{ active: is_display_machine_list }">
+    <div class="os_popup_header">対応OS</div>
+    <div class="os_popup_body">
+      <table>
+        <tbody>
+          <tr>
+            <td>Windows</td>
+            <td>-            </td>
+          </tr>
+                    <tr>
+            <td>Mac</td>
+            <td>-</td>
+          </tr>
+          <tr>
+                      <td>iOS</td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>Android</td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>その他</td>
+            <td>-</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+  
+
+  <div class="work_buy_guide type_affiliate" v-if="!is_comingsoon && !product.affiliate_deny" v-cloak>
+    <ul class="guide_list">
+      <li>
+        <a href="https://www.dlsite.com/maniax/circle/affiliate/link/work/=/product_id/RJ304732.html" v-if="isCircleLogin">アフィリエイトリンク作成</a>
+        <a href="https://www.dlsite.com/maniax/user/affiliate/link/work/=/product_id/RJ304732.html" v-else>アフィリエイトリンク作成</a>
+      </li>
+    </ul>
+  </div>
+</div>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      </div>
+      <!-- /right -->
+
+            
+      
+      
+      
+      <!-- footer -->
+      <div id="footer" data-section_name="footer">
+        
+        <div class="pagetop_block">
+    <p class="pagetop"><a href="#header">このページの上部へ</a></p>
+</div>
+<div class="footer_floor_nav">
+<ul class="floor_list">
+<li class="floor_list_item"><a href="https://www.dlsite.com">総合トップ</a></li>
+<li class="floor_list_item"><a href="https://www.dlsite.com/maniax/">同人</a></li>
+<li class="floor_list_item"><a href="https://www.dlsite.com/books/">成年コミック</a></li>
+<li class="floor_list_item"><a href="https://www.dlsite.com/pro/">美少女ゲーム</a></li>
+<li class="floor_list_item sp_switch"><a id="_touch_link" href="https://www.dlsite.com/maniax-touch/work/=/product_id/RJ304732.html" data-platform="touch">スマホ版DLsiteへ</a></li>
+</ul>
+</div>
+
+    <div class="footer_section">
+    <div class="footer_section_inner">
+        <div class="link_list_wrap">
+            <div class="link_list_box col_2">
+                <div class="label">DLsiteについて</div>
+                <ul class="link_list">
+                    <li class="link_list_item"><a rel="noopener" href="https://www.eisys.co.jp/company/information" target="_blank">会社概要</a></li>
+                                        <li class="link_list_item"><a rel="noopener" href="https://hrmos.co/pages/eisys/jobs" target="_blank">採用情報</a></li>
+                                        <li class="link_list_item"><a href="https://www.dlsite.com/maniax/user/regulations">利用規約</a></li>
+                    <li class="link_list_item"><a href="https://www.dlsite.com/maniax/guide/law">特定商取引法に基づく表示</a></li>
+                    <li class="link_list_item"><a href="https://www.dlsite.com/maniax/guide/settlement">資金決済法に基づく表記</a></li>
+                    <li class="link_list_item"><a href="https://www.dlsite.com/maniax/guide/privacy">個人情報の取扱いについて</a></li>
+                    <li class="link_list_item"><a href="https://www.dlsite.com/maniax/mosaic">コンプライアンスポリシー</a></li>
+                    <li class="link_list_item"><a href="https://www.dlsite.com/maniax/guide/copy">著作権</a></li>
+                                        <li class="link_list_item"><a href="https://www.dlsite.com/maniax/banners">リンクについて</a></li>
+                    <li class="link_list_item"><a href="https://www.dlsite.com/maniax/sitemap">サイトマップ</a></li>
+                                    </ul>
+            </div>
+            <div class="link_list_box">
+                <div class="label">ヘルプ&amp;ガイド</div>
+                <ul class="link_list">
+                                        <li class="link_list_item"><a href="https://www.dlsite.com/maniax/welcome">初めての方へ</a></li>
+                                        <li class="link_list_item"><a rel="noopener" href="https://www.dlsite.com/maniax/faq/=/type/user" target="_blank">よくある質問</a></li>
+                                        <li class="link_list_item"><a href="https://www.dlsite.com/maniax/opinion/contribution">作品リクエスト</a></li>
+                                    </ul>
+            </div>
+            <div class="link_list_box">
+                <div class="label">DLsiteのサービス</div>
+                <ul class="link_list">
+                                        <li class="link_list_item"><a href="https://www.dlsite.com/maniax/circle/invite">作品を販売したい方へ</a></li>
+                                                            <li class="link_list_item"><a href="https://www.dlsite.com/maniax/sell/steam">Steamパブリッシャーサービス</a></li>
+                    <li class="link_list_item"><a href="https://www.dlsite.com/maniax/guide/affiliate">アフィリエイト</a></li>
+                                        <li class="link_list_item"><a href="https://www.dlsite.com/maniax/mypage/setting/mail">メールマガジン</a></li>
+                                        <li class="link_list_item"><a rel="noopener" href="https://www.dlsite.com/event-pub/top.html" target="_blank">広告出稿サービス</a></li>
+                    <li class="link_list_item"><a rel="noopener" href="https://play.dlsite.com/ja" target="_blank">Webビューア DLsite Play</a></li>
+                    <li class="link_list_item"><a href="https://www.dlsite.com/maniax/guide/dlnest">PCクライアント DLsite Nest</a></li>
+                                    </ul>
+            </div>
+        </div>
+    </div>
+    <div class="footer_section_inner payment">
+      <div class="label">お支払い&amp;ポイント</div>
+      <div class="footer_payment_box">
+        <ul class="link_list">
+          <li class="link_list_item"><a href="https://www.dlsite.com/maniax/guide/creditcard">お支払い方法</a></li>
+                                <li class="link_list_item"><a href="https://www.dlsite.com/maniax/mypage/aboutpoint">ポイントについて</a></li>
+                    <li class="link_list_item"><a href="https://www.dlsite.com/maniax/guide/payment#link_point">ポイント購入方法</a></li>
+        </ul>
+        <a href="https://www.dlsite.com/maniax/guide/creditcard" class="footer_payment_img">
+                      <img src="/modpub/images/web/common/payment_wide.jpg" alt="多彩な決済方法">
+                  </a>
+      </div>
+    </div>
+            <div class="footer_section_inner sns">
+              <div class="label">Twitter公式アカウント</div>
+        <ul class="footer_sns">
+          <li class="footer_sns_item"><a rel="noopener" href="https://twitter.com/DLsite" target="_blank" class="twitter_g">全年齢</a></li>
+          <li class="footer_sns_item"><a rel="noopener" href="https://twitter.com/DLsiteManiax" target="_blank" class="twitter_r18">R18</a></li>
+          <li class="footer_sns_item"><a rel="noopener" href="https://twitter.com/GirlsManiax" target="_blank" class="twitter_bl">BL</a></li>
+          <li class="footer_sns_item"><a rel="noopener" href="https://twitter.com/girlsmaniax_OTM" target="_blank" class="twitter_otm">乙女</a></li>
+          <li class="footer_sns_item"><a rel="noopener" href="https://twitter.com/DLsiteC" target="_blank" class="twitter_comic">Comic</a></li>
+          <li class="footer_sns_item"><a rel="noopener" href="https://twitter.com/DLsiteR18" target="_blank" class="twitter_comic_r18">Comic R18</a></li>
+          <li class="footer_sns_item"><a rel="noopener" href="https://twitter.com/DLsiteEnglish" target="_blank" class="twitter_eng">English</a></li>
+          <li class="footer_sns_item"><a rel="noopener" href="https://twitter.com/DLsite_info" target="_blank" class="twitter_info">広報</a></li>
+        </ul>
+        <div class="label">Youtube公式アカウント</div>
+        <ul class="footer_sns">
+          <li class="footer_sns_item"><a rel="noopener" href="https://www.youtube.com/channel/UCQEN3LsNnqottC2mXx3tAjA" target="_blank" class="youtube_info">広報</a></li>
+        </ul>
+            <!-- 日本語以外で共通で出すアイコン群 -->
+          </div>
+    <div class="footer_section_inner recruit">
+                <div class="label">採用情報</div>
+        <ul class="job_list">
+            <li class="job_list_item new">
+                <a rel="noopener" href="https://hrmos.co/pages/eisys/jobs/0AAB003" target="_blank">
+                    <div class="job_icon recruit_01">
+                        <img src="/modpub/images/web/common/recruit/icon_recruit_12.png" loading="lazy">
+                    </div>
+                    <div class="job_info">
+                        <p class="job_name">【急募】広告入稿管理/営業事務(契約社員)</p>
+                        <span class="addition">エイシスサービス全般</span>
+                    </div>
+                </a>
+            </li>
+            <li class="job_list_item new">
+                <a rel="noopener" href="https://hrmos.co/pages/eisys/jobs/0AAA002" target="_blank">
+                    <div class="job_icon recruit_02">
+                      <img src="/modpub/images/web/common/recruit/icon_recruit_03.png" loading="lazy">
+                    </div>
+                    <div class="job_info">
+                        <p class="job_name">WEBエンジニア</p>
+                        <span class="addition">エイシスサービス全般</span>
+                    </div>
+                </a>
+            </li>
+            <li class="job_list_item new">
+                <a rel="noopener" href="https://hrmos.co/pages/eisys/jobs/0BBL001" target="_blank">
+                    <div class="job_icon recruit_03">
+                      <img src="/modpub/images/web/common/recruit/icon_recruit_08.png" loading="lazy">
+                    </div>
+                    <div class="job_info">
+                        <p class="job_name">クリエイターサポートスタッフ(アルバイト)</p>
+                        <span class="addition">エイシスサービス全般</span>
+                    </div>
+                </a>
+            </li>
+            <li class="job_list_item new">
+                <a rel="noopener" href="https://hrmos.co/pages/eisys/jobs/0CMD002" target="_blank">
+                    <div class="job_icon recruit_04">
+                        <img src="/modpub/images/web/common/recruit/icon_recruit_01.png" loading="lazy">
+                    </div>
+                    <div class="job_info">
+                        <p class="job_name">ゲームソフトデータ登録(アルバイト)</p>
+                        <span class="addition">エイシスサービス全般</span>
+                    </div>
+                </a>
+            </li>
+        </ul>
+                <a rel="noopener" href="https://hrmos.co/pages/eisys/jobs?staff_pc_n" class="recruit_more" target="_blank">採用サイトへ</a>
+    </div>
+    </div>
+<div id="copyright">
+    <div class="container clearfix">
+        <div id="system">推奨環境：最新版のMicrosoft Edge、Safari、Chrome、Firefox（JavaScript・Cookieを許可）</div>
+        <p>&copy; 1996 DLsite</p>
+    </div>
+</div>
+
+<div data-vue-component="thumb-img-popup-in-swiper"></div>
+      </div>
+      <!-- /footer -->
+
+    </div>
+    <!-- /container -->
+
+        <!-- script_footer -->
+    
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "DLsite",
+  "alternateName": "DLsite",
+  "url": "https://www.dlsite.com/"
+}
+</script>
+
+
+<div data-vue-component="cookie-policy" data-async="true"></div>
+
+<script type="text/javascript" src="/vue/js/pc/vendor.js?cdn_cache=1&v=0.1.2&_=1631164903"></script>
+<script type="text/javascript" src="/vue/js/pc/app.js?cdn_cache=1&v=0.1.2&_=1631165365"></script>
+
+
+<script type="text/javascript">
+(function(document, undefined) {
+  "use strict";
+  var $script = document.createElement('script');
+  $script.src = document.location.protocol + '//banner.eisys-bcs.jp/js/bcs.min.js';
+  document.body.appendChild($script);
+
+  $(window).bind('guestbannerDelete', function(){
+    var $guest_banner = $('.bcs_viewer').find('.__guest');
+    if ($.cookie('loginchecked') >= 1 && $guest_banner.length > 0 ) {
+      $guest_banner.remove();
+    }
+  });
+
+  // フッターリンクQRコードのモーダル
+  // 開き
+  $('.qr-modal-open-link').bind('click', function(e) {
+    e.preventDefault();
+    var targetModal = $(this).attr('data-modal-open');
+    $('[data-modal-type =' + targetModal + ']').addClass('is-show');
+  })
+  // 閉じ（ボタン）
+  $('.global_modal_content_close').bind('click', function(e) {
+    $('[data-modal-type]').removeClass('is-show');
+  })
+  // 閉じ（オーバーレイ）
+  $('.global_modal_overlay.type_qr').bind('click', function(e) {
+    $('[data-modal-type]').removeClass('is-show');
+  })
+  $('.global_modal_content.type_qr').bind('click', function(e) {
+    e.stopPropagation();
+  })
+})(document);
+</script>
+
+
+
+<style>
+div.measure_tag {
+  height: 0 !important;
+  width: 0 !important;
+  line-height: 0 !important;
+  font-size: 0 !important;
+  margin-top: -10000px;
+  margin-left: -10000px;
+  float: left;
+}
+</style>
+
+<div class="measure_tag"></div>
+    <!-- /script_footer -->
+        <script type="text/javascript">var contents = {"impression":[],"detail":[{"id":"RJ304732","name":"\u6771\u65b9\u932b\u306e\u98a8\uff5e\u3068\u3046\u307b\u3046\u3059\u305a\u306e\u304b\u305c\uff5e","category":"home","brand":"RG53722","price":10,"regist_date":"2020\/10\/21","image_main":"\/\/img.dlsite.jp\/modpub\/images2\/work\/doujin\/RJ305000\/RJ304732_img_main.jpg","official_price":110,"series_id":"SRI0000027121","series_name":"\u6771\u65b9\u932b\u306e\u98a8","title_id":"SRI0000027121","title_name":"\u6771\u65b9\u932b\u306e\u98a8"}],"time":0.0007278919219970703};</script>
+<script type="text/javascript">window.NREUM||(NREUM={});NREUM.info={"beacon":"bam.nr-data.net","licenseKey":"NRJS-26fb73475871c01d5bd","applicationID":"948953362","transactionName":"YwQBYkdWDRZQVxUKDlpONkRcGAoLVVEZTRFcEQ==","queueTime":0,"applicationTime":195,"atts":"T0MCFA9MHhg=","errorBeacon":"bam.nr-data.net","agent":""}</script></body>
+
+</html>
