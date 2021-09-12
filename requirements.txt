@@ -1,0 +1,8 @@
+beautifulsoup4 ~= 4.6
+dataclasses == 0.5
+lxml ~= 4.0
+
+# For development
+pytest ~= 3.2
+pytest-cov ~= 2.5
+twine ~= 1.9

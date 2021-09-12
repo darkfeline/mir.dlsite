@@ -7,22 +7,22 @@ mir.dlsite README
 
 API for DLsite.
 
-Before running any other make command, run::
+Before running any other commands, set up the virtualenv::
 
-  $ pipenv install --dev
+  $ make setup
 
 To build an installable wheel, run::
 
-  $ pipenv run make wheel
+  $ make wheel
 
 To build a source distribution, run::
 
-  $ pipenv run make sdist
+  $ make sdist
 
 To run tests, run::
 
-  $ pipenv run make check
+  $ make check
 
 To build docs, run::
 
-  $ pipenv run make html
+  $ make html

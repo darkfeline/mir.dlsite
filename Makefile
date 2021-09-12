@@ -1,20 +1,25 @@
-PYTHON := python
-export PYTHONPATH := $(CURDIR)
-
-.PHONY: all
-all:
-
-.PHONY: check
-check:
-	$(PYTHON) -m pytest
-
-.PHONY: sdist
-sdist:
-	$(PYTHON) setup.py sdist
+PYTHON = python3
+VENV_DIR = .venv
+VENV_PIP = $(VENV_DIR)/bin/pip
+VENV_PYTHON = $(VENV_DIR)/bin/python
 
 .PHONY: wheel
 wheel:
-	$(PYTHON) setup.py bdist_wheel
+	$(VENV_PYTHON) setup.py bdist_wheel
+
+.PHONY: sdist
+sdist:
+	$(VENV_PYTHON) setup.py sdist
+
+.PHONY: setup
+setup:
+	rm -rf $(VENV_DIR)
+	$(PYTHON) -m venv $(VENV_DIR)
+	$(VENV_PIP) install -r requirements.txt
+
+.PHONY: check
+check:
+	$(VENV_PYTHON) -m pytest
 
 .PHONY: html
 html: \
@@ -23,8 +28,9 @@ html: \
 
 pydoc/%.html: $(wildcard mir/**/*.py)
 	mkdir -p pydoc
-	cd pydoc && $(PYTHON) -m pydoc -w $(@F:%.html=%)
+	$(VENV_PYTHON) -m pydoc -w $(@F:%.html=%)
+	mv $(@F) $@
 
 .PHONY: upload
 upload: sdist wheel
-	$(PYTHON) -m twine upload --skip-existing dist/*
+	$(VENV_PYTHON) -m twine upload --skip-existing dist/*
