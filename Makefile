@@ -25,10 +25,6 @@ pydoc/%.html: $(wildcard mir/**/*.py)
 	mkdir -p pydoc
 	cd pydoc && $(PYTHON) -m pydoc -w $(@F:%.html=%)
 
-.PHONY: TAGS
-TAGS:
-	ctags -e -R mir
-
 .PHONY: upload
 upload: sdist wheel
 	$(PYTHON) -m twine upload --skip-existing dist/*

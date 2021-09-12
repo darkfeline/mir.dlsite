@@ -26,7 +26,3 @@ To run tests, run::
 To build docs, run::
 
   $ pipenv run make html
-
-To build a TAGS file, run::
-
-  $ make TAGS
