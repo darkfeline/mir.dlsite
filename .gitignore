@@ -7,8 +7,8 @@ __pycache__/
 # Build artifacts
 /build/
 /dist/
-/pydoc/
 /*.egg-info/
+/pydoc/
 
 # Test artifacts
 /.pytest/

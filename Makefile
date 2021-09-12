@@ -17,6 +17,11 @@ setup:
 	$(PYTHON) -m venv $(VENV_DIR)
 	$(VENV_PIP) install -r requirements.txt
 
+.PHONY: clean
+clean:
+	rm -rf $(VENV_DIR) build dist *.egg-info pydoc \
+	.pytest .pytest_cache coverage.xml .coverage
+
 .PHONY: check
 check:
 	$(VENV_PYTHON) -m pytest
