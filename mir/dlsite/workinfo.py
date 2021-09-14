@@ -15,11 +15,19 @@
 """DLSite work info library"""
 
 from dataclasses import dataclass, field
+from enum import Enum
 from pathlib import Path
 import re
 
 
 _RJCODE_PATTERN = re.compile(r'RJ[0-9]+')
+
+
+class AgeRating(Enum):
+    """Possible values for the age rating of a work."""
+    AllAges = 0
+    R15 = 1
+    R18 = 2
 
 
 def parse_rjcode(string) -> str:
@@ -41,6 +49,7 @@ class Work:
     rjcode: str
     name: str
     maker: str
+    age: 'Optional[AgeRating]' = None
     series: 'Optional[str]' = None
     description: 'Optional[str]' = None
     tracklist: 'Optional[List[Track]]' = None

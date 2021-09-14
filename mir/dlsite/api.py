@@ -39,6 +39,10 @@ def fetch_work(rjcode: str) -> workinfo.Work:
         maker=_get_maker(soup))
     work.description = _get_description(soup)
     try:
+        work.age = _get_age(soup)
+    except _NoInfoError:
+        pass
+    try:
         series = _get_series(soup)
     except _NoInfoError:
         pass
@@ -132,6 +136,19 @@ def _replace_br(elements) -> 'Iterable[str]':
             continue
         logger.debug('Encountered unhandled tag %r', element)
         yield element.string
+
+
+def _get_age(soup) -> workinfo.AgeRating:
+    """Get work age rating."""
+    work_block = soup.find(id='work_outline')
+    if work_block.find('span', {'class': 'icon_GEN'}) is not None:
+        return workinfo.AgeRating.AllAges
+    elif work_block.find('span', {'class': 'icon_R15'}) is not None:
+        return workinfo.AgeRating.R15
+    elif work_block.find('span', {'class': 'icon_ADL'}) is not None:
+        return workinfo.AgeRating.R18
+    else:
+        raise _NoInfoError('no age rating')  # can this even happen?
 
 
 def _get_tracklist(soup) -> 'List[Track]':
