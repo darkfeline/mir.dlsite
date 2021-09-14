@@ -23,6 +23,7 @@ import pathlib
 import pytest
 
 from mir.dlsite import api
+from mir.dlsite.workinfo import AgeRating
 from mir.dlsite.workinfo import Track
 
 logger = logging.getLogger(__name__)
@@ -50,6 +51,16 @@ def test_fetch_work_with_series(fake_urlopen):
     assert work.description.endswith('''本作品の販売
 B-bishop http://pawnlank7.blog.fc2.com
 ''')
+
+
+def test_fetch_work_age_rating(fake_urlopen):
+    work = api.fetch_work('RJ304732')
+    assert work.age == AgeRating.AllAges
+
+
+def test_fetch_work_age_rating_r18(fake_urlopen):
+    work = api.fetch_work('RJ189758')
+    assert work.age == AgeRating.R18
 
 
 def test_fetch_work_with_genre(fake_urlopen):
