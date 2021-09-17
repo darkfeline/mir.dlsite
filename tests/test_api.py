@@ -24,6 +24,7 @@ import pytest
 
 from mir.dlsite import api
 from mir.dlsite.workinfo import AgeRating
+from mir.dlsite.locale import Locale
 from mir.dlsite.workinfo import Track
 
 logger = logging.getLogger(__name__)
@@ -31,12 +32,12 @@ logger = logging.getLogger(__name__)
 
 def test_get_work_url():
     got = api._get_work_url('RJ123')
-    assert got == 'https://www.dlsite.com/maniax/work/=/product_id/RJ123.html'
+    assert got == 'https://www.dlsite.com/maniax/work/=/product_id/RJ123.html?locale=ja_JP'
 
 
 def test_get_announce_url():
     got = api._get_announce_url('RJ123')
-    assert got == 'https://www.dlsite.com/maniax/announce/=/product_id/RJ123.html'
+    assert got == 'https://www.dlsite.com/maniax/announce/=/product_id/RJ123.html?locale=ja_JP'
 
 
 def test_fetch_work_with_series(fake_urlopen):
@@ -68,6 +69,19 @@ def test_fetch_work_age_rating(fake_urlopen):
 def test_fetch_work_age_rating_r18(fake_urlopen):
     work = api.fetch_work('RJ189758')
     assert work.age == AgeRating.R18
+
+
+def test_fetch_work_with_locale(fake_urlopen):
+    work = api.fetch_work('RJ126928', Locale.English)
+    assert work.rjcode == 'RJ126928'
+    assert work.locale == Locale.English
+    assert work.maker == 'Cookie Voice'
+    assert work.name == 'Magicos Halloween: Vampire Glamour of the Visiting Lewd Witch!'
+    assert work.series == 'ハロウィンパーティー'
+    assert work.description.startswith('''On All Hallow's Eve, when magic moonlight transforms the town...''')
+    assert work.description.endswith('''CV: Shiho Bubaigawara http://shiho.moe.in/v/ 
+Length: 51 minutes + bonus
+''')
 
 
 def test_fetch_work_with_genre(fake_urlopen):
@@ -126,16 +140,27 @@ def test_cached_fetcher(tmpdir, fake_urlopen):
     assert work1.rjcode == work2.rjcode
 
 
+def test_cached_fetcher_with_different_locale(tmpdir, fake_urlopen):
+    fetcher = api.CachedFetcher(str(tmpdir.join('cache')), api.fetch_work)
+    with fetcher:
+        work1 = fetcher('RJ126928')
+        work2 = fetcher('RJ126928', Locale.English)
+        fake_urlopen.side_effect = _FakeError
+        work3 = fetcher('RJ126928', Locale.English)
+    assert work1.name != work2.name
+    assert work2.name == work3.name
+
+
 def test_get_fetcher():
     f = api.get_fetcher()
     assert isinstance(f, api.CachedFetcher)
 
 
-def _get_page(section: str, rjcode: str) -> str:
+def _get_page(section: str, rjcode: str, locale: str) -> str:
     """Get test page contents as a fake HTTP body."""
     logger.debug(f'Getting page {section} {rjcode}')
     path = (pathlib.Path(__file__).parent
-            / 'pages' / section / f'{rjcode}.html')
+            / 'pages' / section / locale / f'{rjcode}.html')
     try:
         text = path.read_text(encoding='utf-8')
     except FileNotFoundError:
@@ -146,11 +171,12 @@ def _get_page(section: str, rjcode: str) -> str:
 def _open_url(url):
     """Fake DLSite URL open."""
     logger.debug(f'Opening {url}')
-    match = re.match(r'https://www.dlsite.com/maniax/(work|announce)/=/product_id/(RJ[0-9]+)(.html)?',
+    match = re.match(r'https://www.dlsite.com/maniax/(work|announce)/=/product_id/(RJ[0-9]+)(?:.html)?/?\??'
+                     r'(?:locale=([a-z]{2}_[A-Z]{2}))?',
                      url)
     if match is None:  # pragma: no cover
         raise _FakeError
-    return _get_page(match.group(1), match.group(2))
+    return _get_page(match.group(1), match.group(2), match.group(3))
 
 
 @pytest.fixture
