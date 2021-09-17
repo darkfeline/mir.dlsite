@@ -38,6 +38,7 @@ def fetch_work(rjcode: str) -> workinfo.Work:
         name=_get_name(soup),
         maker=_get_maker(soup))
     work.description = _get_description(soup)
+    work.images = _get_images(soup)
     try:
         work.age = _get_age(soup)
     except _NoInfoError:
@@ -123,6 +124,17 @@ def _get_description(soup) -> str:
         .strings)
     text = ''.join(_replace_br(contents))
     return text.strip() + '\n'
+
+
+def _get_images(soup) -> 'List[str]':
+    return list(_generate_images(soup))
+
+
+def _generate_images(soup) -> 'Iterable[str]':
+    div = soup.find('div', {'class': 'product-slider-data'})
+    image_div = div.find_all('div')
+    for image in image_div:
+        yield 'https:' + image['data-src']
 
 
 def _replace_br(elements) -> 'Iterable[str]':

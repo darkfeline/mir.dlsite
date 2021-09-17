@@ -54,6 +54,7 @@ class Work:
     description: 'Optional[str]' = None
     tracklist: 'Optional[List[Track]]' = None
     genres: 'List[str]' = field(default_factory=list)
+    images: 'List[str]' = field(default_factory=list)
 
 
 def work_filename(work) -> str:

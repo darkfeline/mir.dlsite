@@ -53,6 +53,13 @@ B-bishop http://pawnlank7.blog.fc2.com
 ''')
 
 
+def test_fetch_work_images(fake_urlopen):
+    work = api.fetch_work('RJ126928')
+    assert work.images == ['https://img.dlsite.jp/modpub/images2/work/doujin/RJ127000/RJ126928_img_main.jpg',
+                           'https://img.dlsite.jp/modpub/images2/work/doujin/RJ127000/RJ126928_img_smp1.jpg',
+                           'https://img.dlsite.jp/modpub/images2/work/doujin/RJ127000/RJ126928_img_smp2.jpg']
+
+
 def test_fetch_work_age_rating(fake_urlopen):
     work = api.fetch_work('RJ304732')
     assert work.age == AgeRating.AllAges
