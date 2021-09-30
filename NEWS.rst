@@ -9,7 +9,9 @@ This project uses `semantic versioning <http://semver.org/>`_.
 Added
 ^^^^^
 
-- Added genre support.
+- Added genre.
+- Added age rating.
+- Added image URLs.
 
 0.7.0 (2020-10-15)
 ------------------
