@@ -38,7 +38,7 @@ def fetch_work(rjcode: str) -> workinfo.Work:
         name=_get_name(soup),
         maker=_get_maker(soup))
     work.description = _get_description(soup)
-    work.images = _get_images(soup)
+    work.images = list(_generate_images(soup))
     try:
         work.age = _get_age(soup)
     except _NoInfoError:
@@ -50,13 +50,13 @@ def fetch_work(rjcode: str) -> workinfo.Work:
     else:
         work.series = series
     try:
-        tracklist = _get_tracklist(soup)
+        tracklist = list(_generate_tracklist(soup))
     except _NoInfoError:
         pass
     else:
         work.tracklist = tracklist
     try:
-        work.genres = _get_genres(soup)
+        work.genres = list(_generate_genres(soup))
     except _NoInfoError:
         pass
     return work
@@ -126,10 +126,6 @@ def _get_description(soup) -> str:
     return text.strip() + '\n'
 
 
-def _get_images(soup) -> 'List[str]':
-    return list(_generate_images(soup))
-
-
 def _generate_images(soup) -> 'Iterable[str]':
     div = soup.find('div', {'class': 'product-slider-data'})
     image_div = div.find_all('div')
@@ -163,10 +159,6 @@ def _get_age(soup) -> workinfo.AgeRating:
         raise _NoInfoError('no age rating')  # can this even happen?
 
 
-def _get_tracklist(soup) -> 'List[Track]':
-    return list(_generate_tracklist(soup))
-
-
 def _generate_tracklist(soup) -> 'Iterable[Track]':
     div = soup.find('div', id='work_parts')
     if div is None:
@@ -179,10 +171,6 @@ def _generate_tracklist(soup) -> 'Iterable[Track]':
         name = ' '.join(li.find('p', {'class': 'track_name'}).strings)
         text = str(li.find('p', {'class': 'track_text'}).string)
         yield workinfo.Track(name, text)
-
-
-def _get_genres(soup) -> 'List[str]':
-    return list(_generate_genres(soup))
 
 
 def _generate_genres(soup) -> 'Iterable[str]':
