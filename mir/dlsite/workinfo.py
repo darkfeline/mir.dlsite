@@ -17,6 +17,7 @@
 from dataclasses import dataclass, field
 from enum import Enum
 from pathlib import Path
+from mir.dlsite.locale import Locale
 import re
 
 
@@ -50,6 +51,7 @@ class Work:
     name: str
     maker: str
     age: 'Optional[AgeRating]' = None
+    locale: Locale = Locale.Japanese
     series: 'Optional[str]' = None
     description: 'Optional[str]' = None
     tracklist: 'Optional[List[Track]]' = None

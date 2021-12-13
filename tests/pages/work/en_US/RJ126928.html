@@ -1,0 +1,2830 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+  <meta charset="utf-8"><script type="text/javascript">(window.NREUM||(NREUM={})).loader_config={licenseKey:"NRJS-26fb73475871c01d5bd",applicationID:"781370968"};window.NREUM||(NREUM={}),__nr_require=function(t,e,n){function r(n){if(!e[n]){var i=e[n]={exports:{}};t[n][0].call(i.exports,function(e){var i=t[n][1][e];return r(i||e)},i,i.exports)}return e[n].exports}if("function"==typeof __nr_require)return __nr_require;for(var i=0;i<n.length;i++)r(n[i]);return r}({1:[function(t,e,n){function r(){}function i(t,e,n){return function(){return o(t,[u.now()].concat(f(arguments)),e?null:this,n),e?void 0:this}}var o=t("handle"),a=t(8),f=t(9),c=t("ee").get("tracer"),u=t("loader"),s=NREUM;"undefined"==typeof window.newrelic&&(newrelic=s);var d=["setPageViewName","setCustomAttribute","setErrorHandler","finished","addToTrace","inlineHit","addRelease"],p="api-",l=p+"ixn-";a(d,function(t,e){s[e]=i(p+e,!0,"api")}),s.addPageAction=i(p+"addPageAction",!0),s.setCurrentRouteName=i(p+"routeName",!0),e.exports=newrelic,s.interaction=function(){return(new r).get()};var m=r.prototype={createTracer:function(t,e){var n={},r=this,i="function"==typeof e;return o(l+"tracer",[u.now(),t,n],r),function(){if(c.emit((i?"":"no-")+"fn-start",[u.now(),r,i],n),i)try{return e.apply(this,arguments)}catch(t){throw c.emit("fn-err",[arguments,this,t],n),t}finally{c.emit("fn-end",[u.now()],n)}}}};a("actionText,setName,setAttribute,save,ignore,onEnd,getContext,end,get".split(","),function(t,e){m[e]=i(l+e)}),newrelic.noticeError=function(t,e){"string"==typeof t&&(t=new Error(t)),o("err",[t,u.now(),!1,e])}},{}],2:[function(t,e,n){function r(t){if(NREUM.init){for(var e=NREUM.init,n=t.split("."),r=0;r<n.length-1;r++)if(e=e[n[r]],"object"!=typeof e)return;return e=e[n[n.length-1]]}}e.exports={getConfiguration:r}},{}],3:[function(t,e,n){function r(){return f.exists&&performance.now?Math.round(performance.now()):(o=Math.max((new Date).getTime(),o))-a}function i(){return o}var o=(new Date).getTime(),a=o,f=t(10);e.exports=r,e.exports.offset=a,e.exports.getLastTimestamp=i},{}],4:[function(t,e,n){function r(t){return!(!t||!t.protocol||"file:"===t.protocol)}e.exports=r},{}],5:[function(t,e,n){function r(t,e){var n=t.getEntries();n.forEach(function(t){"first-paint"===t.name?d("timing",["fp",Math.floor(t.startTime)]):"first-contentful-paint"===t.name&&d("timing",["fcp",Math.floor(t.startTime)])})}function i(t,e){var n=t.getEntries();n.length>0&&d("lcp",[n[n.length-1]])}function o(t){t.getEntries().forEach(function(t){t.hadRecentInput||d("cls",[t])})}function a(t){if(t instanceof m&&!g){var e=Math.round(t.timeStamp),n={type:t.type};e<=p.now()?n.fid=p.now()-e:e>p.offset&&e<=Date.now()?(e-=p.offset,n.fid=p.now()-e):e=p.now(),g=!0,d("timing",["fi",e,n])}}function f(t){"hidden"===t&&d("pageHide",[p.now()])}if(!("init"in NREUM&&"page_view_timing"in NREUM.init&&"enabled"in NREUM.init.page_view_timing&&NREUM.init.page_view_timing.enabled===!1)){var c,u,s,d=t("handle"),p=t("loader"),l=t(7),m=NREUM.o.EV;if("PerformanceObserver"in window&&"function"==typeof window.PerformanceObserver){c=new PerformanceObserver(r);try{c.observe({entryTypes:["paint"]})}catch(v){}u=new PerformanceObserver(i);try{u.observe({entryTypes:["largest-contentful-paint"]})}catch(v){}s=new PerformanceObserver(o);try{s.observe({type:"layout-shift",buffered:!0})}catch(v){}}if("addEventListener"in document){var g=!1,h=["click","keydown","mousedown","pointerdown","touchstart"];h.forEach(function(t){document.addEventListener(t,a,!1)})}l(f)}},{}],6:[function(t,e,n){function r(t,e){if(!i)return!1;if(t!==i)return!1;if(!e)return!0;if(!o)return!1;for(var n=o.split("."),r=e.split("."),a=0;a<r.length;a++)if(r[a]!==n[a])return!1;return!0}var i=null,o=null,a=/Version\/(\S+)\s+Safari/;if(navigator.userAgent){var f=navigator.userAgent,c=f.match(a);c&&f.indexOf("Chrome")===-1&&f.indexOf("Chromium")===-1&&(i="Safari",o=c[1])}e.exports={agent:i,version:o,match:r}},{}],7:[function(t,e,n){function r(t){function e(){t(a&&document[a]?document[a]:document[i]?"hidden":"visible")}"addEventListener"in document&&o&&document.addEventListener(o,e,!1)}e.exports=r;var i,o,a;"undefined"!=typeof document.hidden?(i="hidden",o="visibilitychange",a="visibilityState"):"undefined"!=typeof document.msHidden?(i="msHidden",o="msvisibilitychange"):"undefined"!=typeof document.webkitHidden&&(i="webkitHidden",o="webkitvisibilitychange",a="webkitVisibilityState")},{}],8:[function(t,e,n){function r(t,e){var n=[],r="",o=0;for(r in t)i.call(t,r)&&(n[o]=e(r,t[r]),o+=1);return n}var i=Object.prototype.hasOwnProperty;e.exports=r},{}],9:[function(t,e,n){function r(t,e,n){e||(e=0),"undefined"==typeof n&&(n=t?t.length:0);for(var r=-1,i=n-e||0,o=Array(i<0?0:i);++r<i;)o[r]=t[e+r];return o}e.exports=r},{}],10:[function(t,e,n){e.exports={exists:"undefined"!=typeof window.performance&&window.performance.timing&&"undefined"!=typeof window.performance.timing.navigationStart}},{}],ee:[function(t,e,n){function r(){}function i(t){function e(t){return t&&t instanceof r?t:t?u(t,c,a):a()}function n(n,r,i,o,a){if(a!==!1&&(a=!0),!l.aborted||o){t&&a&&t(n,r,i);for(var f=e(i),c=v(n),u=c.length,s=0;s<u;s++)c[s].apply(f,r);var p=d[w[n]];return p&&p.push([b,n,r,f]),f}}function o(t,e){y[t]=v(t).concat(e)}function m(t,e){var n=y[t];if(n)for(var r=0;r<n.length;r++)n[r]===e&&n.splice(r,1)}function v(t){return y[t]||[]}function g(t){return p[t]=p[t]||i(n)}function h(t,e){l.aborted||s(t,function(t,n){e=e||"feature",w[n]=e,e in d||(d[e]=[])})}var y={},w={},b={on:o,addEventListener:o,removeEventListener:m,emit:n,get:g,listeners:v,context:e,buffer:h,abort:f,aborted:!1};return b}function o(t){return u(t,c,a)}function a(){return new r}function f(){(d.api||d.feature)&&(l.aborted=!0,d=l.backlog={})}var c="nr@context",u=t("gos"),s=t(8),d={},p={},l=e.exports=i();e.exports.getOrSetContext=o,l.backlog=d},{}],gos:[function(t,e,n){function r(t,e,n){if(i.call(t,e))return t[e];var r=n();if(Object.defineProperty&&Object.keys)try{return Object.defineProperty(t,e,{value:r,writable:!0,enumerable:!1}),r}catch(o){}return t[e]=r,r}var i=Object.prototype.hasOwnProperty;e.exports=r},{}],handle:[function(t,e,n){function r(t,e,n,r){i.buffer([t],r),i.emit(t,e,n)}var i=t("ee").get("handle");e.exports=r,r.ee=i},{}],id:[function(t,e,n){function r(t){var e=typeof t;return!t||"object"!==e&&"function"!==e?-1:t===window?0:a(t,o,function(){return i++})}var i=1,o="nr@id",a=t("gos");e.exports=r},{}],loader:[function(t,e,n){function r(){if(!R++){var t=M.info=NREUM.info,e=v.getElementsByTagName("script")[0];if(setTimeout(u.abort,3e4),!(t&&t.licenseKey&&t.applicationID&&e))return u.abort();c(E,function(e,n){t[e]||(t[e]=n)});var n=a();f("mark",["onload",n+M.offset],null,"api"),f("timing",["load",n]);var r=v.createElement("script");0===t.agent.indexOf("http://")||0===t.agent.indexOf("https://")?r.src=t.agent:r.src=l+"://"+t.agent,e.parentNode.insertBefore(r,e)}}function i(){"complete"===v.readyState&&o()}function o(){f("mark",["domContent",a()+M.offset],null,"api")}var a=t(3),f=t("handle"),c=t(8),u=t("ee"),s=t(6),d=t(4),p=t(2),l=p.getConfiguration("ssl")===!1?"http":"https",m=window,v=m.document,g="addEventListener",h="attachEvent",y=m.XMLHttpRequest,w=y&&y.prototype,b=!d(m.location);NREUM.o={ST:setTimeout,SI:m.setImmediate,CT:clearTimeout,XHR:y,REQ:m.Request,EV:m.Event,PR:m.Promise,MO:m.MutationObserver};var x=""+location,E={beacon:"bam.nr-data.net",errorBeacon:"bam.nr-data.net",agent:"js-agent.newrelic.com/nr-1210.min.js"},O=y&&w&&w[g]&&!/CriOS/.test(navigator.userAgent),M=e.exports={offset:a.getLastTimestamp(),now:a,origin:x,features:{},xhrWrappable:O,userAgent:s,disabled:b};if(!b){t(1),t(5),v[g]?(v[g]("DOMContentLoaded",o,!1),m[g]("load",r,!1)):(v[h]("onreadystatechange",i),m[h]("onload",r)),f("mark",["firstbyte",a.getLastTimestamp()],null,"api");var R=0}},{}],"wrap-function":[function(t,e,n){function r(t,e){function n(e,n,r,c,u){function nrWrapper(){var o,a,s,p;try{a=this,o=d(arguments),s="function"==typeof r?r(o,a):r||{}}catch(l){i([l,"",[o,a,c],s],t)}f(n+"start",[o,a,c],s,u);try{return p=e.apply(a,o)}catch(m){throw f(n+"err",[o,a,m],s,u),m}finally{f(n+"end",[o,a,p],s,u)}}return a(e)?e:(n||(n=""),nrWrapper[p]=e,o(e,nrWrapper,t),nrWrapper)}function r(t,e,r,i,o){r||(r="");var f,c,u,s="-"===r.charAt(0);for(u=0;u<e.length;u++)c=e[u],f=t[c],a(f)||(t[c]=n(f,s?c+r:r,i,c,o))}function f(n,r,o,a){if(!m||e){var f=m;m=!0;try{t.emit(n,r,o,e,a)}catch(c){i([c,n,r,o],t)}m=f}}return t||(t=s),n.inPlace=r,n.flag=p,n}function i(t,e){e||(e=s);try{e.emit("internal-error",t)}catch(n){}}function o(t,e,n){if(Object.defineProperty&&Object.keys)try{var r=Object.keys(t);return r.forEach(function(n){Object.defineProperty(e,n,{get:function(){return t[n]},set:function(e){return t[n]=e,e}})}),e}catch(o){i([o],n)}for(var a in t)l.call(t,a)&&(e[a]=t[a]);return e}function a(t){return!(t&&t instanceof Function&&t.apply&&!t[p])}function f(t,e){var n=e(t);return n[p]=t,o(t,n,s),n}function c(t,e,n){var r=t[e];t[e]=f(r,n)}function u(){for(var t=arguments.length,e=new Array(t),n=0;n<t;++n)e[n]=arguments[n];return e}var s=t("ee"),d=t(9),p="nr@original",l=Object.prototype.hasOwnProperty,m=!1;e.exports=r,e.exports.wrapFunction=f,e.exports.wrapInPlace=c,e.exports.argsToArray=u},{}]},{},["loader"]);</script>
+<meta name="viewport" content="width=1024">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<meta name="google-site-verification" content="S2Jzwn_Dm4hGoyTfPnxEUSKnbHSuT73N6SZbTanWbEM">
+<link rel="apple-touch-icon" href="/modpub/images/web/common/apple_touch_icon_57x57.png">
+<link rel="apple-touch-icon" sizes="72x72" href="/modpub/images/web/common/apple_touch_icon_72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="/modpub/images/web/common/apple_touch_icon_76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="/modpub/images/web/common/apple_touch_icon_114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="/modpub/images/web/common/apple_touch_icon_120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="/modpub/images/web/common/apple_touch_icon_144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="/modpub/images/web/common/apple_touch_icon_152x152.png">
+<meta name="msapplication-config" content="/browserconfig.xml">
+<link rel="shortcut icon" href="/images/web/common/favicon.ico">
+
+<script src="https://cdn-apac.onetrust.com/scripttemplates/otSDKStub.js"  type="text/javascript" charset="UTF-8" data-domain-script="b3436a95-43c8-4563-b55a-f5f020bd3cc8"></script>
+
+<script type="text/javascript">
+  function OptanonWrapper() { }
+</script>
+
+
+  
+      
+  
+  
+  <link rel="canonical" href="https://www.dlsite.com/maniax/work/=/product_id/RJ126928.html/?locale=en_US">
+
+  <link rel="alternate" media="only screen and (max-width: 640px)" href="https://www.dlsite.com/maniax-touch/work/=/product_id/RJ126928.html/?locale=en_US" class="alternate_smartphone" />
+
+  <link rel="alternate" hreflang="ja" href="https://www.dlsite.com/maniax/work/=/product_id/RJ126928.html">
+<link rel="alternate" hreflang="zh-TW" href="https://www.dlsite.com/maniax/work/=/product_id/RJ126928.html/?locale=zh_TW">
+<link rel="alternate" hreflang="zh-CN" href="https://www.dlsite.com/maniax/work/=/product_id/RJ126928.html/?locale=zh_CN">
+<link rel="alternate" hreflang="ko" href="https://www.dlsite.com/maniax/work/=/product_id/RJ126928.html/?locale=ko_KR">
+<link rel="alternate" hreflang="en" href="https://www.dlsite.com/maniax/work/=/product_id/RJ126928.html/?locale=en_US">
+
+
+
+<meta name="description" content="A sultry vixen with glamouring eyes knocks on your door... a witch enjoying a night of trickery with you... (CV: Shiho) 51 min&quot;DLsite Doujin R18&quot; is a download shop for doujinshi, doujin games, doujin voice works and ASMR content. You can immediately download and enjoy products you like! New items appear every day so you&#039;re sure to find something for you. Welcome to Japan&#039;s largest 2D content online retail site - DLsite!">
+<title>【50%OFF】Magicos Halloween: Vampire Glamour of the Visiting Lewd Witch! [Cookie Voice] | DLsite Doujin - For Adults</title>
+
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@DLsiteManiax">
+<meta name="twitter:image:src" content="https://img.dlsite.jp/modpub/images2/work/doujin/RJ127000/RJ126928_img_main.jpg">
+
+<meta property="og:title" content="Magicos Halloween: Vampire Glamour of the Visiting Lewd Witch! [Cookie Voice] | DLsite">
+<meta property="og:type" content="website">
+<meta property="og:description" content="A sultry vixen with glamouring eyes knocks on your door... a witch enjoying a night of trickery with you... (CV: Shiho) 51 min&quot;DLsite Doujin R18&quot; is a download shop for doujinshi, doujin games, doujin voice works and ASMR content. You can immediately download and enjoy products you like! New items appear every day so you&#039;re sure to find something for you. Welcome to Japan&#039;s largest 2D content online retail site - DLsite!">
+<meta property="og:url" content="https://www.dlsite.com/maniax/work/=/product_id/RJ126928.html">
+<meta property="og:image" content="https://img.dlsite.jp/modpub/images2/work/doujin/RJ127000/RJ126928_img_main.jpg">
+<meta property="og:site_name" content="DLsite">
+<meta property="fb:app_id" content="226115600829997">
+<meta property="mixi:content-rating" content="1">
+<meta property="mixi:device-smartphone" content="https://www.dlsite.com/maniax-touch/work/=/product_id/RJ126928.html">
+
+
+    <script>
+if ( ! /uniqid=/.test(document.cookie)) {
+  document.cookie = 'uniqid=' + Math.random().toString(36) + '; domain=.dlsite.com; path=/; max-age=63072000'
+}
+
+if (/uniqid=\./.test(document.cookie)) {
+  document.cookie = 'uniqid=' + Math.random().toString(36) + '; domain=.dlsite.com; path=/; max-age=63072000'
+}
+</script>
+
+  <link rel="stylesheet" href="/css/reset.css?1631081391" type="text/css" id="reset" />
+<link rel="stylesheet" href="/css/default.css?1631081390" type="text/css" id="default" />
+<link rel="stylesheet" href="/css/layout_2col_work.css?1631081391" type="text/css" id="layout_2col_work" />
+<link rel="stylesheet" href="/css/common.css?1631081387" type="text/css" id="common" />
+<link rel="stylesheet" href="/css/switch.css?1631081392" type="text/css" id="switch" />
+<link rel="stylesheet" href="/css/suggest.css?1631081392" type="text/css" id="suggest" />
+<link rel="stylesheet" href="/css/header_campaign_banner.css?1631081391" type="text/css" id="header_campaign_banner" />
+<link rel="stylesheet" href="/modpub/universal/css/universal.css?" type="text/css" id="universal" />
+<link rel="stylesheet" href="/css/work_template.css?1631081392" type="text/css" id="work_template" />
+<link rel="stylesheet" href="/css/work_slider.css?1631081392" type="text/css" id="work_slider" />
+<link rel="stylesheet" href="/css/couponget.css?1631081390" type="text/css" id="couponget" />
+
+  <script type="text/javascript" src="/js/libs/libraries-pack.js?1631164960"></script>
+<script type="text/javascript" src="/js/dlsite_util.js?1627347590"></script>
+<script type="text/javascript" src="/js/slide_menu.js?1553754105"></script>
+<script type="text/javascript" src="/js/dlsite_suggest.js?1617866986"></script>
+<script type="text/javascript" src="/js/dlsite_trigger.js?1553754105"></script>
+<script type="text/javascript" src="/js/jquery.slideproduct.js?1610442922"></script>
+<script type="text/javascript" src="/js/dlsite_img_filter.js?1553754105"></script>
+<script type="text/javascript" src="/js/dlsite/work/work_logger.js?1617856051"></script>
+<script type="text/javascript" src="/js/libs/clipboard.min.js?1562550059"></script>
+<script type="text/javascript" src="/js/swiper4.0.7/js/swiper.min.js?1553754105"></script>
+
+  
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(), event:'gtm.js'}); var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl+ '&gtm_auth=Z_ubU9a2b3yGEFSh9Hdtkg&gtm_preview=env-12&gtm_cookies_win=x';f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-NTSRG2');</script>
+<!-- End Google Tag Manager -->
+
+
+
+  
+
+
+</head>
+
+<body class="style_maniax t_male">
+  <iframe id="op"
+  src="https://login.dlsite.com/assets/login/check_session.html?_=20171107123100"
+  crossorigin="anonymous"
+  style="height:0;width:0;display:none;"
+></iframe>
+<iframe
+  id="rp"
+  src="/js/check_session.html?site=maniax&client_id=dlsite.user&origin=https%3A%2F%2Flogin.dlsite.com&cookie=session_state&_=20171107123100"
+  style="height:0;width:0;display:none;"
+></iframe>
+
+  <meta http-equiv="PICS-Label" content='(PICS-1.1"http://www.iajapan.org/rating/" r(lv 4) )'> 
+
+<script>
+(function(){
+$.extend({
+  useAdultcheck: false,
+  importAdultcheck: function(){
+    if ($.useAdultcheck) return;
+    $.useAdultcheck = true;
+    var s = document.createElement('script');
+    s.src = '/js/adultcheck.js?1611798352';
+    s.defer = true;
+    document.querySelector('head').appendChild(s);
+  }
+});
+if ((dlsite.isAdult() && dlsite.getId() !== 'circle' && !(dlsite.isFemale() && dlsite.isBooks())) || dlsite.forceAdultCheck) {
+  $.importAdultcheck();
+}
+})();
+</script>
+
+
+  <!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NTSRG2&gtm_auth=Z_ubU9a2b3yGEFSh9Hdtkg&gtm_preview=env-12&gtm_cookies_win=x" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+
+
+    <div data-vue-component="header-banner" data-vue-async="true" data-section_name="campaign_header_banner">
+    <div v-if="loading" class="hd_cp_banner type_1bn">
+    <ul class="cp_bn_list">
+            <li class="cp_bn_item" style="background-color: #ff4fa2;">
+        <a href="https://www.dlsite.com/maniax/campaign/sale202107" >
+          <div class="cp_bn_inner">
+            <div class="cp_bn_reminder " style="background-color: ; color: ;">
+              <div class="cp_bn_reminder_content"><i class="cp_bn_reminder_period type_date">~ Sep 13,</i><i class="cp_bn_reminder_period type_time">13:59</i></div>
+            </div>
+            <div class="cp_bn"><img src="/modpub/images/campaign/doujin_sale_2107/bn_hd_cp_en_us.png" alt="2021年DLsite同人サマーセール"></div>
+                        <div class="cp_bn_work" style="background-color: ;"><div class="cp_bn_work_inner">Approx.<i class="cp_bn_work_count">100,000</i>titles!</div></div>
+                      </div>
+        </a>
+      </li>
+          </ul>
+  </div>
+    
+  <div v-else-if="is_show_frame" :class="style" class="hd_cp_banner" v-cloak>
+    <ul class="cp_bn_list">
+      <li v-for="campaign in campaigns" class="cp_bn_item" :data-ab-test="campaign.abTest" :style="{'background-color': campaign.mainColor}">
+        <a :href="campaign.url" :target="campaign.option.includes('target_blank') ? 'blank' : null">
+          <div class="cp_bn_inner">
+            <div class="cp_bn_reminder" v-if="campaign.isShowLimit" :class="{blank: !campaign.isShowLimit}" :style="{'background-color': campaign.periodBgColor, 'color': campaign.periodTextColor}">
+              <div class="cp_bn_reminder_content" v-html="campaign.period"></div>
+            </div>
+            <div class="cp_bn"><img :src="campaign.img" :alt="campaign.alt"></div>
+            <div
+              class="cp_bn_work"
+              v-if="campaign.outline"
+              v-html="campaign.outline"
+              :style="{'background-color': campaign.periodBgColor}"
+            >
+            </div>
+          </div>
+        </a>
+      </li>
+    </ul>
+  </div>
+  
+</div>
+
+  <div data-vue-component="coupon-modal" v-cloak></div>
+
+<div data-vue-component="header-locale-suggest-dialog" data-vue-async="true"></div>
+
+<div data-vue-component="ie-alert" v-cloak></div>
+  <!-- container -->
+    <div itemscope itemtype="http://schema.org/Product" id="container" site="maniax">
+    
+      <div id="top_header">
+        
+      </div>
+
+      <!-- header -->
+      <div id="header">
+        <header class="l-header" data-vue-component="header" data-search-category="">
+  <div class="headerCore">
+    <div class="headerCore_top">
+      <div class="headerCore_top_item">
+        <p class="header_description">
+                                    Choose DLsite for Doujinshi/Doujin Games/Doujin Audio &amp; ASMR                              </p>
+      </div>
+      <div class="headerCore_top_item">
+                <ul v-if="isMemberLogin" v-cloak class="login_information">
+          <li class="login_information_item type_point">
+            <a href="https://www.dlsite.com/maniax/mypage/point" class="coupon_text">
+            Points<span class="number" v-text="point_str">-</span>pt
+            </a>
+          </li>
+          <li class="login_information_item type_coupon" :class="{ 'is-active': noticeCoupons.length, 'singular-number': coupons.length === 1 }">
+            <a href="https://www.dlsite.com/maniax/mypage/coupon/list" class="coupon_text">Coupon<span class="number" v-text="coupons.length">-</span></a>
+          </li>
+        </ul>
+                <header_locale class="header_dropdown_nav type_language">
+          <div class="header_dropdown_nav_Link">Language</div>
+        </header_locale>
+                        <header_service class="header_dropdown_nav type_service">
+          <div class="header_dropdown_nav_Link">Related Services</div>
+        </header_service>
+              </div>
+    </div>
+
+    <div class="headerCore-sub">
+            <a href="https://www.dlsite.com/maniax/" class="logo">
+                <img src="/images/web/common/logo/pc/logo-dlsite-r18.png" alt="DLsite R18" width="132" height="25">
+              </a>
+            <!-- 検索 -->
+              <div class="globalSearch" :class="{active: isFocus}">
+          <form class="globalSearch-form" action="https://www.dlsite.com/maniax/fs" method="post">
+            <input name="_qf__fulltext_search" type="hidden" value="">
+            <input name="_layout" type="hidden" value="fs">
+            <input name="_site" type="hidden" value="maniax">
+            <input name="_form_id" type="hidden" value="FulltextSearchProductForm">
+            <input name="_view" type="hidden" value="input">
+            <input name="from" type="hidden" value="fs.header" id="header_search_from">
+
+                                        <input type="hidden" name="site_category" :value="selected" v-if="!/drama$/.test(selected)">
+                            <input type="hidden" name="work_category" :value="'drama'" v-if="/drama$/.test(selected)">
+                            <input type="hidden" name="work_category" :value="'all'" v-if="site.gender === 'female' && !selected">
+                            <input type="hidden" name="is_tl"  :value="1" v-if="/^girls/.test(selected)">
+              <input type="hidden" name="is_bl"  :value="1" v-if="/^bl/.test(selected)">
+              <input type="hidden" name="is_gay" :value="1" v-if="/^bl/.test(selected)">
+            
+            <div class="globalSearchSelect">
+              <div class="globalSearchSelect-lable">
+                <span v-text="searchCategories[selected]">All</span>
+              </div>
+              <select v-model="selected" class="globalSearchSelect-list is-active">
+                <option value="">All</option>
+                                <option value="maniax">Doujin</option>
+                <option value="books">Adult Comics</option>
+                <option value="pro">H Games</option>
+                              </select>
+            </div>
+            <div class="globalSearchForm">
+              <input
+                name="keyword"
+                type="search"
+                id="search_text"
+                ref="keyword"
+                maxlength="255"
+                autocomplete="off"
+                aria-autocomplete="list"
+                                placeholder="Search by keywords (product name, circle name, etc)"                @focus="isFocus = true"
+                @blur="isFocus = false"
+              >
+            </div>
+            <button id="search_button" class="globalSearchBtn" type="submit" @click="saveSelected()"><i>Search</i></button>
+          </form>
+        </div>
+        <div class="detailedSearch">
+          <a href="https://www.dlsite.com/maniax/fs">Advanced search</a>
+        </div>
+            <!-- /検索 -->
+      <!-- アイコンメニュー -->
+      <ul class="globalNav">
+        <li v-if="!isMemberLogin && !isCircleLogin" class="globalNav-item type-register" v-cloak>
+          <a href="https://www.dlsite.com/maniax/regist/user"><i>Registration</i></a>
+        </li>
+        <li v-if="!isMemberLogin && !isCircleLogin" class="globalNav-item type-login" v-cloak>
+          <a href="https://www.dlsite.com/maniax/login/=/skip_register/1" referrerpolicy="no-referrer-when-downgrade"><i>Log in</i></a>
+        </li>
+        <li v-if="isMemberLogin" class="globalNav-item type-favorite">
+          <a  :href="hasUnboughtFavorites ? 'https://www.dlsite.com/maniax/mypage/wishlist' : 'https://www.dlsite.com/maniax/mypage/wishlist'"><i>Favorites</i></a><template v-if="hasUnboughtFavorites" v-cloak><a href="https://www.dlsite.com/maniax/mypage/wishlist/=/discount/1" class="notificationBadge" >Discounts Detected!</a></template>
+        </li>
+        <li class="globalNav-item type-cart"><a href="https://www.dlsite.com/maniax/cart"><i>Cart</i></a><span v-if="cartActives.length" v-cloak class="cartBadge" v-text="Math.min(cartActives.length, 100)"></span></li>
+        <li v-if="isMemberLogin" class="globalNav-item type-play">
+          <a rel="noopener" href="https://play.dlsite.com/" target="_blank" v-cloak><i>My Items</i></a>
+        </li>
+        <!-- メンバーアカウント登録の場合　-->
+        <li v-if="isMemberLogin" class="globalNav-item type-circle">
+          <a v-cloak><i>Account</i></a>
+          <div class="dropdown_list type_account" v-cloak>
+            <div class="dropdown_list_inner">
+              <ul class="globalNav">
+                <li class="globalNav-item type-review">
+                  <a href="https://www.dlsite.com/maniax/mypage/short-review">
+                    <i>Ratings / Reviews</i>
+                  </a>
+                </li>
+                <li class="globalNav-item type-coupon">
+                  <a href="https://www.dlsite.com/maniax/mypage/coupon/list">
+                    <i>Coupon Management</i>
+                  </a>
+                </li>
+                <li class="globalNav-item type-userbuy">
+                  <a href="https://www.dlsite.com/maniax/mypage/userbuy">
+                    <i>Purchase History</i>
+                  </a>
+                </li>
+              </ul>
+              <ul class="menu_list">
+                <li class="menu_list_item type-mypage">
+                  <a href="https://www.dlsite.com/maniax/mypage" class="link">
+                    <i>My Page</i>
+                    <span v-if="mypageNotices > 0" class="count" v-cloak>{{ noticesBadge(mypageNotices) }}</span>
+                  </a>
+                  <div v-if="mypageNotices > 0" class="notice">
+                                        You have <span>{{ mypageNotices }}</span> important notification(s).                  </div>
+                </li>
+                <li v-if="isCircleLogin" class="menu_list_item type-circle" v-cloak>
+                  <a href="https://www.dlsite.com/circle/" class="link">
+                    <i>Circle Management</i>
+                    <span v-if="circleNotices > 0" class="count" v-cloak>{{ noticesBadge(circleNotices) }}</span>
+                  </a>
+                  <div v-if="circleNotices > 0" class="notice">
+                                        You have <span>{{ circleNotices }}</span> important notification(s).                  </div>
+                </li>
+                <li class="menu_list_item">
+                  <a href="https://login.dlsite.com/user/self?lang=en&redirect_uri=https%3A%2F%2Fwww.dlsite.com%2Fmaniax%2F" class="link" target="_blank">
+                    <i>Account Management</i>
+                  </a>
+                </li>
+              </ul>
+              <div class="login_account">
+                <div class="login_account_item">
+                  <p v-if="login_id" v-cloak class="account_name">
+                                                            <span>{{ login_id.substr(0, 30) }}{{ login_id.length > 30 ? '...' : '' }}</span>
+                                      </p>
+                </div>
+                <div class="login_account_item">
+                  <a href="https://www.dlsite.com/maniax/logout" class="logout">Log Out</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <span v-if="(mypageNotices + circleNotices) > 0 " class="accountBadge" v-text="noticesBadge(mypageNotices + circleNotices)" v-cloak></span>
+        </li>
+        <!-- サークルアカウントのみ登録の場合　-->
+        <li v-if="isCircleLogin && !isMemberLogin" class="globalNav-item type-circle">
+          <a v-cloak><i>Account</i></a>
+          <div class="dropdown_list type_account" v-cloak>
+            <div class="dropdown_list_inner">
+              <ul class="menu_list">
+                <li v-if="isCircleLogin" class="menu_list_item type-circle" v-cloak>
+                  <a href="https://www.dlsite.com/circle/" class="link">
+                    <i>Circle Management</i>
+                    <span v-if="circleNotices > 0" class="count" v-cloak>{{ noticesBadge(circleNotices) }}</span>
+                  </a>
+                  <div v-if="circleNotices > 0" class="notice">
+                                        You have <span>{{ circleNotices }}</span> important notification(s).                  </div>
+                </li>
+                <li class="menu_list_item">
+                  <a href="https://login.dlsite.com/user/self?lang=en&redirect_uri=https%3A%2F%2Fwww.dlsite.com%2Fmaniax%2F" class="link" target="_blank">
+                    <i>Account Management</i>
+                  </a>
+                </li>
+              </ul>
+              <div class="login_account">
+                <div class="login_account_item">
+                  <p v-if="login_id" v-cloak class="account_name">
+                                                            <span>{{ login_id.substr(0, 30) }}{{ login_id.length > 30 ? '...' : '' }}</span>
+                                      </p>
+                </div>
+                <div class="login_account_item">
+                  <a href="https://www.dlsite.com/maniax/logout" class="logout">Log Out</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <span v-if="(circleNotices) > 0 " class="accountBadge" v-text="noticesBadge(circleNotices)" v-cloak></span>
+        </li>
+        <li class="globalNav-item type-guide">
+          <a href="#"><i>Guide</i></a>
+          <div class="dropdown_list type_guide">
+            <div class="dropdown_list_inner">
+              <ul class="menu_list">
+                <li class="menu_list_item"><a rel="noopener" href="https://www.dlsite.com/maniax/faq/=/type/user" target="_blank" class="link">Help</a></li>
+                <li class="menu_list_item"><a href="https://www.dlsite.com/maniax/welcome" class="link">For First-time Visitors</a></li>
+                                <li class="menu_list_item"><a href="https://www.dlsite.com/maniax/circle/invite" class="link">About Circle Registration</a></li>
+                                <li class="menu_list_item"><a href="https://www.dlsite.com/maniax/guide/payment" class="link">About payment methods</a></li>
+                <li class="menu_list_item"><a href="https://www.dlsite.com/maniax/mypage/aboutpoint" class="link">About Points</a></li>
+              </ul>
+            </div>
+          </div>
+        </li>
+      </ul>
+      <!-- /ガイドメニュー -->
+    </div>
+
+        <div class="headerCore-main">
+        <div class="headerCore-mainInner " :class="{ couponShow: isAccountLogin }">
+                <ul class="floorTab type-adult">
+          <li class="floorTab-item type-doujin is-active"><a href="https://www.dlsite.com/maniax/">Doujin</a>       </li>
+          <li class="floorTab-item type-ebook "><a href="https://www.dlsite.com/books/">Adult Comics</a></li>
+          <li class="floorTab-item type-com   "><a href="https://www.dlsite.com/pro/">H Games</a>  </li>
+          <li class="floorTab-item type-nijiyome"><a href="https://www.nijiyome.jp?en=dlsite&em=tab&et=maniax">NijiGAME</a></li>
+        </ul>
+        
+                <div class="floorNavLink">
+                              <div class="floorNavLink-item type-general"><a href="https://www.dlsite.com/home/">All-ages</a></div>
+                    <div class="floorNavLink-item type-female"><a href="https://www.dlsite.com/girls/">R18 (BL/TL)</a></div>
+        </div>
+              </div>
+
+            <div class="floorSubNav">
+        <div class="floorSubNav-item">
+          <ul class="headerNav">
+
+      
+                  <li class="headerNav-item"><a href="https://www.dlsite.com/maniax/" class="top">TOP</a></li>
+                        <li class="headerNav-item">
+              <a href="https://www.dlsite.com/maniax/works/type/=/work_type_category/game" class="game" :class="{'is-active': currentWorkTypeCategoryEquals('game')}">Game</a>
+            </li>
+            <li class="headerNav-item">
+              <a href="https://www.dlsite.com/maniax/works/type/=/work_type_category/movie" class="video" :class="{'is-active': currentWorkTypeCategoryEquals('movie')}">Video</a>
+            </li>
+            <li class="headerNav-item">
+              <a href="https://www.dlsite.com/maniax/works/type/=/work_type_category/audio" class="voice" :class="{'is-active': currentWorkTypeCategoryEquals('audio')}">Voice / ASMR</a>
+            </li>
+            <li class="headerNav-item">
+              <a href="https://www.dlsite.com/maniax/works/type/=/work_type_category/comic" class="manga" :class="{'is-active': currentWorkTypeCategoryEquals('comic')}">Manga</a>
+            </li>
+            <li class="headerNav-item">
+              <a href="https://www.dlsite.com/maniax/works/type/=/work_type_category/illust" class="illust" :class="{'is-active': currentWorkTypeCategoryEquals('illust')}">CG + Illustrations</a>
+            </li>
+            <li class="headerNav-item">
+              <a href="https://www.dlsite.com/maniax/ranking?date=30d" class="ranking">Ranking</a>
+            </li>
+            <li class="headerNav-item"><a href="https://www.dlsite.com/maniax/announce/list/day" class="announce">Upcoming Works</a></li>
+            <li class="headerNav-item"><a href="https://www.dlsite.com/maniax/new" class="calendar">Release Calendar</a></li>
+
+            
+                            </ul>
+        </div>
+      </div>
+      
+    </div>
+      </div>
+</header>
+
+
+
+
+        <script type="text/javascript">
+var loginchecked = $.cookie('loginchecked');
+
+if (loginchecked & 1) {
+  // ユーザがログイン中の表示
+  $("li#nav_login a").attr("title", "Log Out").attr("href", "https://www.dlsite.com/maniax/logout/=/type/member");
+  $("li#nav_login").attr("id", "nav_logout");
+} else {
+  // ユーザがログアウト中の表示
+//  $("li#nav_logout a").attr("title", "Log in").attr("href", "https://www.dlsite.com/maniax/login/=/type/member");
+//  $("li#nav_logout").attr("id", "nav_login");
+}
+</script>
+
+        
+      </div>
+      <!-- /header -->
+
+            <!-- top_wrapper -->
+      <div id="top_wrapper" class="clearfix" data-section_name="top_wrapper">
+        <ul class="topicpath" itemscope="" itemtype="https://schema.org/BreadcrumbList">
+  <li class="topicpath_item" itemprop="itemListElement" itemscope="" itemtype="https://schema.org/ListItem">
+    <a itemtype="https://schema.org/Thing" itemprop="item" href="https://www.dlsite.com/maniax/">
+    <span itemprop="name">
+              Doujin
+          </span>
+    </a>
+    <meta itemprop="position" content="1">
+      </li>
+                          <li class="topicpath_item" itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">
+        <a itemtype="http://schema.org/Thing" itemprop="item" href="https://www.dlsite.com/maniax/circle/list">
+    <span itemprop="name">
+                                      List Circle          </span>
+        </a>
+        <meta itemprop="position" content="2">
+              </li>
+                  <li class="topicpath_item" itemprop="itemListElement" itemscope="" itemtype="https://schema.org/ListItem">
+        <a itemtype="https://schema.org/Thing" itemprop="item"
+           href="https://www.dlsite.com/maniax/circle/profile/=/maker_id/RG24357.html">
+          <span itemprop="name">Cookie Voice</span>
+        </a>
+        <meta itemprop="position" content="3">
+              </li>
+                                          <li class="topicpath_item" itemprop="itemListElement" itemscope="" itemtype="https://schema.org/ListItem">
+            <a itemtype="https://schema.org/Thing" itemprop="item"
+               href="https://www.dlsite.com/maniax/fsr/=/keyword_work_name/%22%E3%83%8F%E3%83%AD%E3%82%A6%E3%82%A3%E3%83%B3%E3%83%91%E3%83%BC%E3%83%86%E3%82%A3%E3%83%BC%22+SRI0000007655/order/release_d/from/work.series">
+              <span itemprop="name">「ハロウィンパーティー」Series</span>
+            </a>
+            <meta itemprop="position" content="4">
+                      </li>
+                    <li class="topicpath_item" itemprop="itemListElement" itemscope="" itemtype="https://schema.org/ListItem">
+        <a itemtype="https://schema.org/Thing" itemprop="item" href="https://www.dlsite.com/maniax/work/=/product_id/RJ126928.html">
+          <span itemprop="name">Magicos Halloween: Vampire Glamour of the Visiting Lewd Witch!</span>
+        </a>
+        <meta itemprop="position" content="5">
+              </li>
+                            
+      </ul>
+<div class="base_title_br clearfix">
+
+<div class="icon_wrap">
+
+
+
+
+
+
+
+
+</div>
+<h1 itemprop="name" id="work_name">
+<a href="https://www.dlsite.com/maniax/work/=/product_id/RJ126928.html" itemprop="url">Magicos Halloween: Vampire Glamour of the Visiting Lewd Witch!</a>
+</h1>
+
+<template data-vue-component="dlchannel-topic" data-product-id="RJ126928" data-product-name="Magicos Halloween: Vampire Glamour of the Visiting Lewd Witch!" data-maker-name="Cookie Voice"></template>
+
+
+  
+    
+  
+        
+                
+  
+<template data-vue-component="share-button" data-twitter-share-url="https://twitter.com/intent/tweet?url=https%3A%2F%2Fdlsite.jp%2Fmawot%2FRJ126928%2F%3Futm_content%3DRJ126928%26locale%3Den_US%0A&text=Magicos%20Halloween%3A%20Vampire%20Glamour%20of%20the%20Visiting%20Lewd%20Witch%21%2FCookie%20Voice%2050%25OFF%20Until%20Sep.%2013%2C%2013%3A59%20%28JST%29&hashtags=DLsite&lang=en
+" data-share-url="https://www.dlsite.com/maniax/work/=/product_id/RJ126928.html" data-share-title="Magicos Halloween: Vampire Glamour of the Visiting Lewd Witch!" data-share-maker-name="Cookie Voice"></template>
+
+</div>
+      </div>
+      <!-- /top_wrapper -->
+      
+      <!-- wrapper -->
+      <div id="wrapper">
+
+        <template data-vue-component="share-group"></template>
+
+        
+        <!-- main -->
+        <div id="main" data-section_name="main">
+          <!-- main_inner -->
+          <div id="main_inner">
+            
+
+
+<!-- work_header -->
+<div id="work_header" data-section_name="work_header">
+<!-- work_left -->
+<div id="work_left">
+
+<div data-vue-component="product-slider" data-product-id="RJ126928">
+
+<div class="product-slider">
+  <!-- Sample image data -->
+  <div ref="product_slider_data" class="product-slider-data">
+    <div data-src="//img.dlsite.jp/modpub/images2/work/doujin/RJ127000/RJ126928_img_main.jpg" data-width="560" data-height="420" data-thumb="//img.dlsite.jp/resize/images2/work/doujin/RJ127000/RJ126928_img_main_240x240.jpg"></div>
+    <div data-src="//img.dlsite.jp/modpub/images2/work/doujin/RJ127000/RJ126928_img_smp1.jpg" data-width="600" data-height="330" data-thumb="//img.dlsite.jp/resize/images2/work/doujin/RJ127000/RJ126928_img_smp1_100x100.jpg"></div>
+    <div data-src="//img.dlsite.jp/modpub/images2/work/doujin/RJ127000/RJ126928_img_smp2.jpg" data-width="800" data-height="1143" data-thumb="//img.dlsite.jp/resize/images2/work/doujin/RJ127000/RJ126928_img_smp2_100x100.jpg"></div>
+  </div>
+
+
+  <!-- Sample viewer -->
+  <div class="work_slider male">
+    <div class="work_slider_container">
+      <div class="slider_body">
+        <div ref="swiper" class="slider_body_inner">
+          <ul class="slider_items trans" ref="body_items" @click="showPopup">
+
+            <li v-if="items.length === 0" class="slider_item active"><img itemprop="image" src="//img.dlsite.jp/modpub/images2/work/doujin/RJ127000/RJ126928_img_main.jpg" width="auto" height="420" alt="Magicos Halloween: Vampire Glamour of the Visiting Lewd Witch! [Cookie Voice]"></li>
+
+          <template v-for="(item, index) in items">
+
+            <li v-if="index === 0" class="slider_item active"><img itemprop="image" :src="item.src" alt="Magicos Halloween: Vampire Glamour of the Visiting Lewd Witch! [Cookie Voice]"></li>
+            <li v-else             class="slider_item" ><img class="swiper-lazy" :data-src="item.src" alt="Magicos Halloween: Vampire Glamour of the Visiting Lewd Witch! [Cookie Voice]"></li>
+
+          </template>
+          </ul>
+        </div>
+        <div v-cloak v-if="items.length > 1" class="slider_prev" @click="slideTo('prev')"></div>
+        <div v-cloak v-if="items.length > 1" class="slider_next" @click="slideTo('next')"></div>
+      </div>
+
+      <div v-cloak v-if="items.length > 1" ref="ctrl" @wheel="slideScroll" class="slider_controller">
+        <div class="controller_body">
+          <ul ref="ctrl_items" class="controller_items">
+          <template v-for="(item, index) in items">
+            <li class="controller_item" :class="{active:(index === swiper.realIndex)}" @click="slideTo(index)">
+              <div class="thumb_box">
+                
+                <img v-lazy="item.thumb.src" :width="item.thumb.width" :height="item.thumb.height" alt="Magicos Halloween: Vampire Glamour of the Visiting Lewd Witch! [Cookie Voice]">
+                
+              </div>
+            </li>
+          </template>
+          </ul>
+        </div>
+        <div class="controller_prev" @click="slideTo('prev')"></div>
+        <div class="controller_next" @click="slideTo('next')"></div>
+      </div>
+    </div>
+  </div>
+  <div v-cloak class="work_slider_comp" v-if="items.length > 1">
+
+
+
+    <!-- 枚数 -->
+    <span v-t="{ path: 'product.slider.totalImages', args: [items.length] }"></span>
+  </div>
+
+  <!-- Popup viewer -->
+  <div v-if="popupVisible" class="slider_popup_overlay" @click="hidePopup">
+    <div class="slider_popup" @click.stop>
+      <span class="slider_popup_close" @click="hidePopup"></span>
+      <div class="slider_popup_rightpane">
+        <div class="slider_popup_sidebar">
+        <template v-for="(item, index) in items">
+          <div rel="noopener" target="_blank" :class="{active:(index === swiper.realIndex)}" @click="slideTo(index, false)">
+
+            <img v-lazy="item.thumb.src" alt="Magicos Halloween: Vampire Glamour of the Visiting Lewd Witch! [Cookie Voice]">
+
+          </div>
+        </template>
+        </div>
+        <div class="slider_popup_arrows">
+          <div class="slider_popup_button">
+            <div class="slider_popup_prev" @click="slideTo('prev', false)"></div>
+            <div class="slider_popup_next" @click="slideTo('next', false)"></div>
+          </div>
+          <div class="slider_popup_count">{{ swiper.realIndex + 1 }} / {{ items.length }}</div>
+        </div>
+      </div>
+      <div class="slider_popup_leftpane">
+        <div ref="mainbox" class="slider_popup_mainbox" @wheel.prevent="slideScroll">
+          <div class="slider_zoom_container" ref="zoom_container" @mousemove.prevent="setPopupPosition" @click="setPopupImage(true)">
+
+            <img :src="items[swiper.realIndex].src" ref="zoom_container_image" alt="Magicos Halloween: Vampire Glamour of the Visiting Lewd Witch! [Cookie Voice]">
+
+          </div>
+        </div>
+        <div class="slider_popup_tool">
+          <input id="target1" class="checkbox" name="target" type="checkbox" value="1" v-model="alwaysActualSize" @change="toggleActualSize" @click="toggleActualSize">
+          <label for="target1" class="checkbox-label" v-t="'product.slider.alwaysActual'"></label>
+          <span class="slider_popup_description" v-t="'product.slider.tools'"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</div>
+
+
+</div>
+<!-- /work_left -->
+
+<!-- work_right -->
+<div id="work_right">
+<div
+  class="work_right_info"
+  data-vue-component="product-price"
+  data-product-id="RJ126928"
+  data-is-check="false"
+  data-is-comingsoon="false"
+  v-if="(product.dl_count !== undefined && product.dl_count > 0) || (!isFemale() && product.wishlist_count !== undefined && product.wishlist_count > 0) || product.rate_count > 0 || product.review_count"
+  v-cloak
+>
+  <product-rank product-id="RJ126928"></product-rank>
+
+  <div v-if="(product.dl_count !== undefined && product.dl_count > 0) || product.rate_count > 0" v-cloak class="work_right_info_item">
+    <dl class="work_right_info_title value">
+            <!-- 販売 / DL数 [home, maniax, girls, bl] ここから -->
+      <template v-if="product.dl_count !== undefined && product.dl_count > 0" v-cloak>
+        <dt v-if="isFemale()" v-t="'product.evaluate.download_label'"></dt>
+        <dt v-else v-t="'product.evaluate.purchase_label'"></dt>
+        <dd class="point">{{ product.dl_count|number_format }}</dd>
+      </template>
+      <!-- 販売 / DL数 [home, maniax, girls, bl] ここまで -->
+      
+      <!-- 評価 ここから -->
+      <template v-if="product.rate_count > 0" v-cloak>
+        <dt v-t="'product.evaluate.rating_label'"></dt>
+        <dd class="star_box" @mouseenter="showRateDetail" @mouseleave="hideRateDetail">
+          <span class="point average_count">{{ product.rate_average_2dp }}</span>
+          <div class="star_wrap">
+            
+            <span class="rate" :class="'rate' + product.rate_average_star"></span>
+
+            <div class="rating_popup" :class="{ open: is_open_rate }" v-if="is_display_rate">
+              <div class="rating_popup_inner">
+                <div class="rating_content">
+                  <dl class="rating_content_inner">
+                    <dt class="rating_itemTitle" v-t="'product.rating.average'"></dt>
+                    <dd><p class="rating_score">{{ product.rate_average_2dp }}</p></dd>
+                  </dl>
+                  <dl class="rating_content_inner">
+                    <dt class="rating_itemTitle" v-t="'product.rating.ratings'"></dt>
+                    <dd><p class="">{{ product.rate_count|number_format }}</p></dd>
+                  </dl>
+                </div>
+
+                <div class="rating_content">
+                  <dl class="rating_content_inner">
+                    <dt class="rating_itemTitle" v-t="'product.rating.rating'"></dt>
+                    <dd>
+                      <dl class="rating_map">
+                        <dt class="rating_map_label">
+                          <p v-t="'product.rating.star_5'"></p>
+                        </dt>
+                        <dd class="rating_map_body">
+                          <div class="rating_meter">
+                            <div class="rating_bar" :style="{ width: is_open_rate ? Math.floor(product.rate_count_detail[4].ratio * 0.8) + 'px' : 0 }"></div>
+                          </div>
+                          ({{ product.rate_count_detail ? product.rate_count_detail[4].count : 0|number_format }})
+                        </dd>
+                        <dt class="rating_map_label">
+                          <p v-t="'product.rating.star_4'"></p>
+                        </dt>
+                        <dd class="rating_map_body">
+                          <div class="rating_meter">
+                            <div class="rating_bar" :style="{ width: is_open_rate ? Math.floor(product.rate_count_detail[3].ratio * 0.8) + 'px' : 0 }"></div>
+                          </div>
+                          ({{ product.rate_count_detail ? product.rate_count_detail[3].count : 0|number_format }})
+                        </dd>
+                        <dt class="rating_map_label">
+                          <p v-t="'product.rating.star_3'"></p>
+                        </dt>
+                        <dd class="rating_map_body">
+                          <div class="rating_meter">
+                            <div class="rating_bar" :style="{ width: is_open_rate ? Math.floor(product.rate_count_detail[2].ratio * 0.8) + 'px' : 0 }"></div>
+                          </div>
+                          ({{ product.rate_count_detail ? product.rate_count_detail[2].count : 0|number_format }})
+                        </dd>
+                        <dt class="rating_map_label">
+                          <p v-t="'product.rating.star_2'"></p>
+                        </dt>
+                        <dd class="rating_map_body">
+                          <div class="rating_meter">
+                            <div class="rating_bar" :style="{ width: is_open_rate ? Math.floor(product.rate_count_detail[1].ratio * 0.8) + 'px' : 0 }"></div>
+                          </div>
+                          ({{ product.rate_count_detail ? product.rate_count_detail[1].count : 0|number_format }})
+                        </dd>
+                        <dt class="rating_map_label">
+                          <p v-t="'product.rating.star_1'"></p>
+                        </dt>
+                        <dd class="rating_map_body">
+                          <div class="rating_meter">
+                            <div class="rating_bar" :style="{ width: is_open_rate ? Math.floor(product.rate_count_detail[0].ratio * 0.8) + 'px' : 0 }"></div>
+                          </div>
+                          ({{ product.rate_count_detail ? product.rate_count_detail[0].count : 0|number_format }})
+                        </dd>
+                      </dl>
+                    </dd>
+                  </dl>
+                </div>
+              </div>
+            </div>
+            
+          </div>
+          <span class="count">({{ product.rate_count|number_format }})</span></p>
+        </dd>
+      </template>
+      <!-- 評価 ここまで -->
+    </dl>
+  </div>
+
+  <div v-if="(!isFemale() && product.wishlist_count !== undefined && product.wishlist_count > 0) || product.review_count" v-cloak class="work_right_info_item">
+    <dl class="work_right_info_title">
+            <!-- お気に入り数 / DL数 [home, maniax, girls, bl] ここから -->
+      <template v-if="!isFemale() && product.wishlist_count !== undefined && product.wishlist_count > 0" v-cloak>
+        <dt v-t="'product.evaluate.favorite_works_label'"></dt>
+        <dd class="position_fix">{{ product.wishlist_count|number_format }}</dd>
+
+      </template>
+      <!-- お気に入り数 ここまで -->
+      
+      <!-- レビュー ここから -->
+      <template v-if="product.review_count" v-cloak>
+        <dt v-t="'product.evaluate.review_number_label'"></dt>
+        <dd class="position_fix"><span>{{ product.review_count|number_format }}</span><span class="count"></span>&nbsp;(<a href="#review_link" v-html="$t('product.evaluate.to_rating_label')"></a>)</span></dd>
+      </template>
+      <!-- レビュー ここまで -->
+    </dl>
+  </div>
+  <!--
+  <div v-if=" ! product.is_reservable && product.review_count <= 0" v-cloak class="work_right_info_item">
+    <dl class="work_right_info_title">
+      <dt v-t="'product.evaluate.no_review_message'"></dt>
+      <dd><span class="count"></span><a href="https://www.dlsite.com/maniax/review/write/work/=/product_id/RJ126928.html" v-t="'product.evaluate.to_review_message'"></a></dd>
+    </dl>
+  </div>
+  -->
+</div>
+<div id="work_right_inner">
+
+
+<div id="work_right_name">
+  <table id="work_maker">
+        <tr>
+      <th>Circle</th>
+      <td>
+        <span itemprop="brand" class="maker_name">
+          <a href="https://www.dlsite.com/maniax/circle/profile/=/maker_id/RG24357.html">Cookie Voice</a>
+        </span>
+        <span class="add_follow" data-vue-component="follow-button" data-follow-key="RG24357" data-follow-name="Cookie Voice" v-cloak>
+        </span>
+      </td>
+    </tr>
+      </table>
+    <span data-vue-component="cien-creator-link" data-vue-async="true" data-maker-id="RG24357"></span>
+</div>
+
+
+<table cellspacing="0" id="work_outline">
+  <tr>
+    <th>Release date</th>
+    <td><a href="https://www.dlsite.com/maniax/new/=/year/2014/mon/01/day/11/cyear/2014/cmon/01">Jan/11/2014</a></td>  </tr>
+        <tr>
+      <th>Series name</th>
+      <td>
+        <a href="https://www.dlsite.com/maniax/fsr/=/keyword_work_name/%22%E3%83%8F%E3%83%AD%E3%82%A6%E3%82%A3%E3%83%B3%E3%83%91%E3%83%BC%E3%83%86%E3%82%A3%E3%83%BC%22+SRI0000007655/order/title_d/from/work.titles">ハロウィンパーティー</a>
+      </td>
+    </tr>
+    
+                        
+<tr>
+  <th>Scenario</th>
+    <td>
+          <a
+                  href="https://www.dlsite.com/maniax/fsr/=/keyword_creater/%22%E3%82%AF%E3%83%83%E3%82%AD%E3%83%BC%E3%83%9C%E3%82%A4%E3%82%B9%22"
+              >クッキーボイス</a>        </td>
+</tr>
+                
+<tr>
+  <th>Illustration</th>
+    <td>
+          <a
+                  href="https://www.dlsite.com/maniax/fsr/=/keyword_creater/%22%E7%9A%90%E6%9C%88%E3%81%BF%E3%81%99%E3%81%9A%22"
+              >皐月みすず</a>        </td>
+</tr>
+                
+<tr>
+  <th>Voice Actor</th>
+    <td>
+          <a
+                  href="https://www.dlsite.com/maniax/fsr/=/keyword_creater/%22%E5%88%86%E5%80%8D%E6%B2%B3%E5%8E%9F%E3%82%B7%E3%83%9B%22"
+              >分倍河原シホ</a>        </td>
+</tr>
+
+  
+        <tr>
+      <th>Age</th>
+      <td>
+        <div class="work_genre">
+                      <a href="https://www.dlsite.com/maniax/fsr/=/work_category%5B0%5D/doujin/age_category/3/from/icon.work"><span class="icon_ADL" title="18+">18+</span></a>
+                  </div>
+      </td>
+    </tr>
+    <tr>
+    <th>Product format</th>
+    <td>
+      <div class="work_genre" id="category_type">
+        <a href="https://www.dlsite.com/maniax/works/type/=/work_type/SOU/from/icon.work"><span class="icon_SOU" title="Voice / ASMR">Voice / ASMR</span></a>
+              </div>
+    </td>
+  </tr>
+      <tr>
+      <th>File format</th>
+      <td>
+        <div class="work_genre">
+          <a href="https://www.dlsite.com/maniax/fsr/=/work_category%5B0%5D/doujin/file_type/MP3/from/icon.work"><span class="icon_MP3" title="MP3">MP3</span></a>
+                  </div>
+      </td>
+    </tr>
+                                      <tr>
+        <th>Supported languages</th>
+        <td>
+          <div class="work_genre">
+            <a href="https://www.dlsite.com/maniax/fsr/=/work_category%5B0%5D/doujin/options/JPN/from/icon.work"><span class="icon_JPN" title="Japanese">Japanese</span></a>
+          </div>
+        </td>
+      </tr>
+        
+  
+      <tr>
+      <th>Genre</th>
+      <td>
+        <div class="main_genre">
+                    <a href="https://www.dlsite.com/maniax/works/genre/=/genre/206/from/work.genre">Girl</a>
+                    <a href="https://www.dlsite.com/maniax/works/genre/=/genre/317/from/work.genre">Nonhuman/Monster Girl</a>
+                    <a href="https://www.dlsite.com/maniax/works/genre/=/genre/004/from/work.genre">Lovey Dovey/Sweet Love</a>
+                    <a href="https://www.dlsite.com/maniax/works/genre/=/genre/026/from/work.genre">Occult</a>
+                    <a href="https://www.dlsite.com/maniax/works/genre/=/genre/156/from/work.genre">Submissive Man</a>
+                    
+        </div>
+      </td>
+    </tr>
+  
+       <tr>
+    <th>File size</th>
+    <td>
+      <div class="main_genre">
+                              162.18MB
+                        </div>
+    </td>
+  </tr>
+  
+    </table>
+
+
+
+<ul class="work_feature">
+
+
+
+
+
+
+
+
+
+</ul>
+
+
+<script>
+  jQuery(function ($) {
+    var dl_format = '0';
+    var is_dlsiteplay_work = '1';
+
+    if (/Mac/.test(navigator.userAgent) && (dl_format == 10 || dl_format == 9)) {
+      if (is_dlsiteplay_work) {
+        $('._no_mac_viewer').remove();
+      } else {
+        $('._no_mac_protect').remove();
+      }
+    }
+  });
+</script>
+
+
+<div data-vue-component="product-sales-end" data-product-id="RJ126928" v-cloak></div>
+
+</div>
+
+
+
+
+
+<div class="trial_download mb30">
+<ul><li><p class="trial_file"><a href="//trial.dlsite.com/doujin/RJ127000/RJ126928_trial.zip" class="btn_trial" title="Download Demo">Download Demo</a></p><span>(13.49MB)</span></li></ul>
+</div>
+
+<ul class="work_edition">
+  
+  </ul>
+
+</div>
+<!-- /work_right-->
+</div>
+<!-- /work_header -->
+
+
+
+<div id="intro-title" class="title_01 clearfix"><h2>Product summary</h2></div>
+
+              <div itemprop="description" class="work_parts_container">
+                                  
+<div class="work_parts type_text">
+
+        
+    
+          <div class="work_parts_area">
+        <p>On All Hallow's Eve, when magic moonlight transforms the town... <br />
+<br />
+A sultry vixen with glamouring eyes knocks on your door... a witch enjoying a night of trickery with you...<br />
+ <br />
+CV: Shiho Bubaigawara <a rel="noopener nofollow" href="http://shiho.moe.in/v/" target="_blank">http://shiho.moe.in/v/</a> <br />
+Length: 51 minutes + bonus</p>
+      </div>
+
+    
+</div>
+                    
+      </div>
+
+    
+<!-- spec -->
+<!-- /spec -->
+
+
+
+<script>
+jQuery(function($){
+    $('._to_out').click(function(){
+        ga('send', 'event', 'maniax', $(this).data('action'), $(this).data('label'), {'nonInteraction': 1});
+    });
+});
+</script>
+
+
+
+            <!-- same_series -->
+<div class="work_series">
+  <div class="title_01">
+    <h2><span class="title">Works in the same series</span></h2>
+    <template data-vue-component="product-bulk-cart" data-product-id="RJ126928" data-series-id="SRI0000007655" v-cloak></template>
+  </div>
+    <div class="recommend_list "
+    data-href="https://www.dlsite.com/maniax/load/recommend/detail/v2/=/type/same_series/workno/RJ264090%2CRJ127344%2C"
+    data-type="same_series"></div>
+  <div class="work_series_other_box">
+    <p class="work_series_other">
+      <span class="series"><a
+          href="https://www.dlsite.com/maniax/fsr/=/keyword/%E3%83%8F%E3%83%AD%E3%82%A6%E3%82%A3%E3%83%B3%E3%83%91%E3%83%BC%E3%83%86%E3%82%A3%E3%83%BC+SRI0000007655/order/release_d/from/work.series">See more products</a></span>
+    </p>
+  </div>
+</div>
+<!-- /same_series -->
+
+<!-- maker_works -->
+<div class="work_series">
+  <div class="title_01 clearfix">
+    <h2>
+      <span class="title">
+                CircleList products              </span>
+    </h2>
+        <p class="move"><span><a
+          href="https://www.dlsite.com/maniax/fsr/=/keyword_maker_name/Cookie+Voice+RG24357/ana_flg/all/from/work.same_maker">See more products</a></span>
+    </p>
+      </div>
+      <div class="sub_title"><span class="ml10">Available products</span></div>
+    <div class="recommend_list "
+    data-href="https://www.dlsite.com/maniax/load/recommend/detail/v2/=/type/maker_works/workno/RJ310630%2CRJ299946%2CRJ293464%2CRJ273384%2CRJ268845%2CRJ264090%2CRJ253630%2CRJ150597%2CRJ143215%2CRJ130851%2CRJ127344%2CRJ126794%2C"
+    data-type="maker_works"></div>
+  </div>
+<!-- maker_works -->
+
+<!-- label_works -->
+<!-- /label_works -->
+
+<!-- relation -->
+<!-- /relation -->
+
+<!-- same_voice -->
+<div class="title_01_br clearfix">
+  <h2>More works by the same voice actor</h2>
+</div>
+<div class="recommend_list "
+  data-href="https://www.dlsite.com/maniax/load/recommend/detail/v2/=/type/same_voice_products/workno/RJ286680%2CRJ220246%2CRJ223075%2CRJ265923%2CRJ240457%2CRJ141141%2CRJ302497%2CRJ248987%2CRJ234351%2CRJ159375%2CRJ205271%2CRJ240561%2CRJ199314%2CRJ149268%2CRJ172560%2CRJ249877%2CRJ240563%2CRJ321982%2CRJ240572%2CRJ235247%2CRJ163216%2C"
+  data-type="same_voice_products"></div>
+<!-- /same_voice -->
+
+            <!-- recommend -->
+<div class="title_01 clearfix" data-download-threshold="5"><h2>People who bought this item also bought</h2></div>
+<div
+  class="recommend_list "
+  data-section-name="work_recommend_history"
+  data-href="https://www.dlsite.com/maniax/load/recommend/v2/=/type/viewsales2/reject/RG24357/product_id/RJ126928.html"
+  data-type="viewsales2"
+></div>
+
+<!-- /recommend -->
+
+<div class="title_01 clearfix"><h2>Recently checked</h2></div>
+<div
+  class="recommend_list "
+  data-section-name="work_recommend_history"
+  data-href="https://www.dlsite.com/maniax/load/recommend/v2/=/type/history/product_id/RJ126928.html"
+  data-type="history"
+></div>
+
+
+<script>
+$(function() {
+  // サムネイルポップアップ
+  $(document).bind('ajaxSuccess', function() {
+        var $target_blocks = $('.work_main_list_ncol');
+        $target_blocks.each(function () {
+            if ($(this).thumbImgPopup !== undefined) {
+                $(this).thumbImgPopup();
+                $(this).setBlockViewSetting('mheight_01','__sp_detail','end');
+            };
+        });
+    }
+  );
+
+  $.getJSON('https://www.dlsite.com/maniax/load/member/uninterest').then(
+    function (res) {
+      var rejects = [].concat(res['reason_1'], res['reason_2'])
+
+      $('.recommend_list').each(function(i, element){
+        var href = element.dataset.href
+        var type = element.dataset.type
+        href && $.get(href).then(function(res){
+          // html適応
+          $(element).html(res)
+
+          // イベント設定
+          $(element).find('li.swiper-slide').each(function(i, li){
+            var $li = $(li)
+
+            // 不要な作品
+            if (~rejects.indexOf($li.data('prod'))) {
+              return $li.remove()
+            }
+
+            // miniメニュー開閉
+            $li.find('.mini_menu').bind('click', function (e) {
+              $li.find('.mini_menu_dropdown').toggleClass('open');
+            })
+
+            // 非表示設定
+            $li.find('.mini_menu_dropdown_inner').bind('click', function() {
+              $li.find('.recommend_work_item').addClass('hidden');
+              $.get('https://www.dlsite.com/maniax/cart/ajax/=/mode/nothanks/product_id/' + $li.data('prod'));
+            })
+
+            // Vueの拡大ポップアップロジックを利用するためVueのinit処理を行い、コンポーネントをマウントする
+            $(window).triggerHandler('initialize.vue');
+
+            // レコメンド結果通知
+            $li.delegate('a', 'click', function (e) {
+              var $self = $(e.currentTarget);
+
+              //GAイベント送信
+              try {
+                window.ga('send', 'event', dlsite.getName(), 'recommend_' + $li.data('category'), $self[0].pathname);
+              } catch (ex) {
+                //
+              }
+
+              var param = {
+                prod: $li.data('prod'),
+                merch: 'dlsite',
+                spec: $li.data('spec'),
+                cref: $li.data('cref'),
+                cookie: $.cookie('uniqid')
+              };
+
+              if (!param['prod'] || !param['spec'] || !param['cref']) {
+                return true;
+              }
+
+              var url = 'https://dlsite.silveregg.net/pycre5/click?' + $.param(param);
+
+              // クリックイベントを送出
+              if (!navigator.sendBeacon || !navigator.sendBeacon(url)) {
+                $.ajax(url, {
+                  async: false,
+                  timeout: 2000,
+                });
+              }
+
+              return true;
+            });
+          });
+
+          // Swiper
+          new Swiper(element.firstChild, {
+            navigation: {
+              nextEl: '.swiper-button-next.type-' + type,
+              prevEl: '.swiper-button-prev.type-' + type,
+              disabledClass: 'disable',
+            },
+            slidesPerColumn: type === 'viewsales2' ? 2 : 1,
+            slidesPerView: Math.floor($(element).find('.swiper-container').width() / 200),
+            slidesPerGroup: Math.floor($(element).find('.swiper-container').width() / 200),
+            spaceBetween: 10,
+            breakpoints: {
+              1194: {
+                slidesPerView: 3,
+                slidesPerGroup: 3,
+              },
+              1364: {
+                slidesPerView: 4,
+                slidesPerGroup: 4,
+              },
+              1534: {
+                slidesPerView: 5,
+                slidesPerGroup: 5,
+              },
+              1704: {
+                slidesPerView: 6,
+                slidesPerGroup: 6,
+              },
+              1874: {
+                slidesPerView: 7,
+                slidesPerGroup: 7,
+              },
+              max: {
+                slidesPerView: 8,
+                slidesPerGroup: 8,
+              }
+            },
+          })
+        });
+      })
+    }
+  )
+})
+</script>
+
+            <!-- review -->
+<div class="title_01 clearfix" id="review_link"><h2>User Reviews</h2></div>
+
+
+<div class="work_article" id="work_review" data-section_name="work_review">
+
+    <table class="reviewer_most_genre" cellspacing="0">
+    <tbody>
+      <tr>
+        <th>
+          <p>Frequent keywords the reviewers selected: :</p>
+        </th>
+        <td>
+                    <span><a href="https://www.dlsite.com/maniax/fsr/=/genre/051/from/work.review_genre">萌え（15）</a></span>
+                    <span><a href="https://www.dlsite.com/maniax/fsr/=/genre/004/from/work.review_genre">ラブラブ/あまあま（13）</a></span>
+                    <span><a href="https://www.dlsite.com/maniax/fsr/=/genre/206/from/work.review_genre">少女（8）</a></span>
+                    <span><a href="https://www.dlsite.com/maniax/fsr/=/genre/138/from/work.review_genre">フェラチオ（7）</a></span>
+                    <span><a href="https://www.dlsite.com/maniax/fsr/=/genre/128/from/work.review_genre">中出し（7）</a></span>
+                    <span><a href="https://www.dlsite.com/maniax/fsr/=/genre/156/from/work.review_genre">男性受け（5）</a></span>
+                    <span><a href="https://www.dlsite.com/maniax/fsr/=/genre/086/from/work.review_genre">コスプレ（5）</a></span>
+                    <span><a href="https://www.dlsite.com/maniax/fsr/=/genre/029/from/work.review_genre">魔法（5）</a></span>
+                    <span><a href="https://www.dlsite.com/maniax/fsr/=/genre/317/from/work.review_genre">人外娘/モンスター娘（3）</a></span>
+                    <span><a href="https://www.dlsite.com/maniax/fsr/=/genre/204/from/work.review_genre">血液/流血（2）</a></span>
+                  </td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <div class="review_head">
+      <p class="float_l review_count">Reviews: <span class="review_work_count">22</span></p>
+              <template data-vue-component="product-review-order" data-layout="pc" data-product_id="RJ126928"></template>
+        </div>
+
+  <!-- work_review_list -->
+  <table id="work_review_list" cellspacing="0">
+        <tbody itemprop="review" itemscope itemtype="https://schema.org/Review">
+      <tr>
+        <td class="review_title">
+                    <div class="review_title_l">
+            <div class="title"><span itemprop="name">
+                            <a href="https://www.dlsite.com/maniax/work/reviewlist/=/reviewer/REV0008475/product_id/RJ126928.html">血を吸われるのがすごい良い</a>
+                          </span></div>
+            <p>
+              <meta itemprop="datePublished" content="2016-03-23">Mar/23/2016&nbsp;&nbsp;<span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="name"><a href="https://www.dlsite.com/maniax/reviewlist/=/reviewer/REV0008475">RST</a></span>  </span>
+                                          <span class="purchased">Purchased</span>
+                          </p>
+          </div>
+                    <div class="review_title_r">
+            <span class="reviewer_recommend">Loved it!</span>
+          </div>
+                  </td>
+      </tr>
+      <tr>
+        <td class="review_main _review_main">
+                    <div class="reviewer_genre">
+            <p>Keywords the reviewer selected :</p>
+            <ul class="reviewer_select_genre">
+                            <li><a href="https://www.dlsite.com/maniax/fsr/=/genre/051/from/review.genre">Moe</a></li>
+                            <li><a href="https://www.dlsite.com/maniax/fsr/=/genre/004/from/review.genre">Lovey Dovey/Sweet Love</a></li>
+                            <li><a href="https://www.dlsite.com/maniax/fsr/=/genre/156/from/review.genre">Submissive Man</a></li>
+                          </ul>
+          </div>
+          
+          
+          <div class="_SW2" >
+            <p class="reviewer_descrip" itemprop="reviewBody">同シリーズにドハマリしたのでこちらも購入しました。<br />
+吸血鬼の彼女にだんだんと魅了されていく過程がとても楽しめました。特に最後のトラックでの様子がとても可愛く、ツボにはまりました。最初の方とのギャップがいいですね。<br />
+まずは体験版で試してみてください。</p>
+            <p class="review_ref">
+              <input value="Helpful" type="button" class="_btn_good_review btn_default" data-review_id="165207" data-product_id="RJ126928">
+              <span class="useful">2 users found this helpful.</span>              <span class="review_report">[&nbsp;<a href="https://www.dlsite.com/maniax/contact/review/=/reviewer_id/REV0008475/product_id/RJ126928.html">Report</a>&nbsp;]</span>
+            </p>
+            <p class="mini_message _review_message" style="display: none;">&nbsp;</p>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+        <tbody itemprop="review" itemscope itemtype="https://schema.org/Review">
+      <tr>
+        <td class="review_title">
+                    <div class="review_title_l">
+            <div class="title"><span itemprop="name">
+                            <a href="https://www.dlsite.com/maniax/work/reviewlist/=/reviewer/REV0007659/product_id/RJ126928.html">素晴らしい内容構成に脱帽です!</a>
+                          </span></div>
+            <p>
+              <meta itemprop="datePublished" content="2014-02-02">Feb/02/2014&nbsp;&nbsp;<span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="name"><a href="https://www.dlsite.com/maniax/reviewlist/=/reviewer/REV0007659">ヴィヴィアン</a></span>  </span>
+                              <span class="popularity_reviewer bronze">Top Reviewer: Best400</span>
+                                          <span class="purchased">Purchased</span>
+                          </p>
+          </div>
+                    <div class="review_title_r">
+            <span class="reviewer_recommend">Loved it!</span>
+          </div>
+                  </td>
+      </tr>
+      <tr>
+        <td class="review_main _review_main">
+                    <div class="reviewer_genre">
+            <p>Keywords the reviewer selected :</p>
+            <ul class="reviewer_select_genre">
+                            <li><a href="https://www.dlsite.com/maniax/fsr/=/genre/051/from/review.genre">Moe</a></li>
+                            <li><a href="https://www.dlsite.com/maniax/fsr/=/genre/068/from/review.genre">Dirty Talk</a></li>
+                            <li><a href="https://www.dlsite.com/maniax/fsr/=/genre/251/from/review.genre">Kemo/Animalization/Transfur</a></li>
+                            <li><a href="https://www.dlsite.com/maniax/fsr/=/genre/317/from/review.genre">Nonhuman/Monster Girl</a></li>
+                            <li><a href="https://www.dlsite.com/maniax/fsr/=/genre/004/from/review.genre">Lovey Dovey/Sweet Love</a></li>
+                            <li><a href="https://www.dlsite.com/maniax/fsr/=/genre/026/from/review.genre">Occult</a></li>
+                            <li><a href="https://www.dlsite.com/maniax/fsr/=/genre/138/from/review.genre">Blowjob/Fellatio</a></li>
+                            <li><a href="https://www.dlsite.com/maniax/fsr/=/genre/156/from/review.genre">Submissive Man</a></li>
+                            <li><a href="https://www.dlsite.com/maniax/fsr/=/genre/204/from/review.genre">Blood/Bleeding</a></li>
+                          </ul>
+          </div>
+          
+          
+          <div class="_SW2" >
+            <p class="reviewer_descrip" itemprop="reviewBody">いやあ～～あ。参りました。<br />
+<br />
+色々な意味で楽しめます♪<br />
+このプライスで、こんなに濃～い作品。<br />
+買いです!!<br />
+<br />
+(1)えっちい度　文句なし!<br />
+　分倍河原シホさんの演じる吸血鬼ちゃん。<br />
+　淡々と話す不思議ちゃんですが、エロィ★<br />
+　隠語もたっぷり。<br />
+　中でも、咥えながらの会話にやられちゃいました・・・。<br />
+(2)独自の世界観。<br />
+　と、それを盛り上げる音響効果♪<br />
+　会話の間、テンポも心地よく、リラックスして聴けます♪<br />
+(3)時には、ニヤリとしてしまうギャグのセンス。<br />
+　楽しいオマケも良いですね!!<br />
+<br />
+是非、続編も期待しちゃいます。<br />
+<br />
+収録時間も、お値段も、お手頃で、<br />
+バランス良く、色々楽しめる作品です★★★<br />
+<br />
+次回作も、楽しみにしています!!!</p>
+            <p class="review_ref">
+              <input value="Helpful" type="button" class="_btn_good_review btn_default" data-review_id="108017" data-product_id="RJ126928">
+              <span class="useful">2 users found this helpful.</span>              <span class="review_report">[&nbsp;<a href="https://www.dlsite.com/maniax/contact/review/=/reviewer_id/REV0007659/product_id/RJ126928.html">Report</a>&nbsp;]</span>
+            </p>
+            <p class="mini_message _review_message" style="display: none;">&nbsp;</p>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+        <tbody itemprop="review" itemscope itemtype="https://schema.org/Review">
+      <tr>
+        <td class="review_title">
+                    <div class="review_title_l">
+            <div class="title"><span itemprop="name">
+                            <a href="https://www.dlsite.com/maniax/work/reviewlist/=/reviewer/REV0033261/product_id/RJ126928.html">良かったです</a>
+                          </span></div>
+            <p>
+              <meta itemprop="datePublished" content="2019-01-11">Jan/11/2019&nbsp;&nbsp;<span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="name"><a href="https://www.dlsite.com/maniax/reviewlist/=/reviewer/REV0033261">ワカ</a></span>  </span>
+                                          <span class="purchased">Purchased</span>
+                          </p>
+          </div>
+                    <div class="review_title_r">
+            <span class="reviewer_recommend">Loved it!</span>
+          </div>
+                  </td>
+      </tr>
+      <tr>
+        <td class="review_main _review_main">
+                    <div class="reviewer_genre">
+            <p>Keywords the reviewer selected :</p>
+            <ul class="reviewer_select_genre">
+                            <li><a href="https://www.dlsite.com/maniax/fsr/=/genre/051/from/review.genre">Moe</a></li>
+                            <li><a href="https://www.dlsite.com/maniax/fsr/=/genre/004/from/review.genre">Lovey Dovey/Sweet Love</a></li>
+                          </ul>
+          </div>
+          
+          
+          <div class="_SW2" >
+            <p class="reviewer_descrip" itemprop="reviewBody">身体の自由を魔眼の力で奪われちゃって優しく責められちゃいます。吸血鬼らしく血を吸う行為もありますが気持ちよく吸われちゃうので安心でしょう。<br />
+個人的に色々と舐められたりしちゃうところとエッチのパートが最高でした。おすすめです!</p>
+            <p class="review_ref">
+              <input value="Helpful" type="button" class="_btn_good_review btn_default" data-review_id="316601" data-product_id="RJ126928">
+              <span class="useful">1 users found this helpful.</span>              <span class="review_report">[&nbsp;<a href="https://www.dlsite.com/maniax/contact/review/=/reviewer_id/REV0033261/product_id/RJ126928.html">Report</a>&nbsp;]</span>
+            </p>
+            <p class="mini_message _review_message" style="display: none;">&nbsp;</p>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+        <tbody itemprop="review" itemscope itemtype="https://schema.org/Review">
+      <tr>
+        <td class="review_title">
+                    <div class="review_title_l">
+            <div class="title"><span itemprop="name">
+                            <a href="https://www.dlsite.com/maniax/work/reviewlist/=/reviewer/REV0017944/product_id/RJ126928.html">甘く優しく責められ、吸われ</a>
+                          </span></div>
+            <p>
+              <meta itemprop="datePublished" content="2017-07-22">Jul/22/2017&nbsp;&nbsp;<span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="name"><a href="https://www.dlsite.com/maniax/reviewlist/=/reviewer/REV0017944">狼心闇</a></span>  </span>
+                              <span class="popularity_reviewer bronze">Top Reviewer: Best900</span>
+                                          <span class="purchased">Purchased</span>
+                          </p>
+          </div>
+                  </td>
+      </tr>
+      <tr>
+        <td class="review_main _review_main">
+                    <div class="reviewer_genre">
+            <p>Keywords the reviewer selected :</p>
+            <ul class="reviewer_select_genre">
+                            <li><a href="https://www.dlsite.com/maniax/fsr/=/genre/051/from/review.genre">Moe</a></li>
+                            <li><a href="https://www.dlsite.com/maniax/fsr/=/genre/281/from/review.genre">Classmate/Colleague</a></li>
+                            <li><a href="https://www.dlsite.com/maniax/fsr/=/genre/086/from/review.genre">Cosplay</a></li>
+                            <li><a href="https://www.dlsite.com/maniax/fsr/=/genre/004/from/review.genre">Lovey Dovey/Sweet Love</a></li>
+                            <li><a href="https://www.dlsite.com/maniax/fsr/=/genre/156/from/review.genre">Submissive Man</a></li>
+                          </ul>
+          </div>
+          
+          
+          <div class="_SW2" >
+            <p class="reviewer_descrip" itemprop="reviewBody">自分は分倍河原シホさんと言えば、お姉さんの様な役が多いイメージなのですが、この作品では可愛い声で責めてくれます。ハロウィンの日、吸血鬼になった同級生にお菓子が無い事から悪戯される訳ですが……こんな可愛い子なら、寧ろお願いしたくなるくらいです。<br />
+<br />
+グロは殆どありませんので、苦手な方も大丈夫です。吸われていなくても、この子に座れていると想像すればそれだけで来るものが。素晴らしい音声作品だと思います。</p>
+            <p class="review_ref">
+              <input value="Helpful" type="button" class="_btn_good_review btn_default" data-review_id="218550" data-product_id="RJ126928">
+              <span class="useful">1 users found this helpful.</span>              <span class="review_report">[&nbsp;<a href="https://www.dlsite.com/maniax/contact/review/=/reviewer_id/REV0017944/product_id/RJ126928.html">Report</a>&nbsp;]</span>
+            </p>
+            <p class="mini_message _review_message" style="display: none;">&nbsp;</p>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+        <tbody itemprop="review" itemscope itemtype="https://schema.org/Review">
+      <tr>
+        <td class="review_title">
+                    <div class="review_title_l">
+            <div class="title"><span itemprop="name">
+                            <a href="https://www.dlsite.com/maniax/work/reviewlist/=/reviewer/REV0022083/product_id/RJ126928.html">血も精液もヌキヌキされる</a>
+                          </span></div>
+            <p>
+              <meta itemprop="datePublished" content="2017-01-17">Jan/17/2017&nbsp;&nbsp;<span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="name"><a href="https://www.dlsite.com/maniax/reviewlist/=/reviewer/REV0022083">黒淡雪</a></span>  </span>
+                              <span class="popularity_reviewer silver">Top Reviewer: 16th</span>
+                                          <span class="purchased">Purchased</span>
+                          </p>
+          </div>
+                    <div class="review_title_r">
+            <span class="reviewer_recommend">Loved it!</span>
+          </div>
+                  </td>
+      </tr>
+      <tr>
+        <td class="review_main _review_main">
+                    <div class="reviewer_genre">
+            <p>Keywords the reviewer selected :</p>
+            <ul class="reviewer_select_genre">
+                            <li><a href="https://www.dlsite.com/maniax/fsr/=/genre/051/from/review.genre">Moe</a></li>
+                            <li><a href="https://www.dlsite.com/maniax/fsr/=/genre/070/from/review.genre">Successive Orgasms</a></li>
+                            <li><a href="https://www.dlsite.com/maniax/fsr/=/genre/206/from/review.genre">Girl</a></li>
+                            <li><a href="https://www.dlsite.com/maniax/fsr/=/genre/128/from/review.genre">Internal Cumshot</a></li>
+                            <li><a href="https://www.dlsite.com/maniax/fsr/=/genre/138/from/review.genre">Blowjob/Fellatio</a></li>
+                          </ul>
+          </div>
+          
+          
+          <div class="_SW2" >
+            <p class="reviewer_descrip" itemprop="reviewBody">クッキーボイス様が送るハロウィンシリーズ第二弾です。<br />
+前作では人狼コスということもあり、遠吠えセックスやちょっぴりワイルドな逆レイプっぽいシチュが目立ちましたが、<br />
+こちらは穏やかながらも場面をイメージするとちょっと怖い感じのシーンが多いですね。<br />
+尿道に牙を突き立てたり、あそこから血と精液を吸い上げたり――。<br />
+でも痛みはなく快楽のみであるほか、傷跡も瞬時に癒えたりしますので、<br />
+あくまでそういうプレイだと思えば問題ないでしょう。<br />
+また、分倍河原さんの耳に優しい声が非常にキャラと合っていて、<br />
+設定にある魅了の魔眼に掛けられたかの如く身も心も預けてしまいたくなります。<br />
+声優さんのファンや、優しく責められたい方ならば充分に納得できる仕上がりでした。<br />
+<br />
+個人的には凄くオススメなのですが、説明でどうしてもグロい絵を想像をしてしまうという方は、<br />
+購入を少し考えた方が良いかもしれません。<br />
+ただ、出来ればグロが苦手というだけでこの作品の購入を控えるのは止めた方が良いかと。<br />
+とても勿体ない気がします……。</p>
+            <p class="review_ref">
+              <input value="Helpful" type="button" class="_btn_good_review btn_default" data-review_id="193188" data-product_id="RJ126928">
+              <span class="useful">1 users found this helpful.</span>              <span class="review_report">[&nbsp;<a href="https://www.dlsite.com/maniax/contact/review/=/reviewer_id/REV0022083/product_id/RJ126928.html">Report</a>&nbsp;]</span>
+            </p>
+            <p class="mini_message _review_message" style="display: none;">&nbsp;</p>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+        <tbody itemprop="review" itemscope itemtype="https://schema.org/Review">
+      <tr>
+        <td class="review_title">
+                    <div class="review_title_l">
+            <div class="title"><span itemprop="name">
+                            <a href="https://www.dlsite.com/maniax/work/reviewlist/=/reviewer/REV0017787/product_id/RJ126928.html">数少ないハロウィンネタの音声作品です。</a>
+                          </span></div>
+            <p>
+              <meta itemprop="datePublished" content="2015-11-16">Nov/16/2015&nbsp;&nbsp;<span itemprop="author" itemscope itemtype="https://schema.org/Person">Unsubscribe  </span>
+                                          <span class="purchased">Purchased</span>
+                          </p>
+          </div>
+                    <div class="review_title_r">
+            <span class="reviewer_recommend">Loved it!</span>
+          </div>
+                  </td>
+      </tr>
+      <tr>
+        <td class="review_main _review_main">
+                    <div class="reviewer_genre">
+            <p>Keywords the reviewer selected :</p>
+            <ul class="reviewer_select_genre">
+                            <li><a href="https://www.dlsite.com/maniax/fsr/=/genre/051/from/review.genre">Moe</a></li>
+                            <li><a href="https://www.dlsite.com/maniax/fsr/=/genre/056/from/review.genre">Healing</a></li>
+                            <li><a href="https://www.dlsite.com/maniax/fsr/=/genre/206/from/review.genre">Girl</a></li>
+                            <li><a href="https://www.dlsite.com/maniax/fsr/=/genre/004/from/review.genre">Lovey Dovey/Sweet Love</a></li>
+                            <li><a href="https://www.dlsite.com/maniax/fsr/=/genre/029/from/review.genre">Magic</a></li>
+                            <li><a href="https://www.dlsite.com/maniax/fsr/=/genre/128/from/review.genre">Internal Cumshot</a></li>
+                            <li><a href="https://www.dlsite.com/maniax/fsr/=/genre/138/from/review.genre">Blowjob/Fellatio</a></li>
+                            <li><a href="https://www.dlsite.com/maniax/fsr/=/genre/146/from/review.genre">Restraint</a></li>
+                            <li><a href="https://www.dlsite.com/maniax/fsr/=/genre/156/from/review.genre">Submissive Man</a></li>
+                            <li><a href="https://www.dlsite.com/maniax/fsr/=/genre/193/from/review.genre">Virgin Female</a></li>
+                          </ul>
+          </div>
+          
+          
+          <div class="_SW2" >
+            <p class="reviewer_descrip" itemprop="reviewBody">音声作品としては非常に数少ない、ハロウィンネタの作品です。<br />
+お話的には終始癒される内容になっており、かなりソフトです。<br />
+その為、どんな方にでも聞きやすい作品になっていると思います。<br />
+<br />
+最終トラックにつきましては、「おまけ」の扱いですが時系列で考える<br />
+と、「ハロウィン翌日のお昼の出来事」になっており、後日談的な内容<br />
+にもなっています。「付き合い始めた彼女の意外な一面」という言葉が<br />
+しっくりくる、非常に和やかな内容になっています。<br />
+<br />
+ハロウィンは過ぎましたが、年中おすすめ出来る作品となっていますので、<br />
+声優さんの声質が気に入ればとてもお勧め出来る作品だと私は思います。<br />
+<br />
+また、これは余談ですが音声作品を聴く時には、是非「中音域の特化<br />
+したイヤフォン」の使用を強くお勧めします。特にこの作品においては<br />
+「甘噛み」されるシーンが随所にある為、癒し効果がアップします。<br />
+機会があれば是非お試し下さい。</p>
+            <p class="review_ref">
+              <input value="Helpful" type="button" class="_btn_good_review btn_default" data-review_id="153075" data-product_id="RJ126928">
+              <span class="useful">1 users found this helpful.</span>              <span class="review_report">[&nbsp;<a href="https://www.dlsite.com/maniax/contact/review/=/reviewer_id/REV0017787/product_id/RJ126928.html">Report</a>&nbsp;]</span>
+            </p>
+            <p class="mini_message _review_message" style="display: none;">&nbsp;</p>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+      </table>
+
+  <table class="review_write">
+    <tr>
+            <td>
+        <div class="review_more">
+          <p><a href="https://www.dlsite.com/maniax/work/reviewlist/=/product_id/RJ126928.html">See all reviews (22)</a></p>
+        </div>
+      </td>
+            <td><div class="review_btn"><a href="https://www.dlsite.com/maniax/review/write/work/=/product_id/RJ126928.html" class="btn_post size_xxl fs15"><i>Post review</i></a></div></td>
+    </tr>
+  </table>
+</div>
+<!-- /work_review_list -->
+
+<script type="text/javascript">
+//<!CDATA[
+
+jQuery(function($){
+    "use strict";
+    var wait = false;
+    $('._btn_good_review').bind('click', function(){
+        if(wait){
+            return false;
+        }
+        wait = true;
+        var $self = $(this);
+        $.post('https://www.dlsite.com/maniax/mypage/review/ajax', {act: 'good_review', review_id: $self.data('review_id'), product_id: $self.data('product_id')}, function(data){
+            wait = false;
+            $self.parents('td').find('._review_message').text(data.text).show();
+        }, 'json');
+        return false;
+    });
+});
+
+//]]>
+</script>
+
+
+            <div class="title_01 clearfix">
+  <h2>Related Articles</h2>
+</div>
+  <table class="matome_write">
+    <tbody>
+    <tr>
+      <td>
+        <p class="base_text">
+          Post about this work                      for writing instructions and other details, please see <a rel="noopener" href="https://ch.dlsite.com/matome/185" target="_blank">How to Make a Summary</a>.        </p>
+      </td>
+      <td>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+  <div class="dlchannel">
+    <div class="matome_container">
+      <div id="matome-swiper" class="swiper-container">
+        <ul class="matome_box swiper-wrapper" style="display:none;">
+                      <li class="matome_box_inner swiper-slide">
+              <div class="matome_content">
+                <div class="matome_img_main">
+                  <a rel="noopener" href="https://ch.dlsite.com/matome/35874?dls=&k_matome_maniax_pc" target="_blank">
+                    <img data-src="https://media.dlsite.com/proxy/cb853b9f2b2e5c1697ce94154213c95c00d066b9/68747470733a2f2f696d672e646c736974652e6a702f6d6f647075622f696d61676573322f776f726b2f646f756a696e2f524a3235383030302f524a3235373134365f696d675f6d61696e2e6a7067" alt="おすすめの音声作品を紹介！【随時更新】"
+                         title="おすすめの音声作品を紹介！【随時更新】" class="swiper-lazy"></a>
+                    <div class="swiper-lazy-preloader"></div>
+                </div>
+                <p class="matome_content_title">
+                  <a href="https://ch.dlsite.com/matome/35874?dls=&k_matome_maniax_pc"
+                     rel="noopener" target="_blank">おすすめの音声作品を紹介！【随時更新】</a>
+                </p>
+              </div>
+            </li>
+                      <li class="matome_box_inner swiper-slide">
+              <div class="matome_content">
+                <div class="matome_img_main">
+                  <a rel="noopener" href="https://ch.dlsite.com/matome/85918?dls=&k_matome_maniax_pc" target="_blank">
+                    <img data-src="https://media.dlsite.com/proxy/bbf2388d2e836502ae0e85fe19d7e9a91660bee9/687474703a2f2f696d672e646c736974652e6a702f6d6f647075622f696d61676573322f776f726b2f646f756a696e2f524a3132373030302f524a3132363932385f696d675f6d61696e2e6a7067" alt="女の子に吸血されたいからDLsiteと出会ったんだ"
+                         title="女の子に吸血されたいからDLsiteと出会ったんだ" class="swiper-lazy"></a>
+                    <div class="swiper-lazy-preloader"></div>
+                </div>
+                <p class="matome_content_title">
+                  <a href="https://ch.dlsite.com/matome/85918?dls=&k_matome_maniax_pc"
+                     rel="noopener" target="_blank">女の子に吸血されたいからDLsiteと出会ったんだ</a>
+                </p>
+              </div>
+            </li>
+                      <li class="matome_box_inner swiper-slide">
+              <div class="matome_content">
+                <div class="matome_img_main">
+                  <a rel="noopener" href="https://ch.dlsite.com/matome/4182?dls=&k_matome_maniax_pc" target="_blank">
+                    <img data-src="https://media.dlsite.com/proxy/376d1e0e3a05c14920139558fdfb0b2c05b870a5/687474703a2f2f696d672e646c736974652e6a702f6d6f647075622f696d61676573322f776f726b2f646f756a696e2f524a3134353030302f524a3134343236315f696d675f6d61696e2e6a7067" alt="ハロウィンな作品、探してみた"
+                         title="ハロウィンな作品、探してみた" class="swiper-lazy"></a>
+                    <div class="swiper-lazy-preloader"></div>
+                </div>
+                <p class="matome_content_title">
+                  <a href="https://ch.dlsite.com/matome/4182?dls=&k_matome_maniax_pc"
+                     rel="noopener" target="_blank">ハロウィンな作品、探してみた</a>
+                </p>
+              </div>
+            </li>
+                      <li class="matome_box_inner swiper-slide">
+              <div class="matome_content">
+                <div class="matome_img_main">
+                  <a rel="noopener" href="https://ch.dlsite.com/matome/28190?dls=&k_matome_maniax_pc" target="_blank">
+                    <img data-src="https://media.dlsite.com/proxy/4d164a5f24d30046a298019cf4366014dee10cec/687474703a2f2f696d672e646c736974652e6a702f6d6f647075622f696d61676573322f776f726b2f646f756a696e2f524a3230343030302f524a3230333433315f696d675f6d61696e2e6a7067" alt="11/3更新【今週のよもやま】同人がたり（週記）2018/10/28～11/3"
+                         title="11/3更新【今週のよもやま】同人がたり（週記）2018/10/28～11/3" class="swiper-lazy"></a>
+                    <div class="swiper-lazy-preloader"></div>
+                </div>
+                <p class="matome_content_title">
+                  <a href="https://ch.dlsite.com/matome/28190?dls=&k_matome_maniax_pc"
+                     rel="noopener" target="_blank">11/3更新【今週のよもやま】同人がたり（週記）2018/10/28～11/3</a>
+                </p>
+              </div>
+            </li>
+                      <li class="matome_box_inner swiper-slide">
+              <div class="matome_content">
+                <div class="matome_img_main">
+                  <a rel="noopener" href="https://ch.dlsite.com/matome/10548?dls=&k_matome_maniax_pc" target="_blank">
+                    <img data-src="https://media.dlsite.com/proxy/5bd9d315c745f15b566fe55ccbcec417a8ceeeec/687474703a2f2f696d672e646c736974652e6a702f6d6f647075622f696d61676573322f776f726b2f646f756a696e2f524a3138363030302f524a3138353439365f696d675f6d61696e2e6a7067" alt="台本がついてくる音声作品まとめ"
+                         title="台本がついてくる音声作品まとめ" class="swiper-lazy"></a>
+                    <div class="swiper-lazy-preloader"></div>
+                </div>
+                <p class="matome_content_title">
+                  <a href="https://ch.dlsite.com/matome/10548?dls=&k_matome_maniax_pc"
+                     rel="noopener" target="_blank">台本がついてくる音声作品まとめ</a>
+                </p>
+              </div>
+            </li>
+                      <li class="matome_box_inner swiper-slide">
+              <div class="matome_content">
+                <div class="matome_img_main">
+                  <a rel="noopener" href="https://ch.dlsite.com/matome/69026?dls=&k_matome_maniax_pc" target="_blank">
+                    <img data-src="https://media.dlsite.com/proxy/e14ab939f82c51f0102c0ae524a3e7006fe849af/687474703a2f2f696d672e646c736974652e6a702f6d6f647075622f696d61676573322f776f726b2f70726f66657373696f6e616c2f564a3030373030302f564a3030363835355f696d675f6d61696e2e6a7067" alt="ヴァンパイア、吸血鬼がメインの作品38作まとめ"
+                         title="ヴァンパイア、吸血鬼がメインの作品38作まとめ" class="swiper-lazy"></a>
+                    <div class="swiper-lazy-preloader"></div>
+                </div>
+                <p class="matome_content_title">
+                  <a href="https://ch.dlsite.com/matome/69026?dls=&k_matome_maniax_pc"
+                     rel="noopener" target="_blank">ヴァンパイア、吸血鬼がメインの作品38作まとめ</a>
+                </p>
+              </div>
+            </li>
+                      <li class="matome_box_inner swiper-slide">
+              <div class="matome_content">
+                <div class="matome_img_main">
+                  <a rel="noopener" href="https://ch.dlsite.com/matome/7475?dls=&k_matome_maniax_pc" target="_blank">
+                    <img data-src="https://media.dlsite.com/proxy/bbf2388d2e836502ae0e85fe19d7e9a91660bee9/687474703a2f2f696d672e646c736974652e6a702f6d6f647075622f696d61676573322f776f726b2f646f756a696e2f524a3132373030302f524a3132363932385f696d675f6d61696e2e6a7067" alt="優しく責められる音声作品紹介"
+                         title="優しく責められる音声作品紹介" class="swiper-lazy"></a>
+                    <div class="swiper-lazy-preloader"></div>
+                </div>
+                <p class="matome_content_title">
+                  <a href="https://ch.dlsite.com/matome/7475?dls=&k_matome_maniax_pc"
+                     rel="noopener" target="_blank">優しく責められる音声作品紹介</a>
+                </p>
+              </div>
+            </li>
+                      <li class="matome_box_inner swiper-slide">
+              <div class="matome_content">
+                <div class="matome_img_main">
+                  <a rel="noopener" href="https://ch.dlsite.com/matome/12026?dls=&k_matome_maniax_pc" target="_blank">
+                    <img data-src="https://media.dlsite.com/proxy/bbf2388d2e836502ae0e85fe19d7e9a91660bee9/687474703a2f2f696d672e646c736974652e6a702f6d6f647075622f696d61676573322f776f726b2f646f756a696e2f524a3132373030302f524a3132363932385f696d675f6d61696e2e6a7067" alt="おすすめ音声作品を紹介13"
+                         title="おすすめ音声作品を紹介13" class="swiper-lazy"></a>
+                    <div class="swiper-lazy-preloader"></div>
+                </div>
+                <p class="matome_content_title">
+                  <a href="https://ch.dlsite.com/matome/12026?dls=&k_matome_maniax_pc"
+                     rel="noopener" target="_blank">おすすめ音声作品を紹介13</a>
+                </p>
+              </div>
+            </li>
+                      <li class="matome_box_inner swiper-slide">
+              <div class="matome_content">
+                <div class="matome_img_main">
+                  <a rel="noopener" href="https://ch.dlsite.com/matome/7577?dls=&k_matome_maniax_pc" target="_blank">
+                    <img data-src="https://media.dlsite.com/proxy/bbf2388d2e836502ae0e85fe19d7e9a91660bee9/687474703a2f2f696d672e646c736974652e6a702f6d6f647075622f696d61676573322f776f726b2f646f756a696e2f524a3132373030302f524a3132363932385f696d675f6d61696e2e6a7067" alt="購入した音声作品を紹介する part15"
+                         title="購入した音声作品を紹介する part15" class="swiper-lazy"></a>
+                    <div class="swiper-lazy-preloader"></div>
+                </div>
+                <p class="matome_content_title">
+                  <a href="https://ch.dlsite.com/matome/7577?dls=&k_matome_maniax_pc"
+                     rel="noopener" target="_blank">購入した音声作品を紹介する part15</a>
+                </p>
+              </div>
+            </li>
+                      <li class="matome_box_inner swiper-slide">
+              <div class="matome_content">
+                <div class="matome_img_main">
+                  <a rel="noopener" href="https://ch.dlsite.com/matome/85472?dls=&k_matome_maniax_pc" target="_blank">
+                    <img data-src="https://media.dlsite.com/proxy/b22290e8b1f16020123dac3a826129a25f7404d0/68747470733a2f2f696d672e646c736974652e6a702f6d6f647075622f696d61676573322f776f726b2f70726f66657373696f6e616c2f564a3031313030302f564a3031303339385f696d675f736d7061312e6a7067" alt="女の子吸血鬼に血を吸われた～い！　ヴァンパイア女子作品まとめ"
+                         title="女の子吸血鬼に血を吸われた～い！　ヴァンパイア女子作品まとめ" class="swiper-lazy"></a>
+                    <div class="swiper-lazy-preloader"></div>
+                </div>
+                <p class="matome_content_title">
+                  <a href="https://ch.dlsite.com/matome/85472?dls=&k_matome_maniax_pc"
+                     rel="noopener" target="_blank">女の子吸血鬼に血を吸われた～い！　ヴァンパイア女子作品まとめ</a>
+                </p>
+              </div>
+            </li>
+                  </ul>
+      </div>
+      <div class="carousel_arrow_left swiper-button-prev"></div>
+      <div class="carousel_arrow_right swiper-button-next"></div>
+    </div>
+    <ul class="matome_more">
+              <li><p class="matome_text"><a href="https://ch.dlsite.com/antenna/205955/contents?mode=matome"
+                                      rel="noopener" target="_blank">View all related articles (27)</a></p></li>
+            <li class="matome_btn"><a href="https://ch.dlsite.com/matome/create" rel="noopener" target="_blank"
+                                class="btn_post size_xxl fs15"><i>Create a post</i></a></li>
+    </ul>
+  </div>
+
+  <script>
+      $(function () {
+          // Swiper4系
+          var swiper = new Swiper('#matome-swiper', {
+              slidesPerView: 6,
+              slidesPerGroup: 6,
+              spaceBetween: 20,
+              watchSlidesVisibility: true,
+              navigation: {
+                  nextEl: '.swiper-button-next',
+                  prevEl: '.swiper-button-prev',
+              },
+              preloadImages: false,
+              lazy: true,
+              breakpoints: {
+                  1900: {
+                      slidesPerView: 5,
+                      slidesPerGroup: 5,
+                  },
+                  1620: {
+                      slidesPerView: 4,
+                      slidesPerGroup: 4,
+                  },
+                  1390: {
+                      slidesPerView: 3,
+                      slidesPerGroup: 3,
+                  },
+                  1150: {
+                      slidesPerGroup: 2,
+                      slidesPerView: 2,
+                  }
+              }
+          });
+
+          $('.matome_box').show();
+
+            //要素表示時読み込み
+        var scrollIn = function(event) {
+            var target_rect = document.getElementById('matome-swiper').getBoundingClientRect();
+            if (0 < target_rect.top && target_rect.bottom <= window.innerHeight) {
+                swiper.lazy.load();
+                window.removeEventListener('scroll', scrollIn, false);
+            }
+        };
+        window.addEventListener('scroll', scrollIn, false);
+
+       $('.matome_box').show();
+      });
+  </script>
+
+
+            <div class="title_01 clearfix">
+  <h2>Open Projects / Promotions</h2>
+</div>
+  <div class="content_scroller" data-section-name="eisys-campaign" id="campaign_bcs">
+    <div class="relation_content_container">
+      <div id="content-swiper" class="swiper-container">
+        <ul class="relation_content_list swiper-wrapper" style="display:none;">
+                      <li class="relation_content_list_item swiper-slide">
+              <div class="content_item">
+                <div class="content_item_img">
+                  <a rel="noopener" href="https://ch.dlsite.com/matome/143879?from=event_matome_2109_comipo-free0910" target="_blank">
+                    <img data-src="//media.dlsite.com/bcs/dlsite/1630335600/bn_88eea1b175214d2a323d27fc1343627876cef8cd.jpg?w=200&h=150&s=30" alt="【オリジナルレーベル『comipo comics』】2021年9月の新作情報！" class="swiper-lazy"></a>
+                    <div class="swiper-lazy-preloader"></div>
+                </div>
+                <p class="content_item_title">
+                  <a rel="noopener" href="https://ch.dlsite.com/matome/143879?from=event_matome_2109_comipo-free0910" target="_blank">【オリジナルレーベル『comipo comics』】2021年9月の新作情報！</a>
+                </p>
+              </div>
+            </li>
+                      <li class="relation_content_list_item swiper-slide">
+              <div class="content_item">
+                <div class="content_item_img">
+                  <a rel="noopener" href="https://ch.dlsite.com/matome/143906?from=event_matome_2109_180s-asmr" target="_blank">
+                    <img data-src="//media.dlsite.com/bcs/dlsite/1632927600/bn_6cd29c97712989677006aaed8e798b020755ff64.jpg?w=200&h=150&s=30" alt="【ASMRxアニメーション】180秒で君の耳を幸せにできるか ASMR音声作品が発売開始！" class="swiper-lazy"></a>
+                    <div class="swiper-lazy-preloader"></div>
+                </div>
+                <p class="content_item_title">
+                  <a rel="noopener" href="https://ch.dlsite.com/matome/143906?from=event_matome_2109_180s-asmr" target="_blank">【ASMRxアニメーション】180秒で君の耳を幸せにできるか ASMR音声作品が発売開始！</a>
+                </p>
+              </div>
+            </li>
+                      <li class="relation_content_list_item swiper-slide">
+              <div class="content_item">
+                <div class="content_item_img">
+                  <a rel="noopener" href="https://ch.dlsite.com/matome/143862?from=event_matome_2109_summersale2021-rt" target="_blank">
+                    <img data-src="//media.dlsite.com/bcs/dlsite/1632927600/bn_9a0318d5efe6cbde45458acdc72a987ff746bf7f.jpg?w=200&h=150&s=30" alt="【9/13 13:59まで】＼RTでポイントUP／フォロー&amp;amp;RTキャンペーン実施中" class="swiper-lazy"></a>
+                    <div class="swiper-lazy-preloader"></div>
+                </div>
+                <p class="content_item_title">
+                  <a rel="noopener" href="https://ch.dlsite.com/matome/143862?from=event_matome_2109_summersale2021-rt" target="_blank">【9/13 13:59まで】＼RTでポイントUP／フォロー&amp;amp;RTキャンペーン実施中</a>
+                </p>
+              </div>
+            </li>
+                      <li class="relation_content_list_item swiper-slide">
+              <div class="content_item">
+                <div class="content_item_img">
+                  <a rel="noopener" href="https://ch.dlsite.com/matome/140499?from=event_matome_2109_populargenres0903" target="_blank">
+                    <img data-src="//media.dlsite.com/bcs/dlsite/1632927600/bn_cb2b7bda81a7dbed772d8b72818c681c63ffc151.jpg?w=200&h=150&s=30" alt="【八尺様】いまDLsiteで気になる作品ジャンルについてご紹介！" class="swiper-lazy"></a>
+                    <div class="swiper-lazy-preloader"></div>
+                </div>
+                <p class="content_item_title">
+                  <a rel="noopener" href="https://ch.dlsite.com/matome/140499?from=event_matome_2109_populargenres0903" target="_blank">【八尺様】いまDLsiteで気になる作品ジャンルについてご紹介！</a>
+                </p>
+              </div>
+            </li>
+                      <li class="relation_content_list_item swiper-slide">
+              <div class="content_item">
+                <div class="content_item_img">
+                  <a rel="noopener" href="https://ch.dlsite.com/matome/142390?from=event_matome_2109_8month-matome" target="_blank">
+                    <img data-src="//media.dlsite.com/bcs/dlsite/1632927600/bn_d123e057b0a2b67025055b27b61a52fa271d24d7.jpg?w=200&h=150&s=30" alt="【2021年8月】DLチャンネル運営が勝手に選ぶ、先月面白かったまとめ記事" class="swiper-lazy"></a>
+                    <div class="swiper-lazy-preloader"></div>
+                </div>
+                <p class="content_item_title">
+                  <a rel="noopener" href="https://ch.dlsite.com/matome/142390?from=event_matome_2109_8month-matome" target="_blank">【2021年8月】DLチャンネル運営が勝手に選ぶ、先月面白かったまとめ記事</a>
+                </p>
+              </div>
+            </li>
+                      <li class="relation_content_list_item swiper-slide">
+              <div class="content_item">
+                <div class="content_item_img">
+                  <a rel="noopener" href="https://ch.dlsite.com/matome/142417?from=event_matome_2109_talk-occult" target="_blank">
+                    <img data-src="//media.dlsite.com/bcs/dlsite/1632927600/bn_933a0b616c99ba654d79ab569ff50c7f18e5bdd3.jpg?w=200&h=150&s=30" alt="【トークキャンペーン】オススメのホラー・オカルト作品を語って1000ポイントをGETしよう！" class="swiper-lazy"></a>
+                    <div class="swiper-lazy-preloader"></div>
+                </div>
+                <p class="content_item_title">
+                  <a rel="noopener" href="https://ch.dlsite.com/matome/142417?from=event_matome_2109_talk-occult" target="_blank">【トークキャンペーン】オススメのホラー・オカルト作品を語って1000ポイントをGETしよう！</a>
+                </p>
+              </div>
+            </li>
+                      <li class="relation_content_list_item swiper-slide">
+              <div class="content_item">
+                <div class="content_item_img">
+                  <a rel="noopener" href="https://ch.dlsite.com/matome/141654?from=event_matome_2109_hadukitubasa_review39" target="_blank">
+                    <img data-src="//media.dlsite.com/bcs/dlsite/1632927600/bn_6440162787f5f5eea249aa93829a06dc805f5c61.jpg?w=200&h=150&s=30" alt="【葉月つばさの同人レビューVol.39】三十路童貞が新卒女子に喰われた話" class="swiper-lazy"></a>
+                    <div class="swiper-lazy-preloader"></div>
+                </div>
+                <p class="content_item_title">
+                  <a rel="noopener" href="https://ch.dlsite.com/matome/141654?from=event_matome_2109_hadukitubasa_review39" target="_blank">【葉月つばさの同人レビューVol.39】三十路童貞が新卒女子に喰われた話</a>
+                </p>
+              </div>
+            </li>
+                      <li class="relation_content_list_item swiper-slide">
+              <div class="content_item">
+                <div class="content_item_img">
+                  <a rel="noopener" href="https://ch.dlsite.com/matome/141853?from=event_matome_2108_illegalupload" target="_blank">
+                    <img data-src="//media.dlsite.com/bcs/dlsite/1630335600/bn_39d96fe20548b1bec220ca5bfd36c0d986383ab8.jpg?w=200&h=150&s=30" alt="違法アップロードへの対策活動に関するご報告" class="swiper-lazy"></a>
+                    <div class="swiper-lazy-preloader"></div>
+                </div>
+                <p class="content_item_title">
+                  <a rel="noopener" href="https://ch.dlsite.com/matome/141853?from=event_matome_2108_illegalupload" target="_blank">違法アップロードへの対策活動に関するご報告</a>
+                </p>
+              </div>
+            </li>
+                      <li class="relation_content_list_item swiper-slide">
+              <div class="content_item">
+                <div class="content_item_img">
+                  <a rel="noopener" href="https://ch.dlsite.com/matome/139136?from=event_matome_2108_free0817" target="_blank">
+                    <img data-src="//media.dlsite.com/bcs/dlsite/1630335600/bn_c4758f5666be81bdc11e479e899c87176225673a.jpg?w=200&h=150&s=30" alt="【9/14まで】&amp;ldquo;期間限定&amp;rdquo; 無料作品！ 一ヵ月間だけ0円！【同人】" class="swiper-lazy"></a>
+                    <div class="swiper-lazy-preloader"></div>
+                </div>
+                <p class="content_item_title">
+                  <a rel="noopener" href="https://ch.dlsite.com/matome/139136?from=event_matome_2108_free0817" target="_blank">【9/14まで】&amp;ldquo;期間限定&amp;rdquo; 無料作品！ 一ヵ月間だけ0円！【同人】</a>
+                </p>
+              </div>
+            </li>
+                      <li class="relation_content_list_item swiper-slide">
+              <div class="content_item">
+                <div class="content_item_img">
+                  <a rel="noopener" href="https://ch.dlsite.com/matome/136873?from=event_matome_2108_voice-comic0806" target="_blank">
+                    <img data-src="//media.dlsite.com/bcs/dlsite/1630335600/bn_39006238679b00e974e90cf35cb4ac7d1a15c7dd.jpeg?w=200&h=150&s=30" alt="【2021年8月発売】もう試した？漫画・CG集をボイス付きで楽しむ！ボイスコミック新作まとめ" class="swiper-lazy"></a>
+                    <div class="swiper-lazy-preloader"></div>
+                </div>
+                <p class="content_item_title">
+                  <a rel="noopener" href="https://ch.dlsite.com/matome/136873?from=event_matome_2108_voice-comic0806" target="_blank">【2021年8月発売】もう試した？漫画・CG集をボイス付きで楽しむ！ボイスコミック新作まとめ</a>
+                </p>
+              </div>
+            </li>
+                      <li class="relation_content_list_item swiper-slide">
+              <div class="content_item">
+                <div class="content_item_img">
+                  <a rel="noopener" href="https://ch.dlsite.com/matome/135733?from=event_matome_2107_home-support" target="_blank">
+                    <img data-src="//media.dlsite.com/bcs/dlsite/1627657200/bn_50a37f438668dedb130b79b786b8029433c45cf6.jpg?w=200&h=150&s=30" alt="【クリエイター向け】卸価格一律90%！ 創作活動応援キャンペーン！【販売手数料10%】" class="swiper-lazy"></a>
+                    <div class="swiper-lazy-preloader"></div>
+                </div>
+                <p class="content_item_title">
+                  <a rel="noopener" href="https://ch.dlsite.com/matome/135733?from=event_matome_2107_home-support" target="_blank">【クリエイター向け】卸価格一律90%！ 創作活動応援キャンペーン！【販売手数料10%】</a>
+                </p>
+              </div>
+            </li>
+                      <li class="relation_content_list_item swiper-slide">
+              <div class="content_item">
+                <div class="content_item_img">
+                  <a rel="noopener" href="https://ch.dlsite.com/matome/130260?from=event_matome_2106_dead-of-dead" target="_blank">
+                    <img data-src="//media.dlsite.com/bcs/dlsite/1624978800/bn_c7cabdd867507641a78a8f445a48f4679d75c979.jpg?w=200&h=150&s=30" alt="【CV:椎名へきる】「食人音・咀嚼音」が楽しめるASMR「Dead of Dead」新田鈴編" class="swiper-lazy"></a>
+                    <div class="swiper-lazy-preloader"></div>
+                </div>
+                <p class="content_item_title">
+                  <a rel="noopener" href="https://ch.dlsite.com/matome/130260?from=event_matome_2106_dead-of-dead" target="_blank">【CV:椎名へきる】「食人音・咀嚼音」が楽しめるASMR「Dead of Dead」新田鈴編</a>
+                </p>
+              </div>
+            </li>
+                      <li class="relation_content_list_item swiper-slide">
+              <div class="content_item">
+                <div class="content_item_img">
+                  <a rel="noopener" href="https://ch.dlsite.com/matome/131640?from=event_matome_2107_yukiusagi-asmr" target="_blank">
+                    <img data-src="//media.dlsite.com/bcs/dlsite/1627657200/bn_72c95d91a08fb875c9de2056024c949af900b1fe.jpg?w=200&h=150&s=30" alt="【大人気コミックを音声化！】夢の中の秘め事をASMRで体験しよう【ゆきうさぎ。/幻想エクスタシー】" class="swiper-lazy"></a>
+                    <div class="swiper-lazy-preloader"></div>
+                </div>
+                <p class="content_item_title">
+                  <a rel="noopener" href="https://ch.dlsite.com/matome/131640?from=event_matome_2107_yukiusagi-asmr" target="_blank">【大人気コミックを音声化！】夢の中の秘め事をASMRで体験しよう【ゆきうさぎ。/幻想エクスタシー】</a>
+                </p>
+              </div>
+            </li>
+                      <li class="relation_content_list_item swiper-slide">
+              <div class="content_item">
+                <div class="content_item_img">
+                  <a rel="noopener" href="https://ch.dlsite.com/matome/129602?from=event_matome_2106_ranking" target="_blank">
+                    <img data-src="//media.dlsite.com/bcs/dlsite/1624978800/bn_08290def7d73d821eedcd842a73eeb1513253f14.jpg?w=200&h=150&s=30" alt="【男性成人向け】DLsite2021年上半期ランキング！" class="swiper-lazy"></a>
+                    <div class="swiper-lazy-preloader"></div>
+                </div>
+                <p class="content_item_title">
+                  <a rel="noopener" href="https://ch.dlsite.com/matome/129602?from=event_matome_2106_ranking" target="_blank">【男性成人向け】DLsite2021年上半期ランキング！</a>
+                </p>
+              </div>
+            </li>
+                      <li class="relation_content_list_item swiper-slide">
+              <div class="content_item">
+                <div class="content_item_img">
+                  <a rel="noopener" href="https://ch.dlsite.com/matome/128692?from=event_matome_2106_freelyavailable05" target="_blank">
+                    <img data-src="//media.dlsite.com/bcs/dlsite/1624978800/bn_e83ce1e9e7c185dd3a3510aa722bbf642e9ff9ef.jpg?w=200&h=150&s=30" alt="【無料音声】相良茉優さん主演ASMR「【京ことば】美容師さんごっこ」配信開始" class="swiper-lazy"></a>
+                    <div class="swiper-lazy-preloader"></div>
+                </div>
+                <p class="content_item_title">
+                  <a rel="noopener" href="https://ch.dlsite.com/matome/128692?from=event_matome_2106_freelyavailable05" target="_blank">【無料音声】相良茉優さん主演ASMR「【京ことば】美容師さんごっこ」配信開始</a>
+                </p>
+              </div>
+            </li>
+                      <li class="relation_content_list_item swiper-slide">
+              <div class="content_item">
+                <div class="content_item_img">
+                  <a rel="noopener" href="https://ch.dlsite.com/matome/127111?from=event_matome_2106_girls-comic" target="_blank">
+                    <img data-src="//media.dlsite.com/bcs/dlsite/1624978800/bn_c83de307ef9f20c3f9bb3e1a2de0ae90b20fb886.jpg?w=200&h=150&s=30" alt="【TL】男性でも楽しめる 注目の女性向けコミック【作品まとめ】" class="swiper-lazy"></a>
+                    <div class="swiper-lazy-preloader"></div>
+                </div>
+                <p class="content_item_title">
+                  <a rel="noopener" href="https://ch.dlsite.com/matome/127111?from=event_matome_2106_girls-comic" target="_blank">【TL】男性でも楽しめる 注目の女性向けコミック【作品まとめ】</a>
+                </p>
+              </div>
+            </li>
+                      <li class="relation_content_list_item swiper-slide">
+              <div class="content_item">
+                <div class="content_item_img">
+                  <a rel="noopener" href="https://ch.dlsite.com/matome/123144?from=event_matome_2105_maikafantasia" target="_blank">
+                    <img data-src="//media.dlsite.com/bcs/dlsite/1622386800/bn_226d07395d8c6db3f789797e63f834d79e206b01.jpg?w=200&h=150&s=30" alt="【にじGAME】今度は音ゲー！ 新作タイトル「舞歌ファンタジア」が2021年夏に配信予定！" class="swiper-lazy"></a>
+                    <div class="swiper-lazy-preloader"></div>
+                </div>
+                <p class="content_item_title">
+                  <a rel="noopener" href="https://ch.dlsite.com/matome/123144?from=event_matome_2105_maikafantasia" target="_blank">【にじGAME】今度は音ゲー！ 新作タイトル「舞歌ファンタジア」が2021年夏に配信予定！</a>
+                </p>
+              </div>
+            </li>
+                      <li class="relation_content_list_item swiper-slide">
+              <div class="content_item">
+                <div class="content_item_img">
+                  <a rel="noopener" href="https://ch.dlsite.com/matome/49195?from=event_matome_1911_advertisingbanner" target="_blank">
+                    <img data-src="//media.dlsite.com/bcs/dlsite/1575039600/bn_1caa693d26f78343827d74bcbc1a4c0a6b666cef.jpg?w=200&h=150&s=30" alt="【注目の話題作】広告掲載中の作品一覧はこちらです【バナー広告掲載中のエロ同人】" class="swiper-lazy"></a>
+                    <div class="swiper-lazy-preloader"></div>
+                </div>
+                <p class="content_item_title">
+                  <a rel="noopener" href="https://ch.dlsite.com/matome/49195?from=event_matome_1911_advertisingbanner" target="_blank">【注目の話題作】広告掲載中の作品一覧はこちらです【バナー広告掲載中のエロ同人】</a>
+                </p>
+              </div>
+            </li>
+                  </ul>
+      </div>
+      <div class="carousel_arrow_left content-swiper-button-prev"></div>
+      <div class="carousel_arrow_right content-swiper-button-next"></div>
+    </div>
+  </div>
+
+
+<script>
+$(function () {
+
+  //作品並びシャッフル
+  function shuffleContent(container) {
+    var content = container.find('> li');
+    var total = content.size();
+    content.each(function() {
+        content.eq(Math.floor(Math.random()*total)).prependTo(container);
+    });
+    return true;
+  }
+  shuffleContent($('.relation_content_list'));
+
+  // Swiper4系
+  var swiper = new Swiper('#content-swiper', {
+      slidesPerView: 6,
+      slidesPerGroup: 6,
+      spaceBetween: 20,
+      watchSlidesVisibility: true,
+      navigation: {
+          nextEl: '.content-swiper-button-next',
+          prevEl: '.content-swiper-button-prev',
+      },
+      preloadImages: false,
+      lazy: true,
+      breakpoints: {
+          1900: {
+              slidesPerView: 5,
+              slidesPerGroup: 5,
+          },
+          1620: {
+              slidesPerView: 4,
+              slidesPerGroup: 4,
+          },
+          1390: {
+              slidesPerView: 3,
+              slidesPerGroup: 3,
+          },
+          1150: {
+              slidesPerGroup: 2,
+              slidesPerView: 2,
+          }
+      }
+  });
+
+  //要素表示時読み込み
+  var scrollIn = function(event) {
+      var target_rect = document.getElementById('campaign_bcs').getBoundingClientRect();
+      if (0 < target_rect.top && target_rect.bottom <= window.innerHeight) {
+          swiper.lazy.load();
+          window.removeEventListener('scroll', scrollIn, false);
+      }
+  };
+  window.addEventListener('scroll', scrollIn, false);
+
+  // ファーストビューに含まれそうならすぐ表示
+  if (!document.querySelector('#work_name')) {
+    scrollIn();
+  }
+
+  $('.relation_content_list').show();
+});
+</script>
+
+
+            
+            
+            
+            
+          </div>
+          <!-- /main_inner -->
+        </div>
+        <!-- /main -->
+
+        <template data-vue-component="restriction-of-countries"></template>
+        <template data-vue-component="notice"></template>
+
+      </div>
+      <!-- /wrapper -->
+
+      <!-- right -->
+      <div id="right" data-section_name="right">
+        
+        
+        
+        <div id="work_buy_box_wrapper" data-vue-component="product-price" data-product-id="RJ126928" data-is-check="" data-is-comingsoon="0" data-section_name="right_work_price">
+  <div v-if="product.price !== undefined && (product.on_sale || product.is_rental || is_bought || rentaled)" v-cloak class="work_buy_main">
+    
+    <div id="work_price">
+      <div v-if="product.on_sale" class="work_buy_type" :class="class_buy_type_sell" @click.stop="buy_type = 'sell'">
+        
+
+        <div v-if="product.is_discount || product.is_pointup || product.is_limit_work || rentaled" class="campaign_info">
+          <p v-if="product.is_limit_work" class="type_quantity"><span v-t="'product.title_works.limit_sales'"></span></p>
+          <!-- タイムセール -->
+          <p v-if="product.is_timesale" class="type_sale">
+            <span>{{$t('product.title_works.limit_sales')}} {{ product.discount_rate == 100 ? $t('product.price.discount_free') : product.discount_rate + '%OFF' }}</span>
+          </p>
+          <!-- 割引・無料販売 -->
+          <template v-else-if="product.is_discount">
+            <p v-if="product.discount_to && !dlsite.isComipo()" class="type_sale transition">
+              <a rel="noopener" :href="product.discount_to">
+                <span>{{ product.discount_rate == 100 ? $t('product.price.discount_free') : product.discount_rate + '%OFF' }}<span v-if="product.discount_end_date" class="period">{{ $t('product.price.til', [product.discount_end_date]) }}</span><span class="fs11" v-t="'product.price.sale_link'"></span></span>
+              </a>
+            </p>
+            <p v-else class="type_sale">
+              <span>{{ product.discount_rate == 100 ? $t('product.price.discount_free') : product.discount_rate + '%OFF' }}<span class="period" v-if="product.discount_end_date">{{ $t('product.price.til', [product.discount_end_date]) }}</span></span>
+            </p>
+          </template>
+          <!-- ポイント還元 -->
+          <p v-if="product.is_pointup && (product.product_point || product.default_point)" class="type_point">
+            <span>{{ $t('product.price.point_return', [product.product_point_rate]) }}<span v-if="product.pointup_end_date" class="period">{{ $t('product.price.til', [product.pointup_end_date]) }}</span></span>
+          </p>
+        </div>
+
+        <div class="work_buy_container">
+          
+                    
+          <div class="work_buy_body" itemprop="offers" itemscope="" itemtype="http://schema.org/Offer">
+            <meta itemprop="price" :content="real_price">
+            <meta itemprop="priceCurrency" content="JPY">
+            <div v-if="product.is_discount" class="work_buy_label" v-t="'product.price.special_price'"><!-- セール特価 --></div>
+            <div v-else class="work_buy_label" v-t="'product.price.price'"><!-- 価格 --></div>
+            <div class="work_buy_content">
+              <strong v-if="product.is_discount" class="price">{{ real_price | number_format }}<i v-html="yen_symbol_label"></i></strong>
+              <span v-else class="price">{{ product.price_str }}<i v-html="yen_symbol_label"></i></span>
+              <!-- 通貨換算額 -->
+              <tempalate v-if="locale_price">
+                <span class="separator">/</span>
+                <strong  class="price" v-html="locale_price"></strong>
+              </template>
+            </div>
+          </div>
+
+          <div v-if="product.is_discount" class="work_buy_body">
+            <div class="work_buy_label" v-t="'product.price.normal_price'"><!-- 通常価格 --></div>
+            <div class="work_buy_content">
+                <span class="strike">{{ product.official_price_str || product.price_str }}<i v-html="yen_symbol_label"></i></span>
+                <!-- 通貨換算額 -->
+                <template v-if="locale_official_price">
+                  <span class="separator">/</span>
+                  <span class="strike" v-html="locale_official_price"></span>
+                </template>
+            </div>
+          </div>
+
+          <div v-if="dlsite.getLocale() != 'ja-jp'" class="work_buy_body">
+            <p>[&nbsp;<a :href="estimation_link" v-t="'product.price.estimation'"></a>&nbsp;]</p>
+          </div>
+
+          <div v-if="real_point" class="work_buy_body">
+            <div class="work_buy_label" v-t="'product.price.point'"><!-- ポイント --></div>
+            <div class="work_buy_content">
+              <strong class="work_point point_up">{{ real_point | number_format }}<i v-if="real_point">pt ({{ $t('product.price.point_return', [real_point_rate]) }})</i><i v-else>pt</i></strong>
+            </div>
+          </div>
+          
+          <div v-if="bestCouponDiscount" v-cloak class="coupon_available">
+            <span class="coupon_available_head">Register for free coupons!</span>
+            <div class="coupon_available_inner">
+              <dl class="coupon_detail">
+                <dt class="ex">Lowest possible price with coupons</dt>
+                <dd class="total type_jpy">
+                  {{ (product.price - bestCouponDiscount).toLocaleString() }}<span>JPY</span>
+                  <span class="separator">/</span>
+                </dd>
+                <dd class="total" v-html="$options.filters.exchanger_discount_format(product.locale_price, bestCouponRate, dlsite.getLocale())"></dd>
+              </dl>
+            </div>
+          </div>
+          
+          <div v-else-if="bestUserCoupon" v-cloak class="coupon_available">
+            <div class="coupon_available_inner">
+              <dl class="coupon_detail">
+                <dt class="ex">Lowest possible price with coupons</dt>
+                <dd class="total type_jpy">
+                  {{ (product.price - bestUserCouponDiscount).toLocaleString() }}<span>JPY</span>
+                  <span class="separator">/</span>
+                </dd>
+                <dd class="total" v-html="$options.filters.exchanger_discount_format(product.locale_price, bestUserCouponRate, dlsite.getLocale())"></dd>
+              </dl>
+            </div>
+            <span class="attended">Available Coupon</span>
+            <p class="coupon_name" v-text="bestUserCoupon.coupon_name"></p>
+            <div class="coupon_detail">
+              <a href="https://www.dlsite.com/maniax/mypage/coupon/list">Check the conditions here</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="work_buy_btn">
+      <!-- ダウンロード -->
+      <template v-if=" ! product.is_sale && is_comingsoon && !is_check">
+        <div class="pre_work_message">
+          <span class="title">Scheduled Release Date</span>
+          <span class="date">1月11日 0時</span>
+          <span class="note">*Sale may be<br>postponed.</span>
+        </div>
+      </template>
+      <template v-else-if=" ! product.is_sale && product.on_sale && ! is_check">
+        <p class="work_sales_end">販売終了しました</p>
+      </template>
+      <template v-else>
+        <template v-if="is_bought">
+          
+                    
+          <p class="work_stream"><a rel="noopener" href="https://play.dlsite.com/?workno=RJ126928" class="btn_st" :class="{ disabled: ! product.dlsiteplay_work || product.dl_format == 16 }" title="ブラウザ視聴" target="_blank">Stream</a></p>
+          <p v-if="product.dl_format !== 20 && product.dl_format !== 21" class="work_cart">
+            <a :href="product.down_url" class="btn_dl" :class="{ disabled: product.dl_format == 17 }">Download</a>
+          </p>
+          
+                    
+        </template>
+        <template v-else-if="is_already">
+          <p class="work_already">既に持っています</p>
+        </template>
+
+        <template v-if="rentaled">
+          <p class="work_cart"><a href="https://www.dlsite.com/maniax/download/rental/=/product_id/RJ126928.html" class="btn_dl">Download</a></p>
+        </template>
+
+        <transition name="popup" mode="out-in">
+        <p v-if="product.is_rental && ! rentaled && ((product.work_rentals || []).length + ( ! is_bought && product.on_sale ? 1 : 0) > 1) && carted" class="message_cart_in" :key="carted.rental_id"><span>{{ carted.name }}</span>Added</p>
+        </transition>
+
+        <template v-if="is_check">
+          <p class="work_cart">
+            <a class="btn_cart" v-t="'cart.add_cart'"><!-- カートに入れる --></a>
+          </p>
+        </template>
+        <template v-else-if="buy_type == 'rental' || ! is_bought && ! rentaled && ! product.on_sale">
+          <p v-if="carted && carted.rental_id == rental.id" class="work_cart">
+            <a :href="makeUrl('/cart', { rental_id: rental_id, product_id: product.product_id })" class="btn_cart_in" v-t="'cart.in_cart'"><!-- カートに入っています--></a>
+          </p>
+          <p v-else class="work_cart">
+            <a @click.prevent="addCart({ product_id:product.product_id, rental_id: rental.id }); showCartPopup()" :href="makeUrl('/cart', { rental_id: rental_id, product_id: product.product_id })" class="btn_cart" v-t="'cart.add_cart'"><!-- カートに入れる --></a>
+          </p>
+        </template>
+        <template v-else-if=" ! is_bought && product.on_sale">
+          <p v-if="product.is_sold_out" class="work_cart">
+            <a href="#" class="btn_cart disabled" v-t="'product.item.sold_out'"></a>
+          </p>
+          <p v-else-if="carted && ! carted.rental_id" class="work_cart">
+            
+                          <a :href="makeUrl('/cart', { product_id: product.product_id })" class="btn_cart_in" v-t="'cart.in_cart'"><!-- カートに入っています --></a>
+                      
+          </p>
+          <template v-else>
+          
+                          
+              <p class="work_cart" v-if="!isAccountLogin">
+                <a href="https://www.dlsite.com/maniax/pay/member/=/relayout/cart/buynow/1/product_id/RJ126928.html" class="btn_buy">Sign Up &amp; Buy Now</a>
+              </p>
+              <p class="work_cart">
+                <a @click.prevent="addCart({ product_id:product.product_id }); showCartPopup()" :href="makeUrl('/cart', { product_id: product.product_id })" class="btn_cart" v-t="'cart.add_cart'"><!-- カートに入れる --></a>
+              </p>
+              <p class="work_cart" v-if="isAccountLogin">
+                <a href="https://www.dlsite.com/maniax/pay/member/=/relayout/cart/buynow/1/product_id/RJ126928.html" class="btn_buy">Buy Now</a>
+              </p>
+              
+                      
+          </template>
+        </template>
+
+        <!-- お気に入り -->
+        <p v-if="is_check" class="work_favorite"><a class="btn_favorite" v-t="favorite.add_fav"><!-- お気に入りに追加 --></a></p>
+        <p v-else-if="product.is_sold_out" class="work_favorite"><a href="#" class="btn_favorite disabled" v-t="'favorite.add_fav'"><!-- お気に入りに追加 --></a></p>
+        <p v-else-if="! user.customer_id && ! is_favorite" class="work_favorite"><a :href="link.favorite" class="btn_favorite" :class="{ btn_favorite_in: is_favorite }">{{ is_favorite ? $t('favorite.in_fav') : $t('favorite.add_fav') }}</a></p>
+        <p v-else-if="user.customer_id && ! is_favorite" class="work_favorite"><a @click.prevent="addFavorite({ product_id:product.product_id })" href="https://www.dlsite.com/maniax/mypage/wishlist/=/product_id/RJ126928.html" class="btn_favorite" :class="{ btn_favorite_in: is_favorite }">{{ is_favorite ? $t('favorite.in_fav') : $t('favorite.add_fav') }}</a></p>
+        <p v-else class="work_favorite"><a href="https://www.dlsite.com/maniax/mypage/wishlist/=/product_id/RJ126928.html" class="btn_favorite" :class="{ btn_favorite_in: is_favorite }">{{ is_favorite ? $t('favorite.in_fav') : $t('favorite.add_fav') }}</a></p>
+
+        <!-- 購入済み作品の場合、作品評価ページへのリンクを表示する -->
+        <template v-if="is_bought" v-cloak>
+          <div v-if="is_myrated" class="work_rating" v-cloak><a href="https://www.dlsite.com/maniax/mypage/short-review" class="btn_rating_in">Product Rating Complete</a></div>
+          <div v-else class="work_rating" v-cloak><a href="https://www.dlsite.com/maniax/mypage/short-review" class="btn_rating">Evaluate the work</a></div>
+        </template>
+
+        
+        <!-- 多言語の場合、ポイント購入へのリンクを表示する -->
+                <p class="work_point_purchase">
+          <button class="btn_post size_xs fs14 purchase spot_cart" onclick="location.href='https://www.dlsite.com/maniax/mypage/user/buy/point'">
+            <i class="letter_closer point">Purchase Points</i>
+          </button>
+        </p>
+        <p class="point_global" v-if="!isAccountLogin">*Login required.</p>
+        <p class="point_global">Want to pay with credit card alternatives?</br>Points can be used to buy ANY product on DLsite.</p>
+                
+
+        <!-- カートボタン押下時にレコメンドのモーダル表示 -->
+        <div v-show="this.$store.state.is_carted" class="add_cart_overlay" @click.stop.prevent="function(){ closeRecommend(); $(document.body).removeClass('scrolling_stop'); }">
+          <div class="add_cart_modal" @click.stop>
+            <span class="add_cart_close" @click.stop.prevent="function(){ closeRecommend(); $(document.body).removeClass('scrolling_stop'); }"></span>
+            <div class="add_cart_btn_inner">
+              <p class="add_cart_note">Added to Cart</p>
+              <a v-if="user.customer_id" :href="makeUrl('/cart', { product_id: product.product_id })" v-t="'cart.go_buy'" class="add_cart_btn"><!-- 購入手続きへ --></a>
+              <a v-else :href="makeUrl('/cart', { product_id: product.product_id })" v-t="'cart.go_cart'" class="add_cart_btn"><!-- カートを見る --></a>
+            </div>
+            <cart_recommend v-bind:on_display="this.$store.state.is_carted" :product_id="product_id"></cart_recommend>
+          </div>
+        </div>
+        <!-- /カートボタン押下時にレコメンドのモーダル表示 -->
+      </template>
+
+    </div>
+    
+  </div>
+  <div v-else-if="product.price === undefined" class="work_buy_main">
+    <!-- IE8 or noscript -->
+    <div id="work_price">
+      <div class="work_buy_type">
+        <div class="work_buy_container">
+          <div class="work_buy_body">
+            <div class="work_buy_label">Price</div>
+            <div class="work_buy_content"><span class="price">495<i>&nbsp;JPY</i></span></div>
+          </div>
+                    <div class="work_buy_body">
+            <div class="work_buy_label">Points</div>
+            <div class="work_buy_content">
+              <strong class="work_point">
+                45<i>pt (10% Earn)</i>
+              </strong>
+            </div>
+          </div>
+                  </div>
+      </div>
+    </div>
+    <div id="work_buy_btn">
+              <p class="work_cart _work_cart" id="_work_cart_RJ126928"><a href="https://www.dlsite.com/maniax/cart/=/product_id/RJ126928.html" class="btn_cart _btn_cart" id="_btn_cart_RJ126928">Add to Cart</a></p>
+        <p class="work_favorite _work_favorite" id="_work_favorite_RJ126928"><a href="https://www.dlsite.com/maniax/mypage/wishlist/=/product_id/RJ126928.html" class="btn_favorite _btn_favorite" id="_btn_favorite_RJ126928">Favorites</a></p>
+          </div>
+  </div>
+
+    <div v-if="product.is_sale && ! is_bought && ! product.is_sold_out && (product.on_sale || product.is_rental)" v-cloak class="floating_cart_box" :class="class_floating_cart_box">
+    <div class="cart_box_header" @click.prevent="toggleDisplayFloat">{{$t('cart.buy_this')}}<div class="hide" v-t="'cart.hide'"></div></div>
+    <div class="cart_box_body">
+      <div class="cart_box_body_inner">
+        <div class="work_info_wrap">
+          <div class="work_thumb">
+            <img src="//img.dlsite.jp/resize/images2/work/doujin/RJ127000/RJ126928_img_main_240x240.jpg" alt="Magicos Halloween: Vampire Glamour of the Visiting Lewd Witch! [Cookie Voice]" class="target_type">
+          </div>
+          
+          <div class="work_buy_body_wrap">
+            <div class="work_buy_body">
+              <div class="work_buy_label" v-t="'product.price.price'"><!-- 価格 --></div>
+              <div class="work_buy_content">
+                <strong class="price">{{ real_price | number_format }}<i v-t="'product.price.yen'"></i></strong>
+              </div>
+            </div>
+            <div v-if="product.product_point || product.default_point" class="work_buy_body">
+              <div class="work_buy_label" v-t="'product.price.point'"><!-- ポイント --></div>
+              <div class="work_buy_content">
+                <strong class="work_point">{{ (product.product_point || product.default_point) | number_format }}<i>pt</i></strong>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="btn_wrap">
+          <div class="btn_wrap_inner">
+          <template v-if="buy_type == 'rental' || ! is_bought && ! rentaled && ! product.on_sale">
+            <p v-if="carted && carted.rental_id == rental.id" class="work_cart">
+              <a :href="'https://www.dlsite.com/maniax/cart/=/rental_id/_rental_/product_id/RJ126928.html'.replace('_rental_', rental_id)" class="btn_cart_in" v-t="'product.item.into_cart_result'"></a>
+            </p>
+            <p v-else class="work_cart">
+              <a @click.prevent="addCart({ product_id:product.product_id, rental_id: rental.id }); showCartPopup()" :href="'https://www.dlsite.com/maniax/cart/=/rental_id/_rental_/product_id/RJ126928.html'.replace('_rental_', rental_id)" class="btn_cart" data-link-name="float" v-t="'product.item.into_cart'"></a>
+            </p>
+          </template>
+
+          <template v-else-if=" ! is_bought && product.on_sale">
+          
+            <p v-if="carted && ! carted.rental_id" class="work_cart">
+              <a href="https://www.dlsite.com/maniax/cart/=/product_id/RJ126928.html" class="btn_cart_in" v-t="'cart.in_cart_s'"><!-- カートに追加済み --></a>
+            </p>
+            <template v-else>
+              <p class="work_cart" v-if="!isAccountLogin">
+                <a href="https://www.dlsite.com/maniax/pay/member/=/relayout/cart/buynow/1/product_id/RJ126928.html" class="btn_buy">Sign Up &amp; Buy Now</a>
+              </p>
+              <p class="work_cart">
+                <a @click.prevent="addCart({ product_id:product.product_id }); showCartPopup()" href="https://www.dlsite.com/maniax/cart/=/product_id/RJ126928.html" class="btn_cart" data-link-name="float" v-t="'cart.add_cart_s'"><!-- カートに追加 --></a>
+              </p>
+              <p class="work_cart" v-if="isAccountLogin">
+                <a href="https://www.dlsite.com/maniax/pay/member/=/relayout/cart/buynow/1/product_id/RJ126928.html" class="btn_buy">Buy Now</a>
+              </p>
+            </template>
+          
+          </template>
+
+          <p v-if="user.customer_id && ! is_favorite" class="work_favorite">
+            <a @click.prevent="addFavorite({ product_id:product.product_id })" href="https://www.dlsite.com/maniax/mypage/wishlist/=/product_id/RJ126928.html" class="btn_favorite" v-t="'favorite.add_fav'"><!-- お気に入りに追加 --></a>
+          </p>
+          <p v-else class="work_favorite">
+            <a href="https://www.dlsite.com/maniax/mypage/wishlist/=/product_id/RJ126928.html" :class="{ btn_favorite_in: is_favorite, btn_favorite: !is_favorite }" data-link-name="float">{{ is_favorite ? $t('favorite.in_fav') : $t('favorite.add_fav') }}</a>
+          </p>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+  
+    <coupon-obtain
+    link-coupons="https://www.dlsite.com/maniax/coupon/=/ajax/1/product_id/RJ126928.html"
+    link-obtain="https://www.dlsite.com/maniax/get/coupon/=/ajax/1/code/"
+  >
+  </coupon-obtain>
+
+    
+  <div class="work_privilege_guide" v-if="gift && gift.title || coupons.length || bonuses.length" v-cloak>
+    <p class="separate_title"><span>Purchase bonus</span></p>
+    
+    <div class="work_privilege_guide_inner">
+      <ul>
+        <li v-if="gift && gift.title">
+          <p class="label bonus_code">{{ gift.title }}</p>
+          <p v-if="gift.distribute_end_str" class="distribution_period">
+          
+                        Available until {{ gift.distribute_end_str }}          
+          </p>
+          <p class="body" v-html="gift.description"></p>
+        </li>
+        <li v-for="coupon in coupons">
+          <p class="label coupon" :class="{ type_work: coupon.issue.product_id, type_maker: coupon.issue.maker_id, type_price: ! coupon.issue.product_id && ! coupon.issue.maker_id }">{{ coupon.coupon_name }}</p>
+          <p v-if="coupon.end_date_str" class="distribution_period" :class="{ type_work: coupon.issue.product_id, type_maker: coupon.issue.maker_id, type_price: ! coupon.issue.product_id && ! coupon.issue.maker_id }">{{ coupon.end_date_str }}まで配布中</p>
+          <p class="body" v-html="coupon.info"></p>
+          <p v-if="coupon.user_limit_date" class="period"><span>Expiration Date: </span>{{ coupon.user_limit_date }}</p>
+          <p v-else-if="coupon.limit_days_day" class="period">
+          
+                        <span>Expiration Date: </span>{{ coupon.limit_days_day }} days after purchase          
+          </p>
+        </li>
+        <li v-for="bonus in bonuses">
+          <p class="label limited_benefit">{{ bonus.title }}</p>
+          <p v-if="bonus.end_date_str" class="distribution_period type_work">
+          
+                        Available until {{ bonus.end_date_str }}          
+          </p>
+          <p class="body" v-html="bonus.description"></p>
+        </li>
+      </ul>
+    </div>
+    
+    <p v-if="product.is_rental" class="guide_message">Rentals do not include<br>purchase bonuses.</p>
+  </div>
+
+  <div id="work_device_guide">
+    <p class="separate_title"><span>Compatible systems</span></p>
+    <div class="work_device_table_wrap">
+  <table class="work_device_table">
+    <thead>
+      <tr>
+        <th class="dev"></th>
+        <th class="dl"><span>Download</span></th>
+        <th class="st"><span>Browser</span></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="label icon_pc">PC</td>
+        <td v-if="user.os == 'Mac'" v-cloak><span class="dev_play"></span></td>
+        <td v-else><span class="dev_play"></span></td>
+        <td><span class="dev_play"></span></td>
+      </tr>
+      <tr>
+        <td class="label icon_sp">Smartphone</td>
+        <td>
+                        <span class="dev_play_no"></span>
+                    </td>
+        <td><span class="dev_play"></span></td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+    
+    
+  <div class="os_popup" :class="{ active: is_display_machine_list }">
+    <div class="os_popup_header">Compatible OS</div>
+    <div class="os_popup_body">
+      <table>
+        <tbody>
+          <tr>
+            <td>Windows</td>
+            <td>                                                                          XP / Vista / 7 / 8 / 8.1 / 10                            </td>
+          </tr>
+                    <tr>
+            <td>Mac</td>
+            <td>-</td>
+          </tr>
+          <tr>
+                      <td>iOS</td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>Android</td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>Miscellaneous</td>
+            <td>-</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+  
+
+  <div class="work_buy_guide type_affiliate" v-if="!is_comingsoon && !product.affiliate_deny" v-cloak>
+    <ul class="guide_list">
+      <li>
+        <a href="https://www.dlsite.com/maniax/circle/affiliate/link/work/=/product_id/RJ126928.html" v-if="isCircleLogin">Create Affiliate Link</a>
+        <a href="https://www.dlsite.com/maniax/user/affiliate/link/work/=/product_id/RJ126928.html" v-else>Create Affiliate Link</a>
+      </li>
+    </ul>
+  </div>
+</div>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      </div>
+      <!-- /right -->
+
+            
+      
+      
+      
+      <!-- footer -->
+      <div id="footer" data-section_name="footer">
+        
+        <div class="pagetop_block">
+    <p class="pagetop"><a href="#header">Back to Top</a></p>
+</div>
+<div class="footer_floor_nav">
+<ul class="floor_list">
+<li class="floor_list_item"><a href="https://www.dlsite.com">ALL top</a></li>
+<li class="floor_list_item"><a href="https://www.dlsite.com/maniax/">Doujin</a></li>
+<li class="floor_list_item"><a href="https://www.dlsite.com/books/">Adult Comics</a></li>
+<li class="floor_list_item"><a href="https://www.dlsite.com/pro/">H Games</a></li>
+<li class="floor_list_item sp_switch"><a id="_touch_link" href="https://www.dlsite.com/maniax-touch/work/=/product_id/RJ126928.html" data-platform="touch">Change to the mobile site</a></li>
+</ul>
+</div>
+
+    <div class="footer_section">
+    <div class="footer_section_inner">
+        <div class="link_list_wrap">
+            <div class="link_list_box col_2">
+                <div class="label">About DLsite</div>
+                <ul class="link_list">
+                    <li class="link_list_item"><a rel="noopener" href="https://www.eisys.co.jp/company/information_en" target="_blank">Company Overview</a></li>
+                                        <li class="link_list_item"><a rel="noopener" href="https://hrmos.co/pages/eisys/jobs" target="_blank">Recruitment Guide</a></li>
+                                        <li class="link_list_item"><a href="https://www.dlsite.com/maniax/user/regulations">User Agreement</a></li>
+                    <li class="link_list_item"><a href="https://www.dlsite.com/maniax/guide/law">Legal Statement based on Act on Specified Commercial Transactions</a></li>
+                    <li class="link_list_item"><a href="https://www.dlsite.com/maniax/guide/settlement">Payment Services Act</a></li>
+                    <li class="link_list_item"><a href="https://www.dlsite.com/maniax/guide/privacy">Privacy Policy</a></li>
+                    <li class="link_list_item"><a href="https://www.dlsite.com/maniax/mosaic">Compliance Policy</a></li>
+                    <li class="link_list_item"><a href="https://www.dlsite.com/maniax/guide/copy">Copyright</a></li>
+                                        <li class="link_list_item"><a href="https://www.dlsite.com/maniax/banners">About Links</a></li>
+                    <li class="link_list_item"><a href="https://www.dlsite.com/maniax/sitemap">Site Map</a></li>
+                                    </ul>
+            </div>
+            <div class="link_list_box">
+                <div class="label">Help&amp;guide</div>
+                <ul class="link_list">
+                                        <li class="link_list_item"><a href="https://www.dlsite.com/maniax/welcome">For First-time Visitors</a></li>
+                                        <li class="link_list_item"><a rel="noopener" href="https://www.dlsite.com/maniax/faq/=/type/user" target="_blank">FAQ</a></li>
+                                        <li class="link_list_item"><a href="https://www.dlsite.com/maniax/opinion/contribution">Product Request</a></li>
+                                    </ul>
+            </div>
+            <div class="link_list_box">
+                <div class="label">DLsite services</div>
+                <ul class="link_list">
+                                        <li class="link_list_item"><a href="https://www.dlsite.com/maniax/circle/invite">To sell your works</a></li>
+                                                            <li class="link_list_item"><a href="https://www.dlsite.com/maniax/sell/steam">Steam Publisher Service</a></li>
+                    <li class="link_list_item"><a href="https://www.dlsite.com/maniax/guide/affiliate">Affiliate</a></li>
+                                        <li class="link_list_item"><a href="https://www.dlsite.com/maniax/mypage/setting/mail">Newsletters</a></li>
+                                        <li class="link_list_item"><a rel="noopener" href="https://www.dlsite.com/event-pub/top.html" target="_blank">Ad Placement Service</a></li>
+                    <li class="link_list_item"><a rel="noopener" href="https://play.dlsite.com/ja" target="_blank">Web Viewer - DLsite Play</a></li>
+                    <li class="link_list_item"><a href="https://www.dlsite.com/maniax/guide/dlnest">PC Client DLsite Nest</a></li>
+                                    </ul>
+            </div>
+        </div>
+    </div>
+    <div class="footer_section_inner payment">
+      <div class="label">Payments/Points</div>
+      <div class="footer_payment_box">
+        <ul class="link_list">
+          <li class="link_list_item"><a href="https://www.dlsite.com/maniax/guide/creditcard">Payment Method</a></li>
+                                <li class="link_list_item"><a href="https://www.dlsite.com/maniax/mypage/aboutpoint">About Points</a></li>
+                    <li class="link_list_item"><a href="https://www.dlsite.com/maniax/guide/payment#link_point">How to buy points</a></li>
+        </ul>
+        <a href="https://www.dlsite.com/maniax/guide/creditcard" class="footer_payment_img">
+                      <img src="/modpub/images/web/common/payment_wide_en_us.jpg" alt="Plenty of accepted payment methods!">
+                  </a>
+      </div>
+    </div>
+            <div class="footer_section_inner sns">
+              <div class="label">Official English SNS</div>
+        <ul class="footer_sns">
+          <li class="footer_sns_item"><a rel="noopener" href="https://twitter.com/DLsiteGlobal" target="_blank" class="twitter_g_en">ALL</a></li>
+          <li class="footer_sns_item"><a rel="noopener" href="https://twitter.com/DLsiteEnglish" target="_blank" class="twitter_r18_en">R18</a></li>
+          <li class="footer_sns_item"><a rel="noopener" href="https://sharesome.com/dlsite.com/" target="_blank" class="sharesome_en">Sharesome</a></li>
+          <li class="footer_sns_item"><a rel="noopener" href="https://www.reddit.com/r/HentaiDLsite/" target="_blank" class="reddit_en">Reddit</a></li>
+          <li class="footer_sns_item"><a rel="noopener" href="https://www.youtube.com/channel/UCQkksxJt8QH9U-0cnKhxufw" target="_blank" class="youtube_info_en">PR</a></li>
+          <li class="footer_sns_item"><a rel="noopener" href="https://discord.gg/QkbHCJAAXC" target="_blank" class="discord_en">DISCORD</a></li>
+          <li class="footer_sns_item"><a rel="noopener" href="https://ch.dlsite.com/profile/1583107/timeline" target="_blank" class="dlch_en">Official DL.Ch</a></li>
+          <li class="footer_sns_item"><a rel="noopener" href="https://www.instagram.com/dlsite_garumani/" target="_blank" class="otmebl_en">Otome & BL</a></li>
+        </ul>
+        <div class="label">Official Japaness SNS</div>
+            <!-- 日本語以外で共通で出すアイコン群 -->
+            <ul class="footer_sns">
+        <li class="footer_sns_item"><a rel="noopener" href="https://twitter.com/DLsite" target="_blank" class="twitter_g">ALL</a></li>
+        <li class="footer_sns_item"><a rel="noopener" href="https://twitter.com/DLsiteManiax" target="_blank" class="twitter_r18">R18</a></li>
+        <li class="footer_sns_item"><a rel="noopener" href="https://twitter.com/GirlsManiax" target="_blank" class="twitter_bl">BL</a></li>
+        <li class="footer_sns_item"><a rel="noopener" href="https://twitter.com/girlsmaniax_OTM" target="_blank" class="twitter_otm">TL</a></li>
+        <li class="footer_sns_item"><a rel="noopener" href="https://twitter.com/DLsiteC" target="_blank" class="twitter_comic">Comic</a></li>
+        <li class="footer_sns_item"><a rel="noopener" href="https://twitter.com/DLsiteR18" target="_blank" class="twitter_comic_r18">Comic R18</a></li>
+        <li class="footer_sns_item"><a rel="noopener" href="https://twitter.com/DLsite_info" target="_blank" class="twitter_info">PR</a></li>
+        <li class="footer_sns_item"><a rel="noopener" href="https://www.youtube.com/channel/UCQEN3LsNnqottC2mXx3tAjA" target="_blank" class="youtube_info">PR</a></li>
+      </ul>
+        </div>
+    <div class="footer_section_inner recruit">
+                <div class="label">Career Information</div>
+        <ul class="job_list">
+            <li class="job_list_item new">
+                <a rel="noopener" href="https://hrmos.co/pages/eisys/jobs/0EDP005" target="_blank" rel="noopener">
+                    <div class="job_icon recruit_01">
+                        <img src="/modpub/images/web/common/recruit/icon_recruit_16.png" loading="lazy">
+                    </div>
+                    <div class="job_info">
+                        <p class="job_name">Translator (Freelance)</p>
+                    </div>
+                </a>
+            </li>
+            <li class="job_list_item new">
+                <a rel="noopener" href="https://hrmos.co/pages/eisys/jobs/0FKP016" target="_blank" rel="noopener">
+                    <div class="job_icon recruit_02">
+                        <img src="/modpub/images/web/common/recruit/icon_recruit_07.png" loading="lazy">
+                    </div>
+                    <div class="job_info">
+                        <p class="job_name">Freelance video editor</p>
+                    </div>
+                </a>
+            </li>
+        </ul>
+                <a rel="noopener" href="https://hrmos.co/pages/eisys/jobs?staff_pc_n" class="recruit_more" target="_blank">To Recruitment Page</a>
+    </div>
+    </div>
+<div id="copyright">
+    <div class="container clearfix">
+        <div id="system">Recommended: Latest version of Microsoft Edge, Safari, Chrome, Firefox (JavaScript/Cookies enabled)</div>
+        <p>&copy; 1996 DLsite</p>
+    </div>
+</div>
+
+<div data-vue-component="thumb-img-popup-in-swiper"></div>
+      </div>
+      <!-- /footer -->
+
+    </div>
+    <!-- /container -->
+
+        <!-- script_footer -->
+    
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "DLsite",
+  "alternateName": "DLsite",
+  "url": "https://www.dlsite.com/"
+}
+</script>
+
+
+<div data-vue-component="cookie-policy" data-async="true"></div>
+
+<script type="text/javascript" src="/vue/js/pc/vendor.js?cdn_cache=1&v=0.1.2&_=1631164903"></script>
+<script type="text/javascript" src="/vue/js/pc/app.js?cdn_cache=1&v=0.1.2&_=1631165365"></script>
+
+
+<script type="text/javascript">
+(function(document, undefined) {
+  "use strict";
+  var $script = document.createElement('script');
+  $script.src = document.location.protocol + '//banner.eisys-bcs.jp/js/bcs.min.js';
+  document.body.appendChild($script);
+
+  $(window).bind('guestbannerDelete', function(){
+    var $guest_banner = $('.bcs_viewer').find('.__guest');
+    if ($.cookie('loginchecked') >= 1 && $guest_banner.length > 0 ) {
+      $guest_banner.remove();
+    }
+  });
+
+  // フッターリンクQRコードのモーダル
+  // 開き
+  $('.qr-modal-open-link').bind('click', function(e) {
+    e.preventDefault();
+    var targetModal = $(this).attr('data-modal-open');
+    $('[data-modal-type =' + targetModal + ']').addClass('is-show');
+  })
+  // 閉じ（ボタン）
+  $('.global_modal_content_close').bind('click', function(e) {
+    $('[data-modal-type]').removeClass('is-show');
+  })
+  // 閉じ（オーバーレイ）
+  $('.global_modal_overlay.type_qr').bind('click', function(e) {
+    $('[data-modal-type]').removeClass('is-show');
+  })
+  $('.global_modal_content.type_qr').bind('click', function(e) {
+    e.stopPropagation();
+  })
+})(document);
+</script>
+
+
+
+<style>
+div.measure_tag {
+  height: 0 !important;
+  width: 0 !important;
+  line-height: 0 !important;
+  font-size: 0 !important;
+  margin-top: -10000px;
+  margin-left: -10000px;
+  float: left;
+}
+</style>
+
+<div class="measure_tag"></div>
+    <!-- /script_footer -->
+        <script type="text/javascript">var contents = {"impression":[],"detail":[{"id":"RJ126928","name":"Magicos Halloween: Vampire Glamour of the Visiting Lewd Witch!","category":"maniax","brand":"RG24357","price":450,"regist_date":"2014\/01\/11","image_main":"\/\/img.dlsite.jp\/modpub\/images2\/work\/doujin\/RJ127000\/RJ126928_img_main.jpg","official_price":990,"series_id":"SRI0000007655","series_name":"\u30cf\u30ed\u30a6\u30a3\u30f3\u30d1\u30fc\u30c6\u30a3\u30fc","title_id":"SRI0000007655","title_name":"\u30cf\u30ed\u30a6\u30a3\u30f3\u30d1\u30fc\u30c6\u30a3\u30fc"}],"time":0.0007119178771972656};</script>
+<script type="text/javascript">window.NREUM||(NREUM={});NREUM.info={"beacon":"bam.nr-data.net","licenseKey":"NRJS-26fb73475871c01d5bd","applicationID":"781370968","transactionName":"YwQBYkdWDRZQVxUKDlpONkRcGAoLVVEZTRFcEQ==","queueTime":0,"applicationTime":323,"atts":"T0MCFA9MHhg=","errorBeacon":"bam.nr-data.net","agent":""}</script></body>
+
+</html>

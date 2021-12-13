@@ -25,16 +25,19 @@ import bs4
 from bs4 import BeautifulSoup
 
 from mir.dlsite import workinfo
+from mir.dlsite.locale import Locale
+
 
 logger = logging.getLogger(__name__)
 
 
-def fetch_work(rjcode: str) -> workinfo.Work:
+def fetch_work(rjcode: str, locale: Locale = Locale.Japanese) -> workinfo.Work:
     """Fetch DLsite work information."""
-    page = _get_page(rjcode)
+    page = _get_page(rjcode, locale)
     soup = BeautifulSoup(page, 'lxml')
     work = workinfo.Work(
         rjcode=rjcode,
+        locale=locale,
         name=_get_name(soup),
         maker=_get_maker(soup))
     work.description = _get_description(soup)
@@ -44,7 +47,7 @@ def fetch_work(rjcode: str) -> workinfo.Work:
     except _NoInfoError:
         pass
     try:
-        series = _get_series(soup)
+        series = _get_series(soup, locale)
     except _NoInfoError:
         pass
     else:
@@ -62,10 +65,10 @@ def fetch_work(rjcode: str) -> workinfo.Work:
     return work
 
 
-def _get_page(rjcode: str) -> str:
+def _get_page(rjcode: str, locale: Locale) -> str:
     """Get webpage text for a work."""
     try:
-        request = urllib.request.urlopen(_get_work_url(rjcode))
+        request = urllib.request.urlopen(_get_work_url(rjcode, locale))
     except urllib.error.HTTPError as e:
         if e.code != 404:  # pragma: no cover
             raise
@@ -74,18 +77,19 @@ def _get_page(rjcode: str) -> str:
 
 
 _ROOT = 'https://www.dlsite.com/maniax/'
-_WORK_URL = _ROOT + 'work/=/product_id/{}.html'
-_ANNOUNCE_URL = _ROOT + 'announce/=/product_id/{}.html'
+_LOCALE = '?locale={}'
+_WORK_URL = _ROOT + 'work/=/product_id/{}.html' + _LOCALE
+_ANNOUNCE_URL = _ROOT + 'announce/=/product_id/{}.html' + _LOCALE
 
 
-def _get_work_url(rjcode: str) -> str:
+def _get_work_url(rjcode: str, locale: Locale = Locale.Japanese) -> str:
     """Get DLsite work URL corresponding to an RJ code."""
-    return _WORK_URL.format(rjcode)
+    return _WORK_URL.format(rjcode, locale.value)
 
 
-def _get_announce_url(rjcode: str) -> str:
+def _get_announce_url(rjcode: str, locale: Locale = Locale.Japanese) -> str:
     """Get DLsite announce URL corresponding to an RJ code."""
-    return _ANNOUNCE_URL.format(rjcode)
+    return _ANNOUNCE_URL.format(rjcode, locale.value)
 
 
 def _get_name(soup) -> str:
@@ -97,21 +101,28 @@ def _get_maker(soup) -> str:
     """Get the work maker."""
     return str(
         soup.find(id="work_maker")
-        .find(**{'class': 'maker_name'})
-        .a.string)
+            .find(**{'class': 'maker_name'})
+            .a.string)
 
 
-_SERIES_PATTERN = re.compile('^シリーズ名')
+_SERIES_PATTERN = {
+    Locale.Japanese: re.compile('^シリーズ名'),
+    Locale.English: re.compile('^Series name'),
+    Locale.ChineseSimplified: re.compile('^系列名'),
+    Locale.ChineseTraditional: re.compile('^系列名'),
+    Locale.Korean: re.compile('^시리즈명'),
+}
 
 
-def _get_series(soup) -> str:
+
+def _get_series(soup, locale: Locale) -> str:
     """Get work series name."""
     try:
         return str(
             soup.find(id='work_outline')
-            .find('th', string=_SERIES_PATTERN)
-            .find_next_sibling('td')
-            .a.string)
+                .find('th', string=_SERIES_PATTERN[locale])
+                .find_next_sibling('td')
+                .a.string)
     except AttributeError:
         raise _NoInfoError('no series')
 
@@ -120,8 +131,8 @@ def _get_description(soup) -> str:
     """Get work description."""
     contents = (
         soup.find(id='main_inner')
-        .find('div', itemprop='description')
-        .strings)
+            .find('div', itemprop='description')
+            .strings)
     text = ''.join(_replace_br(contents))
     return text.strip() + '\n'
 
@@ -185,7 +196,6 @@ def _generate_genres(soup) -> 'Iterable[str]':
 
 
 class CachedFetcher:
-
     """DLSite work fetcher that uses a cache.
 
     CachedFetcher does not implement fetching and needs to be passed a
@@ -199,14 +209,14 @@ class CachedFetcher:
         self._path = path
         self._shelf = None
 
-    def __call__(self, rjcode: str) -> workinfo.Work:
+    def __call__(self, rjcode: str, locale: Locale = Locale.Japanese) -> workinfo.Work:
         try:
-            return self._shelf[rjcode]
+            return self._shelf[rjcode + '-' + locale.value]
         except TypeError:
             raise ValueError('called unopened CachedFetcher')
         except KeyError:
-            work = self._fetcher(rjcode)
-            self._shelf[rjcode] = work
+            work = self._fetcher(rjcode, locale)
+            self._shelf[rjcode + '-' + locale.value] = work
             return work
 
     def __enter__(self):
